@@ -1,0 +1,341 @@
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="CSS/Font-Awesome/css/font-awesome.min.css"/>
+    <link type="text/css" rel="stylesheet" href="CSS/ATSC_UI.css"/>
+    <link type="text/css" rel="stylesheet" href="CSS/qunit-2.0.1.css">
+</head>
+<body>
+<div id="main">
+    <div id="menu">
+        <!--p style="font-size: 100px;text-align: center">Hisense</p-->
+        <img src="asset/img/qunit_logo.png">
+        <ul class="level1">
+            <li id="scan">
+                <i class="fa fa-signal fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Scan
+                <ul class="level2">
+                    <li><span>1101_AutoScanT</span></li>
+                    <li><span>1102_AutoScanC</span></li>
+                    <li><span>1001_setSourceDtvT</span></li>
+                    <li><span>1002_setSourceAtvT</span></li>
+                    <li><span>1003_setSourceDtvC</span></li>
+                    <li><span>1004_setSourceAtvC</span></li>
+                    <li><span>1005_getSourceDtvT</span></li>
+                    <li><span>1006_getSourceAtvT</span></li>
+                    <li><span>1007_getSourceDtvC</span></li>
+                    <li><span>1008_getSourceAtvC</span></li>
+                    <li><span>1009_autoScanStartDtvT</span></li>
+                    <li><span>1010_autoScanStartAtvT</span></li>
+                    <li><span>1011_autoScanStartDtvC</span></li>
+                    <li><span>1012_autoScanStartAtvC</span></li>
+                    <li><span>1013_manualScanStartDtvT</span></li>
+                    <li><span>1014_manualScanStartAtvT</span></li>
+                    <li><span>1015_manualScanStartDtvC</span></li>
+                    <li><span>1016_manualScanStartAtvC</span></li>
+                    <li><span>1017_autoScanStopDtvT</span></li>
+                    <li><span>1018_autoScanStopAtvT</span></li>
+                    <li><span>1019_autoScanStopDtvC</span></li>
+                    <li><span>1020_autoScanStopAtvC</span></li>
+                    <li><span>1021_autoScanProgressDtvT</span></li>
+                    <li><span>1022_autoScanProgressAtvT</span></li>
+                    <li><span>1023_autoScanProgressDtvC</span></li>
+                    <li><span>1024_autoScanProgressAtvC</span></li>
+                    <li><span>1025_autoScanDigitServicesDtvT</span></li>
+                    <li><span>1026_autoScanAnalogServicesAtvT</span></li>
+                    <li><span>1027_autoScanDigitServicesDtvC</span></li>
+                    <li><span>1028_autoScanAnalogServicesAtvC</span></li>
+                    <li><span>1029_manualScanDigitServicesDtvT</span></li>
+                    <li><span>1030_manualScanAnalogServicesAtvT</span></li>
+                    <li><span>1031_manualScanDigitServicesDtvC</span></li>
+                    <li><span>1032_manualScanAnalogServicesAtvC</span></li>
+                    <li><span>1033_autoScanStateCompleteDtvT</span></li>
+                    <li><span>1034_autoScanStateCompleteAtvT</span></li>
+                    <li><span>1035_autoScanStateCompleteDtvC</span></li>
+                    <li><span>1036_autoScanStateCompleteAtvC</span></li>
+                    <li><span>1037_autoScanStateCancelDtvT</span></li>
+                    <li><span>1038_autoScanStateCancelAtvT</span></li>
+                    <li><span>1039_autoScanStateCancelDtvC</span></li>
+                    <li><span>1040_autoScanStateCancelAtvC</span></li>
+                    <li><span>1041_manualScanStateCompleteDtvT</span></li>
+                    <li><span>1042_manualScanStateCompleteAtvT</span></li>
+                    <li><span>1043_manualScanStateCompleteDtvC</span></li>
+                    <li><span>1044_manualScanStateCompleteAtvC</span></li>
+                    <li><span>1045_manualScanSetFrequencyT</span></li>
+                    <li><span>1046_manualScanSetFrequencyC</span></li>
+                    <li><span>1047_ScanIsRunning</span></li>
+                </ul>
+            </li>
+            <li id="play">
+                <i class="fa fa-play-circle-o fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Play
+                <ul class="level2">
+                    <li><span>2101_upT</span></li>
+                    <li><span>2102_downT</span></li>
+                    <li><span>2103_randomT</span></li>
+                    <li><span>2104_upC</span></li>
+                    <li><span>2105_downC</span></li>
+                    <li><span>2106_randomC</span></li>
+                    <li><span>2107_randomT_C</span></li>
+                    <li><span>2001_playChannelT</span></li>
+                    <li><span>2002_playChannelC</span></li>
+                    <li><span>2003_getMainPlay</span></li>
+                    <li><span>2004_mainPlayChangedDvbT</span></li>
+                    <li><span>2005_mainPlayChangedDvbC</span></li>
+                    <li><span>2006_getNoSignalMain</span></li>
+                    <li><span>2007_getSignalLevel</span></li>
+                    <li><span>2008_getSignalCn</span></li>
+                </ul>
+            </li>
+
+            <li id="serviceList">
+                <i class="fa fa-steam fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;ServiceList
+                <ul class="level2">
+                    <li><span>3001_getServicelistT</span></li>
+                    <li><span>3002_getServicelistC</span></li>
+                    <li><span>3003_getFavListT</span></li>
+                    <li><span>3004_getFavListC</span></li>
+                    <li><span>3005_addToFavListT</span></li>
+                    <li><span>3006_addToFavListC</span></li>
+                    <li><span>3007_delFromFavListT</span></li>
+                    <li><span>3008_delFromFavListC</span></li>
+                    <li><span>3009_getSkipListT</span></li>
+                    <li><span>3010_getSkipListC</span></li>
+                    <li><span>3011_addToSkipListT</span></li>
+                    <li><span>3012_addToSkipListC</span></li>
+                    <li><span>3013_delFromSkipListT</span></li>
+                    <li><span>3014_delFromSkipListC</span></li>
+                    <li><span>3015_getBlockListT</span></li>
+                    <li><span>3016_getBlockListC</span></li>
+                    <li><span>3017_addToBlockListT</span></li>
+                    <li><span>3018_addToBlockListC</span></li>
+                    <li><span>3019_delFromBlockListT</span></li>
+                    <li><span>3020_delFromBlockListC</span></li>
+                    <li><span>3021_getServicesAttrT</span></li>
+                    <li><span>3022_getServicesAttrC</span></li>
+                    <li><span>3023_onChannelListUpdateT</span></li>
+                    <li><span>3024_onChannelListUpdateC</span></li>
+                    <li><span>3025_checkChannelListT</span></li>
+                    <li><span>3026_checkChannelListC</span></li>
+                </ul>
+            </li>
+
+            <li id="PC">
+                <i class="fa fa-users fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;PC
+                <ul class="level2">
+                    <li><span>4001_getPin</span></li>
+                    <li><span>4002_setPin</span></li>
+                    <li><span>4003_getSModel</span></li>
+                    <li><span>4004_setSModel</span></li>
+                    <li><span>4005_reset</span></li>
+                    <li><span>4006_getPinRequest</span></li>
+                    <li><span>4007_pinRequestChanged</span></li>
+                    <li><span>4008_pinRequestConfirm</span></li>
+                    <li><span>4009_getStart</span></li>
+                    <li><span>4010_setStart</span></li>
+                    <li><span>4011_getEnd</span></li>
+                    <li><span>4012_setEnd</span></li>
+                    <li><span>4013_getEndWeekly</span></li>
+                    <li><span>4014_setEndWeekly</span></li>
+                    <li><span>4015_getBlockUnrated</span></li>
+                    <li><span>4016_setBlockUnrated</span></li>
+                    <li><span>4017_getUsTvRating</span></li>
+                    <li><span>4018_actionSetUsTvRating</span></li>
+                    <li><span>4019_getUsMovieRating</span></li>
+                    <li><span>4020_setUsMovieRating</span></li>
+                    <li><span>4021_getCanEnglishRating</span></li>
+                    <li><span>4022_setCanEnglishRating</span></li>
+                    <li><span>4023_getCanFrenchRating</span></li>
+                    <li><span>4024_setCanFrenchRating</span></li>
+                    <li><span>4025_getOpenVchip</span></li>
+                    <li><span>4026_setOpenVchip</span></li>
+                </ul>
+            </li>
+            <li id="CC">
+                <i class="fa fa-cc fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;CC
+                <ul class="level2">
+                    <li><span>5001_getControl</span></li>
+                    <li><span>5002_setControl</span></li>
+                    <li><span>5003_getAnalogMode</span></li>
+                    <li><span>5004_setAnalogMode</span></li>
+                    <li><span>5005_getDigitalMode</span></li>
+                    <li><span>5006_setDigitalMode</span></li>
+                    <li><span>5007_getDigitalStyle</span></li>
+                    <li><span>5008_setDigitalStyle</span></li>
+                    <li><span>5009_getDigitalSize</span></li>
+                    <li><span>5010_setDigitalSize</span></li>
+                    <li><span>5011_getDigitalFont</span></li>
+                    <li><span>5012_setDigitalFont</span></li>
+                    <li><span>5013_getDigitalTextcolor</span></li>
+                    <li><span>5014_setDigitalTextcolor</span></li>
+                    <li><span>5015_getDigitalBgcolor</span></li>
+                    <li><span>5016_setDigitalBgcolor</span></li>
+                    <li><span>5017_getDigitalEdgecolor</span></li>
+                    <li><span>5018_setDigitalEdgecolor</span></li>
+                    <li><span>5019_getDigitalTextopacity</span></li>
+                    <li><span>5020_setDigitalTextopacity</span></li>
+                    <li><span>5021_getDigitalBgopacity</span></li>
+                    <li><span>5022_setDigitalBgopacity</span></li>
+                    <li><span>5023_getDigitalEdgeeffect</span></li>
+                    <li><span>5024_setDigitalEdgeeffect</span></li>
+                </ul>
+            </li>
+
+            <li id="tvservice">
+                <i class="fa fa-television fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;TVService
+                <ul class="level2">
+                    <li><span>6001_getEitMainNow</span></li>
+                    <li><span>6002_EitMainNowChanged</span></li>
+                    <li><span>6003_getEitMainNext</span></li>
+                    <li><span>6004_EitMainNextChanged</span></li>
+                </ul>
+            </li>
+
+            <li id="time">
+                <i class="fa fa-clock-o fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Time
+                <ul class="level2">
+                    <li><span>7001_getTimeZone</span></li>
+                    <li><span>7002_setTimeZone</span></li>
+                    <li><span>7003_getDeviationFromUtc</span></li>
+                    <li><span>7004_getTimeFormat</span></li>
+                    <li><span>7005_setTimeFormat</span></li>
+                    <li><span>7006_getCurTime</span></li>
+                    <li><span>7007_getCurLocalTime</span></li>
+                    <li><span>7008_setCurLocalTime</span></li>
+                </ul>
+            </li>
+
+            <li id="audio">
+                <i class="fa fa-volume-up fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Audio
+                <ul class="level2">
+                    <li><span>8001_audioTable</span></li>
+                    <li><span>8002_audioExistChanged</span></li>
+                    <li><span>8003_audioIndex</span></li>
+                    <li><span>8004_getAudioIdent</span></li>
+                    <li><span>8005_audioIdentChanged</span></li>
+                    <li><span>8006_getMainVolume</span></li>
+                    <li><span>8007_setMainVolume</span></li>
+                    <li><span>8008_getMainMute</span></li>
+                    <li><span>8009_setMainMute</span></li>
+                    <li><span>8010_getMainMode</span></li>
+                    <li><span>8011_setMainMode</span></li>
+                </ul>
+            </li>
+
+            <li id="video">
+                <i class="fa fa-video-camera fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Video
+                <ul class="level2">
+                    <li><span>9001_getVideoFormat</span></li>
+                    <li><span>9002_videoFormatChanged</span></li>
+                    <li><span>9003_getFrameAspect</span></li>
+                    <li><span>9004_frameAspectChanged</span></li>
+                    <li><span>9005_getCcExist</span></li>
+                    <li><span>9006_ccExistChanged</span></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div id="qunit"></div>
+    <div id="info" class="container">
+        <!--canvas width="960" height="500"></canvas-->
+        <table id="infoQueue" class="table">
+            <thead>
+                <tr>
+                    <th>Test Case</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<script type="text/javascript" src="lib/LAB.min.js"></script>
+<script type="text/javascript" src="lib/d3.min.js"></script>
+<script>
+    $LAB.script("lib/qunit-2.0.1.js")
+            .script("lib/jquery-3.1.1.slim.min.js")
+            .script("lib/Const.js")
+            .script("model/model.js")
+            .script("lib/ATSC_UI.js")
+            .script("lib/Arrays.js")
+            .script("src/searchImpl.js")
+            .script("src/playImpl.js")
+            .script("src/infoBarImpl.js")
+            .script("src/CCImpl.js")
+            .script("src/PCImpl.js")
+            .wait(function () {
+                /*
+                 var data = [1, 1, 2, 3, 5, 8, 13];
+
+                 var canvas = document.querySelector("canvas"),
+                 context = canvas.getContext("2d");
+
+                 var width = canvas.width,
+                 height = canvas.height,
+                 radius = Math.min(width, height) / 2;
+
+                 var colors = [
+                 "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd",
+                 "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"
+                 ];
+
+                 var outerRadius = radius - 10,
+                 innerRadius = radius - 70,
+                 cornerRadius = 12;
+
+                 var arc = d3.arc()
+                 .outerRadius(outerRadius)
+                 .innerRadius(innerRadius)
+                 .cornerRadius(cornerRadius)
+                 .context(context);
+
+                 var circle = d3.arc()
+                 .startAngle(0)
+                 .endAngle(2 * Math.PI)
+                 .innerRadius(0)
+                 .context(context);
+
+                 var pie = d3.pie();
+
+                 var arcs = pie(data);
+
+                 context.translate(width / 2, height / 2);
+
+                 context.globalAlpha = 0.5;
+                 arcs.forEach(function (d, i) {
+                 context.beginPath();
+                 arc(d);
+                 context.fillStyle = colors[i];
+                 context.fill();
+                 });
+
+                 context.globalAlpha = 1;
+                 context.beginPath();
+                 arcs.forEach(arc);
+                 context.lineWidth = 1.5;
+                 context.strokeStyle = "#fff";
+                 context.stroke();
+
+                 context.beginPath();
+                 arcs.forEach(function (d) {
+                 corner(d.startAngle, outerRadius - cornerRadius, +1);
+                 corner(d.endAngle, outerRadius - cornerRadius, -1);
+                 corner(d.endAngle, innerRadius + cornerRadius, -1);
+                 corner(d.startAngle, innerRadius + cornerRadius, +1);
+                 });
+                 context.strokeStyle = "#000";
+                 context.stroke();
+
+                 function corner(angle, radius, sign) {
+                 context.save();
+                 context.translate(
+                 sign * cornerRadius * Math.cos(angle) + Math.sqrt(radius * radius - cornerRadius * cornerRadius) * Math.sin(angle),
+                 sign * cornerRadius * Math.sin(angle) - Math.sqrt(radius * radius - cornerRadius * cornerRadius) * Math.cos(angle)
+                 );
+                 circle.outerRadius(cornerRadius - 1.5)();
+                 context.restore();
+                 }
+                 */
+                createModel(initModel, MDLOADTYPE.PRELOAD);
+
+                $("#scan").addClass("onFocus");
+            });
+</script>
+</body>
+</html>
