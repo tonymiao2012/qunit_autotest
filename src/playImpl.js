@@ -1,3 +1,5 @@
+QUnit.config.reorder = false;
+
 function eventRowsToChannels(rows) {
     var chnls = [];
     $("#total").html(rows.length);
@@ -35,9 +37,9 @@ function eventRowsToChannels(rows) {
     }
     table += "</table>";
 
-    if($("#resultView table").length === 0){
+    if ($("#resultView table").length === 0) {
         $("#resultView").append(table);
-    }else{
+    } else {
         $("#resultView table").append(table);
     }
     return chnls;
@@ -318,19 +320,18 @@ function play(direction, sourceType) {
 
 function switchChannel(direction, sourceType, repeat, funcName) {
     console.log("............switchChannel.");
-    try {
-        QUnit.test(funcName, function (assert) {
-            if(QUnit.config.interrupt === true){
-                throw new Error("Interrupt test case in switchChannle.");
-            }
+    QUnit.test(funcName, function (assert) {
+        var i = 0;
+        var times = repeat;
+        var timer;
+        play(direction, sourceType);
+        var done = assert.async(times);
 
-            var i = 0;
-            var times = repeat;
-            var timer;
-            play(direction, sourceType);
-            var done = assert.async(times);
-
-            function playTimeout() {
+        function playTimeout() {
+            try {
+                if (QUnit.config.interrupt === true) {
+                    throw new Error("Interrupt test case in switchChannel.");
+                }
                 if (i < times) {
                     assert.equal(play(direction, sourceType), true, "check play ");
                     i++;
@@ -339,36 +340,36 @@ function switchChannel(direction, sourceType, repeat, funcName) {
                     if (i < times)
                         setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 1000) + 1000));
                 }
-
+            } catch (e) {
+                console.log(e.message);
+                return;
             }
 
-            setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 1000) + 1000));
+        }
+
+        setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 1000) + 1000));
 
 
-            /*timer = setInterval(function(){
-             console.log("......the time is  %d",i);
-             if(i<times)
-             {
-             assert.equal(play(direction, sourceType),true, "check play " );
-             i++;
-             done();
-             if(i==times)
-             clearInterval(timer);
-             }
-             else
-             {
-             var left;
-             for(left =0; left<= times -i; left++ )
-             done();
-             clearInterval(timer);
-             }
-             },interval);*/
+        /*timer = setInterval(function(){
+         console.log("......the time is  %d",i);
+         if(i<times)
+         {
+         assert.equal(play(direction, sourceType),true, "check play " );
+         i++;
+         done();
+         if(i==times)
+         clearInterval(timer);
+         }
+         else
+         {
+         var left;
+         for(left =0; left<= times -i; left++ )
+         done();
+         clearInterval(timer);
+         }
+         },interval);*/
 
-        });
-    }catch(ex){
-        console.log(ex.message);
-        return;
-    }
+    });
 }
 
 function randomSwitchChannel(repeat, funcName) {
@@ -378,6 +379,7 @@ function randomSwitchChannel(repeat, funcName) {
         var timer;
         var currentIndexT = Math.ceil(Math.random() * ((allChannels_T.length - 1) - 0) + 0);
         var currentIndexC = Math.ceil(Math.random() * ((allChannels_C.length - 1) - 0) + 0);
+
         function switch_T_C(val) {
             if (val % 2 == 0) {
                 model.tvservice.playChannel("0", allChannels_T[currentIndexT].uuid);
@@ -393,9 +395,9 @@ function randomSwitchChannel(repeat, funcName) {
         var done = assert.async(times);
         var interval = Math.ceil(Math.random() * (10000 - 1000) + 1000);
 
-        try{
+        try {
             timer = setInterval(function () {
-                if(QUnit.config.interrupt == true){
+                if (QUnit.config.interrupt == true) {
                     throw new Error("Interrupt test in randomSwitchChannle.");
                 }
 
@@ -415,7 +417,7 @@ function randomSwitchChannel(repeat, funcName) {
                     clearInterval(timer);
                 }
             }, interval);
-        }catch(ex){
+        } catch (ex) {
             console.log("Interrupt randow switch channel.");
             console.log(ex.message);
             return;
@@ -542,30 +544,6 @@ function modifyAttr(attr, flag, uuid) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //getSkipListAllT
 
 function getSkipListAllT(funcName) {
@@ -612,7 +590,6 @@ function onGetSkip_T(m_event) {
         }
     }
 }
-
 
 
 function getSkipListCountT(funcName) {
@@ -668,12 +645,7 @@ function delSkipListDoneT(uuid, funcName) {
 }
 
 
-
-
 //getSkipListAllT
-
-
-
 
 
 //getSkipListAllC
@@ -723,7 +695,6 @@ function onGetSkip_C(m_event) {
         }
     }
 }
-
 
 
 function getSkipListCountC(funcName) {
@@ -779,16 +750,7 @@ function delSkipListDoneC(uuid, funcName) {
 }
 
 
-
 //getSkipListAllC
-
-
-
-
-
-
-
-
 
 
 function getServicesT_attrT_timeout(chNum, funcName) {
@@ -835,8 +797,8 @@ function mainPlayChanged(sourceType, chn, testName) {
         }
         else {
             model.tvservice.playChannel("0", allChannels_C[chn].uuid);
-        $("#name").html(allChannels_C[chn].name);
-    }
+            $("#name").html(allChannels_C[chn].name);
+        }
         timerFlag = setTimeout(getMainPlayChangedTimeout, 5000);
     });
 }
