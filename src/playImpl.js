@@ -342,7 +342,10 @@ function switchChannel(direction, sourceType, repeat, funcName) {
                 }
             } catch (e) {
                 console.log(e.message);
-                return;
+                for(var left = 0; left < times - i; left++){
+                    done();
+                }
+                //return;
             }
 
         }
