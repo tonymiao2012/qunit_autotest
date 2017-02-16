@@ -4,7 +4,6 @@
     <link type="text/css" rel="stylesheet" href="CSS/ATSC_UI.css"/>
     <link type="text/css" rel="stylesheet" href="CSS/qunit-2.0.1.css">
     <link type="text/css" rel="stylesheet" href="CSS/buttons.css">
-    <script type="text/javascript" src="lib/LAB.min.js"></script>
 </head>
 <body>
 <div id="main">
@@ -246,7 +245,7 @@
         </table>
     </div>
 </div>
-</body>
+<script type="text/javascript" src="lib/LAB.min.js"></script>
 <script type="text/javascript" src="lib/d3.min.js"></script>
 <script>
     $LAB.script("lib/qunit-2.0.1.js")
@@ -334,8 +333,8 @@
              }
              */
             createModel(initModel, MDLOADTYPE.PRELOAD);
-
             $("#scan").addClass("onFocus");
         });
 </script>
+</body>
 </html>

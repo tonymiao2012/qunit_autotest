@@ -318,48 +318,57 @@ function play(direction, sourceType) {
 
 function switchChannel(direction, sourceType, repeat, funcName) {
     console.log("............switchChannel.");
-    QUnit.test(funcName, function (assert) {
-        var i = 0;
-        var times = repeat;
-        var timer;
-        play(direction, sourceType);
-        var done = assert.async(times);
-
-        function playTimeout() {
-            if (i < times) {
-                assert.equal(play(direction, sourceType), true, "check play ");
-                i++;
-                $("#times").html(i);
-                done();
-                if (i < times)
-                    setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 1000) + 1000));
+    try {
+        QUnit.test(funcName, function (assert) {
+            if(QUnit.config.interrupt === true){
+                throw new Error("Interrupt test case in switchChannle.");
             }
 
-        }
+            var i = 0;
+            var times = repeat;
+            var timer;
+            play(direction, sourceType);
+            var done = assert.async(times);
 
-        setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 1000) + 1000));
+            function playTimeout() {
+                if (i < times) {
+                    assert.equal(play(direction, sourceType), true, "check play ");
+                    i++;
+                    $("#times").html(i);
+                    done();
+                    if (i < times)
+                        setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 1000) + 1000));
+                }
+
+            }
+
+            setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 1000) + 1000));
 
 
-        /*timer = setInterval(function(){
-         console.log("......the time is  %d",i);
-         if(i<times)
-         {
-         assert.equal(play(direction, sourceType),true, "check play " );
-         i++;
-         done();
-         if(i==times)
-         clearInterval(timer);
-         }
-         else
-         {
-         var left;
-         for(left =0; left<= times -i; left++ )
-         done();
-         clearInterval(timer);
-         }
-         },interval);*/
+            /*timer = setInterval(function(){
+             console.log("......the time is  %d",i);
+             if(i<times)
+             {
+             assert.equal(play(direction, sourceType),true, "check play " );
+             i++;
+             done();
+             if(i==times)
+             clearInterval(timer);
+             }
+             else
+             {
+             var left;
+             for(left =0; left<= times -i; left++ )
+             done();
+             clearInterval(timer);
+             }
+             },interval);*/
 
-    });
+        });
+    }catch(ex){
+        console.log(ex.message);
+        return;
+    }
 }
 
 function randomSwitchChannel(repeat, funcName) {
@@ -369,7 +378,6 @@ function randomSwitchChannel(repeat, funcName) {
         var timer;
         var currentIndexT = Math.ceil(Math.random() * ((allChannels_T.length - 1) - 0) + 0);
         var currentIndexC = Math.ceil(Math.random() * ((allChannels_C.length - 1) - 0) + 0);
-
         function switch_T_C(val) {
             if (val % 2 == 0) {
                 model.tvservice.playChannel("0", allChannels_T[currentIndexT].uuid);
@@ -384,23 +392,34 @@ function randomSwitchChannel(repeat, funcName) {
 
         var done = assert.async(times);
         var interval = Math.ceil(Math.random() * (10000 - 1000) + 1000);
-        timer = setInterval(function () {
-            console.log("......the time is  %d", i);
-            if (i < times) {
-                assert.equal(switch_T_C(i), true, "check play ");
-                i++;
-                $("#times").html(i);
-                done();
-                if (i == times)
-                    clearInterval(timer);
-            }
-            else {
-                var left;
-                for (left = 0; left <= times - i; left++)
+
+        try{
+            timer = setInterval(function () {
+                if(QUnit.config.interrupt == true){
+                    throw new Error("Interrupt test in randomSwitchChannle.");
+                }
+
+                console.log("......the time is  %d", i);
+                if (i < times) {
+                    assert.equal(switch_T_C(i), true, "check play ");
+                    i++;
+                    $("#times").html(i);
                     done();
-                clearInterval(timer);
-            }
-        }, interval);
+                    if (i == times)
+                        clearInterval(timer);
+                }
+                else {
+                    var left;
+                    for (left = 0; left <= times - i; left++)
+                        done();
+                    clearInterval(timer);
+                }
+            }, interval);
+        }catch(ex){
+            console.log("Interrupt randow switch channel.");
+            console.log(ex.message);
+            return;
+        }
     });
 }
 function getServiceListT_done_up(repeat, funcName) {
