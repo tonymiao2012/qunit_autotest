@@ -575,13 +575,164 @@ function modifyAttr(attr, flag, uuid) {
     model.servicelist.SetServiceAttribute(attr, flag, uuid);
 }
 
+//getSkipListAllT
+
+function getSkipListAllT(funcName) {
+    getSkipListT();
+    setTimeout(getSkipListCountT, 2000, funcName);
+}
+
+function getSkipListT() {
+    channelIterator = model.servicelist.createServicelistIterator(
+        true,
+        [
+            {field: ServicelistModel.SERVICELIST_FIELD_ATTR, condition: Model.FIELD_COND_ALL_BITS_SET, value: 32},
+            {field: ServicelistModel.SERVICELIST_FIELD_FRONTEND, condition: Model.FIELD_COND_EQUAL, value: 6}
+        ],
+        [
+            ServicelistModel.SERVICELIST_FIELD_NAME,
+            ServicelistModel.SERVICELIST_FIELD_FRONTEND,
+            ServicelistModel.SERVICELIST_FIELD_MAJOR_CHANNEL_NUMBER,
+            ServicelistModel.SERVICELIST_FIELD_MINOR_CHANNEL_NUMBER,
+            ServicelistModel.SERVICELIST_FIELD_ATTR,
+            ServicelistModel.SERVICELIST_FIELD_GCN/*uuid*/
+        ],
+        [
+            {field: ServicelistModel.SERVICELIST_FIELD_NO, direction: 1}
+        ],
+        onGetSkip_T.bind(this)
+    );
+}
+
+function onGetSkip_T(m_event) {
+
+    if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
+        skipChannels_T = eventRowsToChannels(m_event.rows);
+
+    }
+    else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
+
+        modeljs.dbgprint("total channels  is " + m_event.totalCount, 1);
+        if (m_event.totalCount == 0) {
+            onGetSkip_T({type: TableIterator.EVENT_TYPE_ROWS_READ, rows: []});
+        }
+        else {
+            channelIterator.readNextRows(m_event.totalCount);
+        }
+    }
+}
+
+
+function getSkipListCountT(funcName) {
+    $("#details").html(skipChannels_T.length);
+    QUnit.test(funcName, function (assert) {
+        assert.ok(true, "getSkipListAllT ");
+    });
+}
+
 function addToSkipListT(attr, flag, chNum, funcName) {
     console.log("...............................addToSkipListT  . ");
     modifyAttr(attr, flag, allChannels_T[chNum].uuid);
     getSkipListT();
     //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
-    setTimeout(getSkipListDone, 2000, allChannels_T[chNum].uuid, funcName);
+    setTimeout(addSkipListDoneT, 2000, allChannels_T[chNum].uuid, funcName);
 
+}
+function addSkipListDoneT(uuid, funcName) {
+    var i;
+    var flag = false;
+    for (i = 0; i < skipChannels_T.length; i++) {
+        if (uuid == skipChannels_T[i].uuid) {
+            flag = true;
+            break;
+        }
+    }
+    QUnit.test(funcName, function (assert) {
+        assert.equal(flag, true, "check addToSkipListT ");
+    });
+}
+
+
+function delFromSkipListT(attr, flag, chNum, funcName) {
+    console.log("...............................delFromSkipListT  . ");
+    modifyAttr(attr, flag, allChannels_T[chNum].uuid);
+    getSkipListT();
+    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
+    setTimeout(delSkipListDoneT, 2000, allChannels_T[chNum].uuid, funcName);
+
+}
+function delSkipListDoneT(uuid, funcName) {
+    var i;
+    var flag = false;
+    for (i = 0; i < skipChannels_T.length; i++) {
+        if (uuid == skipChannels_T[i].uuid) {
+            flag = true;
+            break;
+        }
+    }
+    QUnit.test(funcName, function (assert) {
+        assert.equal(flag, false, "check delFromSkipListT ");
+    });
+}
+
+
+//getSkipListAllT
+
+
+//getSkipListAllC
+
+
+function getSkipListAllC(funcName) {
+    getSkipListC();
+    setTimeout(getSkipListCountC, 2000, funcName);
+}
+
+function getSkipListC() {
+    channelIterator = model.servicelist.createServicelistIterator(
+        true,
+        [
+            {field: ServicelistModel.SERVICELIST_FIELD_ATTR, condition: Model.FIELD_COND_ALL_BITS_SET, value: 32},
+            {field: ServicelistModel.SERVICELIST_FIELD_FRONTEND, condition: Model.FIELD_COND_EQUAL, value: 7}
+        ],
+        [
+            ServicelistModel.SERVICELIST_FIELD_NAME,
+            ServicelistModel.SERVICELIST_FIELD_FRONTEND,
+            ServicelistModel.SERVICELIST_FIELD_MAJOR_CHANNEL_NUMBER,
+            ServicelistModel.SERVICELIST_FIELD_MINOR_CHANNEL_NUMBER,
+            ServicelistModel.SERVICELIST_FIELD_ATTR,
+            ServicelistModel.SERVICELIST_FIELD_GCN/*uuid*/
+        ],
+        [
+            {field: ServicelistModel.SERVICELIST_FIELD_NO, direction: 1}
+        ],
+        onGetSkip_C.bind(this)
+    );
+}
+
+function onGetSkip_C(m_event) {
+
+    if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
+        skipChannels_C = eventRowsToChannels(m_event.rows);
+
+    }
+    else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
+
+        modeljs.dbgprint("total channels  is " + m_event.totalCount, 1);
+        if (m_event.totalCount == 0) {
+            onGetSkip_C({type: TableIterator.EVENT_TYPE_ROWS_READ, rows: []});
+        }
+        else {
+            channelIterator.readNextRows(m_event.totalCount);
+        }
+    }
+}
+
+
+function getSkipListCountC(funcName) {
+    $("#details").html(skipChannels_C.length);
+    QUnit.test(funcName, function (assert) {
+        assert.ok(true, "getSkipListAllC ");
+    });
 }
 
 function addToSkipListC(attr, flag, chNum, funcName) {
@@ -589,27 +740,255 @@ function addToSkipListC(attr, flag, chNum, funcName) {
     modifyAttr(attr, flag, allChannels_C[chNum].uuid);
     getSkipListC();
     //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
-    setTimeout(getSkipListDone, 2000, allChannels_C[chNum].uuid, funcName);
+    setTimeout(addSkipListDoneC, 2000, allChannels_C[chNum].uuid, funcName);
 
 }
-
-
-function getSkipListCount(funcName) {
-    $("#details").html(skipChannels_T.length);
+function addSkipListDoneC(uuid, funcName) {
+    var i;
+    var flag = false;
+    for (i = 0; i < skipChannels_C.length; i++) {
+        if (uuid == skipChannels_C[i].uuid) {
+            flag = true;
+            break;
+        }
+    }
     QUnit.test(funcName, function (assert) {
-        assert.ok(true, "getSkipListAllT ");
+        assert.equal(flag, true, "check addToSkipListC ");
     });
 }
-function getSkipListAllT(funcName) {
-    getSkipListT();
-    setTimeout(getSkipListCount, 2000, funcName);
-}
 
-function getSkipListAllC(funcName) {
+
+function delFromSkipListC(attr, flag, chNum, funcName) {
+    console.log("...............................delFromSkipListC  . ");
+    modifyAttr(attr, flag, allChannels_C[chNum].uuid);
     getSkipListC();
-    setTimeout(getSkipListCount, 2000, funcName);
+    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
+    setTimeout(delSkipListDoneC, 2000, allChannels_C[chNum].uuid, funcName);
+
+}
+function delSkipListDoneC(uuid, funcName) {
+    var i;
+    var flag = false;
+    for (i = 0; i < skipChannels_C.length; i++) {
+        if (uuid == skipChannels_C[i].uuid) {
+            flag = true;
+            break;
+        }
+    }
+    QUnit.test(funcName, function (assert) {
+        assert.equal(flag, false, "check delFromSkipListC ");
+    });
 }
 
+
+//getSkipListAllC
+
+//getBlockListAllT
+
+function getBlockListAllT(funcName) {
+    getBlockListT();
+    setTimeout(getBlockListCountT, 2000, funcName);
+}
+
+function getBlockListT() {
+    channelIterator = model.servicelist.createServicelistIterator(
+        true,
+        [
+            {field: ServicelistModel.SERVICELIST_FIELD_ATTR, condition: Model.FIELD_COND_ALL_BITS_SET, value: 64},
+            {field: ServicelistModel.SERVICELIST_FIELD_FRONTEND, condition: Model.FIELD_COND_EQUAL, value: 6}
+        ],
+        [
+            ServicelistModel.SERVICELIST_FIELD_NAME,
+            ServicelistModel.SERVICELIST_FIELD_FRONTEND,
+            ServicelistModel.SERVICELIST_FIELD_MAJOR_CHANNEL_NUMBER,
+            ServicelistModel.SERVICELIST_FIELD_MINOR_CHANNEL_NUMBER,
+            ServicelistModel.SERVICELIST_FIELD_ATTR,
+            ServicelistModel.SERVICELIST_FIELD_GCN/*uuid*/
+        ],
+        [
+            {field: ServicelistModel.SERVICELIST_FIELD_NO, direction: 1}
+        ],
+        onGetBlock_T.bind(this)
+    );
+}
+
+function onGetBlock_T(m_event) {
+
+    if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
+        blockChannels_T = eventRowsToChannels(m_event.rows);
+
+    }
+    else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
+
+        modeljs.dbgprint("total channels  is " + m_event.totalCount, 1);
+        if (m_event.totalCount == 0) {
+            onGetBlock_T({type: TableIterator.EVENT_TYPE_ROWS_READ, rows: []});
+        }
+        else {
+            channelIterator.readNextRows(m_event.totalCount);
+        }
+    }
+}
+
+
+function getBlockListCountT(funcName) {
+    $("#details").html(blockChannels_T.length);
+    QUnit.test(funcName, function (assert) {
+        assert.ok(true, "getBlockListAllT ");
+    });
+}
+
+function addToBlockListT(attr, flag, chNum, funcName) {
+    console.log("...............................addToBlockListT  . ");
+    modifyAttr(attr, flag, allChannels_T[chNum].uuid);
+    getBlockListT();
+    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
+    setTimeout(addBlockListDoneT, 2000, allChannels_T[chNum].uuid, funcName);
+
+}
+function addBlockListDoneT(uuid, funcName) {
+    var i;
+    var flag = false;
+    for (i = 0; i < blockChannels_T.length; i++) {
+        if (uuid == blockChannels_T[i].uuid) {
+            flag = true;
+            break;
+        }
+    }
+    QUnit.test(funcName, function (assert) {
+        assert.equal(flag, true, "check addToBlockListT ");
+    });
+}
+
+
+function delFromBlockListT(attr, flag, chNum, funcName) {
+    console.log("...............................delFromBlockListT  . ");
+    modifyAttr(attr, flag, allChannels_T[chNum].uuid);
+    getBlockListT();
+    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
+    setTimeout(delBlockListDoneT, 2000, allChannels_T[chNum].uuid, funcName);
+
+}
+function delBlockListDoneT(uuid, funcName) {
+    var i;
+    var flag = false;
+    for (i = 0; i < blockChannels_T.length; i++) {
+        if (uuid == blockChannels_T[i].uuid) {
+            flag = true;
+            break;
+        }
+    }
+    QUnit.test(funcName, function (assert) {
+        assert.equal(flag, false, "check delFromBlockListT ");
+    });
+}
+
+
+//getBlockListAllT
+
+
+//getBlockListAllC
+
+function getBlockListAllC(funcName) {
+    getBlockListC();
+    setTimeout(getBlockListCountC, 2000, funcName);
+}
+
+function getBlockListC() {
+    channelIterator = model.servicelist.createServicelistIterator(
+        true,
+        [
+            {field: ServicelistModel.SERVICELIST_FIELD_ATTR, condition: Model.FIELD_COND_ALL_BITS_SET, value: 64},
+            {field: ServicelistModel.SERVICELIST_FIELD_FRONTEND, condition: Model.FIELD_COND_EQUAL, value: 7}
+        ],
+        [
+            ServicelistModel.SERVICELIST_FIELD_NAME,
+            ServicelistModel.SERVICELIST_FIELD_FRONTEND,
+            ServicelistModel.SERVICELIST_FIELD_MAJOR_CHANNEL_NUMBER,
+            ServicelistModel.SERVICELIST_FIELD_MINOR_CHANNEL_NUMBER,
+            ServicelistModel.SERVICELIST_FIELD_ATTR,
+            ServicelistModel.SERVICELIST_FIELD_GCN/*uuid*/
+        ],
+        [
+            {field: ServicelistModel.SERVICELIST_FIELD_NO, direction: 1}
+        ],
+        onGetBlock_C.bind(this)
+    );
+}
+
+function onGetBlock_C(m_event) {
+
+    if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
+        blockChannels_C = eventRowsToChannels(m_event.rows);
+
+    }
+    else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
+
+        modeljs.dbgprint("total channels  is " + m_event.totalCount, 1);
+        if (m_event.totalCount == 0) {
+            onGetBlock_C({type: TableIterator.EVENT_TYPE_ROWS_READ, rows: []});
+        }
+        else {
+            channelIterator.readNextRows(m_event.totalCount);
+        }
+    }
+}
+
+
+function getBlockListCountC(funcName) {
+    $("#details").html(blockChannels_C.length);
+    QUnit.test(funcName, function (assert) {
+        assert.ok(true, "getBlockListAllC ");
+    });
+}
+
+function addToBlockListC(attr, flag, chNum, funcName) {
+    console.log("...............................addToBlockListC . ");
+    modifyAttr(attr, flag, allChannels_C[chNum].uuid);
+    getBlockListC();
+    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
+    setTimeout(addBlockListDoneC, 2000, allChannels_C[chNum].uuid, funcName);
+
+}
+function addBlockListDoneC(uuid, funcName) {
+    var i;
+    var flag = false;
+    for (i = 0; i < blockChannels_C.length; i++) {
+        if (uuid == blockChannels_C[i].uuid) {
+            flag = true;
+            break;
+        }
+    }
+    QUnit.test(funcName, function (assert) {
+        assert.equal(flag, true, "check addToBlockListC ");
+    });
+}
+
+
+function delFromBlockListC(attr, flag, chNum, funcName) {
+    console.log("...............................delFromBlockListC  . ");
+    modifyAttr(attr, flag, allChannels_C[chNum].uuid);
+    getBlockListC();
+    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
+    setTimeout(delBlockListDoneC, 2000, allChannels_C[chNum].uuid, funcName);
+
+}
+function delBlockListDoneC(uuid, funcName) {
+    var i;
+    var flag = false;
+    for (i = 0; i < blockChannels_C.length; i++) {
+        if (uuid == blockChannels_C[i].uuid) {
+            flag = true;
+            break;
+        }
+    }
+    QUnit.test(funcName, function (assert) {
+        assert.equal(flag, false, "check delFromBlockListC ");
+    });
+}
+
+
+//getBlockListAllC
 
 function getServicesT_attrT_timeout(chNum, funcName) {
     $("#details").html(allChannels_T[chNum].attr + ";fav:" + (((allChannels_T[chNum].attr & 0x80) != 0) ? 1 : 0)
@@ -714,3 +1093,207 @@ function onChannelListUpdate(funcName) {
 function playFirstChannelT() {
     model.tvservice.playChannel("0", allChannels_T[0].uuid);
 }
+//getFavListAllT
+
+function getFavListAllT(funcName) {
+    getFavListT();
+    setTimeout(getFavListCountT, 2000, funcName);
+}
+
+function getFavListT() {
+    channelIterator = model.servicelist.createServicelistIterator(
+        true,
+        [
+            {field: ServicelistModel.SERVICELIST_FIELD_ATTR, condition: Model.FIELD_COND_ALL_BITS_SET, value: 128},
+            {field: ServicelistModel.SERVICELIST_FIELD_FRONTEND, condition: Model.FIELD_COND_EQUAL, value: 6}
+        ],
+        [
+            ServicelistModel.SERVICELIST_FIELD_NAME,
+            ServicelistModel.SERVICELIST_FIELD_FRONTEND,
+            ServicelistModel.SERVICELIST_FIELD_MAJOR_CHANNEL_NUMBER,
+            ServicelistModel.SERVICELIST_FIELD_MINOR_CHANNEL_NUMBER,
+            ServicelistModel.SERVICELIST_FIELD_ATTR,
+            ServicelistModel.SERVICELIST_FIELD_GCN/*uuid*/
+        ],
+        [
+            {field: ServicelistModel.SERVICELIST_FIELD_NO, direction: 1}
+        ],
+        onGetFav_T.bind(this)
+    );
+}
+
+function onGetFav_T(m_event) {
+
+    if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
+        favChannels_T = eventRowsToChannels(m_event.rows);
+
+    }
+    else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
+
+        modeljs.dbgprint("total channels  is " + m_event.totalCount, 1);
+        if (m_event.totalCount == 0) {
+            onGetFav_T({type: TableIterator.EVENT_TYPE_ROWS_READ, rows: []});
+        }
+        else {
+            channelIterator.readNextRows(m_event.totalCount);
+        }
+    }
+}
+
+
+function getFavListCountT(funcName) {
+    $("#details").html(favChannels_T.length);
+    QUnit.test(funcName, function (assert) {
+        assert.ok(true, "getFavListAllT ");
+    });
+}
+
+function addToFavListT(attr, flag, chNum, funcName) {
+    console.log("...............................addToFavListT  . ");
+    modifyAttr(attr, flag, allChannels_T[chNum].uuid);
+    getFavListT();
+    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
+    setTimeout(addFavListDoneT, 2000, allChannels_T[chNum].uuid, funcName);
+
+}
+function addFavListDoneT(uuid, funcName) {
+    var i;
+    var flag = false;
+    for (i = 0; i < favChannels_T.length; i++) {
+        if (uuid == favChannels_T[i].uuid) {
+            flag = true;
+            break;
+        }
+    }
+    QUnit.test(funcName, function (assert) {
+        assert.equal(flag, true, "check addToFavListT ");
+    });
+}
+
+
+function delFromFavListT(attr, flag, chNum, funcName) {
+    console.log("...............................delFromFavListT  . ");
+    modifyAttr(attr, flag, allChannels_T[chNum].uuid);
+    getFavListT();
+    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
+    setTimeout(delFavListDoneT, 2000, allChannels_T[chNum].uuid, funcName);
+
+}
+function delFavListDoneT(uuid, funcName) {
+    var i;
+    var flag = false;
+    for (i = 0; i < favChannels_T.length; i++) {
+        if (uuid == favChannels_T[i].uuid) {
+            flag = true;
+            break;
+        }
+    }
+    QUnit.test(funcName, function (assert) {
+        assert.equal(flag, false, "check delFromFavListT ");
+    });
+}
+
+//getFavListAllT
+
+
+//getFavListAllC
+
+function getFavListAllC(funcName) {
+    getFavListC();
+    setTimeout(getFavListCountC, 2000, funcName);
+}
+
+function getFavListC() {
+    channelIterator = model.servicelist.createServicelistIterator(
+        true,
+        [
+            {field: ServicelistModel.SERVICELIST_FIELD_ATTR, condition: Model.FIELD_COND_ALL_BITS_SET, value: 128},
+            {field: ServicelistModel.SERVICELIST_FIELD_FRONTEND, condition: Model.FIELD_COND_EQUAL, value: 7}
+        ],
+        [
+            ServicelistModel.SERVICELIST_FIELD_NAME,
+            ServicelistModel.SERVICELIST_FIELD_FRONTEND,
+            ServicelistModel.SERVICELIST_FIELD_MAJOR_CHANNEL_NUMBER,
+            ServicelistModel.SERVICELIST_FIELD_MINOR_CHANNEL_NUMBER,
+            ServicelistModel.SERVICELIST_FIELD_ATTR,
+            ServicelistModel.SERVICELIST_FIELD_GCN/*uuid*/
+        ],
+        [
+            {field: ServicelistModel.SERVICELIST_FIELD_NO, direction: 1}
+        ],
+        onGetFav_C.bind(this)
+    );
+}
+
+function onGetFav_C(m_event) {
+
+    if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
+        favChannels_C = eventRowsToChannels(m_event.rows);
+
+    }
+    else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
+
+        modeljs.dbgprint("total channels  is " + m_event.totalCount, 1);
+        if (m_event.totalCount == 0) {
+            onGetFav_C({type: TableIterator.EVENT_TYPE_ROWS_READ, rows: []});
+        }
+        else {
+            channelIterator.readNextRows(m_event.totalCount);
+        }
+    }
+}
+
+
+function getFavListCountC(funcName) {
+    $("#details").html(favChannels_C.length);
+    QUnit.test(funcName, function (assert) {
+        assert.ok(true, "getFavListAllC ");
+    });
+}
+
+function addToFavListC(attr, flag, chNum, funcName) {
+    console.log("...............................addToFavListC  . ");
+    modifyAttr(attr, flag, allChannels_C[chNum].uuid);
+    getFavListC();
+    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
+    setTimeout(addFavListDoneC, 2000, allChannels_C[chNum].uuid, funcName);
+
+}
+function addFavListDoneC(uuid, funcName) {
+    var i;
+    var flag = false;
+    for (i = 0; i < favChannels_C.length; i++) {
+        if (uuid == favChannels_C[i].uuid) {
+            flag = true;
+            break;
+        }
+    }
+    QUnit.test(funcName, function (assert) {
+        assert.equal(flag, true, "check addToFavListC ");
+    });
+}
+
+
+function delFromFavListC(attr, flag, chNum, funcName) {
+    console.log("...............................delFromFavListC  . ");
+    modifyAttr(attr, flag, allChannels_C[chNum].uuid);
+    getFavListC();
+    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
+    setTimeout(delFavListDoneC, 2000, allChannels_C[chNum].uuid, funcName);
+
+}
+function delFavListDoneC(uuid, funcName) {
+    var i;
+    var flag = false;
+    for (i = 0; i < favChannels_C.length; i++) {
+        if (uuid == favChannels_C[i].uuid) {
+            flag = true;
+            break;
+        }
+    }
+    QUnit.test(funcName, function (assert) {
+        assert.equal(flag, false, "check delFromFavListT ");
+    });
+}
+
+//getFavListAllC
