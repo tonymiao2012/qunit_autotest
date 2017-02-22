@@ -9,11 +9,7 @@ function startSetSource(sourceType) {
 function startGetSource() {
     var sourceType = model.channelSearch.getSource(); //DTV-T means #15.
     $("#details").html(sourceType);
-    if ((sourceType >= 15) && (sourceType <= 18))
-        return true;
-    else
-        return false;
-
+    return sourceType;
 }
 function setSource(sourceType, testName) {
     QUnit.test(testName, function (assert) {
@@ -21,11 +17,11 @@ function setSource(sourceType, testName) {
         assert.equal(result, true, "Test setSource");
     });
 }
-function getSource(testName) {
+function getSource(sourceType, testName) {
     $("#details").html("");
     QUnit.test(testName, function (assert) {
         var result = startGetSource();
-        assert.equal(result, true, "Test getSource");
+        assert.equal(result, sourceType, "Test getSource");
     });
 }
 

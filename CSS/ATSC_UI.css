@@ -80,7 +80,7 @@ thead th {
     background-color: #55608f;
 }
 
-.table {
+#infoQueue.table {
     width: 100%;
     /*margin-bottom: 20px;*/
     background-color: transparent;
@@ -88,8 +88,8 @@ thead th {
     border-spacing: 0;
 }
 
-.table th,
-.table td {
+#infoQueue.table th,
+#infoQueue.table td {
     padding: 8px;
     line-height: 20px;
     text-align: left;
@@ -97,11 +97,11 @@ thead th {
     border-top: 1px solid #dddddd;
 }
 
-.table th {
+#infoQueue.table th {
     font-weight: bold;
 }
 
-.table thead th {
+#infoQueue.table thead th {
     vertical-align: bottom;
 }
 
