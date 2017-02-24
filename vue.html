@@ -6,6 +6,27 @@
     <div id="app">
         {{message}}
     </div>
+    <div id="app-2">
+        <span v-bind:title="message">
+            Hover mouse here for few seconds. See result.
+        </span>
+    </div>
+    <div id="app-4">
+        <ol>
+            <li v-for="todo in todos">
+                {{ todo.text }}
+            </li>
+        </ol>
+    </div>
+    <div id="app-5">
+        <p>{{message}}</p>
+        <button v-on:click="reverseMessage">Reverse Message</button>
+    </div>
+    <div id="app-7">
+        <ol>
+            <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
+        </ol>
+    </div>
 </head>
 <body>
 <script type="text/javascript" src="lib/vue.js"></script>
@@ -16,6 +37,52 @@
             message: 'Hello Vue!'
         }
     });
+
+    var app2 = new Vue({
+        el: '#app-2',
+        data: {
+            message: 'You loaded this page on: ' + new Date()
+        }
+    });
+
+    var app4 = new Vue({
+        el: '#app-4',
+        data: {
+            todos: [
+                {text: 'Learn JS'},
+                {text: 'Learn Vue'},
+                {text: 'Build something awesome'}
+            ]
+        }
+    });
+    var app5 = new Vue({
+        el: '#app-5',
+        data: {
+            message: 'Hello Vue.js!'
+        },
+        methods: {
+            reverseMessage: function(){
+                this.message = this.message.split('').reverse().join('')
+            }
+        }
+    });
+    //Define a component and template here.
+    Vue.component('todo-item', {
+        props: ['todo'],        //means properties.
+        template: '<li>{{ todo.text }}</li>'
+    });
+
+    var app7 = new Vue({
+        el: '#app-7',
+        data: {
+            groceryList: [
+                { text: 'Vegetables'},
+                { text: 'Cheese'},
+                { text: 'Something else'}
+            ]
+        }
+    });
+
 </script>
 </body>
 </html>
