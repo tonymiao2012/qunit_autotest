@@ -27,10 +27,28 @@
             <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
         </ol>
     </div>
+    <a v-bind:href="url">www.baidu.com</a>
+    <div id="computed-Prop">
+        <p>Original message: {{ message }}</p>
+        <p>Reverse it: {{ reverseStr }}</p>
+    </div>
 </head>
 <body>
 <script type="text/javascript" src="lib/vue.js"></script>
 <script>
+    var exp = new Vue({
+        el: '#computed-Prop',
+        data: {
+            message: "You are the sucker."
+        },
+        computed: {
+            //Computed getter
+            reverseStr: function(){
+                return this.message.split('').reverse().join('');
+            }
+        }
+    });
+
     var app = new Vue({
         el: '#app',
         data: {
@@ -61,7 +79,7 @@
             message: 'Hello Vue.js!'
         },
         methods: {
-            reverseMessage: function(){
+            reverseMessage: function () {
                 this.message = this.message.split('').reverse().join('')
             }
         }
@@ -76,9 +94,9 @@
         el: '#app-7',
         data: {
             groceryList: [
-                { text: 'Vegetables'},
-                { text: 'Cheese'},
-                { text: 'Something else'}
+                {text: 'Vegetables'},
+                {text: 'Cheese'},
+                {text: 'Something else'}
             ]
         }
     });
