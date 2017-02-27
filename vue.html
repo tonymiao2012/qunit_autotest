@@ -6,8 +6,8 @@
     <div id="app">
         {{message}}
     </div>
-    <div id="app-2">
-        <span v-bind:title="message">
+    <div id="app-2" v-bind:class="icon">
+        <span v-bind:title="message" v-bind:style="styleObject">
             Hover mouse here for few seconds. See result.
         </span>
     </div>
@@ -32,6 +32,13 @@
         <p>Original message: {{ message }}</p>
         <p>Reverse it: {{ reverseStr }}</p>
     </div>
+    <div id="input-watch">
+        <p>
+            Input anything you want:
+            <input v-model="question">
+        </p>
+        <p>{{ answer }}</p>
+    </div>
 </head>
 <body>
 <script type="text/javascript" src="lib/vue.js"></script>
@@ -43,7 +50,7 @@
         },
         computed: {     //computed properties are cached based on their dependencies.
             //Computed getter
-            reverseStr: function(){
+            reverseStr: function () {
                 return this.message.split('').reverse().join('');
             }
         }
@@ -59,7 +66,12 @@
     var app2 = new Vue({
         el: '#app-2',
         data: {
-            message: 'You loaded this page on: ' + new Date()
+            message: 'You loaded this page on: ' + new Date(),
+            icon: 'fa fa-signal fa-2x',
+            styleObject: {
+                color: 'red',
+                fontSize: '30px'
+            }
         }
     });
 
@@ -98,6 +110,29 @@
                 {text: 'Cheese'},
                 {text: 'Something else'}
             ]
+        }
+    });
+    var handler = new Vue({
+        el: '#input-watch',
+        data: {
+            question: '',
+            answer: 'Cannot give a response'
+        },
+        watch: {
+            question: function (newQuestion) {
+                this.answer = 'Waiting for you to stop typing...';
+                setTimeout(this.getAnswer(), 100);
+            }
+        },
+        methods: {
+            getAnswer: function () {
+                if (this.question.indexOf('?') === -1) {
+                    this.answer = 'Questions usually contain a question mark like /"?/" ';
+                    return;
+                }
+                this.answer = 'Thinking...';
+                setTimeout(this.answer = 'Maybe', 100);
+            }
         }
     });
 

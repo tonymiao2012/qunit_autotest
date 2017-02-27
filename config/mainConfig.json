@@ -1,7 +1,7 @@
 [
   {
     "name": "Scan",
-    "menu": [
+    "testcase": [
       "1101_AutoScanT",
       "1102_AutoScanC",
       "1001_setSourceDtvT",
@@ -51,12 +51,12 @@
       "1045_manualScanSetFrequencyT",
       "1046_manualScanSetFrequencyC",
       "1047_ScanIsRunning"
-    ]
+    ],
+    "icon-class": "fa fa-signal fa-2x"
   },
   {
     "name": "Play",
-    "menu": [
-
-    ]
+    "testcase": [],
+    "icon-class": ""
   }
 ]
