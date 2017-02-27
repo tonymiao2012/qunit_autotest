@@ -41,7 +41,7 @@
         data: {
             message: "You are the sucker."
         },
-        computed: {
+        computed: {     //computed properties are cached based on their dependencies.
             //Computed getter
             reverseStr: function(){
                 return this.message.split('').reverse().join('');

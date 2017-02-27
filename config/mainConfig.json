@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Scan",
+    "menu": [
+      "1101_AutoScanT",
+      "1102_AutoScanC",
+      "1001_setSourceDtvT",
+      "1002_setSourceAtvT",
+      "1003_setSourceDtvC",
+      "1004_setSourceAtvC",
+      "1005_getSourceDtvT",
+      "1006_getSourceAtvT",
+      "1007_getSourceDtvC",
+      "1008_getSourceAtvC",
+      "1009_autoScanStartDtvT",
+      "1010_autoScanStartAtvT",
+      "1011_autoScanStartDtvC",
+      "1012_autoScanStartAtvC",
+      "1013_manualScanStartDtvT",
+      "1014_manualScanStartAtvT",
+      "1015_manualScanStartDtvC",
+      "1016_manualScanStartAtvC",
+      "1017_autoScanStopDtvT",
+      "1018_autoScanStopAtvT",
+      "1019_autoScanStopDtvC",
+      "1020_autoScanStopAtvC",
+      "1021_autoScanProgressDtvT",
+      "1022_autoScanProgressAtvT",
+      "1023_autoScanProgressDtvC",
+      "1024_autoScanProgressAtvC",
+      "1025_autoScanDigitServicesDtvT",
+      "1026_autoScanAnalogServicesAtvT",
+      "1027_autoScanDigitServicesDtvC",
+      "1028_autoScanAnalogServicesAtvC",
+      "1029_manualScanDigitServicesDtvT",
+      "1030_manualScanAnalogServicesAtvT",
+      "1031_manualScanDigitServicesDtvC",
+      "1032_manualScanAnalogServicesAtvC",
+      "1033_autoScanStateCompleteDtvT",
+      "1034_autoScanStateCompleteAtvT",
+      "1035_autoScanStateCompleteDtvC",
+      "1036_autoScanStateCompleteAtvC",
+      "1037_autoScanStateCancelDtvT",
+      "1038_autoScanStateCancelAtvT",
+      "1039_autoScanStateCancelDtvC",
+      "1040_autoScanStateCancelAtvC",
+      "1041_manualScanStateCompleteDtvT",
+      "1042_manualScanStateCompleteAtvT",
+      "1043_manualScanStateCompleteDtvC",
+      "1044_manualScanStateCompleteAtvC",
+      "1045_manualScanSetFrequencyT",
+      "1046_manualScanSetFrequencyC",
+      "1047_ScanIsRunning"
+    ]
+  },
+  {
+    "name": "Play",
+    "menu": [
+
+    ]
+  }
+]
