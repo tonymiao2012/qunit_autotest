@@ -120,12 +120,12 @@ form#test1 {
     width: 100%;
     position: relative;
     float: inherit;
-    padding-left: 145px;
+    padding-left: 127px;
     text-align: center;
 }
 
 #menu ul.level2 li {
-    padding-left: 180px;
+    padding-left: 115px;
 }
 
 #menu ul li {
@@ -133,7 +133,7 @@ form#test1 {
     display: list-item;
     /*float: left;*/
     height: 95px;
-    width: 45%;
+    width: 52%;
     line-height: 95px;
     padding-left: 85px;
     text-align: left;
@@ -184,7 +184,7 @@ form#test1 {
 }
 
 #menu ul li ul li span {
-    width: 420px;
+    width: 555px;
     overflow: hidden;
     display: block;
 }

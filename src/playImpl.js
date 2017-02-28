@@ -8,14 +8,16 @@ function eventRowsToChannels(rows) {
     $("#resultView table").html("");
     //Draw a form header.
     var table = "<table class='table'>";
-    table += "<tr>" +
+    table += "<thead>" +
+        "<tr>" +
         "<th>Index</th>" +
         "<th>Name</th>" +
         "<th>Source</th>" +
         "<th>MajorNumber</th>" +
         "<th>MinorNumber</th>" +
         "<th>Attribute</th>" +
-        "</tr>"
+        "</tr>" +
+        "</thead>";
     for (var i = 0; i < rows.length; i++) {
         var row = rows[i], chnl = {};
         chnl.name = row[0];
