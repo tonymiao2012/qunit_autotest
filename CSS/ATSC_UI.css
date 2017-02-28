@@ -53,56 +53,39 @@ div#main {
     filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
 
-/*
-div#result table, #infoQueue.table{
-    max-width: 100%;
-    background-color: transparent;
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-*/
-th,
-td {
+#infoQueue.table th,
+#infoQueue.table td,
+#resultView table.table th,
+#resultView table.table td{
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.2);
     color: #fff;
-}
-
-td.onFocus {
-    outline: red auto 10px;
-}
-
-th {
-    text-align: left;
-}
-
-thead th {
-    background-color: #55608f;
-}
-
-#infoQueue.table {
-    width: 100%;
-    /*margin-bottom: 20px;*/
-    background-color: transparent;
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-#infoQueue.table th,
-#infoQueue.table td {
     padding: 8px;
     line-height: 20px;
     text-align: left;
     vertical-align: top;
     border-top: 1px solid #dddddd;
-}
-
-#infoQueue.table th {
     font-weight: bold;
 }
 
-#infoQueue.table thead th {
+#infoQueue.table td.onFocus {
+    outline: red auto 10px;
+}
+
+#infoQueue.table thead th,
+#resultView table.table thead th{
+    background-color: #55608f;
     vertical-align: bottom;
+}
+
+#infoQueue.table,
+#resultView table.table
+{
+    width: 100%;
+    /*margin-bottom: 20px;*/
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 #qunit {
@@ -121,7 +104,6 @@ thead th {
 form#test1 {
     display: inline-flex;
 }
-
 /*--------------------------------------------------drop drown menu style----------------------------------------*/
 #menu {
     width: 30%;
