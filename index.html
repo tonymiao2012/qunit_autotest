@@ -13,6 +13,7 @@
             <li id="scan">
                 <i class="fa fa-signal fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Scan
                 <ul class="level2">
+                    <li is="ScanMenu"></li>
                     <li><span>1101_AutoScanT</span></li>
                     <li><span>1102_AutoScanC</span></li>
                     <li><span>1001_setSourceDtvT</span></li>
@@ -246,6 +247,7 @@
         .script("model/model.js")
         .script("lib/ATSC_UI.js")
         .script("lib/Arrays.js")
+        .script("component/scanComp.js")
         .script("src/searchImpl.js")
         .script("src/playImpl.js")
         .script("src/infoBarImpl.js")

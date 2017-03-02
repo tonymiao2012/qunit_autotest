@@ -1,19 +1,20 @@
 /**
  * Created by miaozixiong on 2017/3/2.
  */
-var scanArray = readMenuArray("../config/mainConfig.json")[0];
+var array = new readMenuArray("../config/mainConfig.json");
 
 new Vue({
+    el: "#scan",
     component: {
         'ScanMenu': scanMenu
     },
     data: {
-        name: scanArray[0]["name"],
-        testcase: scanArray[0]["testcase"],
-        iconclass: scanArray[0]["icon-class"]
+        name: array[0]["name"],
+        testcase: array[0]["testcase"],
+        iconclass: array[0]["icon-class"]
     }
 });
 
 var scanMenu = {
-    template: "<li><span>{{}}</span></li>"
+    template: "<li><span v-for='item in testcase'>{{ item }}</span></li>"
 }
