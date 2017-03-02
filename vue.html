@@ -3,51 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <div id="app">
-        {{message}}
-    </div>
-    <div id="app-2" v-bind:class="icon">
+</head>
+<body>
+<div id="app">
+    {{message}}
+</div>
+<div id="app-2" v-bind:class="icon">
         <span v-bind:title="message" v-bind:style="styleObject">
             Hover mouse here for few seconds. See result.
         </span>
-    </div>
-    <div id="app-4">
-        <ol>
-            <li v-for="todo in todos">
-                {{ todo.text }}
-            </li>
-        </ol>
-    </div>
-    <div id="app-5">
-        <p>{{message}}</p>
-        <button v-on:click="reverseMessage">Reverse Message</button>
-    </div>
-    <div id="app-7">
-        <ol>
-            <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
-        </ol>
-    </div>
-    <a v-bind:href="url">www.baidu.com</a>
-    <div id="computed-Prop">
-        <p>Original message: {{ message }}</p>
-        <p>Reverse it: {{ reverseStr }}</p>
-    </div>
-    <div id="input-watch">
-        <p>
-            Input anything you want:
-            <input v-model="question">
-        </p>
-        <p>{{ answer }}</p>
-    </div>
-    <ul id="repeat-object" class="demo">
-        <li v-for="(value, key, index) in object">
-            {{ value }} : {{ key }} : {{ index }}
+</div>
+<div id="app-4">
+    <ol>
+        <li v-for="todo in todos">
+            {{ todo.text }}
         </li>
-    </ul>
-</head>
-<body>
+    </ol>
+</div>
+<div id="app-5">
+    <p>{{message}}</p>
+    <button v-on:click="reverseMessage">Reverse Message</button>
+</div>
+<div id="app-7">
+    <ol>
+        <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
+    </ol>
+</div>
+<a v-bind:href="url">www.baidu.com</a>
+<div id="computed-Prop">
+    <p>Original message: {{ message }}</p>
+    <p>Reverse it: {{ reverseStr }}</p>
+</div>
+<div id="input-watch">
+    <p>
+        Input anything you want:
+        <input v-model="question">
+    </p>
+    <p>{{ answer }}</p>
+</div>
+<ul id="repeat-object" class="demo">
+    <template v-for="(value, key, index) in object">
+        <li>{{ value }} : {{ key }} : {{ index }}</li>
+    </template>
+</ul>
+<div id="event-example-1">
+    <button v-on:click="plusOne">Add By One</button>
+    <p>Button counter: {{ counter }}</p>
+</div>
 <script type="text/javascript" src="lib/vue.js"></script>
 <script>
+    new Vue({
+        el: "#event-example-1",
+        data: {
+            counter: 0
+        },
+        methods: {
+            plusOne: function(){
+                this.counter += 1;
+            }
+        }
+    });
+
     var exp = new Vue({
         el: '#computed-Prop',
         data: {
