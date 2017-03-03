@@ -1,7 +1,7 @@
 /**
  * Created by miaozixiong on 2017/3/2.
  */
-var array = new readMenuArray("../config/mainConfig.json");
+var array = new readMenuArray("config/mainConfig.json");
 
 new Vue({
     el: "#scan",

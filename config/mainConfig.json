@@ -53,10 +53,5 @@
       "1047_ScanIsRunning"
     ],
     "icon-class": "fa fa-signal fa-2x"
-  },
-  {
-    "name": "Play",
-    "testcase": [],
-    "icon-class": ""
   }
 ]

@@ -13,56 +13,8 @@
             <li id="scan">
                 <i class="fa fa-signal fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Scan
                 <ul class="level2">
-                    <li is="ScanMenu"></li>
-                    <li><span>1101_AutoScanT</span></li>
-                    <li><span>1102_AutoScanC</span></li>
-                    <li><span>1001_setSourceDtvT</span></li>
-                    <li><span>1002_setSourceAtvT</span></li>
-                    <li><span>1003_setSourceDtvC</span></li>
-                    <li><span>1004_setSourceAtvC</span></li>
-                    <li><span>1005_getSourceDtvT</span></li>
-                    <li><span>1006_getSourceAtvT</span></li>
-                    <li><span>1007_getSourceDtvC</span></li>
-                    <li><span>1008_getSourceAtvC</span></li>
-                    <li><span>1009_autoScanStartDtvT</span></li>
-                    <li><span>1010_autoScanStartAtvT</span></li>
-                    <li><span>1011_autoScanStartDtvC</span></li>
-                    <li><span>1012_autoScanStartAtvC</span></li>
-                    <li><span>1013_manualScanStartDtvT</span></li>
-                    <li><span>1014_manualScanStartAtvT</span></li>
-                    <li><span>1015_manualScanStartDtvC</span></li>
-                    <li><span>1016_manualScanStartAtvC</span></li>
-                    <li><span>1017_autoScanStopDtvT</span></li>
-                    <li><span>1018_autoScanStopAtvT</span></li>
-                    <li><span>1019_autoScanStopDtvC</span></li>
-                    <li><span>1020_autoScanStopAtvC</span></li>
-                    <li><span>1021_autoScanProgressDtvT</span></li>
-                    <li><span>1022_autoScanProgressAtvT</span></li>
-                    <li><span>1023_autoScanProgressDtvC</span></li>
-                    <li><span>1024_autoScanProgressAtvC</span></li>
-                    <li><span>1025_autoScanDigitServicesDtvT</span></li>
-                    <li><span>1026_autoScanAnalogServicesAtvT</span></li>
-                    <li><span>1027_autoScanDigitServicesDtvC</span></li>
-                    <li><span>1028_autoScanAnalogServicesAtvC</span></li>
-                    <li><span>1029_manualScanDigitServicesDtvT</span></li>
-                    <li><span>1030_manualScanAnalogServicesAtvT</span></li>
-                    <li><span>1031_manualScanDigitServicesDtvC</span></li>
-                    <li><span>1032_manualScanAnalogServicesAtvC</span></li>
-                    <li><span>1033_autoScanStateCompleteDtvT</span></li>
-                    <li><span>1034_autoScanStateCompleteAtvT</span></li>
-                    <li><span>1035_autoScanStateCompleteDtvC</span></li>
-                    <li><span>1036_autoScanStateCompleteAtvC</span></li>
-                    <li><span>1037_autoScanStateCancelDtvT</span></li>
-                    <li><span>1038_autoScanStateCancelAtvT</span></li>
-                    <li><span>1039_autoScanStateCancelDtvC</span></li>
-                    <li><span>1040_autoScanStateCancelAtvC</span></li>
-                    <li><span>1041_manualScanStateCompleteDtvT</span></li>
-                    <li><span>1042_manualScanStateCompleteAtvT</span></li>
-                    <li><span>1043_manualScanStateCompleteDtvC</span></li>
-                    <li><span>1044_manualScanStateCompleteAtvC</span></li>
-                    <li><span>1045_manualScanSetFrequencyT</span></li>
-                    <li><span>1046_manualScanSetFrequencyC</span></li>
-                    <li><span>1047_ScanIsRunning</span></li>
+                    <!--li is="ScanMenu"></li-->
+                    <li v-for="item in testcase"><span>{{ item }}</span></li>
                 </ul>
             </li>
             <li id="play">
