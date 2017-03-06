@@ -5,9 +5,6 @@ var array = new readMenuArray("config/mainConfig.json");
 
 new Vue({
     el: "#scan",
-    component: {
-        'ScanMenu': scanMenu
-    },
     data: {
         name: array[0]["name"],
         testcase: array[0]["testcase"],
@@ -15,6 +12,3 @@ new Vue({
     }
 });
 
-var scanMenu = {
-    template: "<li><span v-for='item in testcase'>{{ item }}</span></li>"
-}

@@ -11,10 +11,9 @@
         <img src="asset/img/qunit_logo.png">
         <ul class="level1">
             <li id="scan">
-                <i class="fa fa-signal fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Scan
+                <i v-bind:class="[iconclass]" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{ name }}
                 <ul class="level2">
-                    <!--li is="ScanMenu"></li-->
-                    <li v-for="item in testcase"><span>{{ item }}</span></li>
+                    <li><span v-for='item in testcase'>{{ item }}</span></li>
                 </ul>
             </li>
             <li id="play">
