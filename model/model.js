@@ -11,8 +11,8 @@
  * Copyright (c) 2014 LOEWE Opta GmbH, Kronach. All rights reserved. */
 //--------------------------------------------------------
 var GLOBAL;
-GLOBAL={
-	DISABLE_MESSAGE:false
+GLOBAL = {
+    DISABLE_MESSAGE: false
 };
 var TVMode = ("undefined" != typeof (modeljs));
 // --------------------------------------------------------
@@ -322,11 +322,11 @@ function SubModel(parentModel, definesClass) {
 
     var currentLoadType = MDLOADTYPE.PRELOAD;
 
-    this.setCurrentLoadType = function(v){
+    this.setCurrentLoadType = function (v) {
         currentLoadType = v;
     }
 
-    function checkContinueRegister(name){
+    function checkContinueRegister(name) {
         return true;
         //if (MDLOADTYPE.PRELOAD == currentLoadType) {
         //    return modelConfig.preloadVal.indexOf(name) > -1
@@ -371,7 +371,7 @@ function SubModel(parentModel, definesClass) {
      * Internal method for registering a simple model object ( integer, string )
      */
     var registerSimpleObject = function (name, getterName, setterName, handlerName, getterConverter, setterConverter) {
-        if(!checkContinueRegister(name)) return false;
+        if (!checkContinueRegister(name)) return false;
         // Set default getterConverter if none specified
         if (!getterConverter) {
             getterConverter = function (value) {
@@ -385,8 +385,6 @@ function SubModel(parentModel, definesClass) {
                 return value;
             }
         }
-
-
 
 
         var handleValueChanged = function (value) {
@@ -410,12 +408,12 @@ function SubModel(parentModel, definesClass) {
                     },
                     set: function (cb) {
                         if (!m_registrations[name]) {
-        // Register object
-        this.registerObject(
-            name, [
-                {
-                    event: "notifyNewValue",
-                    handler: handleValueChanged
+                            // Register object
+                            this.registerObject(
+                                name, [
+                                    {
+                                        event: "notifyNewValue",
+                                        handler: handleValueChanged
                                     }
                                 ]);
                         }
@@ -458,7 +456,7 @@ function SubModel(parentModel, definesClass) {
                                     event: "notifyNewValue",
                                     handler: handleValueChanged
                                 }
-            ]);
+                            ]);
                     }
                     var object = this.getObject(name);
                     object.setValue(setterConverter(value));
@@ -533,7 +531,7 @@ function SubModel(parentModel, definesClass) {
      * Internal method for registering a vector model object (IntegerVector or StringVector).
      */
     var registerVectorObject = function (name, getterName, setterName, handlerName, getterConverter, setterConverter, isInteger) {
-        if(!checkContinueRegister(name)) return false;
+        if (!checkContinueRegister(name)) return false;
         // Set default getterConverter if none specified
         if (!getterConverter) {
             getterConverter = function (value) {
@@ -561,9 +559,6 @@ function SubModel(parentModel, definesClass) {
         }
 
 
-
-
-
         var handleValueChanged = function (value) {
 
             if (GLOBAL.DISABLE_MESSAGE) {
@@ -587,14 +582,14 @@ function SubModel(parentModel, definesClass) {
                     },
                     set: function (cb) {
                         if (!m_registrations[name]) {
-        // Register object
-        this.registerObject(
-            name, [
-                {
-                    event: (isInteger ? "notifyIntegerVector" : "notifyStringVector"),
-                    handler: handleValueChanged
-                }
-            ]);
+                            // Register object
+                            this.registerObject(
+                                name, [
+                                    {
+                                        event: (isInteger ? "notifyIntegerVector" : "notifyStringVector"),
+                                        handler: handleValueChanged
+                                    }
+                                ]);
                         }
                         this['_' + handlerName] = cb;
                     }
@@ -709,8 +704,7 @@ function SubModel(parentModel, definesClass) {
      *      The name of the result handler "onX" or null.
      */
     this.registerActionObject = function (name, methods, handlerName, handlerError) {
-        if(!checkContinueRegister(name)) return false;
-
+        if (!checkContinueRegister(name)) return false;
 
 
         var handleResult = function (actionId, result) {
@@ -754,18 +748,18 @@ function SubModel(parentModel, definesClass) {
             var method = methods[i];
             this[method.name] = function (boundMethod) {
                 if (!m_registrations[name]) {
-        // Register object
-        this.registerObject(
-            name, [
-                {
-                    event: "notifyResult",
-                    handler: handleResult
-                },
-                {
-                    event: 'notifyExecutionError',
-                    handler: handleError
-                }
-            ]);
+                    // Register object
+                    this.registerObject(
+                        name, [
+                            {
+                                event: "notifyResult",
+                                handler: handleResult
+                            },
+                            {
+                                event: 'notifyExecutionError',
+                                handler: handleError
+                            }
+                        ]);
                 }
                 newArguments = Array.prototype.slice.call(arguments);
                 newArguments[0] = this.getObject(name);
@@ -801,7 +795,7 @@ function SubModel(parentModel, definesClass) {
      *      The name of the iterator creator method "createX" or null.
      */
     this.registerTableObject = function (name, iteratorCreatorName) {
-        if(!checkContinueRegister(name)) return false;
+        if (!checkContinueRegister(name)) return false;
         // Register iterator creator if specified
         if (iteratorCreatorName) {
             this[iteratorCreatorName] = function (readOnly, selections, fields, orders, handler) {
@@ -816,10 +810,10 @@ function SubModel(parentModel, definesClass) {
         }
 
         if (name in modelConfig.preload) {
-        // Register object
-        this.registerObject(
-            name, []);
-    }
+            // Register object
+            this.registerObject(
+                name, []);
+        }
     };
 
     /**
@@ -913,9 +907,7 @@ function SubModel(parentModel, definesClass) {
                 }
             }
         }
-
     }
-
 }
 
 
@@ -1053,7 +1045,7 @@ function ModelLoader(onLoadedHandler, configArr) {
 }
 
 var modelConfig = {
-    "preload" : [
+    "preload": [
         "tvapi.table.favouritelist.list",
         "de.loewe.sl2.table.servicelist.list",
         "de.loewe.sl2.messages.messageid"
@@ -1143,7 +1135,11 @@ function MDLOADTYPE() {
 }
 var model = new Model();
 function createModel(callback, loadType) {
-    var modelArr = modelConfig.common.concat(modelConfig["EU"]);
+    var platform = readJSONFileArrayByIndex("config/mainConfig.json", 0);
+    if(platform === "ATSC")
+        platform = "NA";
+
+    var modelArr = modelConfig.common.concat(modelConfig[platform]);
     new ModelLoader(function () {
         model.createSubModel(modelArr, loadType);
         callback();

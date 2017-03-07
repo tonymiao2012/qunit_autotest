@@ -6,16 +6,6 @@ var array = new readMenuArray("config/mainConfig.json");
 new Vue({
     el: "#repeat",
     data: {
-        name: array[0]["name"],
-        testcase: array[0]["testcase"],
-        iconclass: array[0]["icon-class"],
-        ariaAttr: true
-    }
-});
-
-new Vue({
-    el: "#scan",
-    data: {
         name: array[1]["name"],
         testcase: array[1]["testcase"],
         iconclass: array[1]["icon-class"],
@@ -24,7 +14,7 @@ new Vue({
 });
 
 new Vue({
-    el: "#play",
+    el: "#scan",
     data: {
         name: array[2]["name"],
         testcase: array[2]["testcase"],
@@ -34,7 +24,7 @@ new Vue({
 });
 
 new Vue({
-    el: "#serviceList",
+    el: "#play",
     data: {
         name: array[3]["name"],
         testcase: array[3]["testcase"],
@@ -44,7 +34,7 @@ new Vue({
 });
 
 new Vue({
-    el: "#PC",
+    el: "#serviceList",
     data: {
         name: array[4]["name"],
         testcase: array[4]["testcase"],
@@ -54,7 +44,7 @@ new Vue({
 });
 
 new Vue({
-    el: "#CC",
+    el: "#PC",
     data: {
         name: array[5]["name"],
         testcase: array[5]["testcase"],
@@ -64,7 +54,7 @@ new Vue({
 });
 
 new Vue({
-    el: "#infoBar",
+    el: "#CC",
     data: {
         name: array[6]["name"],
         testcase: array[6]["testcase"],
@@ -74,11 +64,21 @@ new Vue({
 });
 
 new Vue({
-    el: "#pvr",
+    el: "#infoBar",
     data: {
         name: array[7]["name"],
         testcase: array[7]["testcase"],
         iconclass: array[7]["icon-class"],
+        ariaAttr: true
+    }
+});
+
+new Vue({
+    el: "#pvr",
+    data: {
+        name: array[8]["name"],
+        testcase: array[8]["testcase"],
+        iconclass: array[8]["icon-class"],
         ariaAttr: true
     }
 });
