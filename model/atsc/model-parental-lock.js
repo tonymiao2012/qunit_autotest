@@ -8,7 +8,7 @@ function Parental_lockModelDefines() {
     Parental_lockModelDefines.SL2_TVAPI_VSTR_PARENTAL_LOCK_PIN_REQUEST = "de.loewe.sl2.vstr.parental.lock.pin.request";
     Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_PIN_REQUEST_CONFIRM = "de.loewe.sl2.action.parental.lock.pin.request.confirm";
 
-    Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_ALL = "de.loewe.sl2.i32.parental.lock.all";
+//    Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_ALL = "de.loewe.sl2.i32.parental.lock.all";
     Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_INPUT_SOURCE = "de.loewe.sl2.str.parental.lock.inputSource";
     Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_DAILY_START = "de.loewe.sl2.i32.parental.lock.daily.start";
     Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_DAILY_END = "de.loewe.sl2.i32.parental.lock.daily.end";
@@ -81,15 +81,6 @@ function Parental_lockModelDefines() {
 
     Parental_lockModelDefines.SL2_TVAPI_PARENTAL_LOCK_INPUT_SOURCE_LENGTH = 128;
     Parental_lockModelDefines.SL2_TVAPI_PARENTAL_LOCK_WEEKLY_LENGTH = 128;
-
-    //reserve for original use, will be remove in the furture
-    Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_PIN_MEMORISED = "de.loewe.sl2.i32.parental.lock.pin.memorised";
-    Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_FALLBACK_PIN = "de.loewe.sl2.str.parental.lock.fallback.pin";
-    Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_LEVEL_PAGE_SELECT_STATE = "tvapi.action.parental.lock.level.page.state";
-    Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_OPENVCHIP_PAGE = "tvapi.vstr.parental.lock.openvchip.page";
-    Parental_lockModelDefines.SL2_TVAPI_INT32_PARENTAL_LOCK_NEW_AREA_PROGRAM_LOCK = "tvapi.i32.parental.lock.new.area.program.lock";
-    Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_SET_LEVEL_PAGE = "tvapi.action.parental.lock.set.level.page";
-    Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_DIRECT_CONTROL = "tvapi.i32.parental.lock.direct.control";
 }
 function Parental_lockModel(_) {
     SubModel.call(this, _, Parental_lockModelDefines);
@@ -116,7 +107,7 @@ function Parental_lockModel(_) {
             }
         }], "null")
 
-        this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_ALL, "getLockAll", "setLockAll", "onLockAll", null, null);
+//        this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_ALL, "getLockAll", "setLockAll", "onLockAll", null, null);
         this.registerStringObject(Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_INPUT_SOURCE, "getInputSourceLock", "setInputSourceLock", "onInputSourceLock", null, null);
         this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_DAILY_START, "getStart", "setStart", "onStartChaged", null, null);
         this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_DAILY_END, "getEnd", "setEnd", "onEndChaged", null, null);
@@ -136,47 +127,30 @@ function Parental_lockModel(_) {
         this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_CA_FRENCH_RATING, "getCanFrenchRating", "setCanFrenchRating", "onCanFrenchRatingChaged", null, null);
         this.registerStringObject(Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_OPEN_VCHIP, "getOpenVchip", "setOpenVchip", "onOpenVchipChaged", null, null);
 
-    //reserve for original use, will be remove in the furture
-        this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_PIN_MEMORISED, "getPinMemorised", "setPinMemorised", "onPinMemorisedChaged", null, null);
-        this.registerStringObject(Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_FALLBACK_PIN, "getFallbackPin", "setFallbackPin", "onFallbackPinChaged", null, null);
-        this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_INT32_PARENTAL_LOCK_NEW_AREA_PROGRAM_LOCK, "getNewAreaProgrammeLock", "setNewAreaProgrammeLock", "onNewAreaProgrammeLockChaged", null, null);
-        this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_DIRECT_CONTROL, "getDirectControl", "setDirectControl", "onDirectControlChaged", null, null);
-        this.registerActionObject(Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_OPENVCHIP_PAGE, [{
-            name: "OpenvchipPage",
-            method: function (_, e, l, n, A) {
-                return _.invoke(e, l, n, A)
-            }
-        }], "GetOpenVchipHandler");
-        this.registerActionObject(Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_LEVEL_PAGE_SELECT_STATE, [{
-            name: "LevelPageState",
-            method: function (_, e, l) {
-                return _.invoke(e, l)
-            }
-        }], "GetLevelPageHandler");
-        this.registerActionObject(Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_SET_LEVEL_PAGE, [{
-            name: "SetLevelPage",
-            method: function (_, e, l, n, A) {
-                return _.invoke(e, l, n, A)
-            }
-        }], "SetLevelPageHandler");
-    //reserve for original use, will be remove in the furture
-  
         this.openVchipRegionPage = function()
         {
-            try 
+            try
             {
                 var retval = {
                     "datalist":[],
                     "selectlist":[]
                 }
-                
-                var openVchip = JSON.parse(this.getOpenVchip());                 
+                var temp=this.getOpenVchip();
+                DBG_ERROR("openVchip"+JSON.stringify(temp));
+                try{
+                   var openVchip = JSON.parse(temp);
+                }
+                catch(ex) {
+                    DBG_ERROR(ex.message);
+                    openVchip={"Open V-chip":[]}
+                }
+                DBG_ERROR("openVchip"+JSON.stringify(openVchip))
                 var regionNames = [];
                 for (var i = 0; i < openVchip['Open V-chip'].length; i++)
                 {
                     regionNames[i] = openVchip['Open V-chip'][i]['regionName'];
                 }
-                
+
                 retval.datalist = regionNames;
                 return retval;
             }
@@ -184,20 +158,20 @@ function Parental_lockModel(_) {
             {
                 DBG_ERROR(e.message)
             }
-        };   
+        };
         this.openVchipDimensionPage = function(RegionSelect)
         {
-            try 
+            try
             {
                 var retval = {
                     "datalist":[],
                     "selectlist":[]
                 }
-                
-                var openVchip = JSON.parse(this.getOpenVchip());                
+
+                var openVchip = JSON.parse(this.getOpenVchip());
                 var dimensionNames = [];
                 var dimensionInfo = openVchip['Open V-chip'][RegionSelect]['dimensionInfo'];
-                
+
                 for (var dimIdx = 0; dimIdx < dimensionInfo.length; dimIdx++)
                 {
                     dimensionNames[dimIdx] = dimensionInfo[dimIdx]['dimensionName'];
@@ -209,17 +183,26 @@ function Parental_lockModel(_) {
             {
                 DBG_ERROR(e.message)
             }
-        };     
+        };
         this.openVchipRatingValuePage = function(RegionSelect, DimensionSelect)
         {
-            try 
+            try
             {
                 var retval = {
                     "datalist":[],
                     "selectlist":[]
                 }
-            
-                var openVchip = JSON.parse(this.getOpenVchip());                
+                var temp=this.getOpenVchip();
+                DBG_ERROR("getOpenVchip"+JSON.stringify(temp));
+                try{
+                    var openVchip = JSON.parse(temp);
+                }
+                catch(ex) {
+                    DBG_ERROR(ex.message);
+                    openVchip={"Open V-chip":[]}
+                }
+
+                //var openVchip = JSON.parse(this.getOpenVchip());
                 var ratingValues = [];
                 var selectList = [];
                 var isFirstRatingNA = false;
@@ -254,7 +237,7 @@ function Parental_lockModel(_) {
                     {
                         selectList.push(settingValue&(1<<i)?1:0)
                     }
-                }            
+                }
 
                 retval.datalist = ratingValues;
                 retval.selectlist = selectList;
@@ -265,12 +248,12 @@ function Parental_lockModel(_) {
             {
                 DBG_ERROR(e.message)
             }
-        };    
+        };
         this.setLevelPage = function(regionSelect, dimensionSelect, ratingValueSelect, enLock)
         {
-            try 
+            try
             {
-                var openVchip = JSON.parse(this.getOpenVchip());        
+                var openVchip = JSON.parse(this.getOpenVchip());
                 var ratingInfo = openVchip['Open V-chip'][regionSelect]['dimensionInfo'][dimensionSelect]['ratingValue'];
                 var settingValue = openVchip['Open V-chip'][regionSelect]['dimensionInfo'][dimensionSelect]['setting'];
                 var gradScale = openVchip['Open V-chip'][regionSelect]['dimensionInfo'][dimensionSelect]['graduatedScale'];
@@ -302,7 +285,7 @@ function Parental_lockModel(_) {
                     {
                         for(var i = ratingValueSelect; i < ratingInfoLength; i++)
                         {
-                            settingValue |= (1<<i); 
+                            settingValue |= (1<<i);
                         }
                     }
                 }
@@ -314,24 +297,24 @@ function Parental_lockModel(_) {
                     }
                     else
                     {
-                        settingValue |= (1<<ratingValueSelect); 
+                        settingValue |= (1<<ratingValueSelect);
                     }
-                }     
+                }
 
                 var selectList = [];
                 for (var i = 0; i < ratingInfoLength; i++)
                 {
                     selectList.push(settingValue&(1<<i)?1:0)
                 }
-                
+
                 if(isFirstRatingNA)
                 {
                 	settingValue = settingValue<<1;
                 }
-                
+
                 openVchip['Open V-chip'][regionSelect]['dimensionInfo'][dimensionSelect]['setting']=settingValue;
                 this.setOpenVchip(JSON.stringify(openVchip));
-                
+
                 return selectList;
             }
             catch (e)

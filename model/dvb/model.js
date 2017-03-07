@@ -1139,6 +1139,13 @@ var modelConfig = {
     ]
 };
 
+// Load modules and create global model instance when finished
+//var model = null;
+//var modelLoader = new ModelLoader(function () {
+//    model = new Model();
+//    model.createSubModel(modelConfig.preload);
+//}, modelConfig.preload);
+
 function MDLOADTYPE() {
 }
 var model = new Model();

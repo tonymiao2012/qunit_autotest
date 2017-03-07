@@ -4,19 +4,17 @@ function Channelsearch_atscModelDefines() {
     Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_SOURCE = "de.loewe.sl2.i32.channel.search.source";
     Channelsearch_atscModelDefines.SL2_TVAPI_ACTION_ATSC_CHANNEL_SEARCH_START = "de.loewe.sl2.action.channel.search.start";
     Channelsearch_atscModelDefines.SL2_TVAPI_ACTION_ATSC_CHANNEL_SEARCH_STOP = "de.loewe.sl2.action.channel.search.stop";
-    Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_PROGRESS = "de.loewe.sl2.i32.channel.search.searching.progress";
-    Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_FOUND_DIGIT_SERVICES = "de.loewe.sl2.i32.channel.search.found.services";
-    Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_FOUND_ANALOG_SERVICES = "de.loewe.sl2.i32.channel.search.found.analogservices";
-    Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_STATE = "de.loewe.sl2.tvapi.i32.channel.search.search.state";
-    Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_FREQUENCY = "de.loewe.sl2.i32.search.frequency";
-    Channelsearch_atscModelDefines.SL2_TVAPI_ATSC_CHANNEL_SEARCH_TABLE_FOUND_CHANNELS = "de.loewe.sl2.table.found.channels";
+    Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_PROGRESS = "tvapi.i32.atsc.channel.search.progress";
+    Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_FOUND_DIGIT_SERVICES = "tvapi.i32.atsc.channel.search.found.digit.services";
+    Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_FOUND_ANALOG_SERVICES = "tvapi.i32.atsc.channel.search.found.analog.services";
+    Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_FOUND_SERVICES_NAME = "tvapi.str.atsc.channel.search.found.services.name";
+    Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_STATE = "tvapi.i32.atsc.channel.search.state";
+    Channelsearch_atscModelDefines.SL2_TVAPI_ATSC_CHANNEL_SEARCH_TABLE_FOUND_CHANNELS = "tvapi.table.atsc.channel.search.found.channels";
     Channelsearch_atscModelDefines.SL2_TVAPI_ATSC_CHANNEL_SEARCH_TABLE_FAVOURITE_ACTION_SET = "tvapi.action.atsc.channel.search.favourite.set";
     Channelsearch_atscModelDefines.SL2_TVAPI_ATSC_CHANNEL_SEARCH_TABLE_SKIP_ACTION_SET = "tvapi.action.atsc.channel.search.skip.set";
-    Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_RUNNING = "de.loewe.sl2.i32.channel.search.running";
-    Channelsearch_atscModelDefines.SL2_TVAPI_ATSC_CHANNEL_SEARCH_SOURCE_ANALOG = 10;
-    Channelsearch_atscModelDefines.SL2_TVAPI_ATSC_CHANNEL_SEARCH_SOURCE_DVBT = 11;
-    Channelsearch_atscModelDefines.SL2_TVAPI_ATSC_CHANNEL_SEARCH_SOURCE_DVBC = 12;
-    Channelsearch_atscModelDefines.SL2_TVAPI_ATSC_CHANNEL_SEARCH_SOURCE_DVBS = 13;
+    Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_RUNNING = "tvapi.i32.atsc.channel.search.running";
+    Channelsearch_atscModelDefines.SL2_TVAPI_ATSC_CHANNEL_SEARCH_SOURCE_DVBT = 0;
+    Channelsearch_atscModelDefines.SL2_TVAPI_ATSC_CHANNEL_SEARCH_SOURCE_DVBC = 1;
     Channelsearch_atscModelDefines.ENUM_ATSC_CHANNEL_SEARCH_SEARCH_STATE_FINISHED = 0;
     Channelsearch_atscModelDefines.ENUM_ATSC_CHANNEL_SEARCH_FOUND_CHANNELS_NUMBER = 0;
     Channelsearch_atscModelDefines.ENUM_ATSC_CHANNEL_SEARCH_FOUND_CHANNELS_NAME = 1;
@@ -48,7 +46,6 @@ function Channelsearch_atscModel(e,type) {
         this.registerIntegerObject(Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_FOUND_DIGIT_SERVICES, "getFoundDigitServices", "setFoundDigitServices", "onFoundDigitServicesChaged", null, null);
         this.registerIntegerObject(Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_FOUND_ANALOG_SERVICES, "getFoundAnalogServices", "setFoundAnalogServices", "onFoundAnalogServicesChaged", null, null);
         this.registerIntegerObject(Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_STATE, "getSearchState", "setSearchState", "onSearchStateChaged", null, null);
-        this.registerIntegerObject(Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_FREQUENCY, "getSearchFrequency", "setSearchFrequency", "onSearchFrequencyChaged", null, null);
         this.registerTableObject(Channelsearch_atscModelDefines.SL2_TVAPI_ATSC_CHANNEL_SEARCH_TABLE_FOUND_CHANNELS, "creatFoundChannelsIterator");
         this.registerActionObject(Channelsearch_atscModelDefines.SL2_TVAPI_ATSC_CHANNEL_SEARCH_TABLE_FAVOURITE_ACTION_SET, [{
             name: "FavouriteSet",

@@ -2,7 +2,10 @@ function TvserviceModelDefines() {
 }
 {
     TvserviceModelDefines.TVAPI_VSTR_TVSERVICE_PLAY_MAIN = "de.loewe.sl2.vstr.tvservice.play.main";
+    TvserviceModelDefines.TVAPI_VSTR_TVSERVICE_PLAY_MAIN_AIR = "de.loewe.sl2.vstr.tvservice.play.main.air";
+    TvserviceModelDefines.TVAPI_VSTR_TVSERVICE_PLAY_MAIN_CABLE = "de.loewe.sl2.vstr.tvservice.play.main.cable";
     TvserviceModelDefines.TVAPI_ACTION_TVSERVICE_PLAY = "de.loewe.sl2.action.tvservice.play";
+    TvserviceModelDefines.TVAPI_ACTION_TVSERVICE_STOP = "de.loewe.sl2.action.tvservice.stop";
     TvserviceModelDefines.TVAPI_I32_TVSERVICE_NO_SIGNAL_MAIN = "de.loewe.sl2.i32.tvservice.nosignal.main";
     TvserviceModelDefines.TVAPI_VSTR_TVSERVICE_UNLOCK_PLAY = "tvapi.action.tvservice.unlock.play";
     TvserviceModelDefines.SL2_TVAPI_STR_TVSERVICE_VIDEO_FORMAT_INFO = "tvapi.str.tvservice.video.format.info";
@@ -19,6 +22,7 @@ function TvserviceModelDefines() {
     TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_LOCK_STATUS = "tvapi.i32.tvservice.lock.status";
     TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_TUNER_SIGNAL_RFLEVEL = "de.loewe.sl2.vint.tunerinfo.signal.rflevel";
     TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_TUNER_SIGNAL_CN = "de.loewe.sl2.vint.tunerinfo.signal.cn";
+    TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_PLAY_MAIN_PAUSE = "de.loewe.sl2.tvservice.play.main.pause";
 
     TvserviceModelDefines.SL2_TVAPI_VSTR_TVSERVICE_PLAY_UUID_FOLDER   = 0;
     TvserviceModelDefines.SL2_TVAPI_VSTR_TVSERVICE_PLAY_UUID_SERVICE  = 1;
@@ -61,6 +65,7 @@ function TvserviceModelDefines() {
     TvserviceModelDefines.SL2_TVAPI_TVSERVICE_AUDIO_TABLE= "de.loewe.sl2.tvservice.audio.table";
     TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_AUDIO_INDEX= "de.loewe.sl2.i32.tvservice.audio.index";
     TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_AUDIO_LAST_INDEX= "de.loewe.sl2.i32.tvservice.audio.last.index";
+    TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_AUDIO_EXIST = "de.loewe.sl2.i32.tvservice.audio.exist";
 
 
     TvserviceModelDefines.SL2_TVAPI_VINT_TUNERINFO_SIGNAL_PERCENTAGE  = 0;
@@ -72,6 +77,8 @@ function TvserviceModel(e) {
 
     this.registerSubObject = function (loadType) {
         this.registerStringVectorObject(TvserviceModelDefines.TVAPI_VSTR_TVSERVICE_PLAY_MAIN, "getMainPlay", null, "onMainPlayChanged", null, null);
+        this.registerStringVectorObject(TvserviceModelDefines.TVAPI_VSTR_TVSERVICE_PLAY_MAIN_AIR, "getMainPlayAir", null, "onMainPlayAirChanged", null, null);
+        this.registerStringVectorObject(TvserviceModelDefines.TVAPI_VSTR_TVSERVICE_PLAY_MAIN_CABLE, "getMainPlayCable", null, "onMainPlayCableChanged", null, null);
         this.registerIntegerObject(TvserviceModelDefines.TVAPI_I32_TVSERVICE_NO_SIGNAL_MAIN, "getNoSignalMain", "setNoSignalMain", "onNoSignalMainChanged", null, null);
         this.registerIntegerObject(TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_PLAY_FAV_CHANNEL_LIST, "getPlayFavChannelList", "setPlayFavChannelList", "onPlayFavChannelListChanged", null, null);
         this.registerIntegerObject(TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_PLAYED_SUCCESS_LIVETV, "getPlaySuccessLiveTV", "setPlaySuccessLiveTV", "onPlaySuccessLiveTVChanged", null, null);
@@ -85,6 +92,12 @@ function TvserviceModel(e) {
                 return e.invoke(i, t)
             }
         }], "onPlayResult");
+        this.registerActionObject(TvserviceModelDefines.TVAPI_ACTION_TVSERVICE_STOP, [{
+            name: "stopChannel",
+            method: function (e) {
+                return e.invoke()
+            }
+        }], "onStopResult");
         this.registerActionObject(TvserviceModelDefines.TVAPI_VSTR_TVSERVICE_UNLOCK_PLAY, [{
             name: "unLockPlayChannel",
             method: function (e, i) {
@@ -117,7 +130,11 @@ function TvserviceModel(e) {
             TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_AUDIO_LAST_INDEX,
             "getAudioLastIndex", "setAudioLastIndex", "onAudioLastIndexChaged",
             null, null );
-
+        // AudioExist
+        this.registerIntegerObject(
+            TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_AUDIO_EXIST,
+            "getAudioExist", "setAudioExist", "onAudioExistChaged",
+            null, null );
 
         // Tuner signal rflevel
         this.registerStringVectorObject(
@@ -129,6 +146,11 @@ function TvserviceModel(e) {
         this.registerStringVectorObject(
             TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_TUNER_SIGNAL_CN,
             "getSignalMainCns", null, "onSignalMainCnsChanged",
+            null, null );
+        //dtv pause resume
+        this.registerIntegerObject(
+            TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_PLAY_MAIN_PAUSE,
+            "getPlayMainPause", "setPlayMainPause", "onPlayMainPauseChanged",
             null, null );
         this.registerStringObject(TvserviceModelDefines.SL2_TVAPI_STR_TVSERVICE_VIDEO_FORMAT_INFO, "getMainPlayVideoFormatInfo", null, "onMainPlayVideoFormatInfoChanged", null, null);
 
