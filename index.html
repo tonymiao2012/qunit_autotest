@@ -10,167 +10,55 @@
     <div id="menu">
         <img src="asset/img/qunit_logo.png">
         <ul class="level1">
+            <li id="repeat">
+                <i v-bind:class='[iconclass]' :aria-hidden='ariaAttr'></i>&nbsp;&nbsp;&nbsp;&nbsp;{{ name }}
+                <ul class="level2">
+                    <li><span v-for='item in testcase'>{{ item }}</span></li>
+                </ul>
+            </li>
             <li id="scan">
-                <i v-bind:class="[iconclass]" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{ name }}
+                <i v-bind:class='[iconclass]' :aria-hidden='ariaAttr'></i>&nbsp;&nbsp;&nbsp;&nbsp;{{ name }}
                 <ul class="level2">
                     <li><span v-for='item in testcase'>{{ item }}</span></li>
                 </ul>
             </li>
             <li id="play">
-                <i class="fa fa-play-circle-o fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Play
+                <i v-bind:class='[iconclass]' :aria-hidden='ariaAttr'></i>&nbsp;&nbsp;&nbsp;&nbsp;{{ name }}
                 <ul class="level2">
-                    <li><span>2101_upT</span></li>
-                    <li><span>2102_downT</span></li>
-                    <li><span>2103_randomT</span></li>
-                    <li><span>2104_upC</span></li>
-                    <li><span>2105_downC</span></li>
-                    <li><span>2106_randomC</span></li>
-                    <li><span>2107_randomT_C</span></li>
-                    <li><span>2001_playChannelT</span></li>
-                    <li><span>2002_playChannelC</span></li>
-                    <li><span>2003_getMainPlay</span></li>
-                    <li><span>2004_mainPlayChangedDvbT</span></li>
-                    <li><span>2005_mainPlayChangedDvbC</span></li>
-                    <li><span>2006_getNoSignalMain</span></li>
-                    <li><span>2007_getSignalLevel</span></li>
-                    <li><span>2008_getSignalCn</span></li>
+                    <li><span v-for='item in testcase'>{{ item }}</span></li>
                 </ul>
             </li>
 
             <li id="serviceList">
-                <i class="fa fa-steam fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;ServiceList
+                <i v-bind:class='[iconclass]' :aria-hidden='ariaAttr'></i>&nbsp;&nbsp;&nbsp;&nbsp;{{ name }}
                 <ul class="level2">
-                    <li><span>3001_getServicelistT</span></li>
-                    <li><span>3002_getServicelistC</span></li>
-                    <li><span>3003_getFavListT</span></li>
-                    <li><span>3004_getFavListC</span></li>
-                    <li><span>3005_addToFavListT</span></li>
-                    <li><span>3006_addToFavListC</span></li>
-                    <li><span>3007_delFromFavListT</span></li>
-                    <li><span>3008_delFromFavListC</span></li>
-                    <li><span>3009_getSkipListT</span></li>
-                    <li><span>3010_getSkipListC</span></li>
-                    <li><span>3011_addToSkipListT</span></li>
-                    <li><span>3012_addToSkipListC</span></li>
-                    <li><span>3013_delFromSkipListT</span></li>
-                    <li><span>3014_delFromSkipListC</span></li>
-                    <li><span>3015_getBlockListT</span></li>
-                    <li><span>3016_getBlockListC</span></li>
-                    <li><span>3017_addToBlockListT</span></li>
-                    <li><span>3018_addToBlockListC</span></li>
-                    <li><span>3019_delFromBlockListT</span></li>
-                    <li><span>3020_delFromBlockListC</span></li>
-                    <li><span>3021_getServicesAttrT</span></li>
-                    <li><span>3022_getServicesAttrC</span></li>
-                    <li><span>3023_onChannelListUpdateT</span></li>
-                    <li><span>3024_onChannelListUpdateC</span></li>
-                    <li><span>3025_checkChannelListT</span></li>
-                    <li><span>3026_checkChannelListC</span></li>
+                    <li><span v-for='item in testcase'>{{ item }}</span></li>
                 </ul>
             </li>
 
             <li id="PC">
-                <i class="fa fa-users fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;PC
+                <i v-bind:class='[iconclass]' :aria-hidden='ariaAttr'></i>&nbsp;&nbsp;&nbsp;&nbsp;{{ name }}
                 <ul class="level2">
-                    <li><span>4001_getPin</span></li>
-                    <li><span>4002_setPin</span></li>
-                    <li><span>4003_getSModel</span></li>
-                    <li><span>4004_setSModel</span></li>
-                    <li><span>4005_reset</span></li>
-                    <li><span>4006_getPinRequest</span></li>
-                    <li><span>4007_getStart</span></li>
-                    <li><span>4008_setStart</span></li>
-                    <li><span>4009_getEnd</span></li>
-                    <li><span>4010_setEnd</span></li>
-                    <li><span>4011_getEndWeekly</span></li>
-                    <li><span>4012_setEndWeekly</span></li>
-                    <li><span>4013_getBlockUnrated</span></li>
-                    <li><span>4014_setBlockUnrated</span></li>
-                    <li><span>4015_getUsTvRating</span></li>
-                    <li><span>4016_actionSetUsTvRating</span></li>
-                    <li><span>4017_getUsMovieRating</span></li>
-                    <li><span>4018_setUsMovieRating</span></li>
-                    <li><span>4019_getCanEnglishRating</span></li>
-                    <li><span>4020_setCanEnglishRating</span></li>
-                    <li><span>4021_getCanFrenchRating</span></li>
-                    <li><span>4022_setCanFrenchRating</span></li>
-                    <li><span>4023_getOpenVchip</span></li>
-                    <li><span>4024_setOpenVchip</span></li>
-                    <li><span>4025_pinRequestConfirm</span></li>
+                    <li><span v-for='item in testcase'>{{ item }}</span></li>
                 </ul>
             </li>
             <li id="CC">
-                <i class="fa fa-cc fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;CC
+                <i v-bind:class='[iconclass]' :aria-hidden='ariaAttr'></i>&nbsp;&nbsp;&nbsp;&nbsp;{{ name }}
                 <ul class="level2">
-                    <li><span>5001_getControl</span></li>
-                    <li><span>5002_setControl</span></li>
-                    <li><span>5003_getAnalogMode</span></li>
-                    <li><span>5004_setAnalogMode</span></li>
-                    <li><span>5005_getDigitalMode</span></li>
-                    <li><span>5006_setDigitalMode</span></li>
-                    <li><span>5007_getDigitalStyle</span></li>
-                    <li><span>5008_setDigitalStyle</span></li>
-                    <li><span>5009_getDigitalSize</span></li>
-                    <li><span>5010_setDigitalSize</span></li>
-                    <li><span>5011_getDigitalFont</span></li>
-                    <li><span>5012_setDigitalFont</span></li>
-                    <li><span>5013_getDigitalTextcolor</span></li>
-                    <li><span>5014_setDigitalTextcolor</span></li>
-                    <li><span>5015_getDigitalBgcolor</span></li>
-                    <li><span>5016_setDigitalBgcolor</span></li>
-                    <li><span>5017_getDigitalEdgecolor</span></li>
-                    <li><span>5018_setDigitalEdgecolor</span></li>
-                    <li><span>5019_getDigitalTextopacity</span></li>
-                    <li><span>5020_setDigitalTextopacity</span></li>
-                    <li><span>5021_getDigitalBgopacity</span></li>
-                    <li><span>5022_setDigitalBgopacity</span></li>
-                    <li><span>5023_getDigitalEdgeeffect</span></li>
-                    <li><span>5024_setDigitalEdgeeffect</span></li>
+                    <li><span v-for='item in testcase'>{{ item }}</span></li>
                 </ul>
             </li>
 
-            <li id="tvservice">
-                <i class="fa fa-television fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;TVService
+            <li id="infoBar">
+                <i v-bind:class='[iconclass]' :aria-hidden='ariaAttr'></i>&nbsp;&nbsp;&nbsp;&nbsp;{{ name }}
                 <ul class="level2">
-                    <li><span>6001_getEitMainNow</span></li>
-                    <li><span>6002_EitMainNowChanged</span></li>
-                    <li><span>6003_getEitMainNext</span></li>
-                    <li><span>6004_EitMainNextChanged</span></li>
+                    <li><span v-for='item in testcase'>{{ item }}</span></li>
                 </ul>
             </li>
-
-            <li id="time">
-                <i class="fa fa-clock-o fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Time
+            <li id="pvr">
+                <i v-bind:class='[iconclass]' :aria-hidden='ariaAttr'></i>&nbsp;&nbsp;&nbsp;&nbsp;{{ name }}
                 <ul class="level2">
-                    <li><span>7001_getTimeZone</span></li>
-                    <li><span>7002_setTimeZone</span></li>
-                    <li><span>7003_getTimeFormat</span></li>
-                    <li><span>7004_setTimeFormat</span></li>
-                    <li><span>7005_getCurLocalTime</span></li>
-                    <li><span>7006_setCurLocalTime</span></li>
-                </ul>
-            </li>
-
-            <li id="audio">
-                <i class="fa fa-volume-up fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Audio
-                <ul class="level2">
-                    <li><span>8001_audioTable</span></li>
-                    <li><span>8002_audioExistChanged</span></li>
-                    <li><span>8003_audioIndex</span></li>
-                    <li><span>8004_getAudioIdent</span></li>
-                    <li><span>8005_audioIdentChanged</span></li>
-                </ul>
-            </li>
-
-            <li id="video">
-                <i class="fa fa-video-camera fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Video
-                <ul class="level2">
-                    <li><span>9001_getVideoFormat</span></li>
-                    <li><span>9002_videoFormatChanged</span></li>
-                    <li><span>9003_getFrameAspect</span></li>
-                    <li><span>9004_frameAspectChanged</span></li>
-                    <li><span>9005_getCcExist</span></li>
-                    <li><span>9006_ccExistChanged</span></li>
+                    <li><span v-for='item in testcase'>{{ item }}</span></li>
                 </ul>
             </li>
         </ul>
@@ -198,7 +86,7 @@
         .script("model/model.js")
         .script("lib/ATSC_UI.js")
         .script("lib/Arrays.js")
-        .script("component/scanComp.js")
+        .script("component/indexComp.js")
         .script("src/searchImpl.js")
         .script("src/playImpl.js")
         .script("src/infoBarImpl.js")
@@ -278,7 +166,7 @@
              }
              */
             createModel(initModel, MDLOADTYPE.PRELOAD);
-            $("#scan").addClass("onFocus");
+            $("#repeat").addClass("onFocus");
         });
 </script>
 </body>
