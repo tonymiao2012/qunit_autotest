@@ -1051,24 +1051,24 @@ var modelConfig = {
         "de.loewe.sl2.messages.messageid"
     ],
     "common": [
-        {name: "sound", modelClass: "SoundModel", path: "model/dvb/model-sound.js"},
+        {name: "sound", modelClass: "SoundModel", path: "model/DVB/model-sound.js"},
         //{name: "system", modelClass: "SystemModel", path: "model/model-system.js"},
         //{name: "message", modelClass: "MessagesModel", path: "model/model-message.js"},
-        {name: "servicelist", modelClass: "ServicelistModel", path: "model/dvb/model-servicelist.js"},
+        {name: "servicelist", modelClass: "ServicelistModel", path: "model/DVB/model-servicelist.js"},
         //{name: "hisfactory", modelClass: "His_factoryModel", path: "model/model-hisfactory.js"},
         //{name: "basicSetting", modelClass: "Basic_settingsModel", path: "model/model-basic-settings.js"},
         //{name: "usb", modelClass: "UsbModel", path: "model/model-usb.js"},
-        {name: "tvservice", modelClass: "TvserviceModel", path: "model/dvb/model-tvservice.js"},
-        {name: "closedcaption", modelClass: "ClosedcaptionModel", path: "model/dvb/model-closedcaption.js"},
+        {name: "tvservice", modelClass: "TvserviceModel", path: "model/DVB/model-tvservice.js"},
+        {name: "closedcaption", modelClass: "ClosedcaptionModel", path: "model/DVB/model-closedcaption.js"},
         //{name: "appsetting", modelClass: "App_settingModel", path: "model/model-app-setting.js"},
         //{name: "language", modelClass: "LanguageModel", path: "model/model-language.js"},
-        {name: "parentlock", modelClass: "Parental_lockModel", path: "model/dvb/model-parental-lock.js"},
+        {name: "parentlock", modelClass: "Parental_lockModel", path: "model/DVB/model-parental-lock.js"},
         //{name: "softupdate", modelClass: "SoftwareupdateModel", path: "model/model-softwareupdate.js"},
         //{name: "cec", modelClass: "CecModel", path: "model/model-cec.js"},
-        {name: "timerfunc", modelClass: "Timer_functionsModel", path: "model/dvb/model-timer-functions.js"},
+        {name: "timerfunc", modelClass: "Timer_functionsModel", path: "model/DVB/model-timer-functions.js"},
         //{name: "source", modelClass: "SourceModel", path: "model/model-source.js"},
         //{name: "network", modelClass: "NetworkModel", path: "model/model-network.js"},
-        {name: "video", modelClass: "VideoModel", path: "model/dvb/model-video.js"},
+        {name: "video", modelClass: "VideoModel", path: "model/DVB/model-video.js"},
         //{name: "miracast", modelClass: "MiracastModel", path: "model/model-miracast.js"},
         //{name: "picture", modelClass: "PictureModel", path: "model/model-picture.js"},
         //{name: "mpctrl", modelClass: "MpCtrlModel", path: "model/model-mpctrl.js"},
@@ -1079,8 +1079,8 @@ var modelConfig = {
         //{name: "tts", modelClass: "TtsModel", path: "model/model-tts.js"}
     ],
     "ATSC": [
-        {name: "servicemode", modelClass: "ServiceModeModel", path: "model/atsc/model-servicemode.js"},
-        {name: "channelSearch", modelClass: "Channelsearch_atscModel", path: "model/atsc/model-channelsearch-atsc.js"}
+        {name: "servicemode", modelClass: "ServiceModeModel", path: "model/ATSC/model-servicemode.js"},
+        {name: "channelSearch", modelClass: "Channelsearch_atscModel", path: "model/ATSC/model-channelsearch-atsc.js"}
     ],
     "SA": [
         {name: "epg", modelClass: "EpgModel", path: "model/model-epg.js"},
@@ -1105,16 +1105,16 @@ var modelConfig = {
         {name: "hotel", modelClass: "HotelModel", path: "model/model-hotel.js"}
     ],
     "DVB": [
-        {name: "epg", modelClass: "EpgModel", path: "model/dvb/model-epg.js"},
+        {name: "epg", modelClass: "EpgModel", path: "model/DVB/model-epg.js"},
         //{name: "timerlist", modelClass: "TimerlistModel", path: "model/dvb/model-timerlist.js"},
-        {name: "timeshift", modelClass: "TimeshiftModel", path: "model/dvb/model-timeshift.js"},
-        {name: "ci", modelClass: "Common_interfaceModel", path: "model/dvb/model-ci.js"},
-        {name: "channelSearch", modelClass: "Channelsearch_dvbModel", path: "model/dvb/model-channelsearch.js"},
+        {name: "timeshift", modelClass: "TimeshiftModel", path: "model/DVB/model-timeshift.js"},
+        {name: "ci", modelClass: "Common_interfaceModel", path: "model/DVB/model-ci.js"},
+        {name: "channelSearch", modelClass: "Channelsearch_dvbModel", path: "model/DVB/model-channelsearch.js"},
         //{name: "mheg5", modelClass: "Mheg5Model", path: "model/dvb/model-mheg5.js"},
-        {name: "bluetooth", modelClass: "BluetoothModel", path: "model/dvb/model-bluetooth.js"},
-        {name: "satellite", modelClass: "SatelliteModel", path: "model/dvb/model-satellite.js"},
+        {name: "bluetooth", modelClass: "BluetoothModel", path: "model/DVB/model-bluetooth.js"},
+        {name: "satellite", modelClass: "SatelliteModel", path: "model/DVB/model-satellite.js"},
         //{name: "speech", modelClass: "SpeechModel", path: "model/dvb/model-speech.js"},
-        {name: "pvr", modelClass: "PvrModel", path: "model/dvb/model-pvr.js"},
+        {name: "pvr", modelClass: "PvrModel", path: "model/DVB/model-pvr.js"},
         //{name: "hotel", modelClass: "HotelModel", path: "model/dvb/model-hotel.js"}
     ],
     "EM": [

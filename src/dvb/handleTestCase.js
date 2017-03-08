@@ -1,5 +1,4 @@
-function handleRepeatTestCase(repeat,expectNum,funcName)
-{
+function handleRepeatTestCase(repeat, expectNum, funcName) {
     switch (funcName) {
         case "1001_autoScanT":
             var sourceType = 11;
@@ -36,6 +35,6 @@ function handleRepeatTestCase(repeat,expectNum,funcName)
         case "1009_channelSwitchT_C":
             getServiceListT();
             setTimeout(channelSwitchT_C_step1, 2000, repeat, funcName);
-            break;            
-    }	
+            break;
+    }
 }

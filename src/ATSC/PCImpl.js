@@ -361,88 +361,79 @@ function setCanFrenchRating(ratingValue, funcName) {
         assert.ok(result, "Test setCanFrenchRating");
     });
 }
-function blockChannelDtvT_1()
-{
-		model.parentlock.setStart(0);
-	  model.parentlock.setEnd(86340);
-	  model.parentlock.setEndWeekly("Mon,Tue,Wed,Thu,Fri,Sat,Sun,");	
-	  modifyAttr(2,1, allChannels_T[0].uuid);
-	  model.tvservice.playChannel("0", allChannels_T[0].uuid);
+function blockChannelDtvT_1() {
+    model.parentlock.setStart(0);
+    model.parentlock.setEnd(86340);
+    model.parentlock.setEndWeekly("Mon,Tue,Wed,Thu,Fri,Sat,Sun,");
+    modifyAttr(2, 1, allChannels_T[0].uuid);
+    model.tvservice.playChannel("0", allChannels_T[0].uuid);
 }
-function pinRequestConfirm(funcName)
-{
+function pinRequestConfirm(funcName) {
     QUnit.test(funcName, function (assert) {
-		model.parentlock.pinRequestConfirm(1,"0000");
-		assert.ok(true, "Test pinRequestConfirm");	     
-    });		
+        model.parentlock.pinRequestConfirm(1, "0000");
+        assert.ok(true, "Test pinRequestConfirm");
+    });
 }
 
 
-function startOpenVchipRegionPage()
-{
-	  var val = model.parentlock.openVchipRegionPage(); 
-    if (val.datalist.length>0)
-    {
-    	  for (var i in val.datalist)
-    	 		 $("#details").html(i+";");
+function startOpenVchipRegionPage() {
+    var val = model.parentlock.openVchipRegionPage();
+    if (val.datalist.length > 0) {
+        for (var i in val.datalist)
+            $("#details").html(i + ";");
         return true;
     }
     else
         return false;
 }
 function openVchipRegionPage(funcName) {
-    QUnit.test(funcName, function( assert ) {
-    var result = startOpenVchipRegionPage();
-    assert.ok(result, "Test openVchipRegionPage");
-    });   
+    QUnit.test(funcName, function (assert) {
+        var result = startOpenVchipRegionPage();
+        assert.ok(result, "Test openVchipRegionPage");
+    });
 }
-function startOpenVchipDimensionPage()
-{
-	  var val = model.parentlock.openVchipDimensionPage(0); 
-    if (val.datalist.length>0)
-    {
-    	  for (var i in val.datalist)
-    	 		 $("#details").html(i+";");
+function startOpenVchipDimensionPage() {
+    var val = model.parentlock.openVchipDimensionPage(0);
+    if (val.datalist.length > 0) {
+        for (var i in val.datalist)
+            $("#details").html(i + ";");
         return true;
     }
     else
         return false;
 }
 function openVchipDimensionPage(funcName) {
-    QUnit.test(funcName, function( assert ) {
-    var result = startOpenVchipDimensionPage();
-    assert.ok(result, "Test openVchipDimensionPage");
-    });   
+    QUnit.test(funcName, function (assert) {
+        var result = startOpenVchipDimensionPage();
+        assert.ok(result, "Test openVchipDimensionPage");
+    });
 }
-function startOpenVchipRatingValuePage()
-{
-	  var val = model.parentlock.openVchipRatingValuePage(0,0); 
-    if (val.datalist.length>0)
-    {
-    	  for (var i=0; i<val.datalist.length; i++)
-    	 		 $("#details").html(val.datalist[i]+"-"+val.selectlist[i]+";");
+function startOpenVchipRatingValuePage() {
+    var val = model.parentlock.openVchipRatingValuePage(0, 0);
+    if (val.datalist.length > 0) {
+        for (var i = 0; i < val.datalist.length; i++)
+            $("#details").html(val.datalist[i] + "-" + val.selectlist[i] + ";");
         return true;
     }
     else
         return false;
 }
 function openVchipRatingValuePage(funcName) {
-    QUnit.test(funcName, function( assert ) {
-    var result = startOpenVchipRatingValuePage();
-    assert.ok(result, "Test openVchipRatingValuePage");
-    });   
+    QUnit.test(funcName, function (assert) {
+        var result = startOpenVchipRatingValuePage();
+        assert.ok(result, "Test openVchipRatingValuePage");
+    });
 }
-function startSetLevelPage(flag)
-{
-	  var val = model.parentlock.setLevelPage(0,0,0,flag); 
+function startSetLevelPage(flag) {
+    var val = model.parentlock.setLevelPage(0, 0, 0, flag);
     if (val[0] == flag)
         return true;
     else
         return false;
 }
-function setLevelPage(flag,funcName) {
-    QUnit.test(funcName, function( assert ) {
-    var result = startSetLevelPage(flag);
-    assert.ok(result, "Test setLevelPage");
-    });   
+function setLevelPage(flag, funcName) {
+    QUnit.test(funcName, function (assert) {
+        var result = startSetLevelPage(flag);
+        assert.ok(result, "Test setLevelPage");
+    });
 }
