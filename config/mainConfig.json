@@ -1,7 +1,15 @@
 [
   {
     "platform": "ATSC",
-    "theme": ""
+    "theme": "",
+    "testImpl":[
+      "CCImpl.js",
+      "handleTestCase.js",
+      "infoBarImpl.js",
+      "PCImpl.js",
+      "play_serviceListImpl.js",
+      "scanImpl.js"
+    ]
   },
   {
     "name": "Repeat",

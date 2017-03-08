@@ -87,11 +87,6 @@
         .script("lib/ATSC_UI.js")
         .script("lib/Arrays.js")
         .script("component/indexComp.js")
-        .script("src/searchImpl.js")
-        .script("src/playImpl.js")
-        .script("src/infoBarImpl.js")
-        .script("src/CCImpl.js")
-        .script("src/PCImpl.js")
         .wait(function () {
             /*
              var data = [1, 1, 2, 3, 5, 8, 13];
@@ -165,11 +160,11 @@
              context.restore();
              }
              */
-            createModel(function () {});
             init();
+            createModel(function () {
+            });
             $("#repeat").addClass("onFocus");
         });
-
 </script>
 </body>
 </html>
