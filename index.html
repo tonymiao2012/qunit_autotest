@@ -2,7 +2,7 @@
 <head>
     <link type="text/css" rel="stylesheet" href="CSS/Font-Awesome/css/font-awesome.min.css"/>
     <link type="text/css" rel="stylesheet" href="CSS/ATSC_UI.css"/>
-    <link type="text/css" rel="stylesheet" href="CSS/qunit-2.0.1.css">
+    <link type="text/css" rel="stylesheet" href="CSS/qunit-2.0.1.css"/>
     <!--link type="text/css" rel="stylesheet" href="CSS/buttons.css"-->
 </head>
 <body>
@@ -165,10 +165,11 @@
              context.restore();
              }
              */
-            createModel(function () {
-            });
+            createModel(function () {});
+            init();
             $("#repeat").addClass("onFocus");
         });
+
 </script>
 </body>
 </html>

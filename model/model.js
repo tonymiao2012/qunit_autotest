@@ -1078,7 +1078,7 @@ var modelConfig = {
         //{name: "datetime", modelClass: "DatetimeModel", path: "model/model-datetime.js"},
         //{name: "tts", modelClass: "TtsModel", path: "model/model-tts.js"}
     ],
-    "NA": [
+    "ATSC": [
         {name: "servicemode", modelClass: "ServiceModeModel", path: "model/atsc/model-servicemode.js"},
         {name: "channelSearch", modelClass: "Channelsearch_atscModel", path: "model/atsc/model-channelsearch-atsc.js"}
     ],
@@ -1104,7 +1104,7 @@ var modelConfig = {
         {name: "pvr", modelClass: "PvrModel", path: "model/model-pvr.js"},
         {name: "hotel", modelClass: "HotelModel", path: "model/model-hotel.js"}
     ],
-    "EU": [
+    "DVB": [
         {name: "epg", modelClass: "EpgModel", path: "model/dvb/model-epg.js"},
         //{name: "timerlist", modelClass: "TimerlistModel", path: "model/dvb/model-timerlist.js"},
         {name: "timeshift", modelClass: "TimeshiftModel", path: "model/dvb/model-timeshift.js"},
@@ -1135,11 +1135,8 @@ function MDLOADTYPE() {
 }
 var model = new Model();
 function createModel(callback, loadType) {
-    var platform = readJSONFileArrayByIndex("config/mainConfig.json", 0);
-    if(platform === "ATSC")
-        platform = "NA";
-
-    var modelArr = modelConfig.common.concat(modelConfig[platform]);
+    var temp = readJSONFileArrayByIndex("config/mainConfig.json", 0);
+    var modelArr = modelConfig.common.concat(modelConfig[temp.platform]);
     new ModelLoader(function () {
         model.createSubModel(modelArr, loadType);
         callback();
