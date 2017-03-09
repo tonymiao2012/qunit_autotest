@@ -9,7 +9,6 @@ var blockChannels_C = [];
 var channelIterator = null;
 var currentIndex = 0;
 QUnit.config.reorder = false;
-
 function eventRowsToChannels(rows) {
     var chnls = [];
     $("#total").html(rows.length);
@@ -141,9 +140,8 @@ function onGetChannels_C(m_event) {
         }
     }
 }
-function showServiceList(sourceType)
-{
-	  var list;
+function showServiceList(sourceType) {
+    var list;
     //Insert a channel list to right side.
     $("#resultView table").html("");
     //Draw a form header.
@@ -155,57 +153,47 @@ function showServiceList(sourceType)
         "<th>MajorNumber</th>" +
         "<th>MinorNumber</th>" +
         "<th>Attribute</th>" +
-        "</tr>"	
-    if(sourceType==1)
-        list =  allChannels_T;
+        "</tr>"
+    if (sourceType == 1)
+        list = allChannels_T;
     else
-    	  list =  allChannels_C;     
-    for(var i=0;i<list.length;i++)  
-    {      
+        list = allChannels_C;
+    for (var i = 0; i < list.length; i++) {
         table += "<tr>";
         table += "<td>" + i + "</td>";
-        table += "<td>" + list[0] + "</td>";
-        table += "<td>" + list[1] + "</td>";
-        table += "<td>" + list[2] + "</td>";
-        table += "<td>" + list[3] + "</td>";
-        table += "<td>" + list[4] + "</td>";
-        table += "</tr>"; 
-    }   
+        table += "<td>" + list[i].name + "</td>";
+        table += "<td>" + list[i].frontEnd + "</td>";
+        table += "<td>" + list[i].majorNum + "</td>";
+        table += "<td>" + list[i].minorNum + "</td>";
+        table += "<td>" + list[i].attr + "</td>";
+        table += "</tr>";
+    }
     table += "</table>";
 
     if ($("#resultView table").length === 0) {
         $("#resultView").append(table);
     } else {
         $("#resultView table").append(table);
-    }	
+    }
 
 }
-function checkServiceT(funcName) {
+
+function checkServiceT(expectNum, funcName) {
     QUnit.test(funcName, function (assert) {
-        var flag;
-        if (allChannels_T.length > 0)
-        {
-            flag = true;
+        if (allChannels_T.length > 0) {
             sourceType = 1;
-            showServiceList(sourceType);
+            // showServiceList(sourceType);
         }
-        else
-            flag = false;
-        assert.equal(flag, true, "getServiceT ");
+        assert.equal(allChannels_T.length, expectNum, "getServiceT ");
     });
 }
-function checkServiceC(funcName) {
+function checkServiceC(expectNum, funcName) {
     QUnit.test(funcName, function (assert) {
-        var flag;
-        if (allChannels_C.length > 0)
-        {
-            flag = true;
+        if (allChannels_C.length > 0) {
             sourceType = 0;
-            showServiceList(sourceType);
+            // showServiceList(sourceType);
         }
-        else
-            flag = false;
-        assert.equal(flag, true, "getServiceC ");
+        assert.equal(allChannels_C.length, expectNum, "getServiceC ");
     });
 }
 
@@ -269,8 +257,21 @@ function randomChannel_C() {
     }
 }
 
-function playInputedChannel(sourceType, chn, t_name) {
-    QUnit.test(t_name, function (assert) {
+function playInputedChannel(sourceType, chn, func_name) {
+    QUnit.test(func_name, function (assert) {
+        var done = assert.async(1);
+        var timerFlag;
+
+        function playInputedChannelTimeout() {
+            assert.ok(false, "playInputedChannel timeout");
+            done();
+        };
+        model.tvservice.onMainPlayChanged = function (value) {
+            clearTimeout(timerFlag);
+            model.tvservice.onMainPlayChanged = null;
+            assert.ok(true, "playInputedChannel");
+            done();
+        }
         if (sourceType == 1) {
             model.tvservice.playChannel("0", allChannels_T[chn].uuid);
             $("#name").html(allChannels_T[chn].name);
@@ -279,7 +280,7 @@ function playInputedChannel(sourceType, chn, t_name) {
             model.tvservice.playChannel("0", allChannels_C[chn].uuid);
             $("#name").html(allChannels_C[chn].name);
         }
-        assert.ok(true, "check playInputedChannel");
+        timerFlag = setTimeout(playInputedChannelTimeout, 5000);
     });
 }
 
@@ -357,16 +358,15 @@ function onMainPlayChanged(val) {
     model.tvservice.onEitMainNextChanged = onEitNextChanged;
 
 }
-function disableMainPlayChangedCallback()
-{
-	  model.tvservice.onMainPlayChanged=null;
+function disableMainPlayChangedCallback() {
+    model.tvservice.onMainPlayChanged = null;
     model.video.onVideoFormatInfoChanged = null;
     model.video.onVideoFrameAspectChanged = null;
     model.video.onCcExistChanged = null;
     model.tvservice.onAudioExistChaged = null;
-    model.sound.onAudioIdentChaged = null;	
+    model.sound.onAudioIdentChaged = null;
     model.tvservice.onEitMainNowChanged = null;
-    model.tvservice.onEitMainNextChanged = null;        
+    model.tvservice.onEitMainNextChanged = null;
 }
 
 function play(direction, sourceType) {
@@ -402,6 +402,7 @@ function switchChannel(direction, sourceType, repeat, funcName) {
         var timer;
         //play(direction, sourceType);
         var done = assert.async(times);
+
         function playTimeout() {
             try {
                 if (QUnit.config.interrupt === true) {
@@ -415,17 +416,18 @@ function switchChannel(direction, sourceType, repeat, funcName) {
                     if (i < times)
                         setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 1000) + 1000));
                     else
-                    	  disableMainPlayChangedCallback(); 
+                        disableMainPlayChangedCallback();
                 }
             } catch (e) {
                 console.log(e.message);
                 for (var left = 0; left < times - i; left++) {
                     done();
-                disableMainPlayChangedCallback();   
+                    disableMainPlayChangedCallback();
                 }
                 //return;
             }
         }
+
         setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 1000) + 1000));
     });
 }
@@ -542,7 +544,7 @@ function getServiceListT_done_check(funcName) {
     if (allChannels_T.length > 0) {
         QUnit.test(funcName, function (assert) {
             var flag = true;
-            var serListPath = "serviceList.json";
+            var serListPath = "serviceListT.json";
             var serList = fileInput(serListPath);
             if (serList.length == allChannels_T.length) {
                 var i;
@@ -560,11 +562,39 @@ function getServiceListT_done_check(funcName) {
             else {
                 flag = false;
             }
-            assert.equal(flag, true, "check serListT ");
-
+            assert.ok(flag, "checkChannelListT ");
         });
     }
 }
+
+function getServiceListC_done_check(funcName) {
+    console.log("............................... getServiceListC_done_check  . ");
+    if (allChannels_C.length > 0) {
+        QUnit.test(funcName, function (assert) {
+            var flag = true;
+            var serListPath = "serviceListC.json";
+            var serList = fileInput(serListPath);
+            if (serList.length == allChannels_C.length) {
+                var i;
+                for (i = 0; i < allChannels_C.length; i++) {
+                    if ((serList[i].name == allChannels_C[i].name) && (serList[i].majorNum == allChannels_C[i].majorNum)
+                        && (serList[i].minorNum == allChannels_C[i].minorNum))
+                        i++;
+                    else
+                        break;
+                }
+                if (i != allChannels_C.length) {
+                    flag = false;
+                }
+            }
+            else {
+                flag = false;
+            }
+            assert.ok(flag, "checkChannelListC ");
+        });
+    }
+}
+
 
 function checkAttr(attr, flag, chNum) {
     var result = false;
@@ -609,9 +639,9 @@ function modifyAttr(attr, flag, uuid) {
 
 //getSkipListAllT
 
-function getSkipListAllT(funcName) {
+function getSkipListAllT(expectNum, funcName) {
     getSkipListT();
-    setTimeout(getSkipListCountT, 2000, funcName);
+    setTimeout(getSkipListCountT, 2000, expectNum, funcName);
 }
 
 function getSkipListT() {
@@ -654,11 +684,10 @@ function onGetSkip_T(m_event) {
     }
 }
 
-
-function getSkipListCountT(funcName) {
+function getSkipListCountT(expectNum, funcName) {
     $("#details").html(skipChannels_T.length);
     QUnit.test(funcName, function (assert) {
-        assert.ok(true, "getSkipListAllT ");
+        assert.equal(skipChannels_T.length, expectNum, "getSkipListAllT ");
     });
 }
 
@@ -666,7 +695,6 @@ function addToSkipListT(attr, flag, chNum, funcName) {
     console.log("...............................addToSkipListT  . ");
     modifyAttr(attr, flag, allChannels_T[chNum].uuid);
     getSkipListT();
-    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
     setTimeout(addSkipListDoneT, 2000, allChannels_T[chNum].uuid, funcName);
 
 }
@@ -680,7 +708,7 @@ function addSkipListDoneT(uuid, funcName) {
         }
     }
     QUnit.test(funcName, function (assert) {
-        assert.equal(flag, true, "check addToSkipListT ");
+        assert.ok(flag, "addToSkipListT ");
     });
 }
 
@@ -689,7 +717,6 @@ function delFromSkipListT(attr, flag, chNum, funcName) {
     console.log("...............................delFromSkipListT  . ");
     modifyAttr(attr, flag, allChannels_T[chNum].uuid);
     getSkipListT();
-    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
     setTimeout(delSkipListDoneT, 2000, allChannels_T[chNum].uuid, funcName);
 
 }
@@ -703,7 +730,7 @@ function delSkipListDoneT(uuid, funcName) {
         }
     }
     QUnit.test(funcName, function (assert) {
-        assert.equal(flag, false, "check delFromSkipListT ");
+        assert.notOk(flag, "delFromSkipListT ");
     });
 }
 
@@ -714,9 +741,9 @@ function delSkipListDoneT(uuid, funcName) {
 //getSkipListAllC
 
 
-function getSkipListAllC(funcName) {
+function getSkipListAllC(expectNum, funcName) {
     getSkipListC();
-    setTimeout(getSkipListCountC, 2000, funcName);
+    setTimeout(getSkipListCountC, 2000, expectNum, funcName);
 }
 
 function getSkipListC() {
@@ -759,11 +786,10 @@ function onGetSkip_C(m_event) {
     }
 }
 
-
 function getSkipListCountC(funcName) {
     $("#details").html(skipChannels_C.length);
     QUnit.test(funcName, function (assert) {
-        assert.ok(true, "getSkipListAllC ");
+        assert.equal(skipChannels_C.length, expectNum, "getSkipListAllC ");
     });
 }
 
@@ -771,7 +797,6 @@ function addToSkipListC(attr, flag, chNum, funcName) {
     console.log("...............................addToSkipListC  . ");
     modifyAttr(attr, flag, allChannels_C[chNum].uuid);
     getSkipListC();
-    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
     setTimeout(addSkipListDoneC, 2000, allChannels_C[chNum].uuid, funcName);
 
 }
@@ -785,7 +810,7 @@ function addSkipListDoneC(uuid, funcName) {
         }
     }
     QUnit.test(funcName, function (assert) {
-        assert.equal(flag, true, "check addToSkipListC ");
+        assert.ok(flag, "addToSkipListC ");
     });
 }
 
@@ -794,7 +819,6 @@ function delFromSkipListC(attr, flag, chNum, funcName) {
     console.log("...............................delFromSkipListC  . ");
     modifyAttr(attr, flag, allChannels_C[chNum].uuid);
     getSkipListC();
-    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
     setTimeout(delSkipListDoneC, 2000, allChannels_C[chNum].uuid, funcName);
 
 }
@@ -808,7 +832,7 @@ function delSkipListDoneC(uuid, funcName) {
         }
     }
     QUnit.test(funcName, function (assert) {
-        assert.equal(flag, false, "check delFromSkipListC ");
+        assert.notOk(flag, "delFromSkipListC ");
     });
 }
 
@@ -817,9 +841,9 @@ function delSkipListDoneC(uuid, funcName) {
 
 //getBlockListAllT
 
-function getBlockListAllT(funcName) {
+function getBlockListAllT(expectNum, funcName) {
     getBlockListT();
-    setTimeout(getBlockListCountT, 2000, funcName);
+    setTimeout(getBlockListCountT, 2000, expectNum, funcName);
 }
 
 function getBlockListT() {
@@ -862,11 +886,10 @@ function onGetBlock_T(m_event) {
     }
 }
 
-
-function getBlockListCountT(funcName) {
+function getBlockListCountT(expectNum, funcName) {
     $("#details").html(blockChannels_T.length);
     QUnit.test(funcName, function (assert) {
-        assert.ok(true, "getBlockListAllT ");
+        assert.equal(blockChannels_T.length, expectNum, "getBlockListAllT ");
     });
 }
 
@@ -874,7 +897,6 @@ function addToBlockListT(attr, flag, chNum, funcName) {
     console.log("...............................addToBlockListT  . ");
     modifyAttr(attr, flag, allChannels_T[chNum].uuid);
     getBlockListT();
-    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
     setTimeout(addBlockListDoneT, 2000, allChannels_T[chNum].uuid, funcName);
 
 }
@@ -888,16 +910,14 @@ function addBlockListDoneT(uuid, funcName) {
         }
     }
     QUnit.test(funcName, function (assert) {
-        assert.equal(flag, true, "check addToBlockListT ");
+        assert.ok(flag, "addToBlockListT ");
     });
 }
-
 
 function delFromBlockListT(attr, flag, chNum, funcName) {
     console.log("...............................delFromBlockListT  . ");
     modifyAttr(attr, flag, allChannels_T[chNum].uuid);
     getBlockListT();
-    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
     setTimeout(delBlockListDoneT, 2000, allChannels_T[chNum].uuid, funcName);
 
 }
@@ -911,7 +931,7 @@ function delBlockListDoneT(uuid, funcName) {
         }
     }
     QUnit.test(funcName, function (assert) {
-        assert.equal(flag, false, "check delFromBlockListT ");
+        assert.notOk(flag, "delFromBlockListT ");
     });
 }
 
@@ -921,9 +941,9 @@ function delBlockListDoneT(uuid, funcName) {
 
 //getBlockListAllC
 
-function getBlockListAllC(funcName) {
+function getBlockListAllC(expectNum, funcName) {
     getBlockListC();
-    setTimeout(getBlockListCountC, 2000, funcName);
+    setTimeout(getBlockListCountC, 2000, expectNum, funcName);
 }
 
 function getBlockListC() {
@@ -967,10 +987,10 @@ function onGetBlock_C(m_event) {
 }
 
 
-function getBlockListCountC(funcName) {
+function getBlockListCountC(expectNum, funcName) {
     $("#details").html(blockChannels_C.length);
     QUnit.test(funcName, function (assert) {
-        assert.ok(true, "getBlockListAllC ");
+        assert.equal(blockChannels_C.length, expectNum, "getBlockListAllC ");
     });
 }
 
@@ -978,7 +998,6 @@ function addToBlockListC(attr, flag, chNum, funcName) {
     console.log("...............................addToBlockListC . ");
     modifyAttr(attr, flag, allChannels_C[chNum].uuid);
     getBlockListC();
-    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
     setTimeout(addBlockListDoneC, 2000, allChannels_C[chNum].uuid, funcName);
 
 }
@@ -992,7 +1011,7 @@ function addBlockListDoneC(uuid, funcName) {
         }
     }
     QUnit.test(funcName, function (assert) {
-        assert.equal(flag, true, "check addToBlockListC ");
+        assert.ok(flag, "addToBlockListC ");
     });
 }
 
@@ -1001,7 +1020,6 @@ function delFromBlockListC(attr, flag, chNum, funcName) {
     console.log("...............................delFromBlockListC  . ");
     modifyAttr(attr, flag, allChannels_C[chNum].uuid);
     getBlockListC();
-    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
     setTimeout(delBlockListDoneC, 2000, allChannels_C[chNum].uuid, funcName);
 
 }
@@ -1015,18 +1033,24 @@ function delBlockListDoneC(uuid, funcName) {
         }
     }
     QUnit.test(funcName, function (assert) {
-        assert.equal(flag, false, "check delFromBlockListC ");
+        assert.notOk(flag, "delFromBlockListC ");
     });
 }
 
-
 //getBlockListAllC
 
-function getServicesT_attrT_timeout(chNum, funcName) {
+function getServicesAttrT(chNum, funcName) {
     $("#details").html(allChannels_T[chNum].attr + ";fav:" + (((allChannels_T[chNum].attr & 0x80) != 0) ? 1 : 0)
         + ";skip:" + (((allChannels_T[chNum].attr & 0x20) != 0) ? 1 : 0) + ";block:" + (((allChannels_T[chNum].attr & 0x40) != 0) ? 1 : 0));
     QUnit.test(funcName, function (assert) {
         assert.ok(true, "getServicesAttrT ");
+    });
+}
+function getServicesAttrC(chNum, funcName) {
+    $("#details").html(allChannels_C[chNum].attr + ";fav:" + (((allChannels_C[chNum].attr & 0x80) != 0) ? 1 : 0)
+        + ";skip:" + (((allChannels_C[chNum].attr & 0x20) != 0) ? 1 : 0) + ";block:" + (((allChannels_C[chNum].attr & 0x40) != 0) ? 1 : 0));
+    QUnit.test(funcName, function (assert) {
+        assert.ok(true, "getServicesAttrC ");
     });
 }
 
@@ -1055,7 +1079,8 @@ function mainPlayChanged(sourceType, chn, testName) {
 
         model.tvservice.onMainPlayChanged = function (val) {
             clearTimeout(timerFlag);
-            assert.notEqual(val, null, "Test mainPlayChanged");
+            model.tvservice.onMainPlayChanged = null;
+            assert.notEqual(val, null, "mainPlayChanged");
             done();
             if (val != null)
                 $("#details").html("listUid:" + val[0] + ";uid:" + val[1] + ";number:" + val[2] + ";name:" + val[5] + ";attr:" + val[8]);
@@ -1073,53 +1098,76 @@ function mainPlayChanged(sourceType, chn, testName) {
 }
 function startGetNoSignalMain() {
     var sig = model.tvservice.getNoSignalMain();
-    return sig;
+    $("#details").html(sig);
+    if ((sig == 0) || (sig == 1))
+        return true;
+    else
+        return false;
 }
 function getNoSignalMain(funcName) {
     $("#details").html("");
     QUnit.test(funcName, function (assert) {
-        var val = startGetNoSignalMain();
-        assert.ok(true, "Test getNoSignalMain");
-        $("#details").html(val);
+        var result = startGetNoSignalMain();
+        assert.ok(result, "getNoSignalMain");
     });
 }
 
 function startGetSignalLevel() {
-    var sig = model.tvservice.getSignalMainLevels();
-    return sig;
+    var val = model.tvservice.getSignalMainLevels();
+    if (val.length == 3) {
+        $("#details").html("percentage:" + val[0] + ";poor:" + val[1] + ";fair:" + val[2]);
+        return true;
+    }
+    else
+        return false;
+}
+
+function enableTunerInfo() {
+    model.servicemode.setSignalMainEnable(1);
+
 }
 function getSignalLevel(funcName) {
     $("#details").html("");
     QUnit.test(funcName, function (assert) {
-        var val = startGetSignalLevel();
-        assert.ok(true, "Test getSignalLevel");
-        $("#details").html(val);
+        var result = startGetSignalLevel();
+        assert.ok(result, "getSignalLevel");
     });
 }
 function startGetSignalCn() {
-    var sig = model.tvservice.getSignalMainCns();
-    return sig;
+    var val = model.tvservice.getSignalMainCns();
+    if (val.length == 3) {
+        $("#details").html("percentage:" + val[0] + ";poor:" + val[1] + ";fair:" + val[2]);
+        return true;
+    }
+    else
+        return false;
 }
 function getSignalCn(funcName) {
     $("#details").html("");
     QUnit.test(funcName, function (assert) {
-        var val = startGetSignalCn();
-        assert.ok(true, "Test getSignalCn");
-        $("#details").html(val);
+        var result = startGetSignalCn();
+        assert.ok(result, "getSignalCn");
+
     });
 }
-function listUpdateNotify() {
-    listUpdate = true;
-}
-function checkChannelListUpdate(funcName) {
-    QUnit.test(funcName, function (assert) {
-        assert.ok(listUpdate, "onChannelListUpdate ");
-    });
-}
+
 function onChannelListUpdate(funcName) {
-    listUpdate = false;
-    model.tvservice.onChannelListUpdate = listUpdateNotify;
-    setTimeout(checkChannelListUpdate, 10000, funcName);
+    QUnit.test(funcName, function (assert) {
+        var done = assert.async(1);
+        listUpdate = false;
+        function listUpdateNotify() {
+            listUpdate = true;
+        }
+
+        function checkChannelListUpdate() {
+            model.tvservice.onChannelListUpdate = null;
+            assert.ok(listUpdate, "onChannelListUpdate ");
+            done();
+        }
+
+        model.tvservice.onChannelListUpdate = listUpdateNotify;
+        setTimeout(checkChannelListUpdate, 10000);
+    });
 }
 
 function playFirstChannelT() {
@@ -1127,9 +1175,9 @@ function playFirstChannelT() {
 }
 //getFavListAllT
 
-function getFavListAllT(funcName) {
+function getFavListAllT(expectNum, funcName) {
     getFavListT();
-    setTimeout(getFavListCountT, 2000, funcName);
+    setTimeout(getFavListCountT, 2000, expectNum, funcName);
 }
 
 function getFavListT() {
@@ -1173,15 +1221,14 @@ function onGetFav_T(m_event) {
 }
 
 
-function getFavListCountT(funcName) {
+function getFavListCountT(expectNum, funcName) {
     $("#details").html(favChannels_T.length);
     QUnit.test(funcName, function (assert) {
-        assert.ok(true, "getFavListAllT ");
+        assert.equal(favChannels_T.length, expectNum, "getFavListAllT ");
     });
 }
 
 function addToFavListT(attr, flag, chNum, funcName) {
-    console.log("...............................addToFavListT  . ");
     modifyAttr(attr, flag, allChannels_T[chNum].uuid);
     getFavListT();
     //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
@@ -1198,7 +1245,7 @@ function addFavListDoneT(uuid, funcName) {
         }
     }
     QUnit.test(funcName, function (assert) {
-        assert.equal(flag, true, "check addToFavListT ");
+        assert.ok(flag, "check addToFavListT ");
     });
 }
 
@@ -1207,7 +1254,6 @@ function delFromFavListT(attr, flag, chNum, funcName) {
     console.log("...............................delFromFavListT  . ");
     modifyAttr(attr, flag, allChannels_T[chNum].uuid);
     getFavListT();
-    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
     setTimeout(delFavListDoneT, 2000, allChannels_T[chNum].uuid, funcName);
 
 }
@@ -1221,7 +1267,7 @@ function delFavListDoneT(uuid, funcName) {
         }
     }
     QUnit.test(funcName, function (assert) {
-        assert.equal(flag, false, "check delFromFavListT ");
+        assert.notOk(flag, "check delFromFavListT ");
     });
 }
 
@@ -1230,9 +1276,9 @@ function delFavListDoneT(uuid, funcName) {
 
 //getFavListAllC
 
-function getFavListAllC(funcName) {
+function getFavListAllC(expectNum, funcName) {
     getFavListC();
-    setTimeout(getFavListCountC, 2000, funcName);
+    setTimeout(getFavListCountC, 2000, expectNum, funcName);
 }
 
 function getFavListC() {
@@ -1275,19 +1321,16 @@ function onGetFav_C(m_event) {
     }
 }
 
-
-function getFavListCountC(funcName) {
+function getFavListCountC(expectNum, funcName) {
     $("#details").html(favChannels_C.length);
     QUnit.test(funcName, function (assert) {
-        assert.ok(true, "getFavListAllC ");
+        assert.equal(favChannels_C.length, expectNum, "getFavListAllC ");
     });
 }
 
 function addToFavListC(attr, flag, chNum, funcName) {
-    console.log("...............................addToFavListC  . ");
     modifyAttr(attr, flag, allChannels_C[chNum].uuid);
     getFavListC();
-    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
     setTimeout(addFavListDoneC, 2000, allChannels_C[chNum].uuid, funcName);
 
 }
@@ -1301,18 +1344,15 @@ function addFavListDoneC(uuid, funcName) {
         }
     }
     QUnit.test(funcName, function (assert) {
-        assert.equal(flag, true, "check addToFavListC ");
+        assert.ok(flag, "addToFavListC ");
     });
 }
-
 
 function delFromFavListC(attr, flag, chNum, funcName) {
     console.log("...............................delFromFavListC  . ");
     modifyAttr(attr, flag, allChannels_C[chNum].uuid);
     getFavListC();
-    //setTimeout("ServiceListAttrDone('"+attr+flag+chNum+"')",2000);
     setTimeout(delFavListDoneC, 2000, allChannels_C[chNum].uuid, funcName);
-
 }
 function delFavListDoneC(uuid, funcName) {
     var i;
@@ -1324,7 +1364,7 @@ function delFavListDoneC(uuid, funcName) {
         }
     }
     QUnit.test(funcName, function (assert) {
-        assert.equal(flag, false, "check delFromFavListT ");
+        assert.notOk(flag, "check delFromFavListT ");
     });
 }
 

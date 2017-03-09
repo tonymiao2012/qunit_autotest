@@ -9,7 +9,7 @@ function startGetPin() {
 function getPin(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetPin();
-        assert.ok(result, "Test getPin");
+        assert.ok(result, "getPin");
     });
 }
 function startSetPin(pinValue) {

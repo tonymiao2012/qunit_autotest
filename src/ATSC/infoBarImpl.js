@@ -31,14 +31,17 @@ function setCurLocalTime(funcName) {
 
 function startGetTimeZone() {
     var val = model.datetime.getTimeZone();
-    return val;
+    $("#details").html(val);
+    if ((val >= 0) && (val <= 7))
+        return true;
+    else
+        return false;
 }
 function getTimeZone(funcName) {
     QUnit.test(funcName, function (assert) {
         var result;
         result = startGetTimeZone();
-        assert.ok(true, "Test getTimeZone");
-        $("#details").html(result);
+        assert.ok(result, "getTimeZone");
     });
 }
 
@@ -52,20 +55,23 @@ function startSetTimeZone(zone) {
 function setTimeZone(zone, funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startSetTimeZone(zone);
-        assert.equal(result, true, "Test setTimeZone");
+        assert.equal(result, true, "setTimeZone");
     });
 }
 
 function startGetTimeFormat() {
     var val = model.datetime.getTimeFormat();
-    return val;
+    $("#details").html(val);
+    if ((val == 0) || (val == 1))
+        return true;
+    else
+        return false;
 }
 function getTimeFormat(funcName) {
     QUnit.test(funcName, function (assert) {
         var result;
         result = startGetTimeFormat();
-        assert.ok(true, "Test getTimeFormat");
-        $("#details").html(result);
+        assert.ok(result, "getTimeFormat");
     });
 }
 
@@ -79,7 +85,7 @@ function startSetTimeFromat(format) {
 function setTimeFormat(format, funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startSetTimeFromat(format);
-        assert.equal(result, true, "Test setTimeFormat");
+        assert.ok(result, "setTimeFormat");
     });
 }
 
@@ -92,7 +98,7 @@ function getEitMainNow(funcName) {
     QUnit.test(funcName, function (assert) {
         var pfResultNow;
         pfResultNow = getEitNow();
-        assert.equal(pfResultNow.length, 12, "Test getEitMainNow");
+        assert.equal(pfResultNow.length, 12, " getEitMainNow");
         if (pfResultNow.length == 12) {
             var startime = new Date(pfResultNow[2] * 1000);
             var stoptime = new Date(pfResultNow[3] * 1000);
@@ -112,13 +118,13 @@ function getEitMainNext(funcName) {
     QUnit.test(funcName, function (assert) {
         var pfResultNext;
         pfResultNext = getEitNext();
-        assert.equal(pfResultNext.length, 12, "Test getEitMainNext");
+        assert.equal(pfResultNext.length, 12, " getEitMainNext");
         if (pfResultNext.length == 12) {
             var startime = new Date(pfResultNext[2] * 1000);
             var stoptime = new Date(pfResultNext[3] * 1000);
-            $("#details").html("window:" + pfResultNow[0] + ";type:" + pfResultNow[1] + ";start:" + startime.toLocaleString() + ";end:" + stoptime.toLocaleString()
-                + ";title:" + pfResultNow[4] + ";shortDes:" + pfResultNow[5] + ";longDes:" + pfResultNow[6] + ";flag:" + pfResultNow[7]
-                + ";rating:" + pfResultNow[8] + ";eventID:" + pfResultNow[9] + ";themes:" + pfResultNow[10] + ";linkage:" + pfResultNow[11]);
+            $("#details").html("window:" + pfResultNext[0] + ";type:" + pfResultNext[1] + ";start:" + startime.toLocaleString() + ";end:" + stoptime.toLocaleString()
+                + ";title:" + pfResultNext[4] + ";shortDes:" + pfResultNext[5] + ";longDes:" + pfResultNext[6] + ";flag:" + pfResultNext[7]
+                + ";rating:" + pfResultNext[8] + ";eventID:" + pfResultNext[9] + ";themes:" + pfResultNext[10] + ";linkage:" + pfResultNext[11]);
         }
     });
 
@@ -129,6 +135,7 @@ function playFirstChannelTForEitMainNowTimeout(funcName, chn) {
         var timerFlag;
 
         function onEitMainNowChanngedTimeout() {
+            model.tvservice.onEitMainNowChanged = null;
             assert.ok(false, "onEitMainNowChanngedTimeout timeout");
             done();
         };
@@ -150,6 +157,7 @@ function playFirstChannelTForEitMainNextTimeout(funcName, chn) {
         var timerFlag;
 
         function onEitMainNextChanngedTimeout() {
+            model.tvservice.onEitMainNextChanged = null;
             assert.ok(false, "onEitMainNextChanngedTimeout timeout");
             done();
         };
@@ -182,10 +190,9 @@ function playFirstChannelTForFormatTimeout(funcName, chn) {
     QUnit.test(funcName, function (assert) {
         var done = assert.async(1);
         var timerFlag;
-        var result = model.video.getVideoFormatInfo();
 
         function onVideoFormatChanngedTimeout() {
-            var result = model.video.getVideoFormatInfo();
+            model.video.onVideoFormatInfoChanged = null;
             assert.ok(false, "onVideoFormatChanngedTimeout timeout");
             done();
         };
@@ -221,7 +228,8 @@ function playFirstChannelTForAspectTimeout(funcName, chn) {
         var timerFlag;
 
         function onVideoAspectChanngedTimeout() {
-            assert.ok(false, "onVideoAspectChanngedTimeout timeout");
+            model.video.onVideoFrameAspectChanged = null;
+            assert.ok(false, "onVideoAspectChanngedTimeout");
             done();
         };
 
@@ -238,16 +246,18 @@ function playFirstChannelTForAspectTimeout(funcName, chn) {
 }
 
 function startGetCcExist() {
-    var result = model.video.getCcExist();
-    return result;
+    var val = model.video.getCcExist();
+    $("#details").html(val);
+    if ((val == 0) || (val == 1))
+        return true;
+    else
+        return false;
 }
 function getCcExist(funcName) {
     QUnit.test(funcName, function (assert) {
         var cc;
         cc = startGetCcExist();
-        assert.notEqual(cc.length, 0, "Test getCcExist");
-        if (cc.length > 0)
-            $("#details").html(cc);
+        assert.ok(cc, "getCcExist");
     });
 }
 function playFirstChannelTForCcTimeout(funcName, chn) {
@@ -256,7 +266,8 @@ function playFirstChannelTForCcTimeout(funcName, chn) {
         var timerFlag;
 
         function onCcExistChanngedTimeout() {
-            assert.ok(false, "onCcExistChanngedTimeout timeout");
+            model.video.onCcExistChanged = null;
+            assert.ok(false, "onCcExistChanngedTimeout");
             done();
         };
 
@@ -272,16 +283,19 @@ function playFirstChannelTForCcTimeout(funcName, chn) {
     });
 }
 function getAudioIndexImpl() {
-    var result = model.tvservice.getAudioIndex();
-    return result;
+    var val = model.tvservice.getAudioIndex();
+    $("#details").html(val);
+    if ((val >= 0) && (val <= 0x7fffffff))
+        return true;
+    else
+        return false;
 }
 
 function getAudioIndex(funcName) {
     QUnit.test(funcName, function (assert) {
-        var audioIndex;
-        audioIndex = getAudioIndexImpl();
-        assert.notEqual(audioIndex, 0x7fffffff, "Test getAudioIndex");
-        $("#details").html(audioIndex);
+        var result;
+        result = getAudioIndexImpl();
+        assert.ok(result, "getAudioIndex");
     });
 }
 
@@ -291,7 +305,7 @@ function getAudioTable(funcName) {
         var timerFlag;
 
         function onGetAudioTableTimeout() {
-            assert.ok(false, "onGetAudioTableTimeout timeout");
+            assert.ok(false, "onGetAudioTableTimeout");
             done();
         };
         function onGetAudioTable(event) {
@@ -306,38 +320,21 @@ function getAudioTable(funcName) {
         timerFlag = setTimeout(onGetAudioTableTimeout, 3000);
     });
 }
-function playFirstChannelTForAudioExistTimeout(funcName, chn) {
-    QUnit.test(funcName, function (assert) {
-        var done = assert.async(1);
-        var timerFlag;
 
-        function onAudioExistChanngedTimeout() {
-            assert.ok(false, "onAudioExistChanngedTimeout timeout");
-            done();
-        };
-
-        model.tvservice.onAudioExistChanged = function (val) {
-            clearTimeout(timerFlag);
-            model.tvservice.onAudioExistChanged = null;
-            assert.ok(true, "onAudioExistChanged");
-            done();
-        }
-        model.tvservice.playChannel("0", allChannels_T[chn].uuid);
-        $("#name").html(allChannels_T[chn].name);
-        timerFlag = setTimeout(onAudioExistChanngedTimeout, 5000);
-    });
-}
 function getAudioIdentImpl() {
-    var result = model.sound.getAudioIdent();
-    return result;
+    var val = model.sound.getAudioIdent();
+    $("#details").html(val);
+    if ((val >= 0) && (val < 110))
+        return true;
+    else
+        return false;
 }
 
 function getAudioIdent(funcName) {
     QUnit.test(funcName, function (assert) {
-        var audioIdent;
-        audioIdent = getAudioIdentImpl();
-        assert.notEqual(audioIdent, 0, "Test getAudioIdent");
-        $("#details").html(audioIdent);
+        var result;
+        result = getAudioIdentImpl();
+        assert.ok(result, "Test getAudioIdent");
     });
 }
 function playFirstChannelTForAudioIdentTimeout(funcName, chn) {
@@ -346,7 +343,8 @@ function playFirstChannelTForAudioIdentTimeout(funcName, chn) {
         var timerFlag;
 
         function onAudioIdentChanngedTimeout() {
-            assert.ok(false, "onAudioIdentChanngedTimeout timeout");
+            model.sound.onAudioIdentChaged = null;
+            assert.ok(false, "onAudioIdentChanngedTimeout ");
             done();
         };
 
