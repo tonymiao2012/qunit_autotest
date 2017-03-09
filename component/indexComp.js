@@ -82,3 +82,21 @@ new Vue({
         ariaAttr: true
     }
 });
+/*
+ new Vue({
+ el: "#infoQueue",
+ styleObject: {
+
+ }
+ });
+
+ new Vue({
+ el: "#menu",
+ data: {
+ styleObject: {
+ 'background-color': array[0]["theme"],
+ '#menu ul li ul li background': 'radial-gradient(circle, green, rgba(0, 0, 0, 0.75))'
+ }
+ }
+ });
+ */
