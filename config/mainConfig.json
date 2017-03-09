@@ -116,10 +116,9 @@
       "4020_delFromBlockListC",
       "4021_getServicesAttrT",
       "4022_getServicesAttrC",
-      "4023_onChannelListUpdateT",
-      "4024_onChannelListUpdateC",
-      "4025_checkChannelListT",
-      "4026_checkChannelListC"
+      "4023_onChannelListUpdate",
+      "4024_checkChannelListT",
+      "4025_checkChannelListC"
     ],
     "icon-class": "fa fa-steam fa-2x"
   },
@@ -198,18 +197,16 @@
       "7007_getTimeFormat",
       "7008_setTimeFormat",
       "7009_getCurLocalTime",
-      "7010_setCurLocalTime",
-      "7011_audioTable",
-      "7012_audioExistChanged",
-      "7013_audioIndex",
-      "7014_getAudioIdent",
-      "7015_audioIdentChanged",
-      "7016_getVideoFormat",
-      "7017_videoFormatChanged",
-      "7018_getFrameAspect",
-      "7019_frameAspectChanged",
-      "7020_getCcExist",
-      "7021_ccExistChanged"
+      "7010_audioTable",
+      "7011_audioIndex",
+      "7012_getAudioIdent",
+      "7013_audioIdentChanged",
+      "7014_getVideoFormat",
+      "7015_videoFormatChanged",
+      "7016_getFrameAspect",
+      "7017_frameAspectChanged",
+      "7018_getCcExist",
+      "7019_ccExistChanged"
     ],
     "icon-class": "fa fa-television fa-2x"
   },
