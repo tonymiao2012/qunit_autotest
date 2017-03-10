@@ -1,7 +1,7 @@
 /**
  * Created by miaozixiong on 2017/3/2.
  */
-var array = new readMenuArray("config/mainConfig.json");
+var array = new readJSONFileArray("config/mainConfig.json");
 
 new Vue({
     el: "#repeat",
@@ -82,14 +82,17 @@ new Vue({
         ariaAttr: true
     }
 });
+
+new Vue({
+    el: "#infoQueue",
+    styleObject: {
+
+    },
+    methods: {
+
+    }
+});
 /*
- new Vue({
- el: "#infoQueue",
- styleObject: {
-
- }
- });
-
  new Vue({
  el: "#menu",
  data: {

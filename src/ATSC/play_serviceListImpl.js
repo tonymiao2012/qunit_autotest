@@ -182,7 +182,7 @@ function checkServiceT(expectNum, funcName) {
     QUnit.test(funcName, function (assert) {
         if (allChannels_T.length > 0) {
             sourceType = 1;
-            // showServiceList(sourceType);
+            showServiceList(sourceType);
         }
         assert.equal(allChannels_T.length, expectNum, "getServiceT ");
     });
@@ -191,7 +191,7 @@ function checkServiceC(expectNum, funcName) {
     QUnit.test(funcName, function (assert) {
         if (allChannels_C.length > 0) {
             sourceType = 0;
-            // showServiceList(sourceType);
+            showServiceList(sourceType);
         }
         assert.equal(allChannels_C.length, expectNum, "getServiceC ");
     });
@@ -544,8 +544,8 @@ function getServiceListT_done_check(funcName) {
     if (allChannels_T.length > 0) {
         QUnit.test(funcName, function (assert) {
             var flag = true;
-            var serListPath = "serviceListT.json";
-            var serList = fileInput(serListPath);
+            var serListPath = "config/serviceListT.json";
+            var serList = readJSONFileArray(serListPath);
             if (serList.length == allChannels_T.length) {
                 var i;
                 for (i = 0; i < allChannels_T.length; i++) {
@@ -572,8 +572,8 @@ function getServiceListC_done_check(funcName) {
     if (allChannels_C.length > 0) {
         QUnit.test(funcName, function (assert) {
             var flag = true;
-            var serListPath = "serviceListC.json";
-            var serList = fileInput(serListPath);
+            var serListPath = "config/serviceListC.json";
+            var serList = readJSONFileArray(serListPath);
             if (serList.length == allChannels_C.length) {
                 var i;
                 for (i = 0; i < allChannels_C.length; i++) {
@@ -786,7 +786,7 @@ function onGetSkip_C(m_event) {
     }
 }
 
-function getSkipListCountC(funcName) {
+function getSkipListCountC(expectNum,funcName) {
     $("#details").html(skipChannels_C.length);
     QUnit.test(funcName, function (assert) {
         assert.equal(skipChannels_C.length, expectNum, "getSkipListAllC ");
