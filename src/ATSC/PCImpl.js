@@ -39,8 +39,8 @@ function getSModel(funcName) {
         assert.ok(result, "Test getSModel");
     });
 }
-function startSetSModel(model) {
-    model.parentlock.setSModel(model);
+function startSetSModel(m) {
+    model.parentlock.setSModel(m);
     if (model.parentlock.getSModel() == model)
         return true;
     else
@@ -48,7 +48,7 @@ function startSetSModel(model) {
 }
 function setSModel(model, funcName) {
     QUnit.test(funcName, function (assert) {
-        var result = startSetSModel(model);
+        var result = startSetSModel(parseInt(model));
         assert.ok(result, "Test setSModel");
     });
 }
