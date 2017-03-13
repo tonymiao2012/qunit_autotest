@@ -50,8 +50,71 @@
     <button v-on:click="plusOne">Add By One</button>
     <p>Button counter: {{ counter }}</p>
 </div>
+<div id="example-1">
+    <input v-model="message" placeholder="edit me">
+    <p>Message is: {{ message }}</p>
+</div>
+
+<div id="example-2">
+    <input type="checkbox" id="checkbox" v-model="checked">
+    <label for="checkbox">{{ checked }}</label>
+</div>
+
+<div id="example-3">
+    <input type="radio" id="one" value="One" v-model="picked">
+    <label for="one">One</label>
+    <br>
+    <input type="radio" id="two" value="Two" v-model="picked">
+    <label for="two">Two</label>
+    <br>
+    <span>Picked: {{ picked }}</span>
+</div>
+
+<div id="example-6">
+    <select v-model="selected" multiple style="width: 50px">
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <br>
+    <span>Selected: {{ selected }}</span>
+</div>
+
+<input type="checkbox"
+       v-model="toggle"
+       v-bind:true-value="a"
+       v-bind:false-value="b">
+
 <script type="text/javascript" src="lib/vue.js"></script>
 <script>
+    new Vue({
+        el: '#example-6',
+        data: {
+            selected: []
+        }
+    });
+
+    new Vue({
+        el:'#example-3',
+        data: {
+            picked: ''
+        }
+    });
+
+    new Vue({
+        el: '#example-2',
+        data: {
+            checked: false
+        }
+    });
+
+    new Vue({
+        el: '#example-1',
+        data:{
+            message: ''
+        }
+    });
+
     new Vue({
         el: "#event-example-1",
         data: {
