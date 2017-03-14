@@ -89,15 +89,31 @@ var statusTable = new Vue({
         tableList: QUnit.config.infoQueueList,       //Should be a list contains test case and status pairs.
         start: 0,
         limit: 2,
-        pagination: 15
+        pagination: 5,
     },
     methods: {
-
+        paginate: function (direction) {
+            console.log("................................................In paginate method");
+            if (direction === 'right') {
+                if(this.limit >= QUnit.config.infoQueueList.length - 1)
+                    return;
+                this.start += parseInt(this.pagination);
+                this.limit += parseInt(this.pagination);
+            } else if (direction === 'left') {
+                if(this.start <= 0)
+                    return;
+                this.limit -= parseInt(this.pagination);
+                this.start -= parseInt(this.pagination);
+            }
+        }
     },
     computed: {
-        filtered: function(){
+        filtered: function () {
             return this.tableList.slice(this.start, this.limit);
         }
+    },
+    mounted: function () {
+        this.limit = parseInt(this.pagination);
     }
 });
 /*
