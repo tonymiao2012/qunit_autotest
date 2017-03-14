@@ -83,13 +83,21 @@ new Vue({
     }
 });
 
-new Vue({
+var statusTable = new Vue({
     el: "#infoQueue",
-    styleObject: {
-
+    data: {
+        tableList: QUnit.config.infoQueueList,       //Should be a list contains test case and status pairs.
+        start: 0,
+        limit: 2,
+        pagination: 15
     },
     methods: {
 
+    },
+    computed: {
+        filtered: function(){
+            return this.tableList.slice(this.start, this.limit);
+        }
     }
 });
 /*
