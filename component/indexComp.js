@@ -94,7 +94,7 @@ var statusTable = new Vue({
     methods: {
         paginate: function (direction) {
             if (direction === 'right') {
-                if(this.limit >= QUnit.config.infoQueueList.length - 1)
+                if(this.limit > QUnit.config.infoQueueList.length - 1)
                     return;
                 this.start += parseInt(this.pagination);
                 this.limit += parseInt(this.pagination);
