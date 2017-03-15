@@ -89,11 +89,10 @@ var statusTable = new Vue({
         tableList: QUnit.config.infoQueueList,       //Should be a list contains test case and status pairs.
         start: 0,
         limit: 2,
-        pagination: 5,
+        pagination: 25
     },
     methods: {
         paginate: function (direction) {
-            console.log("................................................In paginate method");
             if (direction === 'right') {
                 if(this.limit >= QUnit.config.infoQueueList.length - 1)
                     return;
