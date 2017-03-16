@@ -3,16 +3,19 @@
  */
 var array = new readJSONFileArray("config/mainConfig.json");
 
-new Vue({
+var stressTest = new Vue({
     el: "#repeat",
     data: {
         name: array[1]["name"],
         testcase: array[1]["testcase"],
         iconclass: array[1]["icon-class"],
         ariaAttr: true
+    },
+    methods: {
+
     }
 });
-
+/*
 new Vue({
     el: "#scan",
     data: {
@@ -82,7 +85,7 @@ new Vue({
         ariaAttr: true
     }
 });
-
+*/
 var statusTable = new Vue({
     el: "#infoQueue",
     data: {
@@ -113,6 +116,17 @@ var statusTable = new Vue({
     },
     mounted: function () {
         this.limit = parseInt(this.pagination);
+    }
+});
+
+var MyView = Vue.component('my-view', {
+    template: '<p>This is a tool bar.</p>'
+});
+
+var qunitToolBar = new Vue({
+    el: "#qunit-testrunner-toolbar",
+    data: {
+        inputAttr: stressTest.$data.testcase
     }
 });
 /*

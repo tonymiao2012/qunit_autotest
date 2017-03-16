@@ -9,7 +9,7 @@ function DatetimeModelDefines() {
     DatetimeModelDefines.SL2_TVAPI_I32_DATETIME_DAYLIGHT_SAVINGS = "de.loewe.sl2.i32.datetime.daylight.saving.time";
     DatetimeModelDefines.SL2_TVAPI_I32_DATETIME_DEVIATION_FROM_UTC = "de.loewe.sl2.i32.datetime.deviation.fromutc";
     DatetimeModelDefines.SL2_TVAPI_I64_TIMER_FUNCTIONS_CUR_LOCAL_TIME = "de.loewe.sl2.i64.datetime.local.time";
-  //  DatetimeModelDefines.SL2_TVAPI_I32_DATETIME_DEVIATION_TIMEZONE = "de.loewe.sl2.i32.datetime.deviation.timezone";
+    DatetimeModelDefines.SL2_TVAPI_I32_DATETIME_TIMEZONE_SYNC_ENABLE = "de.loewe.sl2.i32.datetime.timezone.sync.enable";
 
 
     // DatetimeModelDefines.SL2_TVAPI_I64_TIMER_FUNCTIONS_CUR_TIME = "de.loewe.sl2.i64.datetime.current.time";
@@ -69,6 +69,7 @@ function DatetimeModel(e) {
             null, null);
 
          this.registerIntegerObject(DatetimeModelDefines.SL2_TVAPI_I64_TIMER_FUNCTIONS_CUR_LOCAL_TIME, "getCurLocalTime", "setCurLocalTime", "CurLocalTimeOnChaged", null, null);//dbtag:20161020 change type
+         this.registerIntegerObject(DatetimeModelDefines.SL2_TVAPI_I32_DATETIME_TIMEZONE_SYNC_ENABLE, "getTimeZoneSyncFlag", "setTimeZoneSyncFlag", null, null, null);//dbtag:20161020 change type
 
 //         this.registerIntegerObject(DatetimeModelDefines.SL2_TVAPI_I32_DATETIME_DEVIATION_TIMEZONE,
 //             "getTimeZoneDev",

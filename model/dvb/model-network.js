@@ -2,7 +2,7 @@ function NetworkModelDefines() {
 }
 {
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_NETWORK_CONFIG = "tvapi.i32.network.enum.network.config";
-    NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_NETWORK_AVAILABLE = "de.loewe.sl2.i32.network.available";
+    NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_NETWORK_AVAILABLE = "de.loewe.sl2.i32.local.network.available";
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_NETWORK_ETHERNET_UNPLUG = "tvapi.i32.network.enum.network.ether.unplug";
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_NETWORKING = "de.loewe.sl2.i32.network.enum.networking";
     NetworkModelDefines.SL2_TVAPI_VINT32_NETWORK_NETWORKING_CAPABILITY = "de.loewe.sl2.vint32.network.networking.capability";
@@ -43,6 +43,7 @@ function NetworkModelDefines() {
    // NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ANYVIEWSTREAM_SWITCH = "de.loewe.sl2.i32.network.anyviewstream.switch";
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_DISCLAIMER = "tvapi.i32.network.disclaimer";
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_WIFI_WAKEUP = "tvapi.i32.network.wifi.wakeup";
+    NetworkModelDefines.SL2_TVAPI_I32_NETWORK_WOW_ENABLE = "de.loewe.sl2.i32.network.wow.enable";
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_WOL_ENABLE = "de.loewe.sl2.i32.network.wol.enable";
     NetworkModelDefines.SL2_TVAPI_STR_NETWORK_WPS_PIN_CODE = "de.loewe.sl2.str.network.wps.pin.code";
     NetworkModelDefines.SL2_TVAPI_ACTION_NETWORK_WPS_CONNECT_PBC = "de.loewe.sl2.action.network.wps.pbc";
@@ -52,6 +53,7 @@ function NetworkModelDefines() {
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_TV_NAME = "tvapi.i32.network.tv.name";
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_INTERFACE_STATE = "de.loewe.sl2.i32.network.enum.interface.state";
     NetworkModelDefines.SL2_TVAPI_STR_SYSTEM_FEATURE_CODE = "tvapi.str.system.feature.code";
+    NetworkModelDefines.SL2_TVAPI_STR_NETWORK_CHANGE_MSG = "de.loewe.sl2.str.network.change.msg";
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_NETWORKING_WIRED = 0;
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_NETWORKING_WIRELESS = 1;
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_STATE_ON = 0;
@@ -154,6 +156,7 @@ function NetworkModel(parentModel) {
         this.registerStringObject(NetworkModelDefines.SL2_TVAPI_STR_NETWORK_ENCRYPTION_PASSPHRASE, "getEncryptionPassphrase", "setEncryptionPassphrase", "onEncryptionPassphraseChaged", null, null);
         this.registerIntegerObject(NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENCRYPTION_WEP_INDEX, "getEncryptionWep_index", "setEncryptionWep_index", "onEncryptionWep_indexChaged", null, null);
         this.registerStringObject(NetworkModelDefines.SL2_TVAPI_STR_NETWORK_HOST_NAME, "getHost_name", "setHost_name", "onHost_nameChaged", null, null);
+        this.registerStringObject(NetworkModelDefines.SL2_TVAPI_STR_NETWORK_CHANGE_MSG, "getNetworkChangeMsg", "setNetworkChangeMsg", "onNetworkChangeMsgChanged", null, null);
         this.registerActionObject(NetworkModelDefines.SL2_TVAPI_ACTION_NETWORK_WIRED_SET, [{
             name: "WiredSet",
             method: function (e) {
@@ -208,6 +211,8 @@ function NetworkModel(parentModel) {
        // this.registerIntegerObject(NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ANYVIEWSTREAM_SWITCH, "getAnyviewstreamSwitch", "setAnyviewstreamSwitch", "onAnyviewstreamSwitchChaged", null, null);
         this.registerIntegerObject(NetworkModelDefines.SL2_TVAPI_I32_NETWORK_DISCLAIMER, "getDisclaimer", "setDisclaimer", "onDisclaimerChaged", null, null);
         this.registerIntegerObject(NetworkModelDefines.SL2_TVAPI_I32_NETWORK_WIFI_WAKEUP, "getWifiWakeup", "setWifiWakeup", "onWifiWakeupChaged", null, null);
+        this.registerIntegerObject(NetworkModelDefines.SL2_TVAPI_I32_NETWORK_WOW_ENABLE, "getWowEnable", "setWowEnable", "onWowEnableChaged", null, null);
+        this.registerIntegerObject(NetworkModelDefines.SL2_TVAPI_I32_NETWORK_WOL_ENABLE, "getWolEnable", "setWolEnable", "onWolEnableChaged", null, null);
         this.registerStringObject(NetworkModelDefines.SL2_TVAPI_STR_NETWORK_WPS_PIN_CODE, "getWpsPinCode", "setWpsPinCode", "onWpsPinCodeChaged", null, null);
         this.registerActionObject(NetworkModelDefines.SL2_TVAPI_ACTION_NETWORK_WPS_CONNECT_PBC, [{
             name: "WpsConnectPBC",

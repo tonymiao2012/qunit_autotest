@@ -43,6 +43,7 @@ function EpgModelDefines() {
     EpgModelDefines.TABLE_FIELD_EPG_TIMER_LIST_ENTRY_RECORDING_UUID = 2020;
     EpgModelDefines.TABLE_FIELD_EPG_TIMER_LIST_ENTRY_MEMORIZED_UUID = 2021;
     EpgModelDefines.TABLE_FIELD_EPG_LINKAGE = 2022;
+    EpgModelDefines.TABLE_FIELD_EPG_GUIDANCE = 2024;
     EpgModelDefines.ENUM_EPG_THEME_MOVIE = 0x0001;
     EpgModelDefines.ENUM_EPG_THEME_NEWS = 0x0002;
     EpgModelDefines.ENUM_EPG_THEME_SHOW = 0x0004;

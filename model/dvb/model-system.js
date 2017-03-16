@@ -63,6 +63,8 @@ function SystemModelDefines() {
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_NOTIFICATIONS_CONTROL = "de.loewe.sl2.i32.system.notifications.control";//DBTAG -Pete 20161011
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_ENTER_HIMEDIA_FLAG = "de.loewe.sl2.i32.system.enter.himedia.flag";
     SystemModelDefines.SL2_TVAPI_TABLE_TVSERVICE_AUDIO_TABLE = "de.loewe.sl2.tvservice.audio.table"; //DBTAG -MARK 20160929
+    SystemModelDefines.SL2_TVAPI_STR_BASIC_SETTINGS_TV_FEATURECODE = "de.loewe.sl2.str.basic.settings.tv.featurecode";
+
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_ENUM_PWR_USE_CASE_IDLE = 0;
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_ENUM_PWR_USE_CASE_TV = 1;
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_ENUM_SCREEN_OFF = 0;
@@ -117,6 +119,10 @@ function SystemModelDefines() {
     SystemModelDefines.ENUM_SYSTEM_OPEN_FROM_STANDBY_EPG = 20;
     SystemModelDefines.ENUM_SYSTEM_OPEN_FROM_STANDBY_DASHBOARD = 21;
     SystemModelDefines.ENUM_SYSTEM_OPEN_FROM_STANDBY_TELETEXT = 22;
+    SystemModelDefines.ENUM_SYSTEM_OPEN_FROM_STANDBY_NETFLIX = 23;
+    SystemModelDefines.ENUM_SYSTEM_OPEN_FROM_STANDBY_VUDU = 24;
+    SystemModelDefines.ENUM_SYSTEM_OPEN_FROM_STANDBY_YOUTUBE = 25;
+    SystemModelDefines.ENUM_SYSTEM_OPEN_FROM_STANDBY_AMAZON = 26;
     SystemModelDefines.ENUM_SYSTEM_OPEN_FROM_STANDBY_VIRGIN_MODE = 100;
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_ACTION_KEY_SYSCMD_0 = 0;
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_ACTION_KEY_SYSCMD_1 = 1;
@@ -395,6 +401,10 @@ function SystemModelDefines() {
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_SUBTITLE_TABLE_FIELD_NAME = 1;
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_SUBTITLE_TABLE_FIELD_ISO639 = 2;
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_SUBTITLE_TABLE_FIELD_TYPE = 3;
+    SystemModelDefines.SL2_TVAPI_I32_SYSTEM_AUDIO_TABLE_FIELD_ID = 0;
+    SystemModelDefines.SL2_TVAPI_I32_SYSTEM_AUDIO_TABLE_FIELD_NAME = 1;
+    SystemModelDefines.SL2_TVAPI_I32_SYSTEM_AUDIO_TABLE_FIELD_ISO639 = 2;
+    SystemModelDefines.SL2_TVAPI_I32_SYSTEM_AUDIO_TABLE_FIELD_TYPE = 3;
 }
 function SystemModel(_) {
     SubModel.call(this, _, SystemModelDefines);
@@ -402,6 +412,7 @@ function SystemModel(_) {
     this.registerSubObject = function (loadType) {
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_STOP_ANIMATION, "getAnimation", "stopAnimation", "onAniamtionChanged", null, null);
         this.registerStringObject(SystemModelDefines.SL2_TVAPI_STR_SYSTEM_CUR_BRAND, "getCurBrand", "setCurBrand", "onCurBrandChanged", null, null);
+        this.registerStringObject(SystemModelDefines.SL2_TVAPI_STR_BASIC_SETTINGS_TV_FEATURECODE, "getSystem_featureCode", "setSystem_featureCode", "onSystem_featureCodeChanged", null, null);
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_OPEN_FROM_STANDBY, "getOpenFromStandby", "setOpenFromStandby", "onOpenFromStandbyChaged", null, null);
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_FIRST_INSTALLATION, "getFirstInstallation", "setFirstInstallation", "onFirstInstallationChaged", null, null);
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_USER_MODE, "getUserMode", "setUserMode", "onUserModeChaged", null, null);

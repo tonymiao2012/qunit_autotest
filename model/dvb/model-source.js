@@ -13,6 +13,7 @@ function SourceModelDefines() {
     SourceModelDefines.SL2_TVAPI_I32_SYSTEM_CURRENT_TIME_IN_LOCK = "tvapi.i32.parental.lock.current.time.inLock";
     SourceModelDefines.SL2_TVAPI_VSTR_SOURCE_DETECT_INFO = "tvapi.vstr.source.detect.info";
     SourceModelDefines.SL2_TVAPI_VI32_SOURCE_DECTION_SOURCE_STATUS = "de.loewe.sl2.str.sourcedection.sourcestatus";//dbtag:20161020
+    SourceModelDefines.SL2_TVAPI_ACTION_SOURCE_APP_STATUS_SET = "de.loewe.sl2.action.source.app.status.set";
     SourceModelDefines.ENUM_SL2_TVAPI_ACTION_SYSTEM_INPUT_RENAME_ARG_INPUT_UID = 0;
     SourceModelDefines.ENUM_SL2_TVAPI_ACTION_SYSTEM_INPUT_RENAME_ARG_NEW_NAME = 1;
     SourceModelDefines.ENUM_SL2_TVAPI_ACTION_SYSTEM_INPUT_SET_ARG_INPUT_UID = 0
@@ -25,7 +26,7 @@ function SourceModel(e) {
         this.registerIntegerObject(SourceModelDefines.SL2_TVAPI_I32_SYSTEM_INPUT_CURRENT_IN_LOCK, "getInputCurrentInLock", "setInputCurrentInLock", "onInputCurrentInLockChaged", null, null);
         this.registerIntegerObject(SourceModelDefines.SL2_TVAPI_I32_SYSTEM_CURRENT_TIME_IN_LOCK, "getCurrentTimeInLock", "setCurrentTimeInLock", "onCurrentTimeInLockChaged", null, null)
         this.registerIntegerObject(SourceModelDefines.SL2_TVAPI_I32_SOURCE_MHL_AVAILABLE, "getInputMhlAvailable", "setInputMhlAvailable", "onInputMhlAvailableChaged", null, null);
-        this.registerIntegerVectorObject(SourceModelDefines.SL2_TVAPI_VI32_SOURCE_DECTION_SOURCE_STATUS, "getSourceStatus", "setSourceStatus", "onSourceStatusChaged", null, null);//dbtag:20161020
+        this.registerStringObject(SourceModelDefines.SL2_TVAPI_VI32_SOURCE_DECTION_SOURCE_STATUS, "getSourceStatus", "setSourceStatus", "onSourceStatusChaged", null, null);//dbtag:20161020
 
 
         this.registerStringObject(SourceModelDefines.SL2_TVAPI_VSTR_SOURCE_DETECT_INFO, "getSRCDetectInfo", "setSRCDetectInfo", "onSRCDetectInfoChanged", null, null);
@@ -45,6 +46,12 @@ function SourceModel(e) {
             name: "unlockInput",
             method: function (e, _) {
                 return e.invoke(_)
+            }
+        }], "null");
+        this.registerActionObject(SourceModelDefines.SL2_TVAPI_ACTION_SOURCE_APP_STATUS_SET, [{
+            name: "appStatusSet",
+            method: function (_, appName,Status) {
+                return _.invoke(appName,Status)
             }
         }], "null");
     }

@@ -73,10 +73,6 @@ function ServicelistModelDefines() {
     ServicelistModelDefines.SL2_TVAPI_ACTION_SERVICELIST_LIST_EXPORT= "de.loewe.sl2.table.servicelist.list.export";
     ServicelistModelDefines.SL2_TVAPI_I32_SERVICELIST_LIST_IMPORT_STATUS= "tvapi.i32.servicelist.list.import.status";
     ServicelistModelDefines.SL2_TVAPI_I32_SERVICELIST_LIST_EXPORT_STATUS= "tvapi.i32.servicelist.list.export.status";
-    ServicelistModelDefines.SL2_TVAPI_MESSAGES_I32_MESSAGEID= "de.loewe.sl2.messages.messageid"; //dbtag:20161019 - add to fix the bug of import/export servicelist
-/***** DBTAG MARK 20161028 *****/
-    ServicelistModelDefines.SL2_TVAPI_ACTION_MESSAGE_CONFIRM = "de.loewe.sl2.messages.action.confirm";
-/***** DBTAG MARK end *****/
 }
 function ServicelistModel(parentModel) {
     SubModel.call(this, parentModel, ServicelistModelDefines);
@@ -198,14 +194,6 @@ function ServicelistModel(parentModel) {
                 }}
             ],"null"
         );
-        //dbtag:20161019 - add to solve the export/import servicelist issues start
-        // Messageid
-        this.registerIntegerObject(
-            ServicelistModelDefines.SL2_TVAPI_MESSAGES_I32_MESSAGEID,
-            "getMessageid", "setMessageid", "onMessageidChaged",
-            null, null );
-        //dbtag:20161019 - add to solve the export/import servicelist issues end
-
         // ListImportStatus
         this.registerIntegerObject(
             ServicelistModelDefines.SL2_TVAPI_I32_SERVICELIST_LIST_IMPORT_STATUS,
@@ -228,19 +216,6 @@ function ServicelistModel(parentModel) {
             ServicelistModelDefines.SL2_TVAPI_I32_SERVICELIST_CHANNELLIST_NEED_UPDATE,
             "getChannellistNeedUpdate", "setChannellistNeedUpdate", "onChannellistNeedUpdateChaged",
             null, null );
-
-/***** DBTAG MARK 20161028 *****/
-        this.registerActionObject(
-            ServicelistModelDefines.SL2_TVAPI_ACTION_MESSAGE_CONFIRM,
-                [
-                    {name:"messageConfirm",
-                        method:function(e,p1,p2){
-                            return e.invoke(p1,p2);
-                        }
-                    }
-                ],"null");
-/***** DBTAG MARK end *****/
-
     }
 
 }

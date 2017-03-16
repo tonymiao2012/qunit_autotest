@@ -22,9 +22,9 @@ function PictureModelDefines() {
     PictureModelDefines.SL2_TVAPI_PICTURE_I32_SLOT_CLOSE = "tvapi.i32.picture.slot.close";
     PictureModelDefines.SL2_TVAPI_PICTURE_ACTION_SET_THUMBNAIL_RUNNING = "tvapi.action.picture.set.thumbnail.running";
     PictureModelDefines.SL2_TVAPI_PICTURE_ACTION_THUMBNAIL_COMMAND = "tvapi.action.picture.thumbnail.command";
-    PictureModelDefines.SL2_TVAPI_PICTURE_DLNA_STATE_RELEASE = 0;
+//    PictureModelDefines.SL2_TVAPI_PICTURE_DLNA_STATE_RELEASE = 0;
     PictureModelDefines.SL2_TVAPI_PICTURE_DLNA_STATE_RUNNING = 1;
-    PictureModelDefines.SL2_TVAPI_PICTURE_DLNA_STATE_STOP = 2
+    PictureModelDefines.SL2_TVAPI_PICTURE_DLNA_STATE_STOP = 0
 }
 function PictureModel(e) {
     SubModel.call(this, e, PictureModelDefines);

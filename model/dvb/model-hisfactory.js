@@ -10,7 +10,7 @@ function His_factoryModelDefines() {
     His_factoryModelDefines.SL2_TVAPI_I32_HIS_FACTORY_AGING = "de.loewe.sl2.i32.hisfactory.aging";
     His_factoryModelDefines.SL2_TVAPI_I32_HIS_FACTORY_CURRENT_SOURCE = "de.loewe.sl2.i32.hisfactory.current.source";
     His_factoryModelDefines.SL2_TVAPI_I32_FACTORY_AREA_INDEX = "de.loewe.sl2.i32.hisfactory.area.index";
-    His_factoryModelDefines.SL2_TVAPI_STR_SYSTEM_PRODUC_TYPE = "tvapi.str.hisfactory.production.type";
+    His_factoryModelDefines.SL2_TVAPI_STR_SYSTEM_PRODUC_TYPE = "de.loewe.sl2.str.hisfactory.production.type";
     His_factoryModelDefines.SL2_TVAPI_STR_SYSTEM_SERVICE_NO = "de.loewe.sl2.str.hisfactory.materiel.serial";
     His_factoryModelDefines.SL2_TVAPI_I32_HIS_FACTORY_COUNTRY = "de.loewe.sl2.i32.hisfactory.country";
     His_factoryModelDefines.SL2_TVAPI_I32_HIS_FACTORY_LANGUAGE = "de.loewe.sl2.i32.hisfactory.language";

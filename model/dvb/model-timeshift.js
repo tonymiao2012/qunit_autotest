@@ -9,7 +9,8 @@ function TimeshiftModelDefines() {
 }
 {
     //TimeshiftModelDefines.SL2_TVAPI_ACTION_TSHIFT_SET_PAR = "de.loewe.sl2.action.tshift.set.par";
-    TimeshiftModelDefines.SL2_TVAPI_ACTION_TSHIFT_IS_REGISTERED = "de.loewe.sl2.action.tshift.is.registered";
+    TimeshiftModelDefines.SL2_TVAPI_ACTION_TSHIFT_IS_REGISTERED = "de.loewe.sl2.hdr.is.recorder.medium.registered";
+
     //TimeshiftModelDefines.SL2_TVAPI_ACTION_TSHIFT_PAR_INFO = "de.loewe.sl2.vstr.tshift.par.info";
     TimeshiftModelDefines.SL2_TVAPI_ACTION_TSHIFT_BEGIN_SHIFT = "de.loewe.sl2.hdr.player.play";
     TimeshiftModelDefines.SL2_TVAPI_HDR_ACTION_PLAYER_SET_SPEED = "de.loewe.sl2.hdr.player.set.speed";
@@ -18,7 +19,7 @@ function TimeshiftModelDefines() {
     //TimeshiftModelDefines.SL2_TVAPI_ACTION_TSHIFT_PAUSE = "de.loewe.sl2.action.tshift.pause";
     TimeshiftModelDefines.SL2_TVAPI_ACTION_TSHIFT_STOP= "de.loewe.sl2.hdr.player.stop";
     TimeshiftModelDefines.SL2_TVAPI_I32_TSHIFT_PLAY_STATE= "de.loewe.sl2.hdr.player.state";
-    //TimeshiftModelDefines.SL2_TVAPI_I32_TSHIFT_PAR_AVAILABLE = "de.loewe.sl2.i32.tshift.par.available";
+    TimeshiftModelDefines.SL2_TVAPI_I32_TSHIFT_PAR_AVAILABLE = "de.loewe.sl2.hdr.recorder.media.available";
     //TimeshiftModelDefines.SL2_TVAPI_VSTR_TSHIFT_RECORD_TIMES_INFO = "de.loewe.sl2.vstr.tshift.record.times.info";
     //TimeshiftModelDefines.SL2_TVAPI_ACTION_TSHIFT_SEEK_POSITION = "de.loewe.sl2.action.tshift.seek.position";
     TimeshiftModelDefines.SL2_TVAPI_HDR_I32_CURSOR_TIME = "de.loewe.sl2.hdr.cursor.time";
@@ -154,15 +155,10 @@ function TimeshiftModel(parentModel) {
             ], "setParCallback");
 
         // is regist
-        this.registerActionObject(
-            TimeshiftModelDefines.SL2_TVAPI_ACTION_TSHIFT_IS_REGISTERED,
-            [
-                {
-                    name: "IsRegistered", method: function (e) {
-                    return e.invoke();
-                }
-                }
-            ], "registerdCallback");
+        this.registerStringVectorObject(
+            TimeshiftModelDefines.SL2_TVAPI_VSTR_PVR_IS_REGISTERED,
+            "getIsRegisterd", "null", "onChangeRegisterd",
+            null, null);
 
         // ParInfo
         this.registerStringVectorObject(
@@ -236,13 +232,13 @@ function TimeshiftModel(parentModel) {
         // PlayState
         this.registerIntegerObject(
             TimeshiftModelDefines.SL2_TVAPI_I32_TSHIFT_PLAY_STATE,
-            "getPlayState", "setPlayerState", "onPlayStateChaged",
+            "getPlayState", "setPlayerState", "onPlayerStateChaged",
             null, null);
 
         //PAR AVAILABLE
         this.registerIntegerObject(
             TimeshiftModelDefines.SL2_TVAPI_I32_TSHIFT_PAR_AVAILABLE,
-            "null", "null", "onParAvailableChaged",
+            "getParAvailableChaged", "null", "onParAvailableChaged",
             null, null);
 
         //RECORD TIMES INFO

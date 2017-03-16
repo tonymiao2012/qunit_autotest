@@ -2,11 +2,11 @@ function TvserviceModelDefines() {
 }
 {
     TvserviceModelDefines.TVAPI_VSTR_TVSERVICE_PLAY_MAIN = "de.loewe.sl2.vstr.tvservice.play.main";
+    TvserviceModelDefines.TVAPI_VSTR_TVSERVICE_PLAY_RADIO = "de.loewe.sl2.vstr.tvservice.play.radio";
     TvserviceModelDefines.TVAPI_ACTION_TVSERVICE_PLAY = "de.loewe.sl2.action.tvservice.play";
     TvserviceModelDefines.TVAPI_I32_TVSERVICE_NO_SIGNAL_MAIN = "de.loewe.sl2.i32.tvservice.nosignal.main";
     TvserviceModelDefines.TVAPI_VSTR_TVSERVICE_UNLOCK_PLAY = "tvapi.action.tvservice.unlock.play";
     TvserviceModelDefines.SL2_TVAPI_STR_TVSERVICE_VIDEO_FORMAT_INFO = "de.loewe.sl2.str.video.format.info";
-    TvserviceModelDefines.SL2_TVAPI_STR_NETWORK_CHANGE_MSG = "de.loewe.sl2.str.network.change.msg";
     //TvserviceModelDefines.SL2_TVAPI_STR_TVSERVICE_AUDIO_INFORMATION = "tvapi.str.tvservice.audio.information";
     //TvserviceModelDefines.SL2_TVAPI_STR_TVSERVICE_AUDIO_INFORMATION = "de.loewe.sl2.tvservice.audio.table";//dbtag:20160820
     TvserviceModelDefines.SL2_TVAPI_ACTION_TVSERVICE_GET_PFINFO = "tvapi.action.tvservice.get.pfinfo";
@@ -19,7 +19,8 @@ function TvserviceModelDefines() {
     TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_PLAYED_SUCCESS_LIVETV = "de.loewe.sl2.i32.tvservice.played.success.livetv";
     //TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_PLAY_FAV_CHANNEL_LIST = "tvapi.i32.tvservice.play.fav.channel.list";
     TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_MESSAGE_CAM_INDEX= "tvapi.i32.tvservice.message.cam.index";
-    TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_LIST_UPDATE = "tvapi.i32.tvservice.list.update";
+    //TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_LIST_UPDATE = "tvapi.i32.tvservice.list.update";
+    TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_LIST_UPDATE = "de.loewe.sl2.i32.tvservice.list.update";
     TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_LIST_NAME_UPDATE = "tvapi.i32.tvservice.list.name.update";
     TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_LIST_SAVED = "tvapi.i32.tvservice.list.saved";
     TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_LOCK_STATUS = "tvapi.i32.tvservice.lock.status";
@@ -50,6 +51,7 @@ function TvserviceModel(e) {
 
     this.registerSubObject = function (loadType) {
         this.registerStringVectorObject(TvserviceModelDefines.TVAPI_VSTR_TVSERVICE_PLAY_MAIN, "getMainPlay", null, "onMainPlayChanged", null, null);
+        this.registerStringVectorObject(TvserviceModelDefines.TVAPI_VSTR_TVSERVICE_PLAY_RADIO, "getRadioPlay", null, "onRadioPlayChanged", null, null);
         this.registerIntegerObject(TvserviceModelDefines.TVAPI_I32_TVSERVICE_NO_SIGNAL_MAIN, "getNoSignalMain", "setNoSignalMain", "onNoSignalMainChanged", null, null);
         //this.registerIntegerObject(TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_PLAY_FAV_CHANNEL_LIST, "getPlayFavChannelList", "setPlayFavChannelList", "onPlayFavChannelListChanged", null, null);
         this.registerIntegerObject(TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_PLAYED_SUCCESS_LIVETV, "getPlaySuccessLiveTV", "setPlaySuccessLiveTV", "onPlaySuccessLiveTVChanged", null, null);
@@ -148,7 +150,6 @@ function TvserviceModel(e) {
             "getPlayMainPause", "setPlayMainPause", "onPlayMainPauseChanged",
             null, null );
         this.registerStringObject(TvserviceModelDefines.SL2_TVAPI_STR_TVSERVICE_VIDEO_FORMAT_INFO, "getMainPlayVideoFormatInfo", null, "onMainPlayVideoFormatInfoChanged", null, null);
-        this.registerStringObject(TvserviceModelDefines.SL2_TVAPI_STR_NETWORK_CHANGE_MSG, null, null, "onNetworkChangeMsgChanged", null, null);
         //this.registerStringObject(TvserviceModelDefines.SL2_TVAPI_STR_TVSERVICE_AUDIO_INFORMATION, "getMainPlayAudioFormatInfo", null, "onMainPlayAudioFormatInfoChanged", null, null);
         this.registerStringObject(TvserviceModelDefines.SL2_TVAPI_STR_TVSERVICE_SOURCE_VIDEO_FORMAT_INFO, "getCurrentSourceVideoFormat", "setCurrentSourceVideoFormat", "onCurrentSourceVideoFormatChanged", null, null);
         this.registerIntegerObject(TvserviceModelDefines.SL2_TVAPI_I32_TVSERVICE_LIST_UPDATE, "getChannelListUpdate", "setChannelListUpdate", "onChannelListUpdate", null, null);

@@ -8,9 +8,9 @@ function PvrModelDefines() {
 }
 {
 /***** DBTAG MARK 20161028 *****/
-    PvrModelDefines.SL2_TVAPI_VSTR_PVR_IS_REGISTERED = "de.loewe.sl2.hdr.recorder.medium.is.registered";
+    PvrModelDefines.SL2_TVAPI_VSTR_PVR_IS_REGISTERED = "de.loewe.sl2.hdr.is.recorder.medium.registered";
     //PvrModelDefines.SL2_TVAPI_ACTION_PVR_SPEED_TEST = "tvapi.action.pvr.speed.test"; 
-    PvrModelDefines.SL2_TVAPI_VSTR_PVR_PAR_INFO = "de.loewe.sl2.hdr.recorder.medium.freespace";
+    PvrModelDefines.SL2_TVAPI_VSTR_PVR_PAR_INFO = "de.loewe.sl2.hdr.user.registered.recorder.medium.path";
     PvrModelDefines.SL2_TVAPI_ACTION_PVR_START_RECORD = "de.loewe.sl2.timer.list.entry.add";
     PvrModelDefines.SL2_TVAPI_ACTION_PVR_STOP_RECORD = "de.loewe.sl2.hdr.player.stop";
     PvrModelDefines.SL2_TVAPI_I32_PVR_LEAD_TIME = "de.loewe.sl2.timer.control.recorder.lead.time";
@@ -27,8 +27,9 @@ function PvrModelDefines() {
     //PvrModelDefines.SL2_TVAPI_I32_PVR_RUNNING_STATUS = "tvapi.i32.pvr.running.status";
     //PvrModelDefines.SL2_TVAPI_I32_PVR_RECORD_STANDBY = "tvapi.i32.pvr.record.standby";
     PvrModelDefines.SL2_TVAPI_ACTION_HDR_PLAYER_PLAY = "de.loewe.sl2.hdr.player.play";
-    PvrModelDefines.SL2_TVAPI_HDR_VSTR_USER_MEDIUM_PATH = "de.loewe.sl2.hdr.user.registered.recorder.medium.path";
-    PvrModelDefines.SL2_TVAPI_TIMER_LIST_ENTRY_ADD_MEMO = "de.loewe.sl2.timer.list.entry.add.memo"
+    PvrModelDefines.SL2_TVAPI_TIMER_LIST_ENTRY_ADD_MEMO = "de.loewe.sl2.timer.list.entry.add.memo";
+    PvrModelDefines.SL2_TVAPI_HDR_VSTR_DELETE_RECORDER_FILES = "de.loewe.sl2.hdr.delete.recorder.files";
+
 
 /***** DBTAG MARK 20161028 *****/
 
@@ -87,8 +88,8 @@ function PvrModelDefines() {
     PvrModelDefines.CONSTRAINT_PVR_REPEAT_SAT = 64;
     PvrModelDefines.CONSTRAINT_PVR_REPEAT_ONCE = 128;
     //book type
-    PvrModelDefines.ENUM_PVR_BOOK_REMINDER = 0;
-    PvrModelDefines.ENUM_PVR_BOOK_PVR = 1;
+    PvrModelDefines.ENUM_PVR_BOOK_REMINDER = 1;
+    PvrModelDefines.ENUM_PVR_BOOK_PVR = 2;
 
 }
 /**
@@ -102,12 +103,6 @@ function PvrModel(parentModel) {
             PvrModelDefines.SL2_TVAPI_VSTR_PVR_IS_REGISTERED,
             "getIsRegisterd", "null", "onChangeRegisterd",
             null, null);
-        // set  medium uuid
-        this.registerStringVectorObject(
-            PvrModelDefines.SL2_TVAPI_HDR_VSTR_USER_MEDIUM_PATH,
-            "nill","setRecMediumPath","null",
-            null, null
-        )
         //speed test
         //this.registerActionObject(
         //    PvrModelDefines.SL2_TVAPI_ACTION_PVR_SPEED_TEST,
@@ -118,7 +113,7 @@ function PvrModel(parentModel) {
         //        }
         //        }
         //    ], "onSpeedTested");
-        //par info
+        //set  medium uuid
         this.registerStringVectorObject(
             PvrModelDefines.SL2_TVAPI_VSTR_PVR_PAR_INFO,
             "null", "setParInfo", "onParInfo",
@@ -192,7 +187,8 @@ function PvrModel(parentModel) {
         //    PvrModelDefines.SL2_TVAPI_VSTR_PVR_SCHEDULE_ITEM,
         //    "null", "null", "onScheduleNotify",
         //    null, null);
-        //free mem event
+
+        //free space medium
         this.registerIntegerObject(
             PvrModelDefines.SL2_TVAPI_I32_PVR_FREE_MEM_THRESHOLD,
             "getRecorderMediumFreespace", "setRecorderMediumFreespace", "onFreeMemThresholdNotify",
@@ -266,17 +262,17 @@ function PvrModel(parentModel) {
                     }
                 }
             ],"onPlayerPlayed");
+        //预约观看
         this.registerActionObject(
             PvrModelDefines.SL2_TVAPI_TIMER_LIST_ENTRY_ADD_MEMO,
             [
-                { name: "addRemindTimer", method: function(object, p0, p1, p2, p3, p4, p5, p6, p7, p8) {
-                    return object.invoke(p0, p1, p2, p3, p4, p5, p6, p7, p8
+                { name: "addRemindTimer", method: function(e, p1, p2, p3, p4, p5, p6, p7, p8) {
+                    return e.invoke( p1, p2, p3, p4, p5, p6, p7, p8
                     );
                 } }
             ],
             "onAddRemindTimerResult");
         /*
-        * p0: ""
         * p1.title,
         * p2.channelUid,
         * p3.channelUri,
@@ -286,6 +282,15 @@ function PvrModel(parentModel) {
         * p7.eventId,
         * p8.listUid
         * */
+
+        //删除预约文件
+        this.registerActionObject(
+            PvrModelDefines.SL2_TVAPI_HDR_VSTR_DELETE_RECORDER_FILES,
+            [
+                {name: "deletePVR", method: function (object, url) {
+                    return object.invoke(url);
+                }}
+            ], "deletePVRHandler","deletePVRHandlerERR");
 /***** DBTAG MARK end *****/
 
     }

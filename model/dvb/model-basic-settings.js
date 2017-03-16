@@ -11,11 +11,11 @@ function Basic_settingsModelDefines() {
     Basic_settingsModelDefines.SL2_TVAPI_I32_BASIC_SETTINGS_ENUM_DVB_AUDIO_MODE = "de.loewe.sl2.i32.basic.settings.enum.dvb.mode.audio";
     Basic_settingsModelDefines.SL2_TVAPI_I32_BASIC_SETTINGS_DVB_CHARSET_EXIST = "de.loewe.sl2.i32.basic.settings.dvb.charset.exist";
     Basic_settingsModelDefines.SL2_TVAPI_I32_BASIC_SETTINGS_ENUM_DVB_CHARSET = "de.loewe.sl2.i32.basic.settings.enum.dvb.charset";
-    Basic_settingsModelDefines.SL2_TVAPI_STR_BASIC_SETTINGS_TVSET_LOCATION = "de.loewe.sl2.i32.basic.settings.tvset.location";
+    Basic_settingsModelDefines.SL2_TVAPI_I32_BASIC_SETTINGS_TVSET_LOCATION = "de.loewe.sl2.i32.basic.settings.tvset.location";
 
     // Now, We use time offset to UTC (region code) to represent the region, if the 
     // time offset is not a multiple of 3600, we use the default region of a location.
-    Basic_settingsModelDefines.SL2_TVAPI_STR_BASIC_SETTINGS_TVSET_REGION_CODE = "de.loewe.sl2.i32.basic.settings.tvset.region.code";
+    Basic_settingsModelDefines.SL2_TVAPI_I32_BASIC_SETTINGS_TVSET_REGION_CODE = "de.loewe.sl2.i32.basic.settings.tvset.region.code";
 
     Basic_settingsModelDefines.SL2_TVAPI_I32_BASIC_SETTINGS_TVSET_LOCATION_AUSTRALIA = "de.loewe.sl2.i32.basic.settings.tvset.location.australia";
     Basic_settingsModelDefines.SL2_TVAPI_I32_BASIC_SETTINGS_ENUM_ENERGY_EFFICIENCY = "de.loewe.sl2.i32.basic.settings.enum.energy.efficiency";
@@ -114,8 +114,8 @@ function Basic_settingsModel(_) {
     SubModel.call(this, _, Basic_settingsModelDefines);
     this.registerSubObject = function () {
 
-        this.registerStringObject(Basic_settingsModelDefines.SL2_TVAPI_STR_BASIC_SETTINGS_TVSET_LOCATION, "getTvsetLocation", "setTvsetLocation", "onTvsetLocationChaged", null, null);
-        this.registerIntegerObject(Basic_settingsModelDefines.SL2_TVAPI_STR_BASIC_SETTINGS_TVSET_REGION_CODE, "getTvsetRegionCode", "setTvsetRegionCode", "onTvsetRegionCodeChaged", null, null);
+        this.registerIntegerObject(Basic_settingsModelDefines.SL2_TVAPI_I32_BASIC_SETTINGS_TVSET_LOCATION, "getTvsetLocation", "setTvsetLocation", "onTvsetLocationChaged", null, null);
+        this.registerIntegerObject(Basic_settingsModelDefines.SL2_TVAPI_I32_BASIC_SETTINGS_TVSET_REGION_CODE, "getTvsetRegionCode", "setTvsetRegionCode", "onTvsetRegionCodeChaged", null, null);
 
         this.registerIntegerObject(Basic_settingsModelDefines.SL2_TVAPI_I32_BASIC_SETTINGS_ENUM_DVB_SUBTITLE_MODE, "getEnumDvbModeSubtitle", "setEnumDvbModeSubtitle", "onEnumDvbModeSubtitleChaged", null, null);
         this.registerIntegerObject(Basic_settingsModelDefines.SL2_TVAPI_I32_BASIC_SETTINGS_MENU_DELAY_DISAPPEAR, "getMenuDelayDisappear", "setMenuDelayDisappear", "onMenuDelayDisappearChaged", null, null);

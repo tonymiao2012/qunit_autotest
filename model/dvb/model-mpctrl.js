@@ -13,7 +13,7 @@ function MpCtrlModelDefines() {
     MpCtrlModelDefines.SL2_TVAPI_MPCTRL_I32_PLAYTIME_CURRENT = "de.loewe.sl2.mpctrl.i32.playtime.current";
     MpCtrlModelDefines.SL2_TVAPI_MPCTRL_I32_GUI_RENDER = "de.loewe.sl2.mpctrl.i32.gui.render";
     MpCtrlModelDefines.SL2_TVAPI_MPCTRL_VSTR_METADATA = "de.loewe.sl2.mpctrl.vstr.metadata";
-    MpCtrlModelDefines.SL2_TVAPI_I32_REQACTION = "tvapi.i32.mpctrl.reqaction";
+    MpCtrlModelDefines.SL2_TVAPI_I32_REQACTION = "de.loewe.sl2.mpctrl.reqaction";
     MpCtrlModelDefines.SL2_TVAPI_I32_MPCTRL_FLAG_STATUS = "de.loewe.sl2.i32.videoplayer.flag.status";//"tvapi.i32.videoplayer.flag.status";
     MpCtrlModelDefines.SL2_TVAPI_I32_MPCTRL_ENUM_REPEAT = "de.loewe.sl2.i32.videoplayer.enum.repeat";//"tvapi.i32.videoplayer.enum.repeat";
     MpCtrlModelDefines.SL2_TVAPI_I32_MPCTRL_ENUM_FORMAT = "de.loewe.sl2.i32.videoplayer.enum.format";//"tvapi.i32.videoplayer.enum.format";
@@ -48,7 +48,7 @@ function MpCtrlModelDefines() {
 
     MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_PVRVIDEO_SUBTITLE_TOTAL_NUM = "tvapi.i32.videoplayer.pvrvd.subtitle.total.num";
     MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_PVRVIDEO_SUBTITLE_NO = "tvapi.i32.videoplayer.pvrvd.subtitle.no";
-    MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_VIDEO_SUBTITLE_ENCODE = "tvapi.i32.videoplayer.vd.subtitle.encode";
+    MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_VIDEO_SUBTITLE_ENCODE = "de.loewe.sl2.mpctrl.i32.subtitle.encode";
     MpCtrlModelDefines.SL2_TVAPI_ACTION_VIDEOPLAYER_MUSIC_FIND_LYRIC = "tvapi.action.videoplayer.music.find.lyric";
     MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_MUSIC_SUBTITLE_TEXT_SIZE = "de.loewe.sl2.mpctrl.i32.subtitle.font.size";
     MpCtrlModelDefines.SL2_TVAPI_VINT_VIDEOPLAYER_MUSIC_SUBTITLE_POSITION = "de.loewe.sl2.mpctrl.vi32.subtitle.position";
@@ -56,6 +56,8 @@ function MpCtrlModelDefines() {
     MpCtrlModelDefines.SL2_TVAPI_VI32_VIDEOPLAYER_MUSIC_SUBTITLE_COLOR = "de.loewe.sl2.mpctrl.vi32.subtitle.font.color";
     MpCtrlModelDefines.SL2_TVAPI_MPCTRL_ACTION_ROTATE_PICTURE = "de.loewe.sl2.mpctrl.action.rotate.picture";//dbtag:20160801
     MpCtrlModelDefines.SL2_TVAPI_MPCTRL_VI32_SCREEN_POSITION = "de.loewe.sl2.mpctrl.vi32.screen.position";
+    MpCtrlModelDefines.SL2_TVAPI_MPCTRL_VSTR_FONT_PATH_URL = "de.loewe.sl2.mpctrl.vstr.font.path.url";
+
     MpCtrlModelDefines.SL2_TVAPI_MPCTRL_I32_ENUM_PLAYER_ERROR_UNSUPPORT_FORMAT = 4;
     MpCtrlModelDefines.SL2_TVAPI_MPCTRL_I32_ENUM_PLAYER_ERROR_UNSUPPORT_VIDEO_FORMAT = 5;
     MpCtrlModelDefines.SL2_TVAPI_MPCTRL_I32_ENUM_PLAYER_ERROR_UNSUPPORT_AUDIO_FORMAT = 6;
@@ -262,7 +264,7 @@ function MpCtrlModel(_) {
         //this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_VIDEO_SUBTITLE_TOTAL_NUM, "getMpCtrlSubtitleTotalNo", "setMpCtrlSubtitleTotalNo", "onMpCtrlSubtitleTotalNochanged", null, null);
         //this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_PVRVIDEO_SUBTITLE_NO, "getMpCtrlPvrSubtitleNo", "setMpCtrlPvrSubtitleNo", "onMpCtrlPvrSubtitleNochanged", null, null);
         //this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_PVRVIDEO_SUBTITLE_TOTAL_NUM, "getMpCtrlPvrSubtitleTotalNo", "setMpCtrlPvrSubtitleTotalNo", "onMpCtrlPvrSubtitleTotalNochanged", null, null);
-        //this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_VIDEO_SUBTITLE_ENCODE, "getMpCtrlSubtitleEncode", "setMpCtrlSubtitleEncode", "onMpCtrlSubtitleEncodechanged", null, null);
+        this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_VIDEO_SUBTITLE_ENCODE, "getMpCtrlSubtitleEncode", "setMpCtrlSubtitleEncode", "onMpCtrlSubtitleEncodechanged", null, null);
         this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_MUSIC_SUBTITLE_LINE_NUM, "getMusicSubtitleLineNum", "setMusicSubtitleLineNum", "onMusicSubtitleLineNumchanged", null, null);
         this.registerIntegerVectorObject(MpCtrlModelDefines.SL2_TVAPI_VINT_VIDEOPLAYER_MUSIC_SUBTITLE_POSITION, "getMusicSubtitlePosition", "setMusicSubtitlePosition", "onMusicSubtitlePositionChaged", null, null);
         this.registerActionObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_ACTION_SPEED, [{
@@ -281,7 +283,7 @@ function MpCtrlModel(_) {
         //this.registerStringObject(MpCtrlModelDefines.SL2_TVAPI_STR_MPCTRL_FORMAT_INFO, "getFormatInfo", "setFormatInfo", "onFormatInfoChanged", null, null);
         this.registerStringVectorObject(MpCtrlModelDefines.SL2_TVAPI_VSTR_MPCTRL_INFO, "getMpctrlInfo", "setMpctrlInfo", "onMpctrlInfoChanged", null, null);
         this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_I32_PLAYTIME_TOTAL, "getMpCtrlPlaytimeTotal", "setMapCtrlPlaytimeTotal", "onMpCtrlPlaytimeTotalchanged", null, null);
-        //this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_REQACTION, "getMpCtrlReqation", "setMpCtrlReqation", "onMpCtrlReqationchanged", null, null);
+        this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_REQACTION, "getMpCtrlReqation", "setMpCtrlReqation", "onMpCtrlReqationchanged", null, null);
         this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_ENUM_SPEED, "getMpCtrlSpeed", "setMpCtrlSpeed", "onMpCtrlMpCtrlSpeedchanged", null, null);
         this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_I32_PLAYTIME_CURRENT, "getMpCtrlPlaytimeCurrent", "setMpCtrlPlaytimeCurrent", "onMpCtrlPlaytimeCurrentchanged", null, null);
         this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_I32_GUI_RENDER, "getMpCtrlRender", "setMpCtrlRender", "onMpCtrlRenderchanged", null, null);
@@ -297,6 +299,8 @@ function MpCtrlModel(_) {
         this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_I32_SELECTED_AUDIO_STREAM, "getAudioTrack", "setAudioTrack", "onMpCtrlAudiochanged", null, null);
         this.registerTableObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_TABLE_AUDIO_STREAM, "createAudiotrackIterator");
         this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_I32_HAS_AUDIO_STREAMS, "getHasAudioStreams", "setHasAudioStreams", "onMpCtrlHasAudioStreamschanged", null, null);
+        this.registerStringVectorObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_VSTR_FONT_PATH_URL, "getFontPathUrl", "setFontPathUrl", "onFontPathUrlChanged", null, null);
+
     }
 
 }
