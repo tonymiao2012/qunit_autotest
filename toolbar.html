@@ -1,3 +1,8 @@
-<template id="toolbarArea">
-    <p>This is a tool bar.</p>
+<template id="toolbarTemplate">
+    <form id="test1">
+        <span v-for="{{(item,index) in inputAreaArray}}" :id=spanId(index)>
+            <label> {{ item }}    </label>
+            <input type="text" :id=inputId(index)>
+        </span>
+    </form>
 </template>
