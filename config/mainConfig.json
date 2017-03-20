@@ -26,7 +26,7 @@
       {
         "casename": "1002_autoScanC",
         "input": [
-          "Repeat",
+          "RepeatMore",
           "Expect Number",
           "Other"
         ]
@@ -35,8 +35,7 @@
         "casename": "1003_channelUpT",
         "input": [
           "Repeat",
-          "Expect Number",
-          "Other"
+          "Expect Number"
         ]
       },
       {
@@ -50,9 +49,9 @@
       {
         "casename": "1005_channelRandomT",
         "input": [
-          "Repeat",
-          "Expect Number",
-          "Other"
+          "Test1",
+          "test1",
+          "test3"
         ]
       },
       {

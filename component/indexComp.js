@@ -117,46 +117,35 @@ var statusTable = new Vue({
     }
 });
 
-var toolbarInput = Vue.component('toolbar-input', {
+Vue.component('toolbar-input', {
+    props:['temp'],
     template: '    \
-    <form id="test2"> \
-        <span v-for="(item,index) in inputAreaArray" :id=spanId(index)> \
+    <form id="test1"> \
+        <span v-for="(item,index) in temp" :id=spanId(index)> \
             <label> {{ item }}    </label> \
             <input type="text" :id=inputId(index)> \
         </span> \
     </form>',
-    computed: {
-        inputAreaArray: function () {
-            var crntFocus = $('.onFocus');
-            var hasLevel2 = crntFocus.parent().hasClass('level2');
-            var renderThis = '';
-
-            if (hasLevel2) {
-                //return realtime input array.
-                var lvlOneIndex = crntFocus.find("span").html()[0];
-                var lvlTwoIndex = crntFocus.index();
-                renderThis = array[lvlOneIndex + 1]['testcase'][lvlTwoIndex].input;
-            } else {
-                //return default input array.
-                renderThis = ["Repeat", "Expect Number", "Other", "Test"];
-            }
-
-            return renderThis;
-        }
-    },
     methods: {
-        spanId: function(index){
-            return "toolbarArea1" + index;
+        spanId: function (index) {
+            return "toolbarArea" + index;
         },
         inputId: function (index) {
             return "input" + index;
         }
     }
-
 });
 
 var qunitToolBar = new Vue({
-    el: "#qunit-testrunner-toolbar"
+    el: "#testing",        //#qunit-testrunner-toolbar
+    data: {
+        temp: ["Repeat", "Expect Number", "Other", "Test"]
+    },
+    methods: {
+        updateInputArea: function(){
+            this.temp = inputAreaArray(array);
+        }
+    }
 });
 /*
  new Vue({
