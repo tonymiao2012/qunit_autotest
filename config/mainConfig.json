@@ -88,5 +88,788 @@
       }
     ],
     "icon-class": "fa fa-repeat fa-2x"
+  },
+  {
+    "name": "Scan",
+    "testcase": [
+      {
+        "casename": "2001_setSourceDtvT",
+        "input": []
+      },
+      {
+        "casename": "2002_getSourceDtvT",
+        "input": []
+      },
+      {
+        "casename": "2003_setSourceAtvT",
+        "input": []
+      },
+      {
+        "casename": "2004_getSourceAtvT",
+        "input": []
+      },
+      {
+        "casename": "2005_setSourceDtvC",
+        "input": []
+      },
+      {
+        "casename": "2006_getSourceDtvC",
+        "input": []
+      },
+      {
+        "casename": "2007_setSourceAtvC",
+        "input": []
+      },
+      {
+        "casename": "2008_getSourceAtvC",
+        "input": []
+      },
+      {
+        "casename": "2009_autoScanStartDtvT",
+        "input": []
+      },
+      {
+        "casename": "2010_autoScanStartAtvT",
+        "input": []
+      },
+      {
+        "casename": "2011_autoScanStartDtvC",
+        "input": []
+      },
+      {
+        "casename": "2012_autoScanStartAtvC",
+        "input": []
+      },
+      {
+        "casename": "2013_manualScanStartDtvT",
+        "input": [
+          "Frequency number manual Dtv-T"
+        ]
+      },
+      {
+        "casename": "2014_manualScanStartAtvT",
+        "input": [
+          "Frequency number manual Atv-T"
+        ]
+      },
+      {
+        "casename": "2015_manualScanStartDtvC",
+        "input": [
+          "Frequency number manual Dtv-C"
+        ]
+      },
+      {
+        "casename": "2016_manualScanStartAtvC",
+        "input": [
+          "Frequency number manual Atv-C"
+        ]
+      },
+      {
+        "casename": "2017_autoScanStopDtvT",
+        "input": []
+      },
+      {
+        "casename": "2018_autoScanStopDtvC",
+        "input": []
+      },
+      {
+        "casename": "2019_autoScanProgressDtvT",
+        "input": []
+      },
+      {
+        "casename": "2020_autoScanProgressDtvC",
+        "input": []
+      },
+      {
+        "casename": "2021_autoScanProgressAtvT",
+        "input": []
+      },
+      {
+        "casename": "2022_autoScanProgressAtvC",
+        "input": []
+      },
+      {
+        "casename": "2023_autoScanDigitServicesDtvT",
+        "input": [
+          "Expect digit service number"
+        ]
+      },
+      {
+        "casename": "2024_autoScanAnalogServicesAtvT",
+        "input": [
+          "Expect digit service number"
+        ]
+      },
+      {
+        "casename": "2025_autoScanDigitServicesDtvC",
+        "input": [
+          "Expect digit service number"
+        ]
+      },
+      {
+        "casename": "2026_autoScanAnalogServicesAtvC",
+        "input": [
+          "Expect digit service number"
+        ]
+      },
+      {
+        "casename": "2027_manualScanDigitServicesDtvT",
+        "input": [
+          "Frequency number Dtv-T manual"
+        ]
+      },
+      {
+        "casename": "2028_manualScanAnalogServicesAtvT",
+        "input": [
+          "Frequency number Atv-T manual"
+        ]
+      },
+      {
+        "casename": "2029_manualScanDigitServicesDtvC",
+        "input": [
+          "Frequency number Dtv-C manual"
+        ]
+      },
+      {
+        "casename": "2030_manualScanAnalogServicesAtvC",
+        "input": [
+          "Frequency number Atv-C manual"
+        ]
+      },
+      {
+        "casename": "2031_autoScanCompleteStateDtvT",
+        "input": []
+      },
+      {
+        "casename": "2032_autoScanCompleteStateAtvT",
+        "input": []
+      },
+      {
+        "casename": "2033_autoScanCompleteStateDtvC",
+        "input": []
+      },
+      {
+        "casename": "2034_autoScanCompleteStateAtvC",
+        "input": []
+      },
+      {
+        "casename": "2035_autoScanCancelStateDtvT",
+        "input": []
+      },
+      {
+        "casename": "2036_autoScanCancelStateDtvC",
+        "input": []
+      },
+      {
+        "casename": "2037_manualScanCompleteStateDtvT",
+        "input": [
+          "Frequency number Dtv-T manual"
+        ]
+      },
+      {
+        "casename": "2038_manualScanCompleteStateAtvT",
+        "input": [
+          "Frequency number Atv-T manual"
+        ]
+      },
+      {
+        "casename": "2039_manualScanCompleteStateDtvC",
+        "input": [
+          "Frequency number Dtv-C manual"
+        ]
+      },
+      {
+        "casename": "2040_manualScanCompleteStateAtvC",
+        "input": [
+          "Frequency number Atv-C manual"
+        ]
+      },
+      {
+        "casename": "2041_manualScanSetFrequencyT",
+        "input": [
+          "Frequency number manual T"
+        ]
+      },
+      {
+        "casename": "2042_manualScanSetFrequencyC",
+        "input": [
+          "Frequency number manual C"
+        ]
+      },
+      {
+        "casename": "2043_ScanIsRunning",
+        "input": []
+      },
+      {
+        "casename": "2044_ScanFinishDtvT",
+        "input": []
+      },
+      {
+        "casename": "2045_ScanFinishDtvC",
+        "input": []
+      }
+    ],
+    "icon-class": "fa fa-signal fa-2x"
+  },
+  {
+    "name": "Play",
+    "testcase": [
+      {
+        "casename": "3001_playChannelT",
+        "input": [
+          "Channel number"
+        ]
+      },
+      {
+        "casename": "3002_playChannelC",
+        "input": [
+          "Channel number"
+        ]
+      },
+      {
+        "casename": "3003_getMainPlay",
+        "input": []
+      },
+      {
+        "casename": "3004_mainPlayChangedDvbT",
+        "input": [
+          "Channel number"
+        ]
+      },
+      {
+        "casename": "3005_mainPlayChangedDvbC",
+        "input": [
+          "Channel number"
+        ]
+      },
+      {
+        "casename": "3006_getNoSignalMain",
+        "input": []
+      },
+      {
+        "casename": "3007_getSignalLevel",
+        "input": []
+      },
+      {
+        "casename": "3008_getSignalCn",
+        "input": []
+      }
+    ],
+    "icon-class": "fa fa-play-circle-o fa-2x"
+  },
+  {
+    "name": "ServiceList",
+    "testcase": [
+      {
+        "casename": "4001_getServicelistT",
+        "input": [
+          "Expect service list number"
+        ]
+      },
+      {
+        "casename": "4002_getServicelistC",
+        "input": [
+          "Expect service list number"
+        ]
+      },
+      {
+        "casename": "4003_getFavListT",
+        "input": [
+          "Expect favorite list number"
+        ]
+      },
+      {
+        "casename": "4004_getFavListC",
+        "input": [
+          "Expect favorite list number"
+        ]
+      },
+      {
+        "casename": "4005_addToFavListT",
+        "input": [
+          "Channel number to be added"
+        ]
+      },
+      {
+        "casename": "4006_addToFavListC",
+        "input": [
+          "Channel number to be added"
+        ]
+      },
+      {
+        "casename": "4007_delFromFavListT",
+        "input": [
+          "Channel number to be deleted"
+        ]
+      },
+      {
+        "casename": "4008_delFromFavListC",
+        "input": [
+          "Channel number to be deleted"
+        ]
+      },
+      {
+        "casename": "4009_getSkipListT",
+        "input": [
+          "Expect skip list number"
+        ]
+      },
+      {
+        "casename": "4010_getSkipListC",
+        "input": [
+          "Expect skip list number"
+        ]
+      },
+      {
+        "casename": "4011_addToSkipListT",
+        "input": [
+          "Channel number to be added"
+        ]
+      },
+      {
+        "casename": "4012_addToSkipListC",
+        "input": [
+          "Channel number to be added"
+        ]
+      },
+      {
+        "casename": "4013_delFromSkipListT",
+        "input": [
+          "Channel number to be deleted"
+        ]
+      },
+      {
+        "casename": "4014_delFromSkipListC",
+        "input": [
+          "Channel number to be deleted"
+        ]
+      },
+      {
+        "casename": "4015_getBlockListT",
+        "input": [
+          "Expect block channel number"
+        ]
+      },
+      {
+        "casename": "4016_getBlockListC",
+        "input": [
+          "Expect block channel number"
+        ]
+      },
+      {
+        "casename": "4017_addToBlockListT",
+        "input": [
+          "Channel number to be added"
+        ]
+      },
+      {
+        "casename": "4018_addToBlockListC",
+        "input": [
+          "Channel number to be added"
+        ]
+      },
+      {
+        "casename": "4019_delFromBlockListT",
+        "input": [
+          "Channel number to be deleted"
+        ]
+      },
+      {
+        "casename": "4020_delFromBlockListC",
+        "input": [
+          "Channel number to be deleted"
+        ]
+      },
+      {
+        "casename": "4021_getServicesAttrT",
+        "input": [
+          "Expect channel number"
+        ]
+      },
+      {
+        "casename": "4022_getServicesAttrC",
+        "input": [
+          "Expect channel number"
+        ]
+      },
+      {
+        "casename": "4023_onChannelListUpdate",
+        "input": []
+      },
+      {
+        "casename": "4024_checkChannelListT",
+        "input": []
+      },
+      {
+        "casename": "4025_checkChannelListC",
+        "input": []
+      }
+    ],
+    "icon-class": "fa fa-steam fa-2x"
+  },
+  {
+    "name": "PC",
+    "testcase": [
+      {
+        "casename": "5001_getPin",
+        "input": []
+      },
+      {
+        "casename": "5002_setPin",
+        "input": [
+          "New pin number"
+        ]
+      },
+      {
+        "casename": "5003_getSModel",
+        "input": []
+      },
+      {
+        "casename": "5004_setSModel",
+        "input": [
+          "PC on/off number"
+        ]
+      },
+      {
+        "casename": "5005_reset",
+        "input": []
+      },
+      {
+        "casename": "5006_getPinRequest",
+        "input": []
+      },
+      {
+        "casename": "5007_getStart",
+        "input": []
+      },
+      {
+        "casename": "5008_setStart",
+        "input": [
+          "Set time start value"
+        ]
+      },
+      {
+        "casename": "5009_getEnd",
+        "input": []
+      },
+      {
+        "casename": "5010_setEnd",
+        "input": [
+          "Set time end value"
+        ]
+      },
+      {
+        "casename": "5011_getEndWeekly",
+        "input": []
+      },
+      {
+        "casename": "5012_setEndWeekly",
+        "input": [
+          "Set week value"
+        ]
+      },
+      {
+        "casename": "5013_getBlockUnrated",
+        "input": []
+      },
+      {
+        "casename": "5014_setBlockUnrated",
+        "input": [
+          "Set VChip unrated trigger"
+        ]
+      },
+      {
+        "casename": "5015_getUsTvRating",
+        "input": []
+      },
+      {
+        "casename": "5016_actionSetUsTvRating",
+        "input": [
+          "Set TV rating range"
+        ]
+      },
+      {
+        "casename": "5017_getUsMovieRating",
+        "input": []
+      },
+      {
+        "casename": "5018_setUsMovieRating",
+        "input": [
+          "Set rating range"
+        ]
+      },
+      {
+        "casename": "5019_getCanEnglishRating",
+        "input": []
+      },
+      {
+        "casename": "5020_setCanEnglishRating",
+        "input": [
+          "Set rating range"
+        ]
+      },
+      {
+        "casename": "5021_getCanFrenchRating",
+        "input": []
+      },
+      {
+        "casename": "5022_setCanFrenchRating",
+        "input": [
+          "Set rating range"
+        ]
+      },
+      {
+        "casename": "5023_pinRequestConfirm",
+        "input": []
+      },
+      {
+        "casename": "5024_openVchipRegionPage",
+        "input": []
+      },
+      {
+        "casename": "5025_openVchipDimensionPage",
+        "input": []
+      },
+      {
+        "casename": "5026_openVchipRatingValuePage",
+        "input": []
+      },
+      {
+        "casename": "5027_setLevelPage",
+        "input": [
+          "Set VChip rating trigger"
+        ]
+      }
+    ],
+    "icon-class": "fa fa-users fa-2x"
+  },
+  {
+    "name": "CC",
+    "testcase": [
+      {
+        "casename": "6001_getControl",
+        "input": []
+      },
+      {
+        "casename": "6002_setControl",
+        "input": [
+          "Set CC control value"
+        ]
+      },
+      {
+        "casename": "6003_getAnalogMode",
+        "input": []
+      },
+      {
+        "casename": "6004_setAnalogMode",
+        "input": [
+          "Set ananlog caption"
+        ]
+      },
+      {
+        "casename": "6005_getDigitalMode",
+        "input": []
+      },
+      {
+        "casename": "6006_setDigitalMode",
+        "input": [
+          "Set digit caption"
+        ]
+      },
+      {
+        "casename": "6007_getDigitalStyle",
+        "input": []
+      },
+      {
+        "casename": "6008_setDigitalStyle",
+        "input": [
+          "Set CC digit style"
+        ]
+      },
+      {
+        "casename": "6009_getDigitalSize",
+        "input": []
+      },
+      {
+        "casename": "6010_setDigitalSize",
+        "input": [
+          "Set CC digit size"
+        ]
+      },
+      {
+        "casename": "6011_getDigitalFont",
+        "input": []
+      },
+      {
+        "casename": "6012_setDigitalFont",
+        "input": [
+          "Set font style"
+        ]
+      },
+      {
+        "casename": "6013_getDigitalTextcolor",
+        "input": []
+      },
+      {
+        "casename": "6014_setDigitalTextcolor",
+        "input": [
+          "Set text color"
+        ]
+      },
+      {
+        "casename": "6015_getDigitalBgcolor",
+        "input": []
+      },
+      {
+        "casename": "6016_setDigitalBgcolor",
+        "input": [
+          "Set background color"
+        ]
+      },
+      {
+        "casename": "6017_getDigitalEdgecolor",
+        "input": []
+      },
+      {
+        "casename": "6018_setDigitalEdgecolor",
+        "input": [
+          "Set edge color"
+        ]
+      },
+      {
+        "casename": "6019_getDigitalTextopacity",
+        "input": []
+      },
+      {
+        "casename": "6020_setDigitalTextopacity",
+        "input": [
+          "Set text opacity"
+        ]
+      },
+      {
+        "casename": "6021_getDigitalBgopacity",
+        "input": []
+      },
+      {
+        "casename": "6022_setDigitalBgopacity",
+        "input": [
+          "Set background opacity"
+        ]
+      },
+      {
+        "casename": "6023_getDigitalEdgeeffect",
+        "input": []
+      },
+      {
+        "casename": "6024_setDigitalEdgeeffect",
+        "input": [
+          "Set edge effect"
+        ]
+      }
+    ],
+    "icon-class": "fa fa-cc fa-2x"
+  },
+  {
+    "name": "InfoBar",
+    "testcase": [
+      {
+        "casename": "7001_getEitMainNow",
+        "input": []
+      },
+      {
+        "casename": "7002_EitMainNowChanged",
+        "input": [
+          "Channel number"
+        ]
+      },
+      {
+        "casename": "7003_getEitMainNext",
+        "input": []
+      },
+      {
+        "casename": "7004_EitMainNextChanged",
+        "input": [
+          "Channel number"
+        ]
+      },
+      {
+        "casename": "7005_getTimeZone",
+        "input": []
+      },
+      {
+        "casename": "7006_setTimeZone",
+        "input": [
+          "Time zone"
+        ]
+      },
+      {
+        "casename": "7007_getTimeFormat",
+        "input": []
+      },
+      {
+        "casename": "7008_setTimeFormat",
+        "input": [
+          "Time format"
+        ]
+      },
+      {
+        "casename": "7009_getCurLocalTime",
+        "input": []
+      },
+      {
+        "casename": "7010_audioTable",
+        "input": []
+      },
+      {
+        "casename": "7011_audioIndex",
+        "input": []
+      },
+      {
+        "casename": "7012_getAudioIdent",
+        "input": []
+      },
+      {
+        "casename": "7013_audioIdentChanged",
+        "input": [
+          "Channel number"
+        ]
+      },
+      {
+        "casename": "7014_getVideoFormat",
+        "input": []
+      },
+      {
+        "casename": "7015_videoFormatChanged",
+        "input": [
+          "Channel number"
+        ]
+      },
+      {
+        "casename": "7016_getFrameAspect",
+        "input": []
+      },
+      {
+        "casename": "7017_frameAspectChanged",
+        "input": [
+          "Channel number"
+        ]
+      },
+      {
+        "casename": "7018_getCcExist",
+        "input": []
+      },
+      {
+        "casename": "7019_ccExistChanged",
+        "input": [
+          "Channel number"
+        ]
+      }
+    ],
+    "icon-class": "fa fa-television fa-2x"
+  },
+  {
+    "name": "PVR",
+    "testcase": [],
+    "icon-class": "fa fa-newspaper-o fa-2x"
   }
 ]
