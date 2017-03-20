@@ -137,9 +137,9 @@ Vue.component('toolbar-input', {
 });
 
 var qunitToolBar = new Vue({
-    el: "#testing",        //#qunit-testrunner-toolbar
+    el: "#qunit-testrunner-toolbar",        // #testing
     data: {
-        temp: ["Repeat", "Expect Number", "Other", "Test"]
+        temp: ["Repeat", "Expect Number", "Other"]
     },
     methods: {
         updateInputArea: function(){
@@ -147,6 +147,7 @@ var qunitToolBar = new Vue({
         }
     }
 });
+
 /*
  new Vue({
  el: "#menu",
