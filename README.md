@@ -1,6 +1,6 @@
 # qunit_autotest
 An auto test framework based on QunitJS. Provide real-time test manipulation and analyst.
-Developed by Hisense Co. Shenzhen Research Center. Lisensed by MIT.
+Developed by Hisense Co. Shenzhen Research Center. Private owned.
 
 ### V 1.0
 1. 实现了测试框架的搭建，采用MVVM架构。包括显示层，测试逻辑实现，对接model APIs。
@@ -18,3 +18,10 @@ Developed by Hisense Co. Shenzhen Research Center. Lisensed by MIT.
 
 
 适配平台版本号：更新至ATSC-H0307，DVB-H0309
+
+### V 1.2
+1. 采用VUE Component方法，设计并实现了动态测试用例队列和动态参数输入域。
+2. 为动态测试用例队列设计翻页逻辑（pagination）。为输入域重新定义config文件，加入了输入属性。
+3. 进一步去耦合，并优化了库依赖。
+4. 进一步丰富DVB测试用例。包括接口测试和压力测试。
+5. 更新DVB的model JS接口至2017-03-15版本。
