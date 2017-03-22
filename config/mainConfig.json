@@ -18,72 +18,56 @@
         "casename": "1001_autoScanT",
         "input": [
           "Repeat",
-          "Expect Number",
-          "Other",
-          "Test"
+          "Expect Number"
         ]
       },
       {
         "casename": "1002_autoScanC",
-        "input": [
-          "RepeatMore",
-          "Expect Number",
-          "Other"
-        ]
-      },
-      {
-        "casename": "1003_channelUpT",
         "input": [
           "Repeat",
           "Expect Number"
         ]
       },
       {
+        "casename": "1003_channelUpT",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
         "casename": "1004_channelDownT",
         "input": [
-          "Repeat",
-          "Expect Number",
-          "Other"
+          "Repeat"
         ]
       },
       {
         "casename": "1005_channelRandomT",
         "input": [
-          "Test1",
-          "test1",
-          "test3"
+          "Repeat"
         ]
       },
       {
         "casename": "1006_channelUpC",
         "input": [
-          "Repeat",
-          "Expect Number",
-          "Other"
+          "Repeat"
         ]
       },
       {
         "casename": "1007_channelDownC",
         "input": [
-          "Repeat",
-          "Expect Number",
-          "Other"
+          "Repeat"
         ]
       },
       {
         "casename": "1008_channelRandomC",
         "input": [
-          "Repeat",
-          "Expect Number",
-          "Other"
+          "Repeat"
         ]
       },
       {
         "casename": "1009_channelSwitchT_C",
         "input": [
-          "Repeat",
-          "Expect Number",
-          "Other"
+          "Repeat"
         ]
       }
     ],
