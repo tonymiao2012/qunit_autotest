@@ -10,10 +10,6 @@
  *
  * Copyright (c) 2014 LOEWE Opta GmbH, Kronach. All rights reserved. */
 //--------------------------------------------------------
-var GLOBAL;
-GLOBAL = {
-    DISABLE_MESSAGE: false
-};
 var TVMode = ("undefined" != typeof (modeljs));
 // --------------------------------------------------------
 /**
@@ -73,6 +69,8 @@ function TableIterator(table, readOnly, selections, fields, orders, handler) {
      *      The rows read
      */
     var handleReadRowChunk = function (rowsRead) {
+        //DBG_ERROR("enter handleReadRowChunk...11111");
+        /*
         var convertedRows = new Array();
         // For every row
         for (var i = 0; i < rowsRead.length; i++) {
@@ -84,7 +82,29 @@ function TableIterator(table, readOnly, selections, fields, orders, handler) {
             }
             convertedRows.push(convertedRow);
         }
-
+        */
+        //DBG_ERROR("enter handleReadRowChunk...222");
+        var convertedRows;
+        try {
+            convertedRows = JSON.parse(rowsRead.getallstrings)
+        }
+        catch (ex) {
+            DBG_ERROR("handleReadRowChunk: " + ex.message);
+        }
+        if (!Array.isArray(convertedRows)) {
+            //convertedRows = rowsRead;
+            var convertedRows = new Array();
+            // For every row
+            for (var i = 0; i < rowsRead.length; i++) {
+                var rowRead = rowsRead[i];
+                var convertedRow = new Array();
+                // For every column in row
+                for (var j = 0; j < rowRead.length; j++) {
+                    convertedRow.push(rowRead[j]);
+                }
+                convertedRows.push(convertedRow);
+            }
+        }
         var event = {
             type: TableIterator.EVENT_TYPE_ROWS_READ,
             rows: convertedRows
@@ -202,7 +222,7 @@ function TableIterator(table, readOnly, selections, fields, orders, handler) {
 
     this.disconnect = function () {
         //DBG_ALWAYS("MTK product do not need disconnect");
-        return true;
+        //return true;  //dbtag:20161011 -first remove then return
         m_iterator.removeEventListener("notifyReadRow", handleReadRow);
         m_iterator.removeEventListener("notifyReadRowChunk", handleReadRowChunk);
         m_iterator.removeEventListener("notifyTotalCount", handleTotalCount);
@@ -322,21 +342,14 @@ function SubModel(parentModel, definesClass) {
 
     var currentLoadType = MDLOADTYPE.PRELOAD;
 
-    this.setCurrentLoadType = function (v) {
+    this.setCurrentLoadType = function(v){
         currentLoadType = v;
     }
 
-    function checkContinueRegister(name) {
-        return true;
-        //if (MDLOADTYPE.PRELOAD == currentLoadType) {
-        //    return modelConfig.preloadVal.indexOf(name) > -1
-        //}
-        ////else if (MDLOADTYPE.DYNAMIC == currentLoadType) {
-        ////    return name == modelConfig.dynamicVal;
-        ////}
-        //else {
-        //    return modelConfig.preloadVal.indexOf(name) < 0;
-        //}
+    function checkContinueRegister(name){
+        //console.error("preload[" + currentLoadType + "], name[" + name + "]");
+        if(MDLOADTYPE.PRELOAD == currentLoadType) return modelConfig.preloadVal.indexOf(name) > -1;
+        return modelConfig.preloadVal.indexOf(name) < 0;
     }
 
     /**
@@ -371,7 +384,7 @@ function SubModel(parentModel, definesClass) {
      * Internal method for registering a simple model object ( integer, string )
      */
     var registerSimpleObject = function (name, getterName, setterName, handlerName, getterConverter, setterConverter) {
-        if (!checkContinueRegister(name)) return false;
+        if(!checkContinueRegister(name)) return false;
         // Set default getterConverter if none specified
         if (!getterConverter) {
             getterConverter = function (value) {
@@ -386,100 +399,53 @@ function SubModel(parentModel, definesClass) {
             }
         }
 
+        // Register getter if specified
+        if (getterName) {
+            this[getterName] = function () {
+                try {
+                    var object = this.getObject(name);
+                    return getterConverter(object.getValue());
+                }
+                catch (ex) {
+                    if (Config.tv) log.error("get value[" + name + "] error." + ex.message);
+                    return "";
+                }
+            }
+        }
+
+        // Register setter if specified
+        if (setterName) {
+            this[setterName] = function (value) {
+                try {
+                    var object = this.getObject(name);
+                    object.setValue(setterConverter(value));
+                }
+                catch (ex) {
+                    log.error("set value[" + name + "] error." + ex.message);
+                }
+            }
+        }
+
+        // Register handler if specified
+        //if (handlerName) {
+        //    this[handlerName] = null;
+        //}
 
         var handleValueChanged = function (value) {
-
-            if (GLOBAL.DISABLE_MESSAGE) {
-                return;
-            }
-
             var handler = this[handlerName];
             if (handler) {
                 handler(getterConverter(value));
             }
         }.bind(this);
 
-        if (!this.hasOwnProperty(handlerName)) {
-            this['_' + handlerName] = null;
-            Object.defineProperty(this, handlerName,
+        // Register object
+        this.registerObject(
+            name, [
                 {
-                    get: function () {
-                        return this['_' + handlerName];
-                    },
-                    set: function (cb) {
-                        if (!m_registrations[name]) {
-                            // Register object
-                            this.registerObject(
-                                name, [
-                                    {
-                                        event: "notifyNewValue",
-                                        handler: handleValueChanged
-                                    }
-                                ]);
-                        }
-                        this['_' + handlerName] = cb;
-                    }
-                });
-        }
-        // Register getter if specified
-        if (getterName) {
-            this[getterName] = function () {
-                try {
-                    if (!m_registrations[name]) {
-                        // Register object
-                        this.registerObject(
-                            name, [
-                                {
-                                    event: "notifyNewValue",
-                                    handler: handleValueChanged
-                                }
-                            ]);
-                    }
-                    var object = this.getObject(name);
-                    return getterConverter(object.getValue());
+                    event: "notifyNewValue",
+                    handler: handleValueChanged
                 }
-                catch (ex) {
-                    DBG_ERROR(ex.stack);
-                    return "";
-                }
-            }
-        }
-        // Register setter if specified
-        if (setterName) {
-            this[setterName] = function (value) {
-                try {
-                    if (!m_registrations[name]) {
-                        // Register object
-                        this.registerObject(
-                            name, [
-                                {
-                                    event: "notifyNewValue",
-                                    handler: handleValueChanged
-                                }
-                            ]);
-                    }
-                    var object = this.getObject(name);
-                    object.setValue(setterConverter(value));
-                }
-                catch (ex) {
-                    DBG_ERROR(ex.stack);
-                }
-            }
-        }
-        // Register handler if specified
-        //if (handlerName) {
-        //    this[handlerName] = null;
-        //}
-        if (name in modelConfig.preload) {
-            // Register object
-            this.registerObject(
-                name, [
-                    {
-                        event: "notifyNewValue",
-                        handler: handleValueChanged
-                    }
-                ]);
-        }
+            ]);
 
     }.bind(this);
 
@@ -531,7 +497,7 @@ function SubModel(parentModel, definesClass) {
      * Internal method for registering a vector model object (IntegerVector or StringVector).
      */
     var registerVectorObject = function (name, getterName, setterName, handlerName, getterConverter, setterConverter, isInteger) {
-        if (!checkContinueRegister(name)) return false;
+        if(!checkContinueRegister(name)) return false;
         // Set default getterConverter if none specified
         if (!getterConverter) {
             getterConverter = function (value) {
@@ -558,13 +524,29 @@ function SubModel(parentModel, definesClass) {
             }
         }
 
+        // Register getter if specified
+        if (getterName) {
+            this[getterName] = function () {
+                var object = this.getObject(name);
+                return getterConverter(object.getVector());
+            }
+        }
+
+        // Register setter if specified
+        if (setterName) {
+            this[setterName] = function (value) {
+                var object = this.getObject(name);
+                object.setVectorElements(setterConverter(value));
+            }
+        }
+
+        // Register handler if specified
+        //if (handlerName) {
+        //    this[handlerName] = null;
+        //}
+
 
         var handleValueChanged = function (value) {
-
-            if (GLOBAL.DISABLE_MESSAGE) {
-                return;
-            }
-
             if (handlerName) {
                 var handler = this[handlerName];
                 if (handler) {
@@ -573,78 +555,14 @@ function SubModel(parentModel, definesClass) {
             }
         }.bind(this);
 
-        if (!this.hasOwnProperty(handlerName)) {
-            this['_' + handlerName] = null;
-            Object.defineProperty(this, handlerName,
+        // Register object
+        this.registerObject(
+            name, [
                 {
-                    get: function () {
-                        return this['_' + handlerName];
-                    },
-                    set: function (cb) {
-                        if (!m_registrations[name]) {
-                            // Register object
-                            this.registerObject(
-                                name, [
-                                    {
-                                        event: (isInteger ? "notifyIntegerVector" : "notifyStringVector"),
-                                        handler: handleValueChanged
-                                    }
-                                ]);
-                        }
-                        this['_' + handlerName] = cb;
-                    }
-                });
-        }
-        // Register getter if specified
-        if (getterName) {
-            this[getterName] = function () {
-                if (!m_registrations[name]) {
-                    // Register object
-                    this.registerObject(
-                        name, [
-                            {
-                                event: (isInteger ? "notifyIntegerVector" : "notifyStringVector"),
-                                handler: handleValueChanged
-                            }
-                        ]);
+                    event: (isInteger ? "notifyIntegerVector" : "notifyStringVector"),
+                    handler: handleValueChanged
                 }
-                var object = this.getObject(name);
-                return getterConverter(object.getVector());
-            }
-        }
-        // Register setter if specified
-        if (setterName) {
-            this[setterName] = function (value) {
-                if (!m_registrations[name]) {
-                    if (!m_registrations[name]) {
-                        // Register object
-                        this.registerObject(
-                            name, [
-                                {
-                                    event: (isInteger ? "notifyIntegerVector" : "notifyStringVector"),
-                                    handler: handleValueChanged
-                                }
-                            ]);
-                    }
-                }
-                var object = this.getObject(name);
-                object.setVectorElements(setterConverter(value));
-            }
-        }
-        // Register handler if specified
-        //if (handlerName) {
-        //    this[handlerName] = null;
-        //}
-        if (name in modelConfig.preload) {
-            // Register object
-            this.registerObject(
-                name, [
-                    {
-                        event: (isInteger ? "notifyIntegerVector" : "notifyStringVector"),
-                        handler: handleValueChanged
-                    }
-                ]);
-        }
+            ]);
 
     }.bind(this);
 
@@ -704,15 +622,24 @@ function SubModel(parentModel, definesClass) {
      *      The name of the result handler "onX" or null.
      */
     this.registerActionObject = function (name, methods, handlerName, handlerError) {
-        if (!checkContinueRegister(name)) return false;
+        if(!checkContinueRegister(name)) return false;
+        // Register methods
+        for (var i = 0; i < methods.length; i++) {
+            var method = methods[i];
 
+            this[method.name] = function (boundMethod) {
+                newArguments = Array.prototype.slice.call(arguments);
+                newArguments[0] = this.getObject(name);
+                boundMethod.method.apply(this, newArguments);
+            }.bind(this, method);
+        }
+
+        // Register handler if specified
+        //if (handlerName) {
+        //    this[handlerName] = null;
+        //}
 
         var handleResult = function (actionId, result) {
-
-            if (GLOBAL.DISABLE_MESSAGE) {
-                return;
-            }
-
             if (handlerName && this[handlerName]) {
                 // Convert result from modeljs map to normal JS map:
                 var convertedResult = new Array();
@@ -731,11 +658,6 @@ function SubModel(parentModel, definesClass) {
         }
 
         var handleError = function (actionId, errorCode) {
-
-            if (GLOBAL.DISABLE_MESSAGE) {
-                return;
-            }
-
             if (handlerError && this[handlerError]) {
 
                 this[handlerError](actionId, errorCode);
@@ -743,47 +665,18 @@ function SubModel(parentModel, definesClass) {
             }
         }.bind(this);
 
-        // Register methods
-        for (var i = 0; i < methods.length; i++) {
-            var method = methods[i];
-            this[method.name] = function (boundMethod) {
-                if (!m_registrations[name]) {
-                    // Register object
-                    this.registerObject(
-                        name, [
-                            {
-                                event: "notifyResult",
-                                handler: handleResult
-                            },
-                            {
-                                event: 'notifyExecutionError',
-                                handler: handleError
-                            }
-                        ]);
+        // Register object
+        this.registerObject(
+            name, [
+                {
+                    event: "notifyResult",
+                    handler: handleResult
+                },
+                {
+                    event: 'notifyExecutionError',
+                    handler: handleError
                 }
-                newArguments = Array.prototype.slice.call(arguments);
-                newArguments[0] = this.getObject(name);
-                boundMethod.method.apply(this, newArguments);
-            }.bind(this, method);
-        }
-        // Register handler if specified
-        //if (handlerName) {
-        //    this[handlerName] = null;
-        //}
-        if (name in modelConfig.preload) {
-            // Register object
-            this.registerObject(
-                name, [
-                    {
-                        event: "notifyResult",
-                        handler: handleResult
-                    },
-                    {
-                        event: 'notifyExecutionError',
-                        handler: handleError
-                    }
-                ]);
-        }
+            ]);
     }
 
     /**
@@ -795,26 +688,19 @@ function SubModel(parentModel, definesClass) {
      *      The name of the iterator creator method "createX" or null.
      */
     this.registerTableObject = function (name, iteratorCreatorName) {
-        if (!checkContinueRegister(name)) return false;
+        if(!checkContinueRegister(name)) return false;
         // Register iterator creator if specified
         if (iteratorCreatorName) {
             this[iteratorCreatorName] = function (readOnly, selections, fields, orders, handler) {
-                if (!m_registrations[name]) {
-                    // Register object
-                    this.registerObject(
-                        name, []);
-                }
                 var object = this.getObject(name);
                 return new TableIterator(object, readOnly, selections, fields, orders, handler);
             }.bind(this);
         }
 
-        if (name in modelConfig.preload) {
-            // Register object
-            this.registerObject(
-                name, []);
-        }
-    };
+        // Register object
+        this.registerObject(
+            name, []);
+    }
 
     /**
      * Returns the actual modeljs object for the given name.
@@ -907,7 +793,9 @@ function SubModel(parentModel, definesClass) {
                 }
             }
         }
+
     }
+
 }
 
 
@@ -945,7 +833,7 @@ function Model() {
             //if (!TVMode) console.log("create sub model: " + v.name + ", " + v.modelClass);
             registerModel(v.name, eval(v.modelClass), loadType);
         });
-    };
+    }
 
     /**
      * Initializes the model. This method must be called
@@ -989,6 +877,7 @@ function Model() {
 }
 
 {
+
     try {
         // --------------------------------------------------------------
         // Static constants
@@ -1045,55 +934,114 @@ function ModelLoader(onLoadedHandler, configArr) {
 }
 
 var modelConfig = {
-    "preload": [
-        "tvapi.table.favouritelist.list",
+    preloadVal: [
+        "de.loewe.sl2.messages.messageid",
+        "de.loewe.sl2.i32.sound.main.volume",
+        "de.loewe.sl2.i32.sound.main.mute",
+        "de.loewe.sl2.i32.system.stop.boot.animation",
+        "tvapi.str.system.am.msg",
+        "tvapi.str.system.cur.brand",
+        "de.loewe.sl2.i32.system.open.from.standby",
+        "tvapi.i32.system.firstInstallation",
+        "de.loewe.sl2.i32.system.user.mode",
+        "tvapi.i32.system.menu.highlight.control",
+        "tvapi.i32.system.input.current.inLock",
+        "de.loewe.sl2.i32.basic.settings.tvset.location",
+        "de.loewe.sl2.i32.basic.settings.tvset.region.code",
+        "de.loewe.sl2.i32.basic.settings.menu.delay.disappear",
+        "de.loewe.sl2.i32.language.osd",
+        "de.loewe.sl2.messages.osd.visible",    //dbtag:20161203  --RICK
+        "de.loewe.sl2.i32.cec.functionality",
+        "de.loewe.sl2.i32.sound.arcdev.exist",
+        "de.loewe.sl2.i32.cec.hdmi.devices.arc.state",
+        "de.loewe.sl2.datetime.timezone",
+        "de.loewe.sl2.i32.datetime.format",
+        "de.loewe.sl2.i64.datetime.current.time",
+        "de.loewe.sl2.i64.datetime.time.utc",//dbtag:20161020 add
+        "de.loewe.sl2.i32.datetime.deviation.fromutc",
+        "de.loewe.sl2.i64.datetime.time.rtc.uptimeoffset",
+        //"de.loewe.sl2.i32.hisfactory.state.open", ToDo
+        "tvapi.i32.hisfactory.state.open",
+        "de.loewe.sl2.str.hisfactory.production.type",
+        "de.loewe.sl2.i32.hisfactory.aging",
+        "de.loewe.sl2.i32.hisfactory.current.source",
+        "de.loewe.sl2.i32.hisfactory.tofactory.opition",
+        //"tvapi.i32.tts.switch.status",
+        "de.loewe.sl2.i32.tvservice.nosignal.main",
+        "de.loewe.sl2.i32.tvservice.played.success.livetv",
+        "tvapi.i32.tvservice.lock.status",
+        "de.loewe.sl2.vstr.tvservice.play.main",
+        "de.loewe.sl2.vstr.tvservice.play.main.last",//dbtag:20161216-Mandy
+        //"tvapi.i32.tvservice.play.fav.channel.list",
+        "tvapi.i32.tvservice.list.saved",
+        "de.loewe.sl2.str.video.format.info",
+        "tvapi.str.tvservice.audio.information",
+        "tvapi.action.tvservice.get.pfinfo",
+        "tvapi.action.tvservice.get.pfinfo2",
+        "de.loewe.sl2.vint32.servicemode.tunerinfo.signallevels",     //dbtag:20160923 --RICK
+        "de.loewe.sl2.vint32.servicemode.tunerinfo.signalqualities",     //dbtag:20160923 --RICK
+//        "de.loewe.sl2.vint32.servicemode.tunersignalinfo.signallevels",
+//       "de.loewe.sl2.vint32.servicemode.tunersignalinfo.signalqualities",
+        //"tvapi.vstr.source.input.name",
+        //"de.loewe.sl2.i32.sourcedection.sourcestatus",//dbtag:20161020
+        "tvapi.i32.source.input.current",
+        "de.loewe.sl2.str.parental.lock.pin", //dbtag:20161028 - fix the print error of no pin function
+        "de.loewe.sl2.i32.parental.lock.switch.mode", //dbtag:20161028 - fix the start bug of UI after modifying the mode interface
+        "tvapi.i32.parental.lock.current.time.inLock",
+        "de.loewe.sl2.str.parental.lock.inputSource", //dbtag:20161123 - LEO - Source lock states receiving
+        "de.loewe.sl2.table.favouritelist.list",
         "de.loewe.sl2.table.servicelist.list",
-        "de.loewe.sl2.messages.messageid"
+        "tvapi.str.tvservice.source.video.format.info",
+        "tvapi.action.software.update.start.search",
+        "tvapi.i32.system.screen.saver.control",
+        "tvapi.i32.system.notifications.control",
+        "tvapi.i32.source.input.mhl.available",
+        "de.loewe.sl2.i32.channel.search.source",
+        //"tvapi.i32.timerfunctions.new.area.time.zone",
+        "de.loewe.sl2.i32.datetime.deviation.timezone",
+        "de.loewe.sl2.system.firstInstallation.wizard.active"
+    ],
+    "preload": [
+        {name: "sound", modelClass: "SoundModel", path: "model/model-sound.js"},
+        {name: "system", modelClass: "SystemModel", path: "model/model-system.js"},
+        {name: "message", modelClass: "MessagesModel", path: "model/model-message.js"}
     ],
     "common": [
-        {name: "sound", modelClass: "SoundModel", path: "model/COMMON/model-sound.js"},
-        //{name: "system", modelClass: "SystemModel", path: "model/model-system.js"},
-        //{name: "message", modelClass: "MessagesModel", path: "model/model-message.js"},
-        {name: "servicelist", modelClass: "ServicelistModel", path: "model/COMMON/model-servicelist.js"},
-        //{name: "hisfactory", modelClass: "His_factoryModel", path: "model/model-hisfactory.js"},
-        //{name: "basicSetting", modelClass: "Basic_settingsModel", path: "model/COMMON/model-basic-settings.js"},
-        //{name: "usb", modelClass: "UsbModel", path: "model/model-usb.js"},
-        {name: "tvservice", modelClass: "TvserviceModel", path: "model/COMMON/model-tvservice.js"},
-        {name: "closedcaption", modelClass: "ClosedcaptionModel", path: "model/COMMON/model-closedcaption.js"},
-        //{name: "appsetting", modelClass: "App_settingModel", path: "model/model-app-setting.js"},
-        //{name: "language", modelClass: "LanguageModel", path: "model/model-language.js"},
-        {name: "parentlock", modelClass: "Parental_lockModel", path: "model/COMMON/model-parental-lock.js"},
-        //{name: "softupdate", modelClass: "SoftwareupdateModel", path: "model/model-softwareupdate.js"},
-        //{name: "cec", modelClass: "CecModel", path: "model/model-cec.js"},
-        {name: "timerfunc", modelClass: "Timer_functionsModel", path: "model/COMMON/model-timer-functions.js"},
-        //{name: "source", modelClass: "SourceModel", path: "model/model-source.js"},
-        //{name: "network", modelClass: "NetworkModel", path: "model/model-network.js"},
-        {name: "video", modelClass: "VideoModel", path: "model/COMMON/model-video.js"},
-        //{name: "miracast", modelClass: "MiracastModel", path: "model/model-miracast.js"},
-        //{name: "picture", modelClass: "PictureModel", path: "model/model-picture.js"},
-        //{name: "mpctrl", modelClass: "MpCtrlModel", path: "model/model-mpctrl.js"},
-        //{name: "volume", modelClass: "VolumeModel", path: "model/model-volume.js"},
-        //{name: "directory", modelClass: "DirectoryModel", path: "model/model-directory.js"},
-        //{name: "bluetooth", modelClass: "BluetoothModel", path: "model/model-bluetooth.js"},
-        //{name: "datetime", modelClass: "DatetimeModel", path: "model/model-datetime.js"},
+        {name: "sound", modelClass: "SoundModel", path: "model/model-sound.js"},
+        {name: "system", modelClass: "SystemModel", path: "model/model-system.js"},
+        {name: "servicelist", modelClass: "ServicelistModel", path: "model/model-servicelist.js"},
+        {name: "hisfactory", modelClass: "His_factoryModel", path: "model/model-hisfactory.js"},
+        {name: "basicSetting", modelClass: "Basic_settingsModel", path: "model/model-basic-settings.js"},
+        {name: "usb", modelClass: "UsbModel", path: "model/model-usb.js"},
+        {name: "tvservice", modelClass: "TvserviceModel", path: "model/model-tvservice.js"},
+        {name: "closedcaption", modelClass: "ClosedcaptionModel", path: "model/model-closedcaption.js"},
+        {name: "appsetting", modelClass: "App_settingModel", path: "model/model-app-setting.js"},
+        {name: "language", modelClass: "LanguageModel", path: "model/model-language.js"},
+        {name: "parentlock", modelClass: "Parental_lockModel", path: "model/model-parental-lock.js"},
+        {name: "softupdate", modelClass: "SoftwareupdateModel", path: "model/model-softwareupdate.js"},
+        {name: "cec", modelClass: "CecModel", path: "model/model-cec.js"},
+        {name: "timerfunc", modelClass: "Timer_functionsModel", path: "model/model-timer-functions.js"},
+        {name: "source", modelClass: "SourceModel", path: "model/model-source.js"},
+        {name: "network", modelClass: "NetworkModel", path: "model/model-network.js"},
+        {name: "video", modelClass: "VideoModel", path: "model/model-video.js"},
+        {name: "miracast", modelClass: "MiracastModel", path: "model/model-miracast.js"},
+        {name: "picture", modelClass: "PictureModel", path: "model/model-picture.js"},
+        {name: "mpctrl", modelClass: "MpCtrlModel", path: "model/model-mpctrl.js"},
+        {name: "volume", modelClass: "VolumeModel", path: "model/model-volume.js"},
+        {name: "directory", modelClass: "DirectoryModel", path: "model/model-directory.js"},
+        {name: "bluetooth", modelClass: "BluetoothModel", path: "model/model-bluetooth.js"},
+        {name: "servicemode", modelClass: "ServiceModeModel", path: "model/model-servicemode.js"},
+        {name: "message", modelClass: "MessagesModel", path: "model/model-message.js"},
+        {name: "datetime", modelClass: "DatetimeModel", path: "model/model-datetime.js"}
         //{name: "tts", modelClass: "TtsModel", path: "model/model-tts.js"}
     ],
-    "ATSC": [
-        {name: "sound", modelClass: "SoundModel", path: "model/ATSC/model-sound.js"},
-        {name: "servicelist", modelClass: "ServicelistModel", path: "model/ATSC/model-servicelist.js"},
-        {name: "tvservice", modelClass: "TvserviceModel", path: "model/ATSC/model-tvservice.js"},
-        {name: "closedcaption", modelClass: "ClosedcaptionModel", path: "model/ATSC/model-closedcaption.js"},
-        {name: "parentlock", modelClass: "Parental_lockModel", path: "model/ATSC/model-parental-lock.js"},
-        {name: "timerfunc", modelClass: "Timer_functionsModel", path: "model/ATSC/model-timer-functions.js"},
-        {name: "video", modelClass: "VideoModel", path: "model/ATSC/model-video.js"},
-        {name: "servicemode", modelClass: "ServiceModeModel", path: "model/ATSC/model-servicemode.js"},
-        {name: "channelSearch", modelClass: "Channelsearch_atscModel", path: "model/ATSC/model-channelsearch-atsc.js"},
-        {name: "datetime", modelClass: "DatetimeModel", path: "model/ATSC/model-datetime.js"}
+    "NA": [
+        {name: "channelSearch", modelClass: "Channelsearch_atscModel", path: "model/model-channelsearch-atsc.js"}
     ],
     "SA": [
         {name: "epg", modelClass: "EpgModel", path: "model/model-epg.js"},
         {name: "timerlist", modelClass: "TimerlistModel", path: "model/model-timerlist.js"},
-        {name: "timeshift", modelClass: "TimeshiftModel", path: "model/model-timeshift.js"},
+        {name: "tshift", modelClass: "TimeshiftModel", path: "model/model-timeshift.js"},
         {name: "ci", modelClass: "Common_interfaceModel", path: "model/model-ci.js"},
         {name: "channelSearch", modelClass: "Channelsearch_isdbModel", path: "model/model-channelsearch-isdb.js"},
         {name: "ginga", modelClass: "GingaModel", path: "model/model-ginga.js"},
@@ -1106,55 +1054,67 @@ var modelConfig = {
     "COL": [
         {name: "epg", modelClass: "EpgModel", path: "model/model-epg.js"},
         {name: "timerlist", modelClass: "TimerlistModel", path: "model/model-timerlist.js"},
-        {name: "timeshift", modelClass: "TimeshiftModel", path: "model/model-timeshift.js"},
+        {name: "tshift", modelClass: "TimeshiftModel", path: "model/model-timeshift.js"},
         {name: "ci", modelClass: "Common_interfaceModel", path: "model/model-ci.js"},
         {name: "channelSearch", modelClass: "Channelsearch_dvbModel", path: "model/model-channelsearch.js"},
         {name: "pvr", modelClass: "PvrModel", path: "model/model-pvr.js"},
         {name: "hotel", modelClass: "HotelModel", path: "model/model-hotel.js"}
     ],
-    "DVB": [
-        {name: "sound", modelClass: "SoundModel", path: "model/DVB/model-sound.js"},
-        {name: "servicelist", modelClass: "ServicelistModel", path: "model/DVB/model-servicelist.js"},
-        {name: "tvservice", modelClass: "TvserviceModel", path: "model/DVB/model-tvservice.js"},
-        {name: "closedcaption", modelClass: "ClosedcaptionModel", path: "model/DVB/model-closedcaption.js"},
-        {name: "parentlock", modelClass: "Parental_lockModel", path: "model/DVB/model-parental-lock.js"},
-        {name: "timerfunc", modelClass: "Timer_functionsModel", path: "model/DVB/model-timer-functions.js"},
-        {name: "video", modelClass: "VideoModel", path: "model/DVB/model-video.js"},
-        {name: "epg", modelClass: "EpgModel", path: "model/DVB/model-epg.js"},
-        //{name: "timerlist", modelClass: "TimerlistModel", path: "model/dvb/model-timerlist.js"},
-        {name: "timeshift", modelClass: "TimeshiftModel", path: "model/DVB/model-timeshift.js"},
-        {name: "ci", modelClass: "Common_interfaceModel", path: "model/DVB/model-ci.js"},
-        {name: "channelSearch", modelClass: "Channelsearch_dvbModel", path: "model/DVB/model-channelsearch.js"},
-        //{name: "mheg5", modelClass: "Mheg5Model", path: "model/dvb/model-mheg5.js"},
-        {name: "bluetooth", modelClass: "BluetoothModel", path: "model/DVB/model-bluetooth.js"},
-        {name: "satellite", modelClass: "SatelliteModel", path: "model/DVB/model-satellite.js"},
-        //{name: "speech", modelClass: "SpeechModel", path: "model/dvb/model-speech.js"},
-        {name: "pvr", modelClass: "PvrModel", path: "model/DVB/model-pvr.js"},
-        {name: "basicSetting", modelClass: "Basic_settingsModel", path: "model/DVB/model-basic-settings.js"},
-        //{name: "hotel", modelClass: "HotelModel", path: "model/dvb/model-hotel.js"}
+    "EU": [
+        {name: "epg", modelClass: "EpgModel", path: "model/model-epg.js"},
+//        {name: "timerlist", modelClass: "TimerlistModel", path: "model/model-timerlist.js"},
+        {name: "tshift", modelClass: "TimeshiftModel", path: "model/model-timeshift.js"},
+        {name: "ci", modelClass: "Common_interfaceModel", path: "model/model-ci.js"},
+        {name: "channelSearch", modelClass: "Channelsearch_dvbModel", path: "model/model-channelsearch.js"},
+//        {name: "mheg5", modelClass: "Mheg5Model", path: "model/model-mheg5.js"},
+        {name: "bluetooth", modelClass: "BluetoothModel", path: "model/model-bluetooth.js"},
+        {name: "satellite", modelClass: "SatelliteModel", path: "model/model-satellite.js"},
+//        {name: "speech", modelClass: "SpeechModel", path: "model/model-speech.js"},
+        {name: "pvr", modelClass: "PvrModel", path: "model/model-pvr.js"},
+//        {name: "hotel", modelClass: "HotelModel", path: "model/model-hotel.js"}
+        {name: "oad", modelClass: "OadModel", path: "model/model-oad.js"},
+        {name: "ttx", modelClass: "TtxModel", path: "model/model-ttx.js"}
+
+        //    {name: "hbbtv", modelClass: "HbbtvModel", path: "model/model-hbbtv.js"}
+
+
     ],
     "EM": [
         {name: "epg", modelClass: "EpgModel", path: "model/model-epg.js"},
         {name: "timerlist", modelClass: "TimerlistModel", path: "model/model-timerlist.js"},
-        {name: "timeshift", modelClass: "TimeshiftModel", path: "model/model-timeshift.js"},
+        {name: "tshift", modelClass: "TimeshiftModel", path: "model/model-timeshift.js"},
         {name: "ci", modelClass: "Common_interfaceModel", path: "model/model-ci.js"},
         {name: "channelSearch", modelClass: "Channelsearch_dvbModel", path: "model/model-channelsearch.js"},
         {name: "mheg5", modelClass: "Mheg5Model", path: "model/model-mheg5.js"},
         {name: "bluetooth", modelClass: "BluetoothModel", path: "model/model-bluetooth.js"},
         {name: "speech", modelClass: "SpeechModel", path: "model/model-speech.js"},
         {name: "pvr", modelClass: "PvrModel", path: "model/model-pvr.js"},
-        {name: "hotel", modelClass: "HotelModel", path: "model/model-hotel.js"},
+        {name: "hotel", modelClass: "HotelModel", path: "model/model-hotel.js"}
     ]
 };
 
+// Load modules and create global model instance when finished
+//var model = null;
+//var modelLoader = new ModelLoader(function () {
+//    model = new Model();
+//    model.createSubModel(modelConfig.preload);
+//}, modelConfig.preload);
+
 function MDLOADTYPE() {
 }
+MDLOADTYPE.PRELOAD = 0;
+MDLOADTYPE.REMAIN = 1;
 var model = new Model();
 function createModel(callback, loadType) {
-    var temp = readJSONFileArrayByIndex("config/mainConfig.json", 0);
-    var modelArr = modelConfig[temp.platform];
-    new ModelLoader(function () {
+    var modelArr = modelConfig.common.concat(modelConfig[GLOBAL.CURRENT_AREA]);
+    if (MDLOADTYPE.PRELOAD == loadType) {
+        new ModelLoader(function () {
+            model.createSubModel(modelArr, loadType);
+            callback();
+        }, modelArr);
+    }
+    else {
         model.createSubModel(modelArr, loadType);
         callback();
-    }, modelArr);
+    }
 }

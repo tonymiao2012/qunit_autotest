@@ -1,0 +1,124 @@
+[
+  {
+    "platform": "DVB",
+    "theme": "green",
+    "testImpl": [
+      "handleTestCase.js",
+      "scanImpl.js",
+      "play_serviceListImpl.js"
+    ]
+  },
+  {
+    "name": "Stress Testing",
+    "testcase": [
+      {
+        "casename": "1001_autoScanT",
+        "input": [
+          "Repeat",
+          "Expect Number",
+          "Other"
+        ]
+      },
+      {
+        "casename": "1002_autoScanC",
+        "input": [
+          "Repeat",
+          "Expect Number",
+          "Other"
+        ]
+      },
+      {
+        "casename": "1003_channelUpT",
+        "input": [
+          "Repeat",
+          "Expect Number",
+          "Other"
+        ]
+      },
+      {
+        "casename": "1004_channelDownT",
+        "input": [
+          "Repeat",
+          "Expect Number",
+          "Other"
+        ]
+      },
+      {
+        "casename": "1005_channelRandomT",
+        "input": [
+          "Repeat",
+          "Expect Number",
+          "Other"
+        ]
+      },
+      {
+        "casename": "1006_channelUpC",
+        "input": [
+          "Repeat",
+          "Expect Number",
+          "Other"
+        ]
+      },
+      {
+        "casename": "1007_channelDownC",
+        "input": [
+          "Repeat",
+          "Expect Number",
+          "Other"
+        ]
+      },
+      {
+        "casename": "1008_channelRandomC",
+        "input": [
+          "Repeat",
+          "Expect Number",
+          "Other"
+        ]
+      },
+      {
+        "casename": "1009_channelSwitchT_C",
+        "input": [
+          "Repeat",
+          "Expect Number",
+          "Other"
+        ]
+      }
+    ],
+    "icon-class": "fa fa-repeat fa-2x"
+  },
+  {
+    "name": "Scan",
+    "testcase": [],
+    "icon-class": "fa fa-signal fa-2x"
+  },
+  {
+    "name": "Play",
+    "testcase": [],
+    "icon-class": "fa fa-play-circle-o fa-2x"
+  },
+  {
+    "name": "ServiceList",
+    "testcase": [],
+    "icon-class": "fa fa-steam fa-2x"
+  },
+  {
+    "name": "PC",
+    "testcase": [],
+    "icon-class": "fa fa-users fa-2x"
+  },
+  {
+    "name": "CC",
+    "testcase": [],
+    "icon-class": "fa fa-cc fa-2x"
+  },
+  {
+    "name": "InfoBar",
+    "testcase": [],
+    "icon-class": "fa fa-television fa-2x"
+  },
+  {
+    "name": "PVR",
+    "testcase": [],
+    "icon-class": "fa fa-newspaper-o fa-2x"
+  }
+]
