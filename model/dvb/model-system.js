@@ -393,7 +393,7 @@ function SystemModelDefines() {
     SystemModelDefines.ENUM_SL2_TVAPI_ACTION_SYSTEM_INPUT_RENAME_ARG_INPUT_INDEX = 0;
     SystemModelDefines.ENUM_SL2_TVAPI_ACTION_SYSTEM_INPUT_RENAME_ARG_NEW_NAME = 1;
     SystemModelDefines.SL2_TVAPI_STR_AM_MSG = "tvapi.str.system.am.msg";
-    SystemModelDefines.SL2_TVAPI_I32_SYSTEM_STOP_ANIMATION = "tvapi.i32.system.stop.animation";
+    SystemModelDefines.SL2_TVAPI_I32_SYSTEM_STOP_ANIMATION = "de.loewe.sl2.i32.system.stop.boot.animation";
     SystemModelDefines.SL2_TVAPI_ACTION_SYSTEM_HALF_AN_HOUR_IDLE = "tvapi.action.system.ten.minutes.idle";
 //    SystemModelDefines.SL2_TVAPI_I32_SYSTEM_ENTER_SUSPEND = "tvapi.i32.system.enter.suspend";
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_BLUETOOTH_SUPPORT = "tvapi.i32.system.bluetooth.support";
@@ -405,6 +405,10 @@ function SystemModelDefines() {
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_AUDIO_TABLE_FIELD_NAME = 1;
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_AUDIO_TABLE_FIELD_ISO639 = 2;
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_AUDIO_TABLE_FIELD_TYPE = 3;
+    SystemModelDefines.SL2_TVAPI_STR_SYSTEM_UPGRADE_BUILT_IN_VIDEO_COPY = "de.loewe.sl2.str.storemode.copy.operation";
+    SystemModelDefines.SL2_TVAPI_I32_SYSTEM_UPGRADE_BUILT_IN_VIDEO_PROGRESS = "de.loewe.sl2.i32.storemode.copy.progress";
+    SystemModelDefines.SL2_TVAPI_I32_SYSTEM_UPGRADE_BUILT_IN_VIDEO_RETCODE = "de.loewe.sl2.i32.storemode.copy.retcode";
+
 }
 function SystemModel(_) {
     SubModel.call(this, _, SystemModelDefines);
@@ -535,6 +539,9 @@ function SystemModel(_) {
         );
         this.registerTableObject(SystemModelDefines.SL2_TVAPI_TABLE_CUR_CHANNEL_SUBTITLE,"createSubtitleListIterator");
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_CUR_CHANNEL_SUBTITLE_TOTAL_INDEX,"getSubtitleTotalIndex","setSubtitleTotalIndex","onSubtitleTotalChanged");
+        this.registerStringObject(SystemModelDefines.SL2_TVAPI_STR_SYSTEM_UPGRADE_BUILT_IN_VIDEO_COPY, "getUpgradeBuiltInVideoCopy", "setUpgradeBuiltInVideoCopy", "onUpgradeBuiltInVideoCopy", null, null);
+        this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_UPGRADE_BUILT_IN_VIDEO_PROGRESS, "getUpgradeBuiltInVideoProgress", "setUpgradeBuiltInVideoProgress", "onUpgradeBuiltInVideoProgress", null, null);
+        this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_UPGRADE_BUILT_IN_VIDEO_RETCODE, "getUpgradeBuiltInVideoRetcode", "setUpgradeBuiltInVideoRetcode", "onUpgradeBuiltInVideoRetcode", null, null);
   }
 }
 SystemModel.prototype = new SubModel;

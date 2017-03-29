@@ -114,7 +114,7 @@ function TimeshiftModelDefines() {
     TimeshiftModelDefines.ENUM_SL2_TVAPI_HDR_PLAYER_STATE_MEDIA_PREPARE=3;
 
     //ENUM_SL2_TVAPI_TSHIFT_PAR
-    TimeshiftModelDefines.ENUM_SL2_TVAPI_TSHIFT_PAR_NO_DEVICE  =  0;
+    TimeshiftModelDefines.ENUM_SL2_TVAPI_TSHIFT_REMOVE_MEDIA_AVAILABLE =  0;
     TimeshiftModelDefines.ENUM_SL2_TVAPI_TSHIFT_PAR_INSETTED  =  1;
     TimeshiftModelDefines.ENUM_SL2_TVAPI_TSHIFT_PAR_REMOVED  =  2;
     TimeshiftModelDefines.ENUM_SL2_TVAPI_TSHIFT_PAR_FORMATED  =  3;
@@ -155,7 +155,7 @@ function TimeshiftModel(parentModel) {
             ], "setParCallback");
 
         // is regist
-        this.registerStringVectorObject(
+        this.registerIntegerObject(
             TimeshiftModelDefines.SL2_TVAPI_VSTR_PVR_IS_REGISTERED,
             "getIsRegisterd", "null", "onChangeRegisterd",
             null, null);

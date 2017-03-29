@@ -27,6 +27,7 @@ function PvrModelDefines() {
     //PvrModelDefines.SL2_TVAPI_I32_PVR_RUNNING_STATUS = "tvapi.i32.pvr.running.status";
     //PvrModelDefines.SL2_TVAPI_I32_PVR_RECORD_STANDBY = "tvapi.i32.pvr.record.standby";
     PvrModelDefines.SL2_TVAPI_ACTION_HDR_PLAYER_PLAY = "de.loewe.sl2.hdr.player.play";
+    PvrModelDefines.SL2_TVAPI_I32_PVR_PLAY_STATE= "de.loewe.sl2.hdr.player.state";
     PvrModelDefines.SL2_TVAPI_TIMER_LIST_ENTRY_ADD_MEMO = "de.loewe.sl2.timer.list.entry.add.memo";
     PvrModelDefines.SL2_TVAPI_HDR_VSTR_DELETE_RECORDER_FILES = "de.loewe.sl2.hdr.delete.recorder.files";
 
@@ -69,6 +70,8 @@ function PvrModelDefines() {
     PvrModelDefines.ENUM_SL2_TVAPI_PVR_UI_IS_READY = 2;
 
     //ENUM self defined
+    PvrModelDefines.ENUM_PVR_REMOVE_MEDIA_AVAILABLE = 0;
+    PvrModelDefines.ENUM_PVR_MEDIA_IS_AVAILABLE = 1;
     PvrModelDefines.ENUM_PVR_LOWPARTIP = 1;
     PvrModelDefines.ENUM_PVR_LOWPARSTOP = 2;
     //constants
@@ -99,7 +102,7 @@ function PvrModel(parentModel) {
     SubModel.call(this, parentModel, PvrModelDefines);
     this.registerSubObject = function (loadType) {
         // registerd
-        this.registerStringVectorObject(
+        this.registerIntegerObject(
             PvrModelDefines.SL2_TVAPI_VSTR_PVR_IS_REGISTERED,
             "getIsRegisterd", "null", "onChangeRegisterd",
             null, null);
@@ -291,6 +294,11 @@ function PvrModel(parentModel) {
                     return object.invoke(url);
                 }}
             ], "deletePVRHandler","deletePVRHandlerERR");
+        //»ñÈ¡²¥·Å×´Ì¬
+        this.registerIntegerObject(
+            PvrModelDefines.SL2_TVAPI_I32_PVR_PLAY_STATE,
+            "getPVRPlayState", "setPVRPlayState", "onPVRPlayStateChaged",
+            null, null );
 /***** DBTAG MARK end *****/
 
     }

@@ -86,7 +86,7 @@ function Parental_lockModel(_) {
         this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_START, "getStart", "setStart", "onStartChaged", null, null);
         this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_END, "getEnd", "setEnd", "onEndChaged", null, null);
         this.registerStringObject(Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_WEEKLY, "getEndWeekly", "setEndWeekly", "onEndWeeklyChaged", null, null); //dbtag:20161107 - intergrate with the weekly interface
-        this.registerStringObject(Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_INPUT_SOURCE, "getInputSource", "setInputSource", "onInputSourceChaged", null, null); //dbtag:20161028 - solve the input block issues
+        this.registerStringObject(Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_INPUT_SOURCE, "getInputSourceLock", "setInputSourceLock", "onInputSourceLockChaged", null, null); //dbtag:20161028 - solve the input block issues
         this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_AGE, "getAge", "setAge", "onAgeChaged", null, null );
         this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_AGE_RELATED, "getAge_related", "setAge_related", "onAge_relatedChaged", null, null );
         this.registerActionObject(Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_RESET, [{

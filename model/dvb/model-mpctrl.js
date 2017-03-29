@@ -28,7 +28,7 @@ function MpCtrlModelDefines() {
     MpCtrlModelDefines.SL2_TVAPI_ACTION_MPCTRL_SKIP_FORW = "de.loewe.sl2.action.videoplayer.skip.forward";//"tvapi.action.videoplayer.skip.forward";
     MpCtrlModelDefines.SL2_TVAPI_MPCTRL_ACTION_SPEED = "de.loewe.sl2.mpctrl.action.speed";
     MpCtrlModelDefines.SL2_TVAPI_STR_MPCTRL_FORMAT_INFO = "tvapi.str.videoplayer.format.info";
-    MpCtrlModelDefines.SL2_TVAPI_I32_MPCTRL_PLAYER_ERROR =  "de.loewe.sl2.mpctrl.i32.player.error";//"tvapi.i32.mpctrl.player.error";
+    MpCtrlModelDefines.SL2_TVAPI_I32_MPCTRL_PLAYER_ERROR = "de.loewe.sl2.mpctrl.i32.player.error";//"tvapi.i32.mpctrl.player.error";
     MpCtrlModelDefines.SL2_TVAPI_STR_VIDEOPLAYER_MUSIC_COVER = "tvapi.i32.videoplayer.music.cover";
     MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_CAN_SEEK = "tvapi.i32.videoplayer.can.seek";
     MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_VIDEO_SUBTITLE_TOTAL_NUM = "tvapi.i32.videoplayer.vd.subtitle.total.num";
@@ -57,7 +57,7 @@ function MpCtrlModelDefines() {
     MpCtrlModelDefines.SL2_TVAPI_MPCTRL_ACTION_ROTATE_PICTURE = "de.loewe.sl2.mpctrl.action.rotate.picture";//dbtag:20160801
     MpCtrlModelDefines.SL2_TVAPI_MPCTRL_VI32_SCREEN_POSITION = "de.loewe.sl2.mpctrl.vi32.screen.position";
     MpCtrlModelDefines.SL2_TVAPI_MPCTRL_VSTR_FONT_PATH_URL = "de.loewe.sl2.mpctrl.vstr.font.path.url";
-
+    MpCtrlModelDefines.SL2_TVAPI_MPCTRL_VSTR_EXIFINFO = "de.loewe.sl2.mpctrl.vstr.exifdata";
     MpCtrlModelDefines.SL2_TVAPI_MPCTRL_I32_ENUM_PLAYER_ERROR_UNSUPPORT_FORMAT = 4;
     MpCtrlModelDefines.SL2_TVAPI_MPCTRL_I32_ENUM_PLAYER_ERROR_UNSUPPORT_VIDEO_FORMAT = 5;
     MpCtrlModelDefines.SL2_TVAPI_MPCTRL_I32_ENUM_PLAYER_ERROR_UNSUPPORT_AUDIO_FORMAT = 6;
@@ -177,102 +177,116 @@ function MpCtrlModelDefines() {
     MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_ACTION_STATE_PAUSE = 2;
     MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_ACTION_STATE_STOP = 3;
     MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_ACTION_STATE_RELEASE = 4;
-
+    MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_ACTION_STATE_PLAY_AT = 8;
     MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_VI32_SCREEN_WIDTH = 3840;
     MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_VI32_SCREEN_HEIGHT = 2160;
     MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_VI32_SCREEN_MODE_NORMAL = 1;
 
     //dbtag:20160812--add title
-    MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_TABLE_STREAMS_PROGRAM_ID            = 0;
-    MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_TABLE_STREAMS_STREAM_ID             = 1;
-    MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_TABLE_STREAMS_STREAM_NAME           = 2;
-    MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_TABLE_STREAMS_STREAM_LANGUAGE_CODE  = 3;
-    MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_TABLE_STREAMS_STREAM_ATTRIBUTES     = 4
+    MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_TABLE_STREAMS_PROGRAM_ID = 0;
+    MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_TABLE_STREAMS_STREAM_ID = 1;
+    MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_TABLE_STREAMS_STREAM_NAME = 2;
+    MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_TABLE_STREAMS_STREAM_LANGUAGE_CODE = 3;
+    MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_TABLE_STREAMS_STREAM_ATTRIBUTES = 4
     //dbtag:20160812--add over
 }
 function MpCtrlModel(_) {
     SubModel.call(this, _, MpCtrlModelDefines);
     this.registerSubObject = function (loadType) {
-/*
-        this.registerActionObject(MpCtrlModelDefines.SL2_TVAPI_ACTION_VIDEOPLAYER_MUSIC_FIND_LYRIC, [{
-            name: "findLyric",
-            method: function (_, e) {
-                return _.invoke(e)
+        /*
+         this.registerActionObject(MpCtrlModelDefines.SL2_TVAPI_ACTION_VIDEOPLAYER_MUSIC_FIND_LYRIC, [{
+         name: "findLyric",
+         method: function (_, e) {
+         return _.invoke(e)
+         }
+         }], "onFindLyricResult");*/
+        //dbtag:20160801: add rotate with one parameter
+        this.registerActionObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_ACTION_ROTATE_PICTURE, [
+            {
+                name: "rotate",
+                method: function (_, e) {
+                    return _.invoke(e)
+                }
             }
-        }], "onFindLyricResult");*/
-    //dbtag:20160801: add rotate with one parameter
-        this.registerActionObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_ACTION_ROTATE_PICTURE, [{
-            name: "rotate",
-            method: function (_, e) {
-                return _.invoke(e)
-            }
-        }], "onStartResult");
-        this.registerActionObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_ACTION_PREPARE_MEDIA, [{
-            name: "PlayMovie",
-            method: function (_, e) {
-                //return _.invoke(e, "video")
-                return _.invoke(e, null,null,null,null,null,4,null,null,null)
-            }
-        }, {
-            name: "PlayMusic", method: function (_, e) {
+        ], "onStartResult");
+        this.registerActionObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_ACTION_PREPARE_MEDIA, [
+            {
+                name: "PlayMovie",
+                method: function (_, e) {
+                    //return _.invoke(e, "video")
+                    return _.invoke(e, null, null, null, null, null, 4, null, null, null)
+                }
+            },
+            {
+                name: "PlayMusic", method: function (_, e) {
                 //return _.invoke(e, "music")
-                return _.invoke(e, null,null,null,null,null,8,null,null,null)
+                return _.invoke(e, null, null, null, null, null, 8, null, null, null)
             }
-        },{  //dbtag--20160728 add api for pic play
-            name: "PlayPic", method: function (_, e) {
+            },
+            {  //dbtag--20160728 add api for pic play
+                name: "PlayPic", method: function (_, e) {
                 //return _.invoke(e, "music")
-                return _.invoke(e, null,null,null,null,null,16,null,null,null)
+                return _.invoke(e, null, null, null, null, null, 16, null, null, null)
             }
-        }], "onStartResult");
+            }
+        ], "onStartResult");
         //dbtag: set start/pause/stop/release in a Func --20160718
         /*this.registerActionObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_ACTION_PLAY_MEDIA, [{
-            name: "PlayNow",
-            method: function (_) {
-                return _.invoke()
-            }
-        }], "onStartResult");*/
+         name: "PlayNow",
+         method: function (_) {
+         return _.invoke()
+         }
+         }], "onStartResult");*/
         this.registerActionObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_ACTION_PLAY_MEDIA,
-        [
-            { name: "MpCtrlPlay", method: function (_, e) {
-                return _.invoke(MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_ACTION_STATE_PLAY);
-            }},
-            { name: "MpCtrlPause", method: function (_, e) {
-                return _.invoke(MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_ACTION_STATE_PAUSE);
-            } },
-            { name: "MpCtrlStop", method: function (_, e) {
-                return _.invoke(MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_ACTION_STATE_STOP);
-            }},
-            { name: "MpCtrlRelease", method: function (_, e) {
-                return _.invoke(MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_ACTION_STATE_RELEASE);
-            }}
-        ],
-        "onStartResult");
-/*
-        this.registerActionObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_ACTION_PVR_UNLOCK, [{
-            name: "UnlockPvr",
-            method: function (_) {
-                return _.invoke()
+            [
+                { name: "MpCtrlPlay", method: function (_, e) {
+                    return _.invoke(MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_ACTION_STATE_PLAY);
+                }},
+                { name: "MpCtrlPause", method: function (_, e) {
+                    return _.invoke(MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_ACTION_STATE_PAUSE);
+                } },
+                { name: "MpCtrlStop", method: function (_, e) {
+                    return _.invoke(MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_ACTION_STATE_STOP);
+                }},
+                { name: "MpCtrlRelease", method: function (_, e) {
+                    return _.invoke(MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_ACTION_STATE_RELEASE);
+                }},
+                { name: "MpCtrlPlayAt", method: function (_, e) {
+                    return _.invoke(MpCtrlModelDefines.ENUM_SL2_TVAPI_MPCTRL_ACTION_STATE_PLAY_AT, null, e);
+                }}
+            ],
+            "onStartResult");
+        /*
+         this.registerActionObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_ACTION_PVR_UNLOCK, [{
+         name: "UnlockPvr",
+         method: function (_) {
+         return _.invoke()
+         }
+         }], "onUnlockPvrResult");*/
+        this.registerActionObject(MpCtrlModelDefines.SL2_TVAPI_ACTION_VIDEOPLAYER_STOP, [
+            {
+                name: "StopMpctrl",
+                method: function (_, e) {
+                    return _.invoke(e)
+                }
             }
-        }], "onUnlockPvrResult");*/
-        this.registerActionObject(MpCtrlModelDefines.SL2_TVAPI_ACTION_VIDEOPLAYER_STOP, [{
-            name: "StopMpctrl",
-            method: function (_, e) {
-                return _.invoke(e)
-            }
-        }], "onStartResult");
+        ], "onStartResult");
         this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_VIDEO_SUBTITLE_NO, "getMpCtrlSubtitleNo", "setMpCtrlSubtitleNo", "onMpCtrlSubtitleNochanged", null, null);
         //this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_VIDEO_SUBTITLE_TOTAL_NUM, "getMpCtrlSubtitleTotalNo", "setMpCtrlSubtitleTotalNo", "onMpCtrlSubtitleTotalNochanged", null, null);
         //this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_PVRVIDEO_SUBTITLE_NO, "getMpCtrlPvrSubtitleNo", "setMpCtrlPvrSubtitleNo", "onMpCtrlPvrSubtitleNochanged", null, null);
         //this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_PVRVIDEO_SUBTITLE_TOTAL_NUM, "getMpCtrlPvrSubtitleTotalNo", "setMpCtrlPvrSubtitleTotalNo", "onMpCtrlPvrSubtitleTotalNochanged", null, null);
+        this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_MUSIC_SUBTITLE_TEXT_SIZE, "getMpCtrlSubtitleTextSize", "setMpCtrlSubtitleTextSize", "onMpCtrlSubtitleTextSizechanged", null, null);
         this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_VIDEO_SUBTITLE_ENCODE, "getMpCtrlSubtitleEncode", "setMpCtrlSubtitleEncode", "onMpCtrlSubtitleEncodechanged", null, null);
         this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_MUSIC_SUBTITLE_LINE_NUM, "getMusicSubtitleLineNum", "setMusicSubtitleLineNum", "onMusicSubtitleLineNumchanged", null, null);
         this.registerIntegerVectorObject(MpCtrlModelDefines.SL2_TVAPI_VINT_VIDEOPLAYER_MUSIC_SUBTITLE_POSITION, "getMusicSubtitlePosition", "setMusicSubtitlePosition", "onMusicSubtitlePositionChaged", null, null);
-        this.registerActionObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_ACTION_SPEED, [{
-            name: "setMpctrlFlag",
-            method: function (_, e) {
-                return _.invoke(e)
+        this.registerActionObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_ACTION_SPEED, [
+            {
+                name: "setMpctrlFlag",
+                method: function (_, e) {
+                    return _.invoke(e)
+                }
             }
-        }], "onStartResult");
+        ], "onStartResult");
         //dbtag: change the type of return
         //this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_I32_STATE, "getMpCtrlStat", "setMapCtrlStat", "onMpCtrlStatchanged", null, null);
         this.registerStringVectorObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_VSTR_STATE, "getMpCtrlStat", "setMapCtrlStat", "onMpCtrlStatchanged", null, null);
@@ -282,6 +296,7 @@ function MpCtrlModel(_) {
         this.registerStringVectorObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_VSTR_METADATA, "getMetadata", "setMetadata", "onMetadataChanged", null, null);
         //this.registerStringObject(MpCtrlModelDefines.SL2_TVAPI_STR_MPCTRL_FORMAT_INFO, "getFormatInfo", "setFormatInfo", "onFormatInfoChanged", null, null);
         this.registerStringVectorObject(MpCtrlModelDefines.SL2_TVAPI_VSTR_MPCTRL_INFO, "getMpctrlInfo", "setMpctrlInfo", "onMpctrlInfoChanged", null, null);
+        this.registerStringVectorObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_VSTR_EXIFINFO, "getMpctrlEInfo", "setMpctrlEInfo", "onMpctrlEInfoChanged", null, null);
         this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_I32_PLAYTIME_TOTAL, "getMpCtrlPlaytimeTotal", "setMapCtrlPlaytimeTotal", "onMpCtrlPlaytimeTotalchanged", null, null);
         this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_REQACTION, "getMpCtrlReqation", "setMpCtrlReqation", "onMpCtrlReqationchanged", null, null);
         this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_ENUM_SPEED, "getMpCtrlSpeed", "setMpCtrlSpeed", "onMpCtrlMpCtrlSpeedchanged", null, null);

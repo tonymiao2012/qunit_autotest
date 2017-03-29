@@ -1,20 +1,20 @@
 function SoftwareupdateModelDefines() {
 }
 {
-    SoftwareupdateModelDefines.SL2_TVAPI_STR_SOFTWARE_UPDATE_CURRENT_PACKET_VERSION = "de.loewe.sl2.str.software.update.current.packet";
+    SoftwareupdateModelDefines.SL2_TVAPI_STR_SOFTWARE_UPDATE_CURRENT_PACKET_VERSION = "de.loewe.sl2.str.software.update.current.version";
     SoftwareupdateModelDefines.SL2_TVAPI_ACTION_SOFTWARE_UPDATE_START_SEARCH = "de.loewe.sl2.action.software.update.start.search.update";
     SoftwareupdateModelDefines.SL2_TVAPI_ACTION_SOFTWARE_UPDATE_CANCEL_SEARCH = "de.loewe.sl2.action.software.update.cancel.search";
-    SoftwareupdateModelDefines.SL2_TVAPI_I32_SOFTWARE_UPDATE_SEARCH_STATE = "de.loewe.sl2.i32.software.update.search.state";
+    SoftwareupdateModelDefines.SL2_TVAPI_I32_SOFTWARE_UPDATE_SEARCH_STATE = "de.loewe.sl2.i32.software.update.search.result";
     SoftwareupdateModelDefines.SL2_TVAPI_I32_SOFTWARE_UPDATE_PROGRESS = "de.loewe.sl2.i32.software.update.progress";
     SoftwareupdateModelDefines.SL2_TVAPI_I32_SOFTWARE_UPDATE_AUTO_ANNOUNCEMENT = "de.loewe.sl2.i32.software.update.auto.check.result";
     SoftwareupdateModelDefines.SL2_TVAPI_I32_SOFTWARE_UPDATE_AUTO_ANNOUNCEMENT_ENABLED = "de.loewe.sl2.i32.software.update.auto.announcement.enabled";
     SoftwareupdateModelDefines.SL2_TVAPI_ACTION_SOFTWARE_UPDATE_START_UPDATE = "de.loewe.sl2.action.software.update.start.software.update";
     SoftwareupdateModelDefines.SL2_TVAPI_ACTION_SOFTWARE_UPDATE_NEVER_REMIND= "de.loewe.sl2.action.software.update.never.remind";
-    SoftwareupdateModelDefines.SL2_TVAPI_STR_SOFTWARE_UPDATE_HISENSE_CURRENT_VERSION = "de.loewe.str.software.update.hisense.new.version";
-    SoftwareupdateModelDefines.SL2_TVAPI_STR_SOFTWARE_UPDATE_HISENSE_VERSION_DESCRIPTION = "de.loewe.str.software.update.hisense.version.description";
+    SoftwareupdateModelDefines.SL2_TVAPI_STR_SOFTWARE_UPDATE_HISENSE_CURRENT_VERSION = "de.loewe.sl2.str.software.update.hisense.new.version";
+    SoftwareupdateModelDefines.SL2_TVAPI_STR_SOFTWARE_UPDATE_HISENSE_VERSION_DESCRIPTION = "de.loewe.sl2.str.software.update.hisense.version.description";
     SoftwareupdateModelDefines.SL2_TVAPI_I32_SOFTWARE_UPDATE_HISENSE_UPGRADE_MODE = "de.loewe.i32.software.update.hisense.upgrade.mode";
     SoftwareupdateModelDefines.SL2_TVAPI_ACTION_SOFTWARE_UPDATE_START_DOWNLOAD = "de.loewe.sl2.action.software.update.start.download";
-    SoftwareupdateModelDefines.SL2_TVAPI_I32_SOFTWARE_UPDATE_DOWNLOAD_PROGRESS = "de.loewe.sl2.i32.software.download.progress";
+    SoftwareupdateModelDefines.SL2_TVAPI_I32_SOFTWARE_UPDATE_DOWNLOAD_PROGRESS = "de.loewe.sl2.i32.software.update.download.progress";
     SoftwareupdateModelDefines.SL2_TVAPI_I32_SOFTWARE_EULA_STATUS = "de.loewe.sl2.i32.software.update.eula.status";
     SoftwareupdateModelDefines.SL2_TVAPI_SOFTWARE_UPDATE_SOURCE_NONE = 0;
     SoftwareupdateModelDefines.SL2_TVAPI_SOFTWARE_UPDATE_SOURCE_USB = 1;
@@ -63,7 +63,7 @@ function SoftwareupdateModel(e) {
             method: function (e, t) {
                 return e.invoke(t)
             }
-        }], "null");
+        }], "StartSearchResult");
         this.registerActionObject(SoftwareupdateModelDefines.SL2_TVAPI_ACTION_SOFTWARE_UPDATE_CANCEL_SEARCH, [{
             name: "CancelSearch",
             method: function (e) {

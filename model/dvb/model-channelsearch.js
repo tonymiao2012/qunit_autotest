@@ -101,6 +101,7 @@
     Channelsearch_dvbModelDefines.SL2_TVAPI_I32_CHANNEL_SEARCH_CAM_OP_EXISTS= "de.loewe.sl2.i32.channel.search.cam.op.exists"; //dbtag:20161216 - LEO -Op exist or not
     //dbtag:20161207 - LEO -CI SEARCH END
 
+    Channelsearch_dvbModelDefines.SL2_TVAPI_I32_IN_SCANNING_SETTING = "de.loewe.sl2.i32.i32.in.scanning.setting";
 
     Channelsearch_dvbModelDefines.SL2_TVAPI_DVB_CHANNEL_SEARCH_SOURCE_ANALOG  = 10;
     Channelsearch_dvbModelDefines.SL2_TVAPI_DVB_CHANNEL_SEARCH_SOURCE_DVBT  =  11;
@@ -133,6 +134,8 @@
     Channelsearch_dvbModelDefines.ENUM_CHANNEL_SEARCH_NETWORK_SELECTED  =  1;
     Channelsearch_dvbModelDefines.ENUM_CHANNEL_SEARCH_NETWORK_TYPE  =  2;
     Channelsearch_dvbModelDefines.ENUM_CHANNEL_SEARCH_NETWORK_SATELLITE_ID  =  3;
+    Channelsearch_dvbModelDefines.ENUM_CHANNEL_SEARCH_NETWORK_SATELLITE_NAME = 4;
+    Channelsearch_dvbModelDefines.ENUM_CHANNEL_SEARCH_NETWORK_NAME = 5;
 
     Channelsearch_dvbModelDefines.ENUM_DVB_CHANNEL_SEARCH_OPERATOR_ID  =  0;
     Channelsearch_dvbModelDefines.ENUM_DVB_CHANNEL_SEARCH_OPERATOR_NAME  =  1;
@@ -642,7 +645,11 @@ function Channelsearch_dvbModel( parentModel ) {
                 }
             ], "null"
         );*/
-
+        // is scanning setting
+        this.registerIntegerObject(
+            Channelsearch_dvbModelDefines.SL2_TVAPI_I32_IN_SCANNING_SETTING,
+            "getScanningSet", "setScanningSet", "onScanningSetChaged",
+            null, null );
         // TableDvbnetworks
         this.registerTableObject(
             Channelsearch_dvbModelDefines.SL2_TVAPI_VSTR_DVB_CHANNEL_SEARCH_OPERATORS,
