@@ -25,3 +25,6 @@ Developed by Hisense Co. Shenzhen Research Center. Private owned.
 3. 进一步去耦合，并优化了库依赖。
 4. 进一步丰富DVB测试用例。包括接口测试和压力测试。
 5. 更新DVB的model JS接口至2017-03-15版本。
+6. Update on 2017-03-30：更新model JS接口这2017-03-27版本。DVB压测用例更新。修复了一个BUG。
+
+适配平台版本号： ATSC-H0327，DVB-H0329
