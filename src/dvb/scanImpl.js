@@ -1,4 +1,8 @@
 var scanOthers = null;
+var fh = new fileHandler();
+var path = "hisenseUI/result.txt";
+var workRoot = 1;
+
 function startAutoScan(sourceType) {
     if (model.channelSearch.getRunning() == 1) {
         model.channelSearch.Stop();
@@ -29,6 +33,13 @@ function autoSearch(repeat, expectNum, sourceType, chan_mode, scan_mode, search_
                 if (isSearched == 1) 
                     {
                         assert.equal(curServiceNumDtv + curServiceNumAtv, expectNum, "check serives");
+                        if(curServiceNumDtv + curServiceNumAtv != expectNum){
+                            var content = "Function name: " + funcName + ". Times: " + i + " failed.";
+                            var result = fh.writeFileToNative(path, content, workRoot);
+                            if(result)
+                                console.log("...............Write file finished..............");
+                        }
+
                         $("#total").html(curServiceNumDtv + curServiceNumAtv);
                         if (curServiceNumDtv + curServiceNumAtv == expectNum)
                             flag = 1;
