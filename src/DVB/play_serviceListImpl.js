@@ -242,8 +242,9 @@ function showServiceList(sourceType) {
     else
         chan_len = list.length;
     for (var i = 0; i < chan_len; i++) {
+        var index = i + 1;
         table += "<tr>";
-        table += "<td>" + i + "</td>";
+        table += "<td>" + index + "</td>";
         table += "<td>" + list[i].name + "</td>";
         table += "<td>" + list[i].id + "</td>";
         table += "<td>" + list[i].type + "</td>";

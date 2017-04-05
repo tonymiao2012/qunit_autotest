@@ -1,81 +1,71 @@
-function handleRepeatTestCase(repeat, expectNum, funcName) {
+function handleRepeatTestCase(toolbarArray, funcName) {
+    var repeat = toolbarArray[0].value;
     switch (funcName) {
         case "1001_autoScanT":
-            if(scanOthers.length==3)
-            {
-            	 var chan_mode=parseInt(scanOthers[0]);
-            	 var scan_mode=parseInt(scanOthers[1]);
-            	 var search_mode=parseInt(scanOthers[2]);
-            	 if(((chan_mode>=0)&&(chan_mode<=1))&&((scan_mode>=0)&&(scan_mode<=2))&&((search_mode>=0)&&(search_mode<=1)))
-            	 	 { 
-            	 	 	var sourceType;
-            	 	 	if(scan_mode==0)
-            	 	 	   sourceType= 10;
-            	 	 	else
-            	 	 		 sourceType= 11;  
-            	    autoSearch(repeat, expectNum, sourceType, chan_mode, scan_mode, search_mode, funcName);
-            	   }
-               else
-                  $("#details").html(" mode has error in other bar");            	  
+            var expectNum = toolbarArray[1].value;
+            var chan_mode = parseInt(toolbarArray[2].value);
+            var scan_mode = parseInt(toolbarArray[3].value);
+            var search_mode = parseInt(toolbarArray[4].value);
+            if (((chan_mode >= 0) && (chan_mode <= 1)) && ((scan_mode >= 0) && (scan_mode <= 2)) && ((search_mode >= 0) && (search_mode <= 1))) {
+                var sourceType;
+                if (scan_mode == 0)
+                    sourceType = 10;
+                else
+                    sourceType = 11;
+                autoSearch(repeat, expectNum, sourceType, chan_mode, scan_mode, search_mode, funcName);
             }
             else
-                $("#details").html("please enter a three-digit number in other bar");
+                $("#details").html("Channel Mode or Scan Mode or Search Mode error. Please check your input again.");
             break;
         case "1002_autoScanC":
-            if(scanOthers.length==3)
-            {
-            	 var chan_mode=parseInt(scanOthers[0]);
-            	 var scan_mode=parseInt(scanOthers[1]);
-            	 var search_mode=parseInt(scanOthers[2]);
-            	 if(((chan_mode>=0)&&(chan_mode<=1))&&((scan_mode>=0)&&(scan_mode<=2))&&((search_mode>=0)&&(search_mode<=2)))
-            	 	 { 
-            	 	 	var sourceType;
-            	 	 	if(scan_mode==0)
-            	 	 	   sourceType= 10;
-            	 	 	else
-            	 	 		 sourceType= 12; 
-            	    autoSearch(repeat, expectNum, sourceType, chan_mode, scan_mode, search_mode, funcName);
-            	   }
-               else
-                  $("#details").html(" mode has error in other bar");            	  
+            var expectNum = toolbarArray[1].value;
+            var chan_mode = parseInt(toolbarArray[2].value);
+            var scan_mode = parseInt(toolbarArray[3].value);
+            var search_mode = parseInt(toolbarArray[4].value);
+            if (((chan_mode >= 0) && (chan_mode <= 1)) && ((scan_mode >= 0) && (scan_mode <= 2)) && ((search_mode >= 0) && (search_mode <= 2))) {
+                var sourceType;
+                if (scan_mode == 0)
+                    sourceType = 10;
+                else
+                    sourceType = 12;
+                autoSearch(repeat, expectNum, sourceType, chan_mode, scan_mode, search_mode, funcName);
             }
             else
-                $("#details").html("please enter a three-digit number in other bar");
-            break;
+                break;
         case "1003_channelUpT":
             getServiceListT();
-            setTimeout(channelUpT, 2000, repeat, funcName);
+            setTimeout(channelUpT, 4000, repeat, funcName);
             break;
         case "1004_channelDownT":
             getServiceListT();
-            setTimeout(channelDownT, 2000, repeat, funcName);
+            setTimeout(channelDownT, 4000, repeat, funcName);
             break;
         case "1005_channelRandomT":
             getServiceListT();
-            setTimeout(channelRandomT, 2000, repeat, funcName);
+            setTimeout(channelRandomT, 4000, repeat, funcName);
             break;
         case "1006_channelUpC":
             getServiceListC();
-            setTimeout(channelUpC, 2000, repeat, funcName);
+            setTimeout(channelUpC, 4000, repeat, funcName);
             break;
         case "1007_channelDownC":
             getServiceListC();
-            setTimeout(channelDownC, 2000, repeat, funcName);
+            setTimeout(channelDownC, 4000, repeat, funcName);
             break;
         case "1008_channelRandomC":
             getServiceListC();
-            setTimeout(channelRandomC, 2000, repeat, funcName);
+            setTimeout(channelRandomC, 4000, repeat, funcName);
             break;
         case "1009_channelSwitchT_C":
             getServiceListT();
-            setTimeout(channelSwitchT_C_step1, 2000, repeat, funcName);
+            setTimeout(channelSwitchT_C_step1, 4000, repeat, funcName);
             break;
     }
 }
-function handlePlayTestCase(otherValue, funcName) {
+function handlePlayTestCase(toolbarArray, funcName) {
+    var chn = toolbarArray[0].value;
     switch (funcName) {
         case "3001_playChannelT":
-            var chn = otherValue;
             var sourceType = 1; //1 for T
             if (chn < allChannels_T.length)
                 playInputedChannel(sourceType, chn, funcName);
@@ -83,7 +73,6 @@ function handlePlayTestCase(otherValue, funcName) {
                 $("#details").html(" The channel number of T is error or click 4001_getServicelistT again!")
             break;
         case "3002_playChannelC":
-            var chn = otherValue;
             var sourceType = 0; //0 for C
             if (chn < allChannels_C.length)
                 playInputedChannel(sourceType, chn, funcName);
@@ -92,17 +81,23 @@ function handlePlayTestCase(otherValue, funcName) {
             break;
     }
 }
-function handleServiceListTestCase(expectNum, otherValue, funcName) {
+function handleServiceListTestCase(toolbarArray, funcName) {
+    var expectNum = toolbarArray[0].value;
     switch (funcName) {
         case "4001_getServicelistT":
             $("#total").html("");
             getServiceListT();
-            setTimeout(checkServiceT, 2000, expectNum, funcName);
+            setTimeout(checkServiceT, 4000, expectNum, funcName);
             break;
         case "4002_getServicelistC":
             $("#total").html("");
             getServiceListC();
-            setTimeout(checkServiceC, 2000, expectNum, funcName);
+            setTimeout(checkServiceC, 4000, expectNum, funcName);
+            break;
+        case "4003_getServicelistS":
+            $("#total").html("");
+            getServiceListS();
+            setTimeout(checkServiceS, 10000, expectNum, funcName);
             break;
     }
 }
