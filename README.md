@@ -28,3 +28,11 @@ Developed by Hisense Co. Shenzhen Research Center. Private owned.
 6. Update on 2017-03-30：更新model JS接口这2017-03-27版本。DVB压测用例更新。修复了一个BUG。
 
 适配平台版本号： ATSC-H0327，DVB-H0329
+
+### V 1.3
+1. 整合Debug.js。可以將debug信息打印在串口并寫入log.txt文件。
+2. 對接HisenseJS模塊，增加對Linux系統文件CURD的file handler，用來保存測試用例相關信息。
+3. 更新model JS和API，適應最新的開發環境。
+4. 修復了一些BUG。
+
+適配平台版本號： ATSC-H0327，DVB-H0405
