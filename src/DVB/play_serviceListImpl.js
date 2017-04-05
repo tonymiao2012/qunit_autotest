@@ -8,11 +8,16 @@ var blockChannels_T = [];
 var blockChannels_C = [];
 var channelIterator = null;
 var currentIndex = 0;
+var readOnce = 20;
+var ChCount = 0;
+var readCount = 0;
+var readPlus = 0;
+var infoBar;
 QUnit.config.reorder = false;
 
-function eventRowsToChannels(rows) {
-    var chnls = [];
-    $("#total").html(rows.length);
+function eventRowsToChannels(rows, channelType) {
+    //var chnls = [];
+    //$("#total").html(rows.length);
 
     for (var i = 0; i < rows.length; i++) {
         var row = rows[i], chnl = {};
@@ -22,9 +27,9 @@ function eventRowsToChannels(rows) {
         chnl.type = row[3];
         chnl.attr = row[4];
         chnl.uuid = row[5];
-        chnls.push(chnl);
+        channelType.push(chnl);
     }
-    return chnls;
+    //return chnls;
 }
 
 function getServiceListT() {
@@ -47,60 +52,46 @@ function getServiceListT() {
         onGetChannels_T.bind(this)
     );
 }
+
 function onGetChannels_T(m_event) {
-
     if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
-        allChannels_T = eventRowsToChannels(m_event.rows);
-
+        if (readCount == 0) {
+            eventRowsToChannels(m_event.rows, allChannels_T);
+            $("#total").html(allChannels_T.length);
+        } else {
+            eventRowsToChannels(m_event.rows, allChannels_T);
+            readCount--;
+            readPlus++;
+            channelIterator.seekToRow(readOnce * readPlus, TableIterator.SEEK_SET);
+            if (readCount != 0 || (ChCount % readOnce == 0)) {
+                channelIterator.readNextRows(readOnce);
+            } else {
+                channelIterator.readNextRows(ChCount % readOnce);
+            }
+        }
     }
     else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
-
-        modeljs.dbgprint("total channels  is " + m_event.totalCount, 1);
+        allChannels_T = [];
         if (m_event.totalCount == 0) {
             onGetChannels_T({type: TableIterator.EVENT_TYPE_ROWS_READ, rows: []});
+        } else {
+            ChCount = m_event.totalCount;
+            readCount = 0;
+            readPlus = 0;
+            if (ChCount <= readOnce) {
+                channelIterator.readNextRows(ChCount);
+            } else {
+                if (ChCount % readOnce != 0) {
+                    readCount = Math.floor(ChCount / readOnce);
+                } else {
+                    readCount = Math.floor(ChCount / readOnce) - 1;
+                }
+                channelIterator.seekToRow(0, TableIterator.SEEK_SET);
+                channelIterator.readNextRows(readOnce);
+            }
         }
-        else {
-            channelIterator.readNextRows(m_event.totalCount);
-        }
-    }
-}
-function getSkipListT() {
-    channelIterator = model.servicelist.createServicelistIterator(
-        true,
-        [
-            {field: ServicelistModel.SERVICELIST_FIELD_ATTR, condition: Model.FIELD_COND_ALL_BITS_SET, value: 32},
-            {field: ServicelistModel.SERVICELIST_FIELD_FRONTEND, condition: Model.FIELD_COND_EQUAL, value: 2}
-        ],
-        [
-            ServicelistModel.SERVICELIST_FIELD_NAME,
-            ServicelistModel.SERVICELIST_FIELD_FRONTEND,
-            ServicelistModel.SERVICELIST_FIELD_NO,
-            ServicelistModel.SERVICELIST_FIELD_TYPE,
-            ServicelistModel.SERVICELIST_FIELD_ATTR,
-            ServicelistModel.SERVICELIST_FIELD_GCN/*uuid*/
-        ],
-        [
-            {field: ServicelistModel.SERVICELIST_FIELD_NO, direction: 1}
-        ],
-        onGetSkip_T.bind(this)
-    );
-}
-
-function onGetSkip_T(m_event) {
-
-    if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
-        skipChannels_T = eventRowsToChannels(m_event.rows);
-
-    }
-    else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
-
-        modeljs.dbgprint("total channels  is " + m_event.totalCount, 1);
-        if (m_event.totalCount == 0) {
-            onGetSkip_T({type: TableIterator.EVENT_TYPE_ROWS_READ, rows: []});
-        }
-        else {
-            channelIterator.readNextRows(m_event.totalCount);
-        }
+    } else if (m_event.type == TableIterator.EVENT_TYPE_SEEK_TO_ROW) {
+    } else {
     }
 }
 function getServiceListC() {
@@ -123,27 +114,111 @@ function getServiceListC() {
         onGetChannels_C.bind(this)
     );
 }
-
 function onGetChannels_C(m_event) {
-
     if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
-        allChannels_C = eventRowsToChannels(m_event.rows);
-
+        if (readCount == 0) {
+            eventRowsToChannels(m_event.rows, allChannels_C);
+            $("#total").html(allChannels_C.length);
+        } else {
+            eventRowsToChannels(m_event.rows, allChannels_C);
+            readCount--;
+            readPlus++;
+            channelIterator.seekToRow(readOnce * readPlus, TableIterator.SEEK_SET);
+            if (readCount != 0 || (ChCount % readOnce == 0)) {
+                channelIterator.readNextRows(readOnce);
+            } else {
+                channelIterator.readNextRows(ChCount % readOnce);
+            }
+        }
     }
     else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
-
-        modeljs.dbgprint("total channels  is " + m_event.totalCount, 1);
+        allChannels_C = [];
         if (m_event.totalCount == 0) {
             onGetChannels_C({type: TableIterator.EVENT_TYPE_ROWS_READ, rows: []});
+        } else {
+            ChCount = m_event.totalCount;
+            readCount = 0;
+            readPlus = 0;
+            if (ChCount <= readOnce) {
+                channelIterator.readNextRows(ChCount);
+            } else {
+                if (ChCount % readOnce != 0) {
+                    readCount = Math.floor(ChCount / readOnce);
+                } else {
+                    readCount = Math.floor(ChCount / readOnce) - 1;
+                }
+                channelIterator.seekToRow(0, TableIterator.SEEK_SET);
+                channelIterator.readNextRows(readOnce);
+            }
         }
-        else {
-            channelIterator.readNextRows(m_event.totalCount);
-        }
+    } else if (m_event.type == TableIterator.EVENT_TYPE_SEEK_TO_ROW) {
+    } else {
     }
 }
-function showServiceList(sourceType)
-{
-	  var list;
+function getServiceListS() {
+    channelIterator = model.servicelist.createServicelistIterator(
+        true,
+        [
+            {field: ServicelistModel.SERVICELIST_FIELD_FRONTEND, condition: Model.FIELD_COND_EQUAL, value: 4}
+        ],
+        [
+            ServicelistModel.SERVICELIST_FIELD_NAME,
+            ServicelistModel.SERVICELIST_FIELD_FRONTEND,
+            ServicelistModel.SERVICELIST_FIELD_NO,
+            ServicelistModel.SERVICELIST_FIELD_TYPE,
+            ServicelistModel.SERVICELIST_FIELD_ATTR,
+            ServicelistModel.SERVICELIST_FIELD_GCN/*uuid*/
+        ],
+        [
+            {field: ServicelistModel.SERVICELIST_FIELD_NO, direction: 1}
+        ],
+        onGetChannels_S.bind(this)
+    );
+}
+function onGetChannels_S(m_event) {
+    if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
+        if (readCount == 0) {
+            eventRowsToChannels(m_event.rows, allChannels_S);
+            $("#total").html(allChannels_S.length);
+        } else {
+            eventRowsToChannels(m_event.rows, allChannels_S);
+            readCount--;
+            readPlus++;
+            channelIterator.seekToRow(readOnce * readPlus, TableIterator.SEEK_SET);
+            if (readCount != 0 || (ChCount % readOnce == 0)) {
+                channelIterator.readNextRows(readOnce);
+            } else {
+                channelIterator.readNextRows(ChCount % readOnce);
+            }
+        }
+    }
+    else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
+        console.log("total channels  is " + m_event.totalCount);
+        allChannels_S = [];
+        if (m_event.totalCount == 0) {
+            onGetChannels_S({type: TableIterator.EVENT_TYPE_ROWS_READ, rows: []});
+        } else {
+            ChCount = m_event.totalCount;
+            readCount = 0;
+            readPlus = 0;
+            if (ChCount <= readOnce) {
+                channelIterator.readNextRows(ChCount);
+            } else {
+                if (ChCount % readOnce != 0) {
+                    readCount = Math.floor(ChCount / readOnce);
+                } else {
+                    readCount = Math.floor(ChCount / readOnce) - 1;
+                }
+                channelIterator.seekToRow(0, TableIterator.SEEK_SET);
+                channelIterator.readNextRows(readOnce);
+            }
+        }
+    } else if (m_event.type == TableIterator.EVENT_TYPE_SEEK_TO_ROW) {
+    } else {
+    }
+}
+function showServiceList(sourceType) {
+    var list;
     //Insert a channel list to right side.
     $("#resultView table").html("");
     //Draw a form header.
@@ -154,35 +229,40 @@ function showServiceList(sourceType)
         "<th>NO</th>" +
         "<th>Type</th>" +
         "<th>Attribute</th>" +
-        "</tr>"	
-    if(sourceType==1)
-        list =  allChannels_T;
+        "</tr>"
+    if (sourceType == 0)
+        list = allChannels_T;
+    else if (sourceType == 1)
+        list = allChannels_C;
+    else if (sourceType == 2)
+        list = allChannels_S;
+    var chan_len;
+    if (list.length > 20)
+        chan_len = 20;
     else
-        list =  allChannels_C;
-
-    for(var i=0;i<list.length;i++)  
-    {      
+        chan_len = list.length;
+    for (var i = 0; i < chan_len; i++) {
         table += "<tr>";
         table += "<td>" + i + "</td>";
         table += "<td>" + list[i].name + "</td>";
         table += "<td>" + list[i].id + "</td>";
         table += "<td>" + list[i].type + "</td>";
         table += "<td>" + list[i].attr + "</td>";
-        table += "</tr>"; 
-    }   
+        table += "</tr>";
+    }
     table += "</table>";
 
     if ($("#resultView table").length === 0) {
         $("#resultView").append(table);
     } else {
         $("#resultView table").append(table);
-    }	
+    }
 
 }
 function checkServiceT(expectNum, funcName) {
     QUnit.test(funcName, function (assert) {
         if (allChannels_T.length > 0) {
-            sourceType = 1;
+            sourceType = 0;
             showServiceList(sourceType);
         }
         assert.equal(allChannels_T.length, expectNum, "getServiceT ");
@@ -191,20 +271,28 @@ function checkServiceT(expectNum, funcName) {
 function checkServiceC(expectNum, funcName) {
     QUnit.test(funcName, function (assert) {
         if (allChannels_C.length > 0) {
-            sourceType = 0;
+            sourceType = 1;
             showServiceList(sourceType);
         }
         assert.equal(allChannels_C.length, expectNum, "getServiceC ");
     });
 }
-
+function checkServiceS(expectNum, funcName) {
+    QUnit.test(funcName, function (assert) {
+        if (allChannels_S.length > 0) {
+            sourceType = 2;
+            showServiceList(sourceType);
+        }
+        assert.equal(allChannels_S.length, expectNum, "getServiceS ");
+    });
+}
 function previousChannel_T() {
     currentIndex--;
     if (currentIndex < 0) {
         currentIndex = allChannels_T.length - 1;
     }
     if (allChannels_T.length > 0) {
-        model.tvservice.playChannel(0, allChannels_T[currentIndex].uuid,0,allChannels_T[currentIndex].type,allChannels_T[currentIndex].id);
+        model.tvservice.playChannel(0, allChannels_T[currentIndex].uuid, 0, allChannels_T[currentIndex].type, allChannels_T[currentIndex].id);
         $("#name").html(allChannels_T[currentIndex].name);
     }
 }
@@ -215,7 +303,7 @@ function nextChannel_T() {
         currentIndex = 0;
     }
     if (allChannels_T.length > 0) {
-        model.tvservice.playChannel(0, allChannels_T[currentIndex].uuid,0,allChannels_T[currentIndex].type,allChannels_T[currentIndex].id);
+        model.tvservice.playChannel(0, allChannels_T[currentIndex].uuid, 0, allChannels_T[currentIndex].type, allChannels_T[currentIndex].id);
         $("#name").html(allChannels_T[currentIndex].name);
     }
 }
@@ -223,7 +311,7 @@ function nextChannel_T() {
 function randomChannel_T() {
     currentIndex = Math.ceil(Math.random() * ((allChannels_T.length - 1) - 0) + 0);
     if (allChannels_T.length > 0) {
-        model.tvservice.playChannel(0, allChannels_T[currentIndex].uuid,0,allChannels_T[currentIndex].type,allChannels_T[currentIndex].id);
+        model.tvservice.playChannel(0, allChannels_T[currentIndex].uuid, 0, allChannels_T[currentIndex].type, allChannels_T[currentIndex].id);
         $("#name").html(allChannels_T[currentIndex].name);
     }
 }
@@ -234,7 +322,7 @@ function previousChannel_C() {
         currentIndex = allChannels_C.length - 1;
     }
     if (allChannels_C.length > 0) {
-        model.tvservice.playChannel(0, allChannels_C[currentIndex].uuid,0,allChannels_C[currentIndex].type,allChannels_C[currentIndex].id);
+        model.tvservice.playChannel(0, allChannels_C[currentIndex].uuid, 0, allChannels_C[currentIndex].type, allChannels_C[currentIndex].id);
         $("#name").html(allChannels_C[currentIndex].name);
     }
 }
@@ -245,7 +333,7 @@ function nextChannel_C() {
         currentIndex = 0;
     }
     if (allChannels_C.length > 0) {
-        model.tvservice.playChannel(0, allChannels_C[currentIndex].uuid,0,allChannels_C[currentIndex].type,allChannels_C[currentIndex].id);
+        model.tvservice.playChannel(0, allChannels_C[currentIndex].uuid, 0, allChannels_C[currentIndex].type, allChannels_C[currentIndex].id);
         $("#name").html(allChannels_C[currentIndex].name);
     }
 }
@@ -253,7 +341,7 @@ function nextChannel_C() {
 function randomChannel_C() {
     currentIndex = Math.ceil(Math.random() * ((allChannels_C.length - 1) - 0) + 0);
     if (allChannels_C.length > 0) {
-        model.tvservice.playChannel(0, allChannels_C[currentIndex].uuid,0,allChannels_C[currentIndex].type,allChannels_C[currentIndex].id);
+        model.tvservice.playChannel(0, allChannels_C[currentIndex].uuid, 0, allChannels_C[currentIndex].type, allChannels_C[currentIndex].id);
         $("#name").html(allChannels_C[currentIndex].name);
     }
 }
@@ -261,11 +349,11 @@ function randomChannel_C() {
 function playInputedChannel(sourceType, chn, funcName) {
     QUnit.test(funcName, function (assert) {
         if (sourceType == 1) {
-            model.tvservice.playChannel(0, allChannels_T[chn].uuid,0,allChannels_T[chn].type,allChannels_T[chn].id);
+            model.tvservice.playChannel(0, allChannels_T[chn].uuid, 0, allChannels_T[chn].type, allChannels_T[chn].id);
             $("#name").html(allChannels_T[chn].name);
         }
         else {
-            model.tvservice.playChannel(0, allChannels_C[chn].uuid,0,allChannels_C[chn].type,allChannels_C[chn].id);
+            model.tvservice.playChannel(0, allChannels_C[chn].uuid, 0, allChannels_C[chn].type, allChannels_C[chn].id);
             $("#name").html(allChannels_C[chn].name);
         }
         assert.ok(true, "check playInputedChannel");
@@ -313,17 +401,25 @@ function readAudioTableInfo(onReadAudioTableInfo) {
     m_audioTrackIterator.readNextRows(999);
 }
 
-function onEitNowChanged(val) {
-}
-function onEitNextChanged(val) {
-}
 function onVideoFormatChanged(val) {
-}
-function onVideoFrameAspectChanged(val) {
-}
-function onVideoCcExistChanged(val) {
-}
-function onCurAudioIdentChaged(val) {
+    if (val.length != 0) {
+        infoBar = infoBar + " /videoFormat=" + val;
+        var pfAspect = model.tvservice.getVideoInfoFrameaspect();
+        infoBar = infoBar + " /pfAspect=" + pfAspect;
+        var pfResultNow = model.tvservice.getEitMainNow();
+        if (pfResultNow.length == 12) {
+            var startimeNow = new Date(pfResultNow[2] * 1000);
+            var stoptimeNow = new Date(pfResultNow[3] * 1000);
+            infoBar = infoBar + "/EITNow->" + ";type:" + pfResultNow[1] + ";start:" + startimeNow.toLocaleString() + ";end:" + stoptimeNow.toLocaleString();
+        }
+        var pfResultNext = model.tvservice.getEitMainNext();
+        if (pfResultNext.length == 12) {
+            var startimeNext = new Date(pfResultNext[2] * 1000);
+            var stoptimeNext = new Date(pfResultNext[3] * 1000);
+            infoBar = infoBar + "/EITNext->" + ";type:" + pfResultNext[1] + ";start:" + startimeNext.toLocaleString() + ";end:" + stoptimeNext.toLocaleString();
+        }
+        $("#details").html(infoBar);
+    }
 }
 function onCurAudioExistChaged(val) {
     if (val == 1)
@@ -333,33 +429,22 @@ function onMainPlayChanged(val) {
     var pinRequest = model.parentlock.getPinRequest();
     if (pinRequest[0] != 0)
         return;
-    var utcTime = model.timerfunc.getCurTime();
-    var timeZoneSec = model.timerfunc.getDeviationFromUtc();
-    var formatHour = model.timerfunc.getTimeFormat();
-    model.video.onVideoFormatInfoChanged = onVideoFormatChanged;
-    model.video.onVideoFrameAspectChanged = onVideoFrameAspectChanged;
-    model.video.onCcExistChanged = onVideoCcExistChanged;
+    var utcTime = model.datetime.getCurLocalTime();
+    var date = new Date(utcTime * 1000);
+    infoBar = date.toLocaleString();
+    $("#details").html(infoBar);
+    model.tvservice.onMainPlayVideoFormatInfoChanged = onVideoFormatChanged;
     model.tvservice.onAudioExistChaged = onCurAudioExistChaged;
-    model.sound.onAudioIdentChaged = onCurAudioIdentChaged;
     readAudioTableInfo(ui_getAudioTableInfo);
-    model.tvservice.onEitMainNowChanged = onEitNowChanged;
-    model.tvservice.onEitMainNextChanged = onEitNextChanged;
-
 }
-function disableMainPlayChangedCallback()
-{
-	  model.tvservice.onMainPlayChanged=null;
-    model.video.onVideoFormatInfoChanged = null;
-    model.video.onVideoFrameAspectChanged = null;
-    model.video.onCcExistChanged = null;
+function disableMainPlayChangedCallback() {
+    model.tvservice.onMainPlayVideoFormatInfoChanged = null;
     model.tvservice.onAudioExistChaged = null;
-    model.sound.onAudioIdentChaged = null;	
-    model.tvservice.onEitMainNowChanged = null;
-    model.tvservice.onEitMainNextChanged = null;        
 }
 
 function play(direction, sourceType) {
     console.log("............play.");
+    $("#details").html("");
     if (direction == 1) {
         if (sourceType == 1)
             nextChannel_T();
@@ -391,6 +476,7 @@ function switchChannel(direction, sourceType, repeat, funcName) {
         var timer;
         //play(direction, sourceType);
         var done = assert.async(times);
+
         function playTimeout() {
             try {
                 if (QUnit.config.interrupt === true) {
@@ -404,17 +490,18 @@ function switchChannel(direction, sourceType, repeat, funcName) {
                     if (i < times)
                         setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 6000) + 6000));
                     else
-                    	  disableMainPlayChangedCallback(); 
+                        disableMainPlayChangedCallback();
                 }
             } catch (e) {
                 console.log(e.message);
                 for (var left = 0; left < times - i; left++) {
                     done();
-                disableMainPlayChangedCallback();   
+                    disableMainPlayChangedCallback();
                 }
                 //return;
             }
         }
+
         setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 6000) + 6000));
     });
 }
@@ -429,11 +516,11 @@ function randomSwitchChannel(repeat, funcName) {
 
         function switch_T_C(val) {
             if (val % 2 == 0) {
-                model.tvservice.playChannel(0, allChannels_T[currentIndexT].uuid,0,allChannels_T[currentIndexT].type,allChannels_T[currentIndexT].id);
+                model.tvservice.playChannel(0, allChannels_T[currentIndexT].uuid, 0, allChannels_T[currentIndexT].type, allChannels_T[currentIndexT].id);
                 $("#name").html(allChannels_T[currentIndexT].name);
             }
             else {
-                model.tvservice.playChannel(0, allChannels_C[currentIndexC].uuid,0,allChannels_C[currentIndexC].type,allChannels_C[currentIndexC].id);
+                model.tvservice.playChannel(0, allChannels_C[currentIndexC].uuid, 0, allChannels_C[currentIndexC].type, allChannels_C[currentIndexC].id);
                 $("#name").html(allChannels_C[currentIndexC].name);
             }
             return true;
@@ -628,7 +715,7 @@ function getSkipListT() {
 function onGetSkip_T(m_event) {
 
     if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
-        skipChannels_T = eventRowsToChannels(m_event.rows);
+        //skipChannels_T = eventRowsToChannels(m_event.rows);
 
     }
     else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
@@ -733,7 +820,7 @@ function getSkipListC() {
 function onGetSkip_C(m_event) {
 
     if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
-        skipChannels_C = eventRowsToChannels(m_event.rows);
+        //skipChannels_C = eventRowsToChannels(m_event.rows);
 
     }
     else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
@@ -836,7 +923,7 @@ function getBlockListT() {
 function onGetBlock_T(m_event) {
 
     if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
-        blockChannels_T = eventRowsToChannels(m_event.rows);
+        // blockChannels_T = eventRowsToChannels(m_event.rows);
 
     }
     else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
@@ -920,7 +1007,7 @@ function getBlockListC() {
         true,
         [
             {field: ServicelistModel.SERVICELIST_FIELD_ATTR, condition: Model.FIELD_COND_ALL_BITS_SET, value: 64},
-            {field: ServicelistModel.SERVICELIST_FIELD_FRONTEND, condition: Model.FIELD_COND_EQUAL, value:3}
+            {field: ServicelistModel.SERVICELIST_FIELD_FRONTEND, condition: Model.FIELD_COND_EQUAL, value: 3}
         ],
         [
             ServicelistModel.SERVICELIST_FIELD_NAME,
@@ -940,7 +1027,7 @@ function getBlockListC() {
 function onGetBlock_C(m_event) {
 
     if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
-        blockChannels_C = eventRowsToChannels(m_event.rows);
+        // blockChannels_C = eventRowsToChannels(m_event.rows);
 
     }
     else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
@@ -1050,11 +1137,11 @@ function mainPlayChanged(sourceType, chn, testName) {
                 $("#details").html("listUid:" + val[0] + ";uid:" + val[1] + ";number:" + val[2] + ";name:" + val[5] + ";attr:" + val[8]);
         }
         if (sourceType == 1) {
-            model.tvservice.playChannel(0, allChannels_T[chn].uuid,0,allChannels_T[chn].type,allChannels_T[chn].id);
+            model.tvservice.playChannel(0, allChannels_T[chn].uuid, 0, allChannels_T[chn].type, allChannels_T[chn].id);
             $("#name").html(allChannels_T[chn].name);
         }
         else {
-            model.tvservice.playChannel(0, allChannels_C[chn].uuid,0,allChannels_C[chn].type,allChannels_C[chn].id);
+            model.tvservice.playChannel(0, allChannels_C[chn].uuid, 0, allChannels_C[chn].type, allChannels_C[chn].id);
             $("#name").html(allChannels_C[chn].name);
         }
         timerFlag = setTimeout(getMainPlayChangedTimeout, 5000);
@@ -1112,7 +1199,7 @@ function onChannelListUpdate(funcName) {
 }
 
 function playFirstChannelT() {
-    model.tvservice.playChannel(0, allChannels_T[0].uuid,0,allChannels_T[0].type,allChannels_T[0].id);
+    model.tvservice.playChannel(0, allChannels_T[0].uuid, 0, allChannels_T[0].type, allChannels_T[0].id);
 }
 //getFavListAllT
 
@@ -1146,7 +1233,7 @@ function getFavListT() {
 function onGetFav_T(m_event) {
 
     if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
-        favChannels_T = eventRowsToChannels(m_event.rows);
+        //favChannels_T = eventRowsToChannels(m_event.rows);
 
     }
     else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
@@ -1249,7 +1336,7 @@ function getFavListC() {
 function onGetFav_C(m_event) {
 
     if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
-        favChannels_C = eventRowsToChannels(m_event.rows);
+        //favChannels_C = eventRowsToChannels(m_event.rows);
 
     }
     else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
