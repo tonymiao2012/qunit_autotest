@@ -16,7 +16,9 @@
         "input": [
           "Repeat",
           "Expect Number",
-          "Other"
+          "Channel Mode",
+          "Scan Mode",
+          "Search Mode"
         ]
       },
       {
@@ -24,63 +26,51 @@
         "input": [
           "Repeat",
           "Expect Number",
-          "Other"
+          "Channel Mode",
+          "Scan Mode",
+          "Search Mode"
         ]
       },
       {
         "casename": "1003_channelUpT",
         "input": [
-          "Repeat",
-          "Expect Number",
-          "Other"
+          "Repeat"
         ]
       },
       {
         "casename": "1004_channelDownT",
         "input": [
-          "Repeat",
-          "Expect Number",
-          "Other"
+          "Repeat"
         ]
       },
       {
         "casename": "1005_channelRandomT",
         "input": [
-          "Repeat",
-          "Expect Number",
-          "Other"
+          "Repeat"
         ]
       },
       {
         "casename": "1006_channelUpC",
         "input": [
-          "Repeat",
-          "Expect Number",
-          "Other"
+          "Repeat"
         ]
       },
       {
         "casename": "1007_channelDownC",
         "input": [
-          "Repeat",
-          "Expect Number",
-          "Other"
+          "Repeat"
         ]
       },
       {
         "casename": "1008_channelRandomC",
         "input": [
-          "Repeat",
-          "Expect Number",
-          "Other"
+          "Repeat"
         ]
       },
       {
         "casename": "1009_channelSwitchT_C",
         "input": [
-          "Repeat",
-          "Expect Number",
-          "Other"
+          "Repeat"
         ]
       }
     ],
@@ -93,12 +83,44 @@
   },
   {
     "name": "Play",
-    "testcase": [],
+    "testcase": [
+      {
+        "casename": "3001_playChannelT",
+        "input": [
+          "Channel Number"
+        ]
+      },
+      {
+        "casename": "3002_playChannelC",
+        "input":[
+          "Channel Number"
+        ]
+      }
+    ],
     "icon-class": "fa fa-play-circle-o fa-2x"
   },
   {
     "name": "ServiceList",
-    "testcase": [],
+    "testcase": [
+      {
+        "casename": "4001_getServicelistT",
+        "input": [
+          "Expect Number"
+        ]
+      },
+      {
+        "casename": "4002_getServicelistC",
+        "input": [
+          "Expect Number"
+        ]
+      },
+      {
+        "casename": "4003_getServicelistS",
+        "input": [
+          "Expect Number"
+        ]
+      }
+    ],
     "icon-class": "fa fa-steam fa-2x"
   },
   {
