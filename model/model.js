@@ -73,6 +73,8 @@ function TableIterator(table, readOnly, selections, fields, orders, handler) {
      *      The rows read
      */
     var handleReadRowChunk = function (rowsRead) {
+        //DBG_ERROR("enter handleReadRowChunk...11111");
+        /*
         var convertedRows = new Array();
         // For every row
         for (var i = 0; i < rowsRead.length; i++) {
@@ -84,7 +86,29 @@ function TableIterator(table, readOnly, selections, fields, orders, handler) {
             }
             convertedRows.push(convertedRow);
         }
-
+        */
+        //DBG_ERROR("enter handleReadRowChunk...222");
+        var convertedRows;
+        try {
+            convertedRows = JSON.parse(rowsRead.getallstrings)
+        }
+        catch (ex) {
+            DBG_ERROR("handleReadRowChunk: " + ex.message);
+        }
+        if (!Array.isArray(convertedRows)) {
+            //convertedRows = rowsRead;
+            var convertedRows = new Array();
+            // For every row
+            for (var i = 0; i < rowsRead.length; i++) {
+                var rowRead = rowsRead[i];
+                var convertedRow = new Array();
+                // For every column in row
+                for (var j = 0; j < rowRead.length; j++) {
+                    convertedRow.push(rowRead[j]);
+                }
+                convertedRows.push(convertedRow);
+            }
+        }
         var event = {
             type: TableIterator.EVENT_TYPE_ROWS_READ,
             rows: convertedRows
@@ -1045,37 +1069,106 @@ function ModelLoader(onLoadedHandler, configArr) {
 }
 
 var modelConfig = {
-    "preload": [
-        "tvapi.table.favouritelist.list",
+    preloadVal: [
+        "de.loewe.sl2.messages.messageid",
+        "de.loewe.sl2.i32.sound.main.volume",
+        "de.loewe.sl2.i32.sound.main.mute",
+        "de.loewe.sl2.i32.system.stop.boot.animation",
+        "tvapi.str.system.am.msg",
+        "tvapi.str.system.cur.brand",
+        "de.loewe.sl2.i32.system.open.from.standby",
+        "tvapi.i32.system.firstInstallation",
+        "de.loewe.sl2.i32.system.user.mode",
+        "tvapi.i32.system.menu.highlight.control",
+        "tvapi.i32.system.input.current.inLock",
+        "de.loewe.sl2.i32.basic.settings.tvset.location",
+        "de.loewe.sl2.i32.basic.settings.tvset.region.code",
+        "de.loewe.sl2.i32.basic.settings.menu.delay.disappear",
+        "de.loewe.sl2.i32.language.osd",
+        "de.loewe.sl2.messages.osd.visible",    //dbtag:20161203  --RICK
+        "de.loewe.sl2.i32.cec.functionality",
+        "de.loewe.sl2.i32.sound.arcdev.exist",
+        "de.loewe.sl2.i32.cec.hdmi.devices.arc.state",
+        "de.loewe.sl2.datetime.timezone",
+        "de.loewe.sl2.i32.datetime.format",
+        "de.loewe.sl2.i64.datetime.current.time",
+        "de.loewe.sl2.i64.datetime.time.utc",//dbtag:20161020 add
+        "de.loewe.sl2.i32.datetime.deviation.fromutc",
+        "de.loewe.sl2.i64.datetime.time.rtc.uptimeoffset",
+        //"de.loewe.sl2.i32.hisfactory.state.open", ToDo
+        "tvapi.i32.hisfactory.state.open",
+        "de.loewe.sl2.str.hisfactory.production.type",
+        "de.loewe.sl2.i32.hisfactory.aging",
+        "de.loewe.sl2.i32.hisfactory.current.source",
+        "de.loewe.sl2.i32.hisfactory.tofactory.opition",
+        //"tvapi.i32.tts.switch.status",
+        "de.loewe.sl2.i32.tvservice.nosignal.main",
+        "de.loewe.sl2.i32.tvservice.played.success.livetv",
+        "tvapi.i32.tvservice.lock.status",
+        "de.loewe.sl2.vstr.tvservice.play.main",
+        "de.loewe.sl2.vstr.tvservice.play.main.last",//dbtag:20161216-Mandy
+        //"tvapi.i32.tvservice.play.fav.channel.list",
+        "tvapi.i32.tvservice.list.saved",
+        "de.loewe.sl2.str.video.format.info",
+        "tvapi.str.tvservice.audio.information",
+        "tvapi.action.tvservice.get.pfinfo",
+        "tvapi.action.tvservice.get.pfinfo2",
+        "de.loewe.sl2.vint32.servicemode.tunerinfo.signallevels",     //dbtag:20160923 --RICK
+        "de.loewe.sl2.vint32.servicemode.tunerinfo.signalqualities",     //dbtag:20160923 --RICK
+//        "de.loewe.sl2.vint32.servicemode.tunersignalinfo.signallevels",
+//       "de.loewe.sl2.vint32.servicemode.tunersignalinfo.signalqualities",
+        //"tvapi.vstr.source.input.name",
+        //"de.loewe.sl2.i32.sourcedection.sourcestatus",//dbtag:20161020
+        "tvapi.i32.source.input.current",
+        "de.loewe.sl2.str.parental.lock.pin", //dbtag:20161028 - fix the print error of no pin function
+        "de.loewe.sl2.i32.parental.lock.switch.mode", //dbtag:20161028 - fix the start bug of UI after modifying the mode interface
+        "tvapi.i32.parental.lock.current.time.inLock",
+        "de.loewe.sl2.str.parental.lock.inputSource", //dbtag:20161123 - LEO - Source lock states receiving
+        "de.loewe.sl2.table.favouritelist.list",
         "de.loewe.sl2.table.servicelist.list",
-        "de.loewe.sl2.messages.messageid"
+        "tvapi.str.tvservice.source.video.format.info",
+        "tvapi.action.software.update.start.search",
+        "tvapi.i32.system.screen.saver.control",
+        "tvapi.i32.system.notifications.control",
+        "tvapi.i32.source.input.mhl.available",
+        "de.loewe.sl2.i32.channel.search.source",
+        //"tvapi.i32.timerfunctions.new.area.time.zone",
+        "de.loewe.sl2.i32.datetime.deviation.timezone",
+        "de.loewe.sl2.system.firstInstallation.wizard.active",
+        "de.loewe.sl2.str.parental.lock.fallback.pin"
+    ],
+    "preload": [
+        {name: "sound", modelClass: "SoundModel", path: "model/model-sound.js"},
+        {name: "system", modelClass: "SystemModel", path: "model/model-system.js"},
+        {name: "message", modelClass: "MessagesModel", path: "model/model-message.js"}
     ],
     "common": [
-        {name: "sound", modelClass: "SoundModel", path: "model/COMMON/model-sound.js"},
-        //{name: "system", modelClass: "SystemModel", path: "model/model-system.js"},
-        //{name: "message", modelClass: "MessagesModel", path: "model/model-message.js"},
-        {name: "servicelist", modelClass: "ServicelistModel", path: "model/COMMON/model-servicelist.js"},
-        //{name: "hisfactory", modelClass: "His_factoryModel", path: "model/model-hisfactory.js"},
-        //{name: "basicSetting", modelClass: "Basic_settingsModel", path: "model/COMMON/model-basic-settings.js"},
-        //{name: "usb", modelClass: "UsbModel", path: "model/model-usb.js"},
-        {name: "tvservice", modelClass: "TvserviceModel", path: "model/COMMON/model-tvservice.js"},
-        {name: "closedcaption", modelClass: "ClosedcaptionModel", path: "model/COMMON/model-closedcaption.js"},
-        //{name: "appsetting", modelClass: "App_settingModel", path: "model/model-app-setting.js"},
-        //{name: "language", modelClass: "LanguageModel", path: "model/model-language.js"},
-        {name: "parentlock", modelClass: "Parental_lockModel", path: "model/COMMON/model-parental-lock.js"},
-        //{name: "softupdate", modelClass: "SoftwareupdateModel", path: "model/model-softwareupdate.js"},
-        //{name: "cec", modelClass: "CecModel", path: "model/model-cec.js"},
-        {name: "timerfunc", modelClass: "Timer_functionsModel", path: "model/COMMON/model-timer-functions.js"},
-        //{name: "source", modelClass: "SourceModel", path: "model/model-source.js"},
-        //{name: "network", modelClass: "NetworkModel", path: "model/model-network.js"},
-        {name: "video", modelClass: "VideoModel", path: "model/COMMON/model-video.js"},
-        //{name: "miracast", modelClass: "MiracastModel", path: "model/model-miracast.js"},
-        //{name: "picture", modelClass: "PictureModel", path: "model/model-picture.js"},
-        //{name: "mpctrl", modelClass: "MpCtrlModel", path: "model/model-mpctrl.js"},
-        //{name: "volume", modelClass: "VolumeModel", path: "model/model-volume.js"},
-        //{name: "directory", modelClass: "DirectoryModel", path: "model/model-directory.js"},
-        //{name: "bluetooth", modelClass: "BluetoothModel", path: "model/model-bluetooth.js"},
-        //{name: "datetime", modelClass: "DatetimeModel", path: "model/model-datetime.js"},
+        {name: "sound", modelClass: "SoundModel", path: "model/model-sound.js"},
+        {name: "system", modelClass: "SystemModel", path: "model/model-system.js"},
+        {name: "servicelist", modelClass: "ServicelistModel", path: "model/model-servicelist.js"},
+        {name: "hisfactory", modelClass: "His_factoryModel", path: "model/model-hisfactory.js"},
+        {name: "basicSetting", modelClass: "Basic_settingsModel", path: "model/model-basic-settings.js"},
+        {name: "usb", modelClass: "UsbModel", path: "model/model-usb.js"},
+        {name: "tvservice", modelClass: "TvserviceModel", path: "model/model-tvservice.js"},
+        {name: "closedcaption", modelClass: "ClosedcaptionModel", path: "model/model-closedcaption.js"},
+        {name: "appsetting", modelClass: "App_settingModel", path: "model/model-app-setting.js"},
+        {name: "language", modelClass: "LanguageModel", path: "model/model-language.js"},
+        {name: "parentlock", modelClass: "Parental_lockModel", path: "model/model-parental-lock.js"},
+        {name: "softupdate", modelClass: "SoftwareupdateModel", path: "model/model-softwareupdate.js"},
+        {name: "cec", modelClass: "CecModel", path: "model/model-cec.js"},
+        {name: "timerfunc", modelClass: "Timer_functionsModel", path: "model/model-timer-functions.js"},
+        {name: "source", modelClass: "SourceModel", path: "model/model-source.js"},
+        {name: "network", modelClass: "NetworkModel", path: "model/model-network.js"},
+        {name: "video", modelClass: "VideoModel", path: "model/model-video.js"},
+        {name: "miracast", modelClass: "MiracastModel", path: "model/model-miracast.js"},
+        {name: "picture", modelClass: "PictureModel", path: "model/model-picture.js"},
+        {name: "mpctrl", modelClass: "MpCtrlModel", path: "model/model-mpctrl.js"},
+        {name: "volume", modelClass: "VolumeModel", path: "model/model-volume.js"},
+        {name: "directory", modelClass: "DirectoryModel", path: "model/model-directory.js"},
+        {name: "bluetooth", modelClass: "BluetoothModel", path: "model/model-bluetooth.js"},
+        {name: "servicemode", modelClass: "ServiceModeModel", path: "model/model-servicemode.js"},
+        {name: "message", modelClass: "MessagesModel", path: "model/model-message.js"},
+        {name: "datetime", modelClass: "DatetimeModel", path: "model/model-datetime.js"}
         //{name: "tts", modelClass: "TtsModel", path: "model/model-tts.js"}
     ],
     "ATSC": [
@@ -1106,7 +1199,7 @@ var modelConfig = {
     "COL": [
         {name: "epg", modelClass: "EpgModel", path: "model/model-epg.js"},
         {name: "timerlist", modelClass: "TimerlistModel", path: "model/model-timerlist.js"},
-        {name: "timeshift", modelClass: "TimeshiftModel", path: "model/model-timeshift.js"},
+        {name: "tshift", modelClass: "TimeshiftModel", path: "model/model-timeshift.js"},
         {name: "ci", modelClass: "Common_interfaceModel", path: "model/model-ci.js"},
         {name: "channelSearch", modelClass: "Channelsearch_dvbModel", path: "model/model-channelsearch.js"},
         {name: "pvr", modelClass: "PvrModel", path: "model/model-pvr.js"},
@@ -1131,19 +1224,21 @@ var modelConfig = {
         //{name: "speech", modelClass: "SpeechModel", path: "model/dvb/model-speech.js"},
         {name: "pvr", modelClass: "PvrModel", path: "model/DVB/model-pvr.js"},
         {name: "basicSetting", modelClass: "Basic_settingsModel", path: "model/DVB/model-basic-settings.js"},
+        {name: "datetime", modelClass: "DatetimeModel", path: "model/DVB/model-datetime.js"},
+        {name: "servicemode", modelClass: "ServiceModeModel", path: "model/DVB/model-servicemode.js"},
         //{name: "hotel", modelClass: "HotelModel", path: "model/dvb/model-hotel.js"}
     ],
     "EM": [
         {name: "epg", modelClass: "EpgModel", path: "model/model-epg.js"},
         {name: "timerlist", modelClass: "TimerlistModel", path: "model/model-timerlist.js"},
-        {name: "timeshift", modelClass: "TimeshiftModel", path: "model/model-timeshift.js"},
+        {name: "tshift", modelClass: "TimeshiftModel", path: "model/model-timeshift.js"},
         {name: "ci", modelClass: "Common_interfaceModel", path: "model/model-ci.js"},
         {name: "channelSearch", modelClass: "Channelsearch_dvbModel", path: "model/model-channelsearch.js"},
         {name: "mheg5", modelClass: "Mheg5Model", path: "model/model-mheg5.js"},
         {name: "bluetooth", modelClass: "BluetoothModel", path: "model/model-bluetooth.js"},
         {name: "speech", modelClass: "SpeechModel", path: "model/model-speech.js"},
         {name: "pvr", modelClass: "PvrModel", path: "model/model-pvr.js"},
-        {name: "hotel", modelClass: "HotelModel", path: "model/model-hotel.js"},
+        {name: "hotel", modelClass: "HotelModel", path: "model/model-hotel.js"}
     ]
 };
 
