@@ -13,18 +13,15 @@ function getControl(funcName) {
         assert.ok(result, "getControl");
     });
 }
-function startSetControl(val) {
-    model.closedcaption.setControl(val);
-    if (model.closedcaption.getControl() == val)
-        return true;
-    else
-        return false;
+function checkSetControl(val, funcName) {
+    QUnit.test(funcName, function (assert) {
+        var newVal = model.closedcaption.getControl();
+        assert.equal(newVal, val, "setControl");
+    });
 }
 function setControl(val, funcName) {
-    QUnit.test(funcName, function (assert) {
-        var result = startSetControl(val);
-        assert.ok(result, "setControl");
-    });
+    model.closedcaption.setControl(val);
+    setTimeout(checkSetControl, 1000, val, funcName);
 }
 function startGetAnalogMode() {
     var val = model.closedcaption.getControlAnalogMode();
@@ -41,18 +38,15 @@ function getAnalogMode(funcName) {
         assert.ok(result, "getAnalogMode");
     });
 }
-function startSetAnalogMode(val) {
-    model.closedcaption.setControlAnalogMode(val);
-    if (model.closedcaption.getControlAnalogMode() == val)
-        return true;
-    else
-        return false;
+function checkSetAnalogMode(val, funcName) {
+    QUnit.test(funcName, function (assert) {
+        var newVal = model.closedcaption.getControlAnalogMode();
+        assert.equal(newVal, val, "setAnalogMode");
+    });
 }
 function setAnalogMode(val, funcName) {
-    QUnit.test(funcName, function (assert) {
-        var result = startSetAnalogMode(val);
-        assert.ok(result, "setAnalogMode");
-    });
+    model.closedcaption.setControlAnalogMode(val);
+    setTimeout(checkSetAnalogMode, 1000, val, funcName);
 }
 
 function startGetDigitalMode() {
@@ -69,18 +63,16 @@ function getDigitalMode(funcName) {
         assert.ok(result, "getDigitalMode");
     });
 }
-function startSetDigitalMode(val) {
-    model.closedcaption.setControlDigitalMode(val);
-    if (model.closedcaption.getControlDigitalMode() == val)
-        return true;
-    else
-        return false;
+
+function checkSetDigitalMode(val, funcName) {
+    QUnit.test(funcName, function (assert) {
+        var newVal = model.closedcaption.getControlDigitalMode();
+        assert.equal(newVal, val, "setDigitalMode");
+    });
 }
 function setDigitalMode(val, funcName) {
-    QUnit.test(funcName, function (assert) {
-        var result = startSetDigitalMode(val);
-        assert.ok(result, "setDigitalMode");
-    });
+    model.closedcaption.setControlDigitalMode(val);
+    setTimeout(checkSetDigitalMode, 1000, val, funcName);
 }
 
 function startGetDigitalStyle() {
@@ -97,18 +89,16 @@ function getDigitalStyle(funcName) {
         assert.ok(result, "getDigitalStyle");
     });
 }
-function startSetDigitalStyle(val) {
-    model.closedcaption.setControlDigitalStyle(val);
-    if (model.closedcaption.getControlDigitalStyle() == val)
-        return true;
-    else
-        return false;
+
+function checkSetDigitalStyle(val, funcName) {
+    QUnit.test(funcName, function (assert) {
+        var newVal = model.closedcaption.getControlDigitalStyle();
+        assert.equal(newVal, val, "setDigitalStyle");
+    });
 }
 function setDigitalStyle(val, funcName) {
-    QUnit.test(funcName, function (assert) {
-        var result = startSetDigitalStyle(val);
-        assert.ok(result, "setDigitalStyle");
-    });
+    model.closedcaption.setControlDigitalStyle(val);
+    setTimeout(checkSetDigitalStyle, 1000, val, funcName);
 }
 
 function startGetDigitalSize() {
@@ -126,18 +116,15 @@ function getDigitalSize(funcName) {
     });
 }
 
-function startSetDigitalSize(val) {
-    model.closedcaption.setControlDigitalSize(val);
-    if (model.closedcaption.getControlDigitalSize() == val)
-        return true;
-    else
-        return false;
+function checkSetDigitalSize(val, funcName) {
+    QUnit.test(funcName, function (assert) {
+        var newVal = model.closedcaption.getControlDigitalSize();
+        assert.equal(newVal, val, "setDigitalSize");
+    });
 }
 function setDigitalSize(val, funcName) {
-    QUnit.test(funcName, function (assert) {
-        var result = startSetDigitalSize(val);
-        assert.ok(result, "setDigitalSize");
-    });
+    model.closedcaption.setControlDigitalSize(val);
+    setTimeout(checkSetDigitalSize, 1000, val, funcName);
 }
 function startGetDigitalFont() {
     var val = model.closedcaption.getControlDigitalFont();
@@ -154,18 +141,15 @@ function getDigitalFont(funcName) {
     });
 }
 
-function startSetDigitalFont(val) {
-    model.closedcaption.setControlDigitalFont(val);
-    if (model.closedcaption.getControlDigitalFont() == val)
-        return true;
-    else
-        return false;
+function checkSetDigitalFont(val, funcName) {
+    QUnit.test(funcName, function (assert) {
+        var newVal = model.closedcaption.getControlDigitalFont();
+        assert.equal(newVal, val, "setDigitalFont");
+    });
 }
 function setDigitalFont(val, funcName) {
-    QUnit.test(funcName, function (assert) {
-        var result = startSetDigitalFont(val);
-        assert.ok(result, "setDigitalFont");
-    });
+    model.closedcaption.setControlDigitalFont(val);
+    setTimeout(checkSetDigitalFont, 1000, val, funcName);
 }
 function startGetDigitalcolor(colorType) {
     var val;
@@ -188,30 +172,31 @@ function getDigitalcolor(colorType, funcName) {
     });
 }
 
-function startSetDigitalcolor(colorType, val) {
-
+function checkSetDigitalcolor(colorType, val, funcName) {
+    QUnit.test(funcName, function (assert) {
+        if (colorType == 0) {
+            var newVal = model.closedcaption.getControlDigitalTextcolor();
+        }
+        else if (colorType == 1) {
+            var newVal = model.closedcaption.getControlDigitalBgcolor();
+        }
+        else {
+            var newVal = model.closedcaption.getControlDigitalEdgecolor();
+        }
+        assert.equal(newVal, val, "setDigitalcolor");
+    });
+}
+function setDigitalcolor(colorType, val, funcName) {
     if (colorType == 0) {
         model.closedcaption.setControlDigitalTextcolor(val);
-        if (model.closedcaption.getControlDigitalTextcolor() == val)
-            return true;
     }
     else if (colorType == 1) {
         model.closedcaption.setControlDigitalBgcolor(val);
-        if (model.closedcaption.getControlDigitalBgcolor() == val)
-            return true;
     }
     else {
         model.closedcaption.setControlDigitalEdgecolor(val);
-        if (model.closedcaption.getControlDigitalEdgecolor() == val)
-            return true;
     }
-    return false;
-}
-function setDigitalcolor(colorType, val, funcName) {
-    QUnit.test(funcName, function (assert) {
-        var result = startSetDigitalcolor(colorType, val);
-        assert.ok(result, "setDigitalcolor");
-    });
+    setTimeout(checkSetDigitalcolor, 1000, colorType, val, funcName);
 }
 function startGetDigitalOpacity(opaType) {
     var val;
@@ -232,24 +217,25 @@ function getDigitalOpacity(opaType, funcName) {
     });
 }
 
-function startSetDigitalOpacity(opaType, val) {
+function checkSetDigitalOpacity(opaType, val, funcName) {
+    QUnit.test(funcName, function (assert) {
+        if (opaType == 0) {
+            var newVal = model.closedcaption.getControlDigitalTextopacity();
+        }
+        else {
+            var newVal = model.closedcaption.getControlDigitalBgopacity();
+        }
+        assert.equal(newVal, val, "setDigitalOpacity");
+    });
+}
+function setDigitalOpacity(opaType, val, funcName) {
     if (opaType == 0) {
         model.closedcaption.setControlDigitalTextopacity(val);
-        if (model.closedcaption.getControlDigitalTextopacity() == val)
-            return true;
     }
     else {
         model.closedcaption.setControlDigitalBgopacity(val);
-        if (model.closedcaption.getControlDigitalBgopacity() == val)
-            return true;
     }
-    return false;
-}
-function setDigitalOpacity(opaType, val, funcName) {
-    QUnit.test(funcName, function (assert) {
-        var result = startSetDigitalOpacity(opaType, val);
-        assert.ok(result, "setDigitalOpacity");
-    });
+    setTimeout(checkSetDigitalOpacity, 1000, opaType, val, funcName);
 }
 function startGetDigitalEdgeeffect() {
     var val = model.closedcaption.getControlDigitalEdgeeffect();
@@ -266,16 +252,13 @@ function getDigitalEdgeeffect(funcName) {
     });
 }
 
-function startSetDigitalEdgeeffect(val) {
-    model.closedcaption.setControlDigitalEdgeeffect(val);
-    if (model.closedcaption.getControlDigitalEdgeeffect() == val)
-        return true;
-    else
-        return false;
+function checkSetDigitalEdgeeffect(val, funcName) {
+    QUnit.test(funcName, function (assert) {
+        var newVal = model.closedcaption.getControlDigitalEdgeeffect();
+        assert.equal(newVal, val, "setDigitalEdgeeffect");
+    });
 }
 function setDigitalEdgeeffect(val, funcName) {
-    QUnit.test(funcName, function (assert) {
-        var result = startSetDigitalEdgeeffect(val);
-        assert.ok(result, "setDigitalEdgeeffect");
-    });
+    model.closedcaption.setControlDigitalEdgeeffect(val);
+    setTimeout(checkSetDigitalEdgeeffect, 1000, val, funcName);
 }          

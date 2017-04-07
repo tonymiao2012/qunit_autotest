@@ -1,3 +1,4 @@
+var inputPin = null;
 function startGetPin() {
     var val = model.parentlock.getPin();
     $("#details").html(val);
@@ -39,16 +40,16 @@ function getSModel(funcName) {
         assert.ok(result, "Test getSModel");
     });
 }
-function startSetSModel(m) {
-    model.parentlock.setSModel(m);
-    if (model.parentlock.getSModel() == model)
+function startSetSModel(flag) {
+    model.parentlock.setSModel(flag);
+    if (model.parentlock.getSModel() == flag)
         return true;
     else
         return false;
 }
-function setSModel(model, funcName) {
+function setSModel(flag, funcName) {
     QUnit.test(funcName, function (assert) {
-        var result = startSetSModel(parseInt(model));
+        var result = startSetSModel(flag);
         assert.ok(result, "Test setSModel");
     });
 }
@@ -370,8 +371,16 @@ function blockChannelDtvT_1() {
 }
 function pinRequestConfirm(funcName) {
     QUnit.test(funcName, function (assert) {
-        model.parentlock.pinRequestConfirm(1, "0000");
-        assert.ok(true, "Test pinRequestConfirm");
+        var done = assert.async(1);
+
+        function checkPinRequestConfirm() {
+            var val = model.parentlock.getPinRequest();
+            assert.equal(val[0], 0, "pinRequestConfirm");
+            done();
+        };
+        var val = model.parentlock.getPin();
+        model.parentlock.PinRequestConfirm(1, val);
+        setTimeout(checkPinRequestConfirm, 1000);
     });
 }
 

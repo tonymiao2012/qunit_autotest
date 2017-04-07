@@ -269,8 +269,8 @@ function PvrModel(parentModel) {
         this.registerActionObject(
             PvrModelDefines.SL2_TVAPI_TIMER_LIST_ENTRY_ADD_MEMO,
             [
-                { name: "addRemindTimer", method: function(e, p1, p2, p3, p4, p5, p6, p7, p8) {
-                    return e.invoke( p1, p2, p3, p4, p5, p6, p7, p8
+                { name: "addRemindTimer", method: function(e, p1, p2, p3, p4, p5, p6, p7, p8, p9) {
+                    return e.invoke( p1, p2, p3, p4, p5, p6, p7, p8 ,p9
                     );
                 } }
             ],
@@ -284,6 +284,7 @@ function PvrModel(parentModel) {
         * p6.end,
         * p7.eventId,
         * p8.listUid
+        * p9.repeat_type
         * */
 
         //É¾³ýÔ¤Ô¼ÎÄ¼þ

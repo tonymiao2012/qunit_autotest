@@ -12,22 +12,6 @@ function getCurLocalTime(funcName) {
     });
 
 }
-function startSetCurLocalTime() {
-    var val = model.datetime.getCurLocalTime();
-    model.datetime.setCurLocalTime(val + 60);
-    if (model.datetime.getCurLocalTime() == (val + 60))
-        return true;
-    else
-        return false;
-}
-function setCurLocalTime(funcName) {
-    QUnit.test(funcName, function (assert) {
-        var result;
-        result = startSetCurLocalTime();
-        assert.ok(result, "Test setCurLocalTime");
-    });
-
-}
 
 function startGetTimeZone() {
     var val = model.datetime.getTimeZone();

@@ -326,34 +326,58 @@ function readAudioTableInfo(onReadAudioTableInfo) {
 }
 
 function onEitNowChanged(val) {
+    var pfResultNow = val;
+    if (pfResultNow.length == 12) {
+        var startimeNow = new Date(pfResultNow[2] * 1000);
+        var stoptimeNow = new Date(pfResultNow[3] * 1000);
+        infoBar = infoBar + "/EITNow->" + ";type:" + pfResultNow[1] + ";start:" + startimeNow.toLocaleString() + ";end:" + stoptimeNow.toLocaleString() + ";PC:" + pfResultNow[8];
+        $("#details").html(infoBar);
+    }
 }
 function onEitNextChanged(val) {
+    var pfResultNext = val;
+    if (pfResultNext.length == 12) {
+        var startimeNext = new Date(pfResultNext[2] * 1000);
+        var stoptimeNext = new Date(pfResultNext[3] * 1000);
+        infoBar = infoBar + "/EITNext->" + ";type:" + pfResultNext[1] + ";start:" + startimeNext.toLocaleString() + ";end:" + stoptimeNext.toLocaleString();
+        $("#details").html(infoBar);
+    }
 }
 function onVideoFormatChanged(val) {
+    if (val.length != 0) {
+        infoBar = infoBar + " /videoFormat=" + val;
+        $("#details").html(infoBar);
+    }
 }
 function onVideoFrameAspectChanged(val) {
+    if (val.length != 0) {
+        infoBar = infoBar + " /Aspect=" + val;
+        $("#details").html(infoBar);
+    }
 }
 function onVideoCcExistChanged(val) {
+    if (val == 1) {
+        infoBar = infoBar + " /CC=" + val;
+        $("#details").html(infoBar);
+    }
 }
 function onCurAudioIdentChaged(val) {
+    infoBar = infoBar + " /AudioIdent=" + val;
+    $("#details").html(infoBar);
 }
-function onCurAudioExistChaged(val) {
-    if (val == 1)
-        readAudioTableInfo(ui_getAudioTableInfo);
-}
+
 function onMainPlayChanged(val) {
     var pinRequest = model.parentlock.getPinRequest();
     if (pinRequest[0] != 0)
         return;
-    var utcTime = model.timerfunc.getCurTime();
-    var timeZoneSec = model.timerfunc.getDeviationFromUtc();
-    var formatHour = model.timerfunc.getTimeFormat();
+    var utcTime = model.datetime.getCurLocalTime();
+    var date = new Date(utcTime * 1000);
+    infoBar = date.toLocaleString();
+    $("#details").html(infoBar);
     model.video.onVideoFormatInfoChanged = onVideoFormatChanged;
     model.video.onVideoFrameAspectChanged = onVideoFrameAspectChanged;
     model.video.onCcExistChanged = onVideoCcExistChanged;
-    model.tvservice.onAudioExistChaged = onCurAudioExistChaged;
     model.sound.onAudioIdentChaged = onCurAudioIdentChaged;
-    readAudioTableInfo(ui_getAudioTableInfo);
     model.tvservice.onEitMainNowChanged = onEitNowChanged;
     model.tvservice.onEitMainNextChanged = onEitNextChanged;
 
@@ -363,7 +387,6 @@ function disableMainPlayChangedCallback() {
     model.video.onVideoFormatInfoChanged = null;
     model.video.onVideoFrameAspectChanged = null;
     model.video.onCcExistChanged = null;
-    model.tvservice.onAudioExistChaged = null;
     model.sound.onAudioIdentChaged = null;
     model.tvservice.onEitMainNowChanged = null;
     model.tvservice.onEitMainNextChanged = null;
@@ -371,6 +394,7 @@ function disableMainPlayChangedCallback() {
 
 function play(direction, sourceType) {
     console.log("............play.");
+    $("#details").html("");
     if (direction == 1) {
         if (sourceType == 1)
             nextChannel_T();
@@ -414,7 +438,7 @@ function switchChannel(direction, sourceType, repeat, funcName) {
                     $("#times").html(i);
                     done();
                     if (i < times)
-                        setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 1000) + 1000));
+                        setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 8000) + 8000));
                     else
                         disableMainPlayChangedCallback();
                 }
@@ -428,7 +452,7 @@ function switchChannel(direction, sourceType, repeat, funcName) {
             }
         }
 
-        setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 1000) + 1000));
+        setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 8000) + 8000));
     });
 }
 
@@ -786,7 +810,7 @@ function onGetSkip_C(m_event) {
     }
 }
 
-function getSkipListCountC(expectNum,funcName) {
+function getSkipListCountC(expectNum, funcName) {
     $("#details").html(skipChannels_C.length);
     QUnit.test(funcName, function (assert) {
         assert.equal(skipChannels_C.length, expectNum, "getSkipListAllC ");

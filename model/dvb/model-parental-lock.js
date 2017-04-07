@@ -81,7 +81,7 @@ function Parental_lockModel(_) {
 
 //        this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_PIN_MEMORISED, "getPinMemorised", "setPinMemorised", "onPinMemorisedChaged", null, null);
         this.registerStringObject(Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_PIN, "getPin", "setPin", "onPinChaged", null, null);
-        this.registerStringObject(Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_FALLBACK_PIN, "getFallbackPin", "setFallbackPin", "onFallbackPinChaged", null, null);
+        this.registerStringObject(Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_FALLBACK_PIN, "getFallbackPin", null, null, null, null);
         this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_ALL_DAILY, "getAllDaily", "setAllDaily", "onAllDailyChaged", null, null );
         this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_START, "getStart", "setStart", "onStartChaged", null, null);
         this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_END, "getEnd", "setEnd", "onEndChaged", null, null);

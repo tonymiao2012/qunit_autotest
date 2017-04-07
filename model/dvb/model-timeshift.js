@@ -28,6 +28,8 @@ function TimeshiftModelDefines() {
     TimeshiftModelDefines.SL2_TVAPI_HDR_I32_BAR_BEGIN_POSITION = "de.loewe.sl2.hdr.bar.begin.position";
     TimeshiftModelDefines.SL2_TVAPI_HDR_I32_BAR_END_POSITION = "de.loewe.sl2.hdr.bar.end.position";
     TimeshiftModelDefines.SL2_TVAPI_HDR_I32_CURSOR_POSITION = "de.loewe.sl2.hdr.cursor.position";
+    TimeshiftModelDefines.SL2_TVAPI_HDR_ACTION_PLAYER_FORWARD_SKIP = "de.loewe.sl2.hdr.player.forward.skip";
+    TimeshiftModelDefines.SL2_TVAPI_HDR_ACTION_PLAYER_BACKWARD_SKIP=  "de.loewe.sl2.hdr.player.backward.skip "
 
     // enum
     //ENUM_SL2_TVAPI_TSHIFT_REG_DEV_STATE
@@ -271,6 +273,25 @@ function TimeshiftModel(parentModel) {
             TimeshiftModelDefines.SL2_TVAPI_HDR_I32_BAR_END_TIME,
             "getBarEndTime", "setBarEndTime", "onBarEndTimeChaged",
             null, null);
+        //¿ì½ø
+        this.registerActionObject(
+            TimeshiftModelDefines.SL2_TVAPI_HDR_ACTION_PLAYER_FORWARD_SKIP,
+            [
+                {name: "PlayerForwardSkip", method: function (object) {
+                    return object.invoke();
+                }}
+            ], null
+        );
+        // PlayerBackwardSkip
+        this.registerActionObject(
+            TimeshiftModelDefines.SL2_TVAPI_HDR_ACTION_PLAYER_BACKWARD_SKIP,
+            [
+                {name: "PlayerBackwardSkip", method: function (object) {
+                    return object.invoke();
+                }}
+            ], null
+        );
+
     }
 }
 TimeshiftModel.prototype = new SubModel;

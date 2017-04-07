@@ -52,7 +52,7 @@ function VideoModelDefines() {
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_COLOR_SATURATION = "de.loewe.sl2.i32.video.color.tuner.sat";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_COLOR_BRIGHTNESS = "de.loewe.sl2.i32.video.color.tuner.luma";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_COLOR_SPACE = "de.loewe.sl2.i32.video.color.space";
-    VideoModelDefines.SL2_TVAPI_I32_VIDEO_COLOR_SPACE_EXIST= "tvapi.i32.video.color.space.exist";
+    VideoModelDefines.SL2_TVAPI_I32_VIDEO_COLOR_SPACE_EXIST= "de.loewe.sl2.i32.video.color.space.supported";
     VideoModelDefines.SL2_TVAPI_ACTION_VIDEO_RESTORE_COLOR_TUNER_SETTINGS = "de.loewe.sl2.action.video.reset.colour.tuner";
     VideoModelDefines.SL2_TVAPI_ACTION_VIDEO_RESTORE_DEFAULT_PICTURE_SETTINGS = "de.loewe.sl2.action.video.reset.picture.settings";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_3D_SUPPORTED = "tvapi.i32.video.3d.supported";

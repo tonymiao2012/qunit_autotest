@@ -19,6 +19,7 @@ function EpgModelDefines() {
     // enum or defined is here
     EpgModelDefines.SL2_TVAPI_I32_EPG_BARKERCHANNEL_ACTIVE = "de.loewe.sl2.i32.epg.barkerchannel.active";
     EpgModelDefines.SL2_TVAPI_I32_EPG_AUTO_UPDATE = "tvapi.i32.epg.auto.update";
+    EpgModelDefines.SL2_TVAPI_VI32_EPG_SERVICE_COMPLETE = "de.loewe.sl2.vint.epg.service.complete";
 
     EpgModelDefines.TABLE_FIELD_EPG_SERVICE_ID = 2000;
     EpgModelDefines.TABLE_FIELD_EPG_TRANSPORT_STREAM_ID = 2001;
@@ -77,6 +78,25 @@ function EpgModelDefines() {
     EpgModelDefines.ENUM_EPG_THEME_HOBBIES_COLOR = 10;
     EpgModelDefines.ENUM_EPG_THEME_SERIES_COLOR = 11;
     EpgModelDefines.ENUM_EPG_THEME_DRAMA_COLOR = 12;
+
+    //enum for EpgModelDefines.SL2_TVAPI_VI32_EPG_SERVICE_COMPLETE
+    EpgModelDefines.ENUM_SL2_TVAPI_WINDOW_MAIN = 0;
+    EpgModelDefines.ENUM_SL2_TVAPI_WINDOW_PIP = 1;
+    EpgModelDefines.ENUM_SL2_TVAPI_WINDOW_TTX = 2;
+    EpgModelDefines.ENUM_SL2_TVAPI_WINDOW_LIVESTREAM_0 = 3;
+    EpgModelDefines.ENUM_SL2_TVAPI_WINDOW_LIVESTREAM_1 = 4;
+
+    EpgModelDefines.ENUM_SL2_TVAPI_TVSERVICE_EPG_TYPE_ACTUAL_PF = 0;
+    EpgModelDefines.ENUM_SL2_TVAPI_TVSERVICE_EPG_TYPE_OTHER_PF = 1;
+    EpgModelDefines.ENUM_SL2_TVAPI_TVSERVICE_EPG_TYPE_ACTUAL_SCH = 2;
+    EpgModelDefines.ENUM_SL2_TVAPI_TVSERVICE_EPG_TYPE_OTHER_SCH = 3;
+
+    EpgModelDefines.ENUM_SL2_TVAPI_TVSERVICE_EPG_SERVICE_FILED_WINDOW = 0;
+    EpgModelDefines.ENUM_SL2_TVAPI_TVSERVICE_EPG_SERVICE_FILED_TYPE = 1;
+    EpgModelDefines.ENUM_SL2_TVAPI_TVSERVICE_EPG_SERVICE_FILED_ONID = 2;
+    EpgModelDefines.ENUM_SL2_TVAPI_TVSERVICE_EPG_SERVICE_FILED_TSID = 3;
+    EpgModelDefines.ENUM_SL2_TVAPI_TVSERVICE_EPG_SERVICE_FILED_SID = 4;
+    EpgModelDefines.ENUM_SL2_TVAPI_TVSERVICE_EPG_SERVICE_FILED_SIZE = 5;
 }
 /**
  * EpgModel class derived from SubModel.
@@ -118,6 +138,12 @@ function EpgModel(parentModel) {
             EpgModelDefines.SL2_TVAPI_VI32_EPG_THEMES_COLOR,
             "getThemsColor", "setThemsColor", "onThemsColorChaged",
             null, null);
+
+    // EPG Complete
+    this.registerIntegerVectorObject(
+            EpgModelDefines.SL2_TVAPI_VI32_EPG_SERVICE_COMPLETE,
+            "getEpgServiceComplete", null, "onEpgServiceComplete",
+            null, null );
 
         this.registerActionObject(
             EpgModelDefines.SL2_TVAPI_ACTION_GET_PROGRAM_TIME,

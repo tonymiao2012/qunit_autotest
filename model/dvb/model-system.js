@@ -62,6 +62,7 @@ function SystemModelDefines() {
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_SCREEN_SAVER_CONTROL = "tvapi.i32.system.screen.saver.control";
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_NOTIFICATIONS_CONTROL = "de.loewe.sl2.i32.system.notifications.control";//DBTAG -Pete 20161011
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_ENTER_HIMEDIA_FLAG = "de.loewe.sl2.i32.system.enter.himedia.flag";
+    SystemModelDefines.SL2_TVAPI_I32_VALUE_WINDOW_CONTROL_FLAG = "de.loewe.sl2.i32.value-added.window.control";
     SystemModelDefines.SL2_TVAPI_TABLE_TVSERVICE_AUDIO_TABLE = "de.loewe.sl2.tvservice.audio.table"; //DBTAG -MARK 20160929
     SystemModelDefines.SL2_TVAPI_STR_BASIC_SETTINGS_TV_FEATURECODE = "de.loewe.sl2.str.basic.settings.tv.featurecode";
 
@@ -408,6 +409,7 @@ function SystemModelDefines() {
     SystemModelDefines.SL2_TVAPI_STR_SYSTEM_UPGRADE_BUILT_IN_VIDEO_COPY = "de.loewe.sl2.str.storemode.copy.operation";
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_UPGRADE_BUILT_IN_VIDEO_PROGRESS = "de.loewe.sl2.i32.storemode.copy.progress";
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_UPGRADE_BUILT_IN_VIDEO_RETCODE = "de.loewe.sl2.i32.storemode.copy.retcode";
+    SystemModelDefines.SL2_TVAPI_I32_SYSTEM_SELLER_FLAG = "de.loewe.sl2.i32.system.seller.flag";
 
 }
 function SystemModel(_) {
@@ -526,7 +528,8 @@ function SystemModel(_) {
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_ENUM_PVR_STATUS, "getPVRStatus", "setPVRStatus", "onPVRStatusChanged", null, null);
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_ENUM_PVR_STANDBY, "getPVRStandby", "setPVRStandby", "onPVRStandbyChanged", null, null);
         this.registerStringVectorObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_ATV_MTS_LIST, "getATVAudioTrackList", "setATVAudioTrackList", "onATVAudioTrackListChanged", null, null);
-        this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_ATV_MTS_ITEM, "getATVAudioTrackSelect", "setATVAudioTrackSelect", "onATVAudioTrackSelectChanged", null, null)
+        this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_ATV_MTS_ITEM, "getATVAudioTrackSelect", "setATVAudioTrackSelect", "onATVAudioTrackSelectChanged", null, null);
+        this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_VALUE_WINDOW_CONTROL_FLAG, "getHBBTvWindowControl", "setHBBTvWindowControl", "onHBBTvWindowControlChanged", null, null);
         this.registerActionObject(
             SystemModelDefines.SL2_TVAPI_ACTION_SYSTEM_HALF_AN_HOUR_IDLE,
             [
@@ -542,6 +545,7 @@ function SystemModel(_) {
         this.registerStringObject(SystemModelDefines.SL2_TVAPI_STR_SYSTEM_UPGRADE_BUILT_IN_VIDEO_COPY, "getUpgradeBuiltInVideoCopy", "setUpgradeBuiltInVideoCopy", "onUpgradeBuiltInVideoCopy", null, null);
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_UPGRADE_BUILT_IN_VIDEO_PROGRESS, "getUpgradeBuiltInVideoProgress", "setUpgradeBuiltInVideoProgress", "onUpgradeBuiltInVideoProgress", null, null);
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_UPGRADE_BUILT_IN_VIDEO_RETCODE, "getUpgradeBuiltInVideoRetcode", "setUpgradeBuiltInVideoRetcode", "onUpgradeBuiltInVideoRetcode", null, null);
+        this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_SELLER_FLAG, "getSystemSellerFlag", "setSystemSellerFlag", "onSystemSellerFlag", null, null);
   }
 }
 SystemModel.prototype = new SubModel;
