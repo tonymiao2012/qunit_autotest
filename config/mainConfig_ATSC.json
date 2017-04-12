@@ -77,52 +77,40 @@
     "name": "Scan",
     "testcase": [
       {
-        "casename": "2001_setSourceDtvT",
-        "input": []
+        "casename": "2001_setSourceDtvT"
       },
       {
-        "casename": "2002_getSourceDtvT",
-        "input": []
+        "casename": "2002_getSourceDtvT"
       },
       {
-        "casename": "2003_setSourceAtvT",
-        "input": []
+        "casename": "2003_setSourceAtvT"
       },
       {
-        "casename": "2004_getSourceAtvT",
-        "input": []
+        "casename": "2004_getSourceAtvT"
       },
       {
-        "casename": "2005_setSourceDtvC",
-        "input": []
+        "casename": "2005_setSourceDtvC"
       },
       {
-        "casename": "2006_getSourceDtvC",
-        "input": []
+        "casename": "2006_getSourceDtvC"
       },
       {
-        "casename": "2007_setSourceAtvC",
-        "input": []
+        "casename": "2007_setSourceAtvC"
       },
       {
-        "casename": "2008_getSourceAtvC",
-        "input": []
+        "casename": "2008_getSourceAtvC"
       },
       {
-        "casename": "2009_autoScanStartDtvT",
-        "input": []
+        "casename": "2009_autoScanStartDtvT"
       },
       {
-        "casename": "2010_autoScanStartAtvT",
-        "input": []
+        "casename": "2010_autoScanStartAtvT"
       },
       {
-        "casename": "2011_autoScanStartDtvC",
-        "input": []
+        "casename": "2011_autoScanStartDtvC"
       },
       {
-        "casename": "2012_autoScanStartAtvC",
-        "input": []
+        "casename": "2012_autoScanStartAtvC"
       },
       {
         "casename": "2013_manualScanStartDtvT",
@@ -149,28 +137,22 @@
         ]
       },
       {
-        "casename": "2017_autoScanStopDtvT",
-        "input": []
+        "casename": "2017_autoScanStopDtvT"
       },
       {
-        "casename": "2018_autoScanStopDtvC",
-        "input": []
+        "casename": "2018_autoScanStopDtvC"
       },
       {
-        "casename": "2019_autoScanProgressDtvT",
-        "input": []
+        "casename": "2019_autoScanProgressDtvT"
       },
       {
-        "casename": "2020_autoScanProgressDtvC",
-        "input": []
+        "casename": "2020_autoScanProgressDtvC"
       },
       {
-        "casename": "2021_autoScanProgressAtvT",
-        "input": []
+        "casename": "2021_autoScanProgressAtvT"
       },
       {
-        "casename": "2022_autoScanProgressAtvC",
-        "input": []
+        "casename": "2022_autoScanProgressAtvC"
       },
       {
         "casename": "2023_autoScanDigitServicesDtvT",
@@ -225,28 +207,22 @@
         ]
       },
       {
-        "casename": "2031_autoScanCompleteStateDtvT",
-        "input": []
+        "casename": "2031_autoScanCompleteStateDtvT"
       },
       {
-        "casename": "2032_autoScanCompleteStateAtvT",
-        "input": []
+        "casename": "2032_autoScanCompleteStateAtvT"
       },
       {
-        "casename": "2033_autoScanCompleteStateDtvC",
-        "input": []
+        "casename": "2033_autoScanCompleteStateDtvC"
       },
       {
-        "casename": "2034_autoScanCompleteStateAtvC",
-        "input": []
+        "casename": "2034_autoScanCompleteStateAtvC"
       },
       {
-        "casename": "2035_autoScanCancelStateDtvT",
-        "input": []
+        "casename": "2035_autoScanCancelStateDtvT"
       },
       {
-        "casename": "2036_autoScanCancelStateDtvC",
-        "input": []
+        "casename": "2036_autoScanCancelStateDtvC"
       },
       {
         "casename": "2037_manualScanCompleteStateDtvT",
@@ -285,16 +261,13 @@
         ]
       },
       {
-        "casename": "2043_ScanIsRunning",
-        "input": []
+        "casename": "2043_ScanIsRunning"
       },
       {
-        "casename": "2044_ScanFinishDtvT",
-        "input": []
+        "casename": "2044_ScanFinishDtvT"
       },
       {
-        "casename": "2045_ScanFinishDtvC",
-        "input": []
+        "casename": "2045_ScanFinishDtvC"
       }
     ],
     "icon-class": "fa fa-signal fa-2x"
@@ -315,8 +288,7 @@
         ]
       },
       {
-        "casename": "3003_getMainPlay",
-        "input": []
+        "casename": "3003_getMainPlay"
       },
       {
         "casename": "3004_mainPlayChangedDvbT",
@@ -331,16 +303,13 @@
         ]
       },
       {
-        "casename": "3006_getNoSignalMain",
-        "input": []
+        "casename": "3006_getNoSignalMain"
       },
       {
-        "casename": "3007_getSignalLevel",
-        "input": []
+        "casename": "3007_getSignalLevel"
       },
       {
-        "casename": "3008_getSignalCn",
-        "input": []
+        "casename": "3008_getSignalCn"
       }
     ],
     "icon-class": "fa fa-play-circle-o fa-2x"
@@ -435,13 +404,13 @@
       {
         "casename": "4015_getBlockListT",
         "input": [
-          "Expected number"
+          "Expect number"
         ]
       },
       {
         "casename": "4016_getBlockListC",
         "input": [
-          "Expected number"
+          "Expect number"
         ]
       },
       {
@@ -481,16 +450,13 @@
         ]
       },
       {
-        "casename": "4023_onChannelListUpdate",
-        "input": []
+        "casename": "4023_onChannelListUpdate"
       },
       {
-        "casename": "4024_checkChannelListT",
-        "input": []
+        "casename": "4024_checkChannelListT"
       },
       {
-        "casename": "4025_checkChannelListC",
-        "input": []
+        "casename": "4025_checkChannelListC"
       }
     ],
     "icon-class": "fa fa-steam fa-2x"
@@ -499,8 +465,7 @@
     "name": "PC",
     "testcase": [
       {
-        "casename": "5001_getPin",
-        "input": []
+        "casename": "5001_getPin"
       },
       {
         "casename": "5002_setPin",
@@ -509,8 +474,7 @@
         ]
       },
       {
-        "casename": "5003_getSModel",
-        "input": []
+        "casename": "5003_getSModel"
       },
       {
         "casename": "5004_setSModel",
@@ -519,16 +483,13 @@
         ]
       },
       {
-        "casename": "5005_reset",
-        "input": []
+        "casename": "5005_reset"
       },
       {
-        "casename": "5006_getPinRequest",
-        "input": []
+        "casename": "5006_getPinRequest"
       },
       {
-        "casename": "5007_getStart",
-        "input": []
+        "casename": "5007_getStart"
       },
       {
         "casename": "5008_setStart",
@@ -537,8 +498,7 @@
         ]
       },
       {
-        "casename": "5009_getEnd",
-        "input": []
+        "casename": "5009_getEnd"
       },
       {
         "casename": "5010_setEnd",
@@ -547,8 +507,7 @@
         ]
       },
       {
-        "casename": "5011_getEndWeekly",
-        "input": []
+        "casename": "5011_getEndWeekly"
       },
       {
         "casename": "5012_setEndWeekly",
@@ -557,8 +516,7 @@
         ]
       },
       {
-        "casename": "5013_getBlockUnrated",
-        "input": []
+        "casename": "5013_getBlockUnrated"
       },
       {
         "casename": "5014_setBlockUnrated",
@@ -567,8 +525,7 @@
         ]
       },
       {
-        "casename": "5015_getUsTvRating",
-        "input": []
+        "casename": "5015_getUsTvRating"
       },
       {
         "casename": "5016_actionSetUsTvRating",
@@ -578,8 +535,7 @@
         ]
       },
       {
-        "casename": "5017_getUsMovieRating",
-        "input": []
+        "casename": "5017_getUsMovieRating"
       },
       {
         "casename": "5018_setUsMovieRating",
@@ -588,8 +544,7 @@
         ]
       },
       {
-        "casename": "5019_getCanEnglishRating",
-        "input": []
+        "casename": "5019_getCanEnglishRating"
       },
       {
         "casename": "5020_setCanEnglishRating",
@@ -598,8 +553,7 @@
         ]
       },
       {
-        "casename": "5021_getCanFrenchRating",
-        "input": []
+        "casename": "5021_getCanFrenchRating"
       },
       {
         "casename": "5022_setCanFrenchRating",
@@ -608,20 +562,16 @@
         ]
       },
       {
-        "casename": "5023_pinRequestConfirm",
-        "input": []
+        "casename": "5023_pinRequestConfirm"
       },
       {
-        "casename": "5024_openVchipRegionPage",
-        "input": []
+        "casename": "5024_openVchipRegionPage"
       },
       {
-        "casename": "5025_openVchipDimensionPage",
-        "input": []
+        "casename": "5025_openVchipDimensionPage"
       },
       {
-        "casename": "5026_openVchipRatingValuePage",
-        "input": []
+        "casename": "5026_openVchipRatingValuePage"
       },
       {
         "casename": "5027_setLevelPage",
@@ -636,8 +586,7 @@
     "name": "CC",
     "testcase": [
       {
-        "casename": "6001_getControl",
-        "input": []
+        "casename": "6001_getControl"
       },
       {
         "casename": "6002_setControl",
@@ -646,8 +595,7 @@
         ]
       },
       {
-        "casename": "6003_getAnalogMode",
-        "input": []
+        "casename": "6003_getAnalogMode"
       },
       {
         "casename": "6004_setAnalogMode",
@@ -656,8 +604,7 @@
         ]
       },
       {
-        "casename": "6005_getDigitalMode",
-        "input": []
+        "casename": "6005_getDigitalMode"
       },
       {
         "casename": "6006_setDigitalMode",
@@ -666,8 +613,7 @@
         ]
       },
       {
-        "casename": "6007_getDigitalStyle",
-        "input": []
+        "casename": "6007_getDigitalStyle"
       },
       {
         "casename": "6008_setDigitalStyle",
@@ -676,8 +622,7 @@
         ]
       },
       {
-        "casename": "6009_getDigitalSize",
-        "input": []
+        "casename": "6009_getDigitalSize"
       },
       {
         "casename": "6010_setDigitalSize",
@@ -686,8 +631,7 @@
         ]
       },
       {
-        "casename": "6011_getDigitalFont",
-        "input": []
+        "casename": "6011_getDigitalFont"
       },
       {
         "casename": "6012_setDigitalFont",
@@ -696,8 +640,7 @@
         ]
       },
       {
-        "casename": "6013_getDigitalTextcolor",
-        "input": []
+        "casename": "6013_getDigitalTextcolor"
       },
       {
         "casename": "6014_setDigitalTextcolor",
@@ -706,8 +649,7 @@
         ]
       },
       {
-        "casename": "6015_getDigitalBgcolor",
-        "input": []
+        "casename": "6015_getDigitalBgcolor"
       },
       {
         "casename": "6016_setDigitalBgcolor",
@@ -716,8 +658,7 @@
         ]
       },
       {
-        "casename": "6017_getDigitalEdgecolor",
-        "input": []
+        "casename": "6017_getDigitalEdgecolor"
       },
       {
         "casename": "6018_setDigitalEdgecolor",
@@ -726,8 +667,7 @@
         ]
       },
       {
-        "casename": "6019_getDigitalTextopacity",
-        "input": []
+        "casename": "6019_getDigitalTextopacity"
       },
       {
         "casename": "6020_setDigitalTextopacity",
@@ -736,8 +676,7 @@
         ]
       },
       {
-        "casename": "6021_getDigitalBgopacity",
-        "input": []
+        "casename": "6021_getDigitalBgopacity"
       },
       {
         "casename": "6022_setDigitalBgopacity",
@@ -746,8 +685,7 @@
         ]
       },
       {
-        "casename": "6023_getDigitalEdgeeffect",
-        "input": []
+        "casename": "6023_getDigitalEdgeeffect"
       },
       {
         "casename": "6024_setDigitalEdgeeffect",
@@ -762,8 +700,7 @@
     "name": "InfoBar",
     "testcase": [
       {
-        "casename": "7001_getEitMainNow",
-        "input": []
+        "casename": "7001_getEitMainNow"
       },
       {
         "casename": "7002_EitMainNowChanged",
@@ -772,8 +709,7 @@
         ]
       },
       {
-        "casename": "7003_getEitMainNext",
-        "input": []
+        "casename": "7003_getEitMainNext"
       },
       {
         "casename": "7004_EitMainNextChanged",
@@ -782,8 +718,7 @@
         ]
       },
       {
-        "casename": "7005_getTimeZone",
-        "input": []
+        "casename": "7005_getTimeZone"
       },
       {
         "casename": "7006_setTimeZone",
@@ -792,8 +727,7 @@
         ]
       },
       {
-        "casename": "7007_getTimeFormat",
-        "input": []
+        "casename": "7007_getTimeFormat"
       },
       {
         "casename": "7008_setTimeFormat",
@@ -802,20 +736,16 @@
         ]
       },
       {
-        "casename": "7009_getCurLocalTime",
-        "input": []
+        "casename": "7009_getCurLocalTime"
       },
       {
-        "casename": "7010_audioTable",
-        "input": []
+        "casename": "7010_audioTable"
       },
       {
-        "casename": "7011_audioIndex",
-        "input": []
+        "casename": "7011_audioIndex"
       },
       {
-        "casename": "7012_getAudioIdent",
-        "input": []
+        "casename": "7012_getAudioIdent"
       },
       {
         "casename": "7013_audioIdentChanged",
@@ -824,8 +754,7 @@
         ]
       },
       {
-        "casename": "7014_getVideoFormat",
-        "input": []
+        "casename": "7014_getVideoFormat"
       },
       {
         "casename": "7015_videoFormatChanged",
@@ -834,8 +763,7 @@
         ]
       },
       {
-        "casename": "7016_getFrameAspect",
-        "input": []
+        "casename": "7016_getFrameAspect"
       },
       {
         "casename": "7017_frameAspectChanged",
@@ -844,8 +772,7 @@
         ]
       },
       {
-        "casename": "7018_getCcExist",
-        "input": []
+        "casename": "7018_getCcExist"
       },
       {
         "casename": "7019_ccExistChanged",
