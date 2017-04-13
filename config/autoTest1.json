@@ -1,0 +1,26 @@
+[
+  {
+    "name": "2023_autoScanDigitServicesDtvT",
+    "param0": "1"
+  },
+  {
+    "name": "2024_autoScanAnalogServicesAtvT",
+    "param0": "0"
+  },
+  {
+    "name": "4001_getServicelistT",
+    "param0": "10"
+  }, 
+  {
+    "name": "3001_playChannelT",
+    "param0": "1"
+  }, 
+  {
+    "name": "3001_playChannelT",
+    "param0": "3"
+  },   
+  {
+    "name": "3001_playChannelT",
+    "param0": "5"
+  }    
+]
