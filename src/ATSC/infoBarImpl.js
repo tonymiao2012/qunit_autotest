@@ -113,21 +113,21 @@ function getEitMainNext(funcName) {
     });
 
 }
-function playFirstChannelTForEitMainNowTimeout(funcName, chn) {
+function checkEitMainNowChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
         var done = assert.async(1);
         var timerFlag;
 
         function onEitMainNowChanngedTimeout() {
             model.tvservice.onEitMainNowChanged = null;
-            assert.ok(false, "onEitMainNowChanngedTimeout timeout");
+            assert.ok(false, "checkEitMainNowChanged fail");
             done();
         };
 
         model.tvservice.onEitMainNowChanged = function (val) {
             clearTimeout(timerFlag);
             model.tvservice.onEitMainNowChanged = null;
-            assert.ok(true, "onEitMainNowChanged");
+            assert.ok(true, "checkEitMainNowChanged");
             done();
         }
         model.tvservice.playChannel("0", allChannels_T[chn].uuid);
@@ -135,21 +135,21 @@ function playFirstChannelTForEitMainNowTimeout(funcName, chn) {
         timerFlag = setTimeout(onEitMainNowChanngedTimeout, 5000);
     });
 }
-function playFirstChannelTForEitMainNextTimeout(funcName, chn) {
+function checkEitMainNextChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
         var done = assert.async(1);
         var timerFlag;
 
         function onEitMainNextChanngedTimeout() {
             model.tvservice.onEitMainNextChanged = null;
-            assert.ok(false, "onEitMainNextChanngedTimeout timeout");
+            assert.ok(false, "checkEitMainNextChanged fail");
             done();
         };
 
         model.tvservice.onEitMainNextChanged = function (val) {
             clearTimeout(timerFlag);
             model.tvservice.onEitMainNextChanged = null;
-            assert.ok(true, "onEitMainNextChanged");
+            assert.ok(true, "checkEitMainNextChanged");
             done();
         }
         model.tvservice.playChannel("0", allChannels_T[chn].uuid);
@@ -170,21 +170,21 @@ function getVideoFormat(funcName) {
             $("#details").html(format);
     });
 }
-function playFirstChannelTForFormatTimeout(funcName, chn) {
+function checkVideoFormatChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
         var done = assert.async(1);
         var timerFlag;
 
         function onVideoFormatChanngedTimeout() {
             model.video.onVideoFormatInfoChanged = null;
-            assert.ok(false, "onVideoFormatChanngedTimeout timeout");
+            assert.ok(false, "checkVideoFormatChanged fail");
             done();
         };
 
         model.video.onVideoFormatInfoChanged = function (val) {
             clearTimeout(timerFlag);
             model.video.onVideoFormatInfoChanged = null;
-            assert.ok(true, "onVideoFormatInfoChanged");
+            assert.ok(true, "checkVideoFormatChanged");
             done();
         }
         model.tvservice.playChannel("0", allChannels_T[chn].uuid);
@@ -206,21 +206,21 @@ function getFrameAspect(funcName) {
             $("#details").html(aspect);
     });
 }
-function playFirstChannelTForAspectTimeout(funcName, chn) {
+function checkFrameAspectChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
         var done = assert.async(1);
         var timerFlag;
 
         function onVideoAspectChanngedTimeout() {
             model.video.onVideoFrameAspectChanged = null;
-            assert.ok(false, "onVideoAspectChanngedTimeout");
+            assert.ok(false, "checkFrameAspectChanged fail");
             done();
         };
 
         model.video.onVideoFrameAspectChanged = function (val) {
             clearTimeout(timerFlag);
             model.video.onVideoFrameAspectChanged = null;
-            assert.ok(true, "onVideoFrameAspectChanged");
+            assert.ok(true, "checkFrameAspectChanged");
             done();
         }
         model.tvservice.playChannel("0", allChannels_T[chn].uuid);
@@ -244,17 +244,15 @@ function getCcExist(funcName) {
         assert.ok(cc, "getCcExist");
     });
 }
-function playFirstChannelTForCcTimeout(funcName, chn) {
+function checkCcExistChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
         var done = assert.async(1);
         var timerFlag;
-
         function onCcExistChanngedTimeout() {
             model.video.onCcExistChanged = null;
             assert.ok(false, "onCcExistChanngedTimeout");
             done();
         };
-
         model.video.onCcExistChanged = function (val) {
             clearTimeout(timerFlag);
             model.video.onCcExistChanged = null;
@@ -321,21 +319,21 @@ function getAudioIdent(funcName) {
         assert.ok(result, "Test getAudioIdent");
     });
 }
-function playFirstChannelTForAudioIdentTimeout(funcName, chn) {
+function checkAudioIdentChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
         var done = assert.async(1);
         var timerFlag;
 
         function onAudioIdentChanngedTimeout() {
             model.sound.onAudioIdentChaged = null;
-            assert.ok(false, "onAudioIdentChanngedTimeout ");
+            assert.ok(false, "checkAudioIdentChanged  fail");
             done();
         };
 
         model.sound.onAudioIdentChaged = function (val) {
             clearTimeout(timerFlag);
             model.sound.onAudioIdentChaged = null;
-            assert.ok(true, "onAudioIdentChaged");
+            assert.ok(true, "checkAudioIdentChanged");
             done();
         }
         model.tvservice.playChannel("0", allChannels_T[chn].uuid);
