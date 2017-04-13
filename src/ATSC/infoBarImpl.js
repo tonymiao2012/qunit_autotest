@@ -248,6 +248,7 @@ function checkCcExistChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
         var done = assert.async(1);
         var timerFlag;
+
         function onCcExistChanngedTimeout() {
             model.video.onCcExistChanged = null;
             assert.ok(false, "onCcExistChanngedTimeout");

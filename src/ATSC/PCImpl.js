@@ -1,7 +1,7 @@
 var inputPin = null;
-var regionPageNumber=0;
-var dimensionPageNumber=0;
-var selectlistNumber=0;
+var regionPageNumber = 0;
+var dimensionPageNumber = 0;
+var selectlistNumber = 0;
 function startGetPin() {
     var val = model.parentlock.getPin();
     $("#details").html(val);
@@ -69,12 +69,12 @@ function PCReset(funcName) {
 function startGetPinRequest(expect) {
     var val = model.parentlock.getPinRequest();
     $("#details").html(val[0]);
-    if (val[0]==expect)
+    if (val[0] == expect)
         return true;
     else
         return false;
 }
-function getPinRequest(expect,funcName) {
+function getPinRequest(expect, funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetPinRequest(expect);
         assert.ok(result, "Test getPinRequest");
@@ -372,8 +372,7 @@ function blockChannelDtvT_1() {
     modifyAttr(2, 1, allChannels_T[0].uuid);
     model.tvservice.playChannel("0", allChannels_T[0].uuid);
 }
-function pinRequestConfirm(funcName)
-{
+function pinRequestConfirm(funcName) {
     QUnit.test(funcName, function (assert) {
         var done = assert.async(1);
 
@@ -392,11 +391,11 @@ function pinRequestConfirm(funcName)
 function startOpenVchipRegionPage() {
     var val = model.parentlock.openVchipRegionPage();
     if (val.datalist.length > 0) {
-    	  var regionValue="";
+        var regionValue = "";
         for (var i in val.datalist)
-             regionValue=regionValue+val.datalist[i]+";";
+            regionValue = regionValue + val.datalist[i] + ";";
         $("#details").html(regionValue);
-        regionPageNumber=i;    
+        regionPageNumber = i;
         return true;
     }
     else
@@ -411,11 +410,11 @@ function openVchipRegionPage(funcName) {
 function startOpenVchipDimensionPage() {
     var val = model.parentlock.openVchipDimensionPage(0);
     if (val.datalist.length > 0) {
-    	  var dimensionValue="";
+        var dimensionValue = "";
         for (var i in val.datalist)
-        		dimensionValue=dimensionValue+val.datalist[i]+";";
+            dimensionValue = dimensionValue + val.datalist[i] + ";";
         $("#details").html(dimensionValue);
-        dimensionPageNumber=i;
+        dimensionPageNumber = i;
         return true;
     }
     else
@@ -427,35 +426,35 @@ function openVchipDimensionPage(funcName) {
         assert.ok(result, "Test openVchipDimensionPage");
     });
 }
-function startOpenVchipRatingValuePage(region,dimen) {
-    var val = model.parentlock.openVchipRatingValuePage(region,dimen);
+function startOpenVchipRatingValuePage(region, dimen) {
+    var val = model.parentlock.openVchipRatingValuePage(region, dimen);
     if (val.datalist.length > 0) {
-    	  var ratingValue="";
+        var ratingValue = "";
         for (var i = 0; i < val.datalist.length; i++)
-            ratingValue=ratingValue+val.datalist[i] + "-" + val.selectlist[i] + ";"
-        selectlistNumber=i;    
+            ratingValue = ratingValue + val.datalist[i] + "-" + val.selectlist[i] + ";"
+        selectlistNumber = i;
         $("#details").html(ratingValue);
         return true;
     }
     else
         return false;
 }
-function openVchipRatingValuePage(region,dimen,funcName) {
+function openVchipRatingValuePage(region, dimen, funcName) {
     QUnit.test(funcName, function (assert) {
-        var result = startOpenVchipRatingValuePage(region,dimen);
+        var result = startOpenVchipRatingValuePage(region, dimen);
         assert.ok(result, "Test openVchipRatingValuePage");
     });
 }
-function startSetLevelPage(region,dimen,selectlist,flag) {
-    var val = model.parentlock.setLevelPage(region,dimen,selectlist, flag);
+function startSetLevelPage(region, dimen, selectlist, flag) {
+    var val = model.parentlock.setLevelPage(region, dimen, selectlist, flag);
     if (val[selectlist] == flag)
         return true;
     else
         return false;
 }
-function setLevelPage(region,dimen,selectlist,flag,funcName) {
+function setLevelPage(region, dimen, selectlist, flag, funcName) {
     QUnit.test(funcName, function (assert) {
-        var result = startSetLevelPage(region,dimen,selectlist,flag);
+        var result = startSetLevelPage(region, dimen, selectlist, flag);
         assert.ok(result, "Test setLevelPage");
     });
 }

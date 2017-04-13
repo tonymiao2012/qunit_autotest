@@ -1,15 +1,14 @@
 function handleRepeatTestCase(toolbarArray, funcName) {
     var repeat = parseInt(toolbarArray[0].value);
-    if((repeat <1)||isNaN(repeat))
-    	{
-    		$("#details").html(" At least 1 time!") ;
-    		return;
-    	} 
+    if ((repeat < 1) || isNaN(repeat)) {
+        $("#details").html(" At least 1 time!");
+        return;
+    }
     var expectNum = 0;
     if (toolbarArray.length > 1) {
         expectNum = parseInt(toolbarArray[1].value);
-        if(isNaN(expectNum))
-        		expectNum=0;
+        if (isNaN(expectNum))
+            expectNum = 0;
     }
     switch (funcName) {
         case "1001_autoScanT":
@@ -21,46 +20,46 @@ function handleRepeatTestCase(toolbarArray, funcName) {
             autoSearch(repeat, expectNum, sourceType, funcName);
             break;
         case "1003_channelUpT":
-            if(allChannels_T.length>0)
-            		channelUpT(repeat, funcName);
+            if (allChannels_T.length > 0)
+                channelUpT(repeat, funcName);
             else
-                $("#details").html(" Click 4001_getServicelistT at first!")            	
+                $("#details").html(" Click 4001_getServicelistT at first!")
             break;
         case "1004_channelDownT":
-            if(allChannels_T.length>0)
-            		channelDownT(repeat, funcName);
+            if (allChannels_T.length > 0)
+                channelDownT(repeat, funcName);
             else
-                $("#details").html(" Click 4001_getServicelistT at first!")            	
+                $("#details").html(" Click 4001_getServicelistT at first!")
             break;
         case "1005_channelRandomT":
-            if(allChannels_T.length>0)
-            		channelRandomT(repeat, funcName);
+            if (allChannels_T.length > 0)
+                channelRandomT(repeat, funcName);
             else
-                $("#details").html(" Click 4001_getServicelistT at first!")            	
+                $("#details").html(" Click 4001_getServicelistT at first!")
             break;
         case "1006_channelUpC":
-            if(allChannels_C.length>0)
-            		channelUpC(repeat, funcName);
+            if (allChannels_C.length > 0)
+                channelUpC(repeat, funcName);
             else
-                $("#details").html(" Click 4002_getServicelistC at first!")            	
+                $("#details").html(" Click 4002_getServicelistC at first!")
             break;
         case "1007_channelDownC":
-            if(allChannels_C.length>0)
-            		channelDownC(repeat, funcName);
+            if (allChannels_C.length > 0)
+                channelDownC(repeat, funcName);
             else
-                $("#details").html(" Click 4002_getServicelistC at first!")            	
+                $("#details").html(" Click 4002_getServicelistC at first!")
             break;
         case "1008_channelRandomC":
-            if(allChannels_C.length>0)
-            		channelRandomC(repeat, funcName);
+            if (allChannels_C.length > 0)
+                channelRandomC(repeat, funcName);
             else
-                $("#details").html(" Click 4002_getServicelistC at first!")            	
+                $("#details").html(" Click 4002_getServicelistC at first!")
             break;
         case "1009_channelSwitchT_C":
-            if((allChannels_T.length>0)&&(allChannels_C.length>0))
-            		randomSwitchChannel(repeat, funcName);
+            if ((allChannels_T.length > 0) && (allChannels_C.length > 0))
+                randomSwitchChannel(repeat, funcName);
             else
-                $("#details").html(" Click 4001_getServicelistT and 4002_getServicelistC at first!")            	
+                $("#details").html(" Click 4001_getServicelistT and 4002_getServicelistC at first!")
             break;
     }
 }
@@ -173,32 +172,32 @@ function handleScanTestCase(toolbarArray, funcName) {
         case "2023_autoScanDigitServicesDtvT":
             var sourceType = 15;
             var expectNum = toolbarArray[0].value;
-            if(isNaN(expectNum))
-        			expectNum=0;
+            if (isNaN(expectNum))
+                expectNum = 0;
             $("#total").html("");
             autoScanServices(expectNum, sourceType, funcName);
             break;
         case "2024_autoScanAnalogServicesAtvT":
             var sourceType = 17;
             var expectNum = toolbarArray[0].value;
-        		if(isNaN(expectNum))
-        			expectNum=0;            
+            if (isNaN(expectNum))
+                expectNum = 0;
             $("#total").html("");
             autoScanServices(expectNum, sourceType, funcName);
             break;
         case "2025_autoScanDigitServicesDtvC":
             var sourceType = 16;
             var expectNum = toolbarArray[0].value;
-            if(isNaN(expectNum))
-        			expectNum=0;
+            if (isNaN(expectNum))
+                expectNum = 0;
             $("#total").html("");
             autoScanServices(expectNum, sourceType, funcName);
             break;
         case "2026_autoScanAnalogServicesAtvC":
             var sourceType = 18;
             var expectNum = toolbarArray[0].value;
-            if(isNaN(expectNum))
-        			expectNum=0;
+            if (isNaN(expectNum))
+                expectNum = 0;
             $("#total").html("");
             autoScanServices(expectNum, sourceType, funcName);
             break;
@@ -379,14 +378,14 @@ function handleServiceListTestCase(toolbarArray, funcName) {
     switch (funcName) {
         case "4001_getServicelistT":
             var expectNum = toolbarArray[0].value;
-            if(isNaN(expectNum))
-            		expectNum=0;
+            if (isNaN(expectNum))
+                expectNum = 0;
             checkServiceT(expectNum, funcName);
             break;
         case "4002_getServicelistC":
             var expectNum = toolbarArray[0].value;
-            if(isNaN(expectNum))
-            		expectNum=0;
+            if (isNaN(expectNum))
+                expectNum = 0;
             checkServiceC(expectNum, funcName);
             break;
         case "4003_getFavListT":
@@ -559,7 +558,7 @@ function handleServiceListTestCase(toolbarArray, funcName) {
             checkServiceListTByFile(funcName);
             break;
         case "4025_checkChannelListC":
-						checkServiceListCByFile(funcName);
+            checkServiceListCByFile(funcName);
             break;
     }
 }
@@ -591,7 +590,7 @@ function handlePCTestCase(toolbarArray, funcName) {
             break;
         case "5006_getPinRequest":
             var expect = toolbarArray[0].value;
-            getPinRequest(expect,funcName);
+            getPinRequest(expect, funcName);
             break;
         case "5007_getStart":
             getStartTime(funcName);
@@ -632,17 +631,17 @@ function handlePCTestCase(toolbarArray, funcName) {
                     temp1 = parseInt(temp1 / 10);
                     if ((day == 1) && (weekly.indexOf("Mon") == -1))
                         weekly += "Mon,";
-                    else if ((day == 2)&&(weekly.indexOf("Tue")==-1))
+                    else if ((day == 2) && (weekly.indexOf("Tue") == -1))
                         weekly += "Tue,";
-                    else if ((day == 3)&&(weekly.indexOf("Wed")==-1))
+                    else if ((day == 3) && (weekly.indexOf("Wed") == -1))
                         weekly += "Wed,";
-                    else if ((day == 4)&&(weekly.indexOf("Thu")==-1))
+                    else if ((day == 4) && (weekly.indexOf("Thu") == -1))
                         weekly += "Thu,";
-                    else if ((day == 5)&&(weekly.indexOf("Fri")==-1))
+                    else if ((day == 5) && (weekly.indexOf("Fri") == -1))
                         weekly += "Fri,";
-                    else if ((day == 6)&&(weekly.indexOf("Sat")==-1))
+                    else if ((day == 6) && (weekly.indexOf("Sat") == -1))
                         weekly += "Sat,";
-                    else if ((day == 7)&&(weekly.indexOf("Sun")==-1))
+                    else if ((day == 7) && (weekly.indexOf("Sun") == -1))
                         weekly += "Sun,";
                 } while (temp1 != 0)
                 setEndWeekly(weekly, funcName);
@@ -715,23 +714,23 @@ function handlePCTestCase(toolbarArray, funcName) {
             openVchipDimensionPage(funcName);
             break;
         case "5026_openVchipRatingValuePage":
-            var region=parseInt(toolbarArray[0].value);
-            var dimen=parseInt(toolbarArray[1].value);
-            if((region<=regionPageNumber)&&(dimen<=dimensionPageNumber))
-            		openVchipRatingValuePage(region,dimen,funcName);
+            var region = parseInt(toolbarArray[0].value);
+            var dimen = parseInt(toolbarArray[1].value);
+            if ((region <= regionPageNumber) && (dimen <= dimensionPageNumber))
+                openVchipRatingValuePage(region, dimen, funcName);
             else
-            		$("#details").html(" The  number is error ");
+                $("#details").html(" The  number is error ");
             break;
         case "5027_setLevelPage":
-            var region=parseInt(toolbarArray[0].value);
-            var dimen=parseInt(toolbarArray[1].value);
-            var selectlist = parseInt(toolbarArray[2].value); 
+            var region = parseInt(toolbarArray[0].value);
+            var dimen = parseInt(toolbarArray[1].value);
+            var selectlist = parseInt(toolbarArray[2].value);
             var flag = parseInt(toolbarArray[3].value)
-            if ((selectlist<=selectlistNumber)&&(region<=regionPageNumber)&&(dimen<=dimensionPageNumber)&&((flag==0)||(flag==1)))
-                setLevelPage(region,dimen,selectlist,flag,funcName);
+            if ((selectlist <= selectlistNumber) && (region <= regionPageNumber) && (dimen <= dimensionPageNumber) && ((flag == 0) || (flag == 1)))
+                setLevelPage(region, dimen, selectlist, flag, funcName);
             else
                 $("#details").html("input error");
-            break;          
+            break;
     }
 }
 
@@ -877,7 +876,7 @@ function handleInfoBarTestCase(toolbarArray, funcName) {
             break;
         case "7002_EitMainNowChanged":
             var chn = parseInt(toolbarArray[0].value);
-            if (chn < allChannels_T.length){
+            if (chn < allChannels_T.length) {
                 checkEitMainNowChanged(funcName, chn);
             }
             else {
@@ -889,7 +888,7 @@ function handleInfoBarTestCase(toolbarArray, funcName) {
             break;
         case "7004_EitMainNextChanged":
             var chn = parseInt(toolbarArray[0].value);
-            if(chn < allChannels_T.length) {
+            if (chn < allChannels_T.length) {
                 checkEitMainNextChanged(funcName, chn);
             }
             else {
@@ -934,7 +933,7 @@ function handleInfoBarTestCase(toolbarArray, funcName) {
             break;
         case "7013_audioIdentChanged":
             var chn = parseInt(toolbarArray[0].value);
-            if(chn < allChannels_T.length) {
+            if (chn < allChannels_T.length) {
                 checkAudioIdentChanged(funcName, chn);
             }
             else {
@@ -946,7 +945,7 @@ function handleInfoBarTestCase(toolbarArray, funcName) {
             break;
         case "7015_videoFormatChanged":
             var chn = parseInt(toolbarArray[0].value);
-            if(chn < allChannels_T.length) {
+            if (chn < allChannels_T.length) {
                 checkVideoFormatChanged(funcName, chn);
             }
             else {
@@ -958,7 +957,7 @@ function handleInfoBarTestCase(toolbarArray, funcName) {
             break;
         case "7017_frameAspectChanged":
             var chn = parseInt(toolbarArray[0].value);
-            if(chn < allChannels_T.length){
+            if (chn < allChannels_T.length) {
                 checkFrameAspectChanged(funcName, chn);
             }
             else {
@@ -970,7 +969,7 @@ function handleInfoBarTestCase(toolbarArray, funcName) {
             break;
         case "7019_ccExistChanged":
             var chn = parseInt(toolbarArray[0].value);
-            if(chn < allChannels_T.length) {
+            if (chn < allChannels_T.length) {
                 checkCcExistChanged(funcName, chn);
             }
             else {
@@ -978,12 +977,12 @@ function handleInfoBarTestCase(toolbarArray, funcName) {
             }
             break;
     }
-}   
-function handleAutoTestCase(toolbarArray,funcName) {
+}
+function handleAutoTestCase(toolbarArray, funcName) {
     switch (funcName) {
         case "8001_autoTest1":
-           // handleScanTestCase(1, 1, "2019_autoScanProgressDtvT");
-            handleServiceListTestCase(1, 1, "4001_getServicelistT") 
+            // handleScanTestCase(1, 1, "2019_autoScanProgressDtvT");
+            handleServiceListTestCase(1, 1, "4001_getServicelistT")
             handleScanTestCase(1, 1, "2002_getSourceDtvT");
             break;
     }
