@@ -25,8 +25,16 @@ function startSetPin(pinValue) {
 }
 function setPin(pinValue, funcName) {
     QUnit.test(funcName, function (assert) {
-        var result = startSetPin(pinValue);
+    	if ((pinValue>=1000)&&(pinValue<=9999))
+    	{
+        var result = startSetPin(pinValue.toString());
         assert.ok(result, "Test setPin");
+      }
+      else
+      {
+        assert.ok(false,"setPin");
+        $("#details").html(" Pin length isn't 4");        	
+      }	
     });
 }
 function startGetSModel() {
@@ -441,8 +449,16 @@ function startOpenVchipRatingValuePage(region, dimen) {
 }
 function openVchipRatingValuePage(region, dimen, funcName) {
     QUnit.test(funcName, function (assert) {
-        var result = startOpenVchipRatingValuePage(region, dimen);
+    	if((region<=regionPageNumber)&&(dimen<=dimensionPageNumber))
+    	{
+        var result = startOpenVchipRatingValuePage(region,dimen);
         assert.ok(result, "Test openVchipRatingValuePage");
+      }
+      else
+      {
+        assert.ok(false,"openVchipRatingValuePage fail");
+        $("#details").html(" The  number is error");        
+      }	
     });
 }
 function startSetLevelPage(region, dimen, selectlist, flag) {
@@ -454,7 +470,15 @@ function startSetLevelPage(region, dimen, selectlist, flag) {
 }
 function setLevelPage(region, dimen, selectlist, flag, funcName) {
     QUnit.test(funcName, function (assert) {
-        var result = startSetLevelPage(region, dimen, selectlist, flag);
+    	if ((selectlist<=selectlistNumber)&&(region<=regionPageNumber)&&(dimen<=dimensionPageNumber)&&((flag==0)||(flag==1)))
+    	{
+        var result = startSetLevelPage(region,dimen,selectlist,flag);
         assert.ok(result, "Test setLevelPage");
+      }
+      else
+      {
+        assert.ok(false,"openVchipRatingValuePage fail");
+        $("#details").html(" input has error");       	
+      }	
     });
 }

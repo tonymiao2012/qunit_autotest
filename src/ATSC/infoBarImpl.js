@@ -115,6 +115,8 @@ function getEitMainNext(funcName) {
 }
 function checkEitMainNowChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
+    	if (chn < allChannels_T.length)
+    	{
         var done = assert.async(1);
         var timerFlag;
 
@@ -133,10 +135,17 @@ function checkEitMainNowChanged(funcName, chn) {
         model.tvservice.playChannel("0", allChannels_T[chn].uuid);
         $("#name").html(allChannels_T[chn].name);
         timerFlag = setTimeout(onEitMainNowChanngedTimeout, 5000);
+      } 
+      else
+      {
+        assert.ok(false,"channel length is 0");
+        $("#details").html(" Click 4001_getServicelistT  at first!");        	
+      }	     
     });
 }
 function checkEitMainNextChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
+    	if(chn < allChannels_T.length) {
         var done = assert.async(1);
         var timerFlag;
 
@@ -155,6 +164,12 @@ function checkEitMainNextChanged(funcName, chn) {
         model.tvservice.playChannel("0", allChannels_T[chn].uuid);
         $("#name").html(allChannels_T[chn].name);
         timerFlag = setTimeout(onEitMainNextChanngedTimeout, 5000);
+      }
+      else
+      {
+        		assert.ok(false,"channel length is 0");
+        		$("#details").html(" Click 4001_getServicelistT  at first!");        	
+      }	
     });
 }
 function startGetVideoFormat() {
@@ -172,6 +187,7 @@ function getVideoFormat(funcName) {
 }
 function checkVideoFormatChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
+    	if(chn < allChannels_T.length){
         var done = assert.async(1);
         var timerFlag;
 
@@ -190,6 +206,12 @@ function checkVideoFormatChanged(funcName, chn) {
         model.tvservice.playChannel("0", allChannels_T[chn].uuid);
         $("#name").html(allChannels_T[chn].name);
         timerFlag = setTimeout(onVideoFormatChanngedTimeout, 5000);
+      }
+      else
+      {
+        		assert.ok(false,"channel length is 0");
+        		$("#details").html(" Click 4001_getServicelistT  at first!");        
+      }	
     });
 }
 
@@ -208,6 +230,7 @@ function getFrameAspect(funcName) {
 }
 function checkFrameAspectChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
+    	if(chn < allChannels_T.length){
         var done = assert.async(1);
         var timerFlag;
 
@@ -226,6 +249,12 @@ function checkFrameAspectChanged(funcName, chn) {
         model.tvservice.playChannel("0", allChannels_T[chn].uuid);
         $("#name").html(allChannels_T[chn].name);
         timerFlag = setTimeout(onVideoAspectChanngedTimeout, 5000);
+      }
+      else
+      {
+        		assert.ok(false,"channel length is 0");
+        		$("#details").html(" Click 4001_getServicelistT  at first!");        	
+      }	
     });
 }
 
@@ -246,9 +275,9 @@ function getCcExist(funcName) {
 }
 function checkCcExistChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
+    	if(chn < allChannels_T.length){
         var done = assert.async(1);
         var timerFlag;
-
         function onCcExistChanngedTimeout() {
             model.video.onCcExistChanged = null;
             assert.ok(false, "onCcExistChanngedTimeout");
@@ -263,6 +292,12 @@ function checkCcExistChanged(funcName, chn) {
         model.tvservice.playChannel("0", allChannels_T[chn].uuid);
         $("#name").html(allChannels_T[chn].name);
         timerFlag = setTimeout(onCcExistChanngedTimeout, 5000);
+      }
+      else
+      {
+        		assert.ok(false,"channel length is 0");
+        		$("#details").html(" Click 4001_getServicelistT  at first!");        
+      }	
     });
 }
 function getAudioIndexImpl() {
@@ -322,6 +357,7 @@ function getAudioIdent(funcName) {
 }
 function checkAudioIdentChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
+    	if(chn < allChannels_T.length){
         var done = assert.async(1);
         var timerFlag;
 
@@ -340,5 +376,11 @@ function checkAudioIdentChanged(funcName, chn) {
         model.tvservice.playChannel("0", allChannels_T[chn].uuid);
         $("#name").html(allChannels_T[chn].name);
         timerFlag = setTimeout(onAudioIdentChanngedTimeout, 5000);
+      }
+      else
+      {
+        		assert.ok(false,"channel length is 0");
+        		$("#details").html(" Click 4001_getServicelistT  at first!");        	
+      }	
     });
 }

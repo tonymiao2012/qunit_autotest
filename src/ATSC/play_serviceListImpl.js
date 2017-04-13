@@ -8,7 +8,12 @@ var blockChannels_T = [];
 var blockChannels_C = [];
 var channelIterator = null;
 var currentIndex = 0;
+var workroot = 1;
+var localTime = new Date();
 QUnit.config.reorder = false;
+var fh = new fileHandler();
+
+
 function eventRowsToChannels(rows) {
     var chnls = [];
     $("#total").html(rows.length);
@@ -189,6 +194,13 @@ function checkServiceT(expectNum, funcName) {
                 showServiceList(sourceType);
             }
             assert.equal(allChannels_T.length, expectNum, "getServiceT ");
+
+            if (allChannels_T.length != expectNum) {
+                var path = "hisenseUI/" + funcName.trim() + ".txt";
+                var content = "Test failed on " + localTime + ". All channelsT length: " + allChannels_T.length + ", expect number: " + expectNum;
+                fh.writeFileToNative(path, content, workroot);
+            }
+
             done();
         };
         getServiceListT();
@@ -206,6 +218,13 @@ function checkServiceC(expectNum, funcName) {
                 showServiceList(sourceType);
             }
             assert.equal(allChannels_C.length, expectNum, "getServiceC ");
+
+            if (allChannels_C.length != expectNum) {
+                var path = "hisenseUI/" + funcName.trim() + ".txt";
+                var content = "Test failed on " + localTime + ". All channelsC length: " + allChannels_C.length + ", expect number: " + expectNum;
+                fh.writeFileToNative(path, content, workroot);
+            }
+
             done();
         };
         getServiceListC();
@@ -275,65 +294,78 @@ function randomChannel_C() {
 
 function playInputedChannel(sourceType, chn, func_name) {
     QUnit.test(func_name, function (assert) {
-        var done = assert.async(1);
-        var timerFlag;
-        var format = "";
-        var curTime = 0;
-        var aspect = "";
-        var starttimeNow = 0;
-        var stoptimeNow = 0;
-        var flag = false;
-        var channelChanged = false;
-        var info = "";
+        if (((sourceType == 1) && (chn < allChannels_T.length)) || ((sourceType == 0) && (chn < allChannels_C.length))) {
+            var done = assert.async(1);
+            var timerFlag;
+            var format = "";
+            var curTime = 0;
+            var aspect = "";
+            var starttimeNow = 0;
+            var stoptimeNow = 0;
+            var flag = false;
+            var channelChanged = false;
+            var info = "";
 
-        function playInputedChannelTimeout() {
-            model.tvservice.onMainPlayChanged = null;
-            model.video.onVideoFormatInfoChanged = null;
-            model.video.onVideoFrameAspectChanged = null;
-            model.tvservice.onEitMainNowChanged = null;
-            if ((format.length != 0) && (aspect.length != 0) && (channelChanged == true) && (starttimeNow > 0) && (stoptimeNow > 0))
-                flag = true;
-            assert.ok(flag, "playInputedChannel");
-            done();
-        };
-        model.tvservice.onMainPlayChanged = function (val) {
-            channelChanged = true;
-        }
-        model.video.onVideoFormatInfoChanged = function (val) {
-            format = val;
-            if (val.length != 0) {
-                info = info + " |" + val;
-                $("#details").html(info);
-            }
-        }
-        model.video.onVideoFrameAspectChanged = function (val) {
-            aspect = val;
-            if (val.length != 0) {
-                info = info + " |" + val;
-                $("#details").html(info);
-            }
-        }
-        model.tvservice.onEitMainNowChanged = function (val) {
-            var pfResultNow = val;
-            if (pfResultNow.length == 12) {
-                starttimeNow = pfResultNow[2];
-                stoptimeNow = pfResultNow[3];
-                var start_now = new Date(pfResultNow[2] * 1000);
-                var stop_now = new Date(pfResultNow[3] * 1000);
-                info = info + "|" + pfResultNow[1] + "|" + start_now.toLocaleString() + "|" + stop_now.toLocaleString() + "|" + pfResultNow[8];
-                $("#details").html(info);
-            }
-        }
+            function playInputedChannelTimeout() {
+                model.tvservice.onMainPlayChanged = null;
+                model.video.onVideoFormatInfoChanged = null;
+                model.video.onVideoFrameAspectChanged = null;
+                model.tvservice.onEitMainNowChanged = null;
+                if ((format.length != 0) && (aspect.length != 0) && (channelChanged == true) && (starttimeNow > 0) && (stoptimeNow > 0))
+                    flag = true;
+                assert.ok(flag, "playInputedChannel");
 
-        if (sourceType == 1) {
-            model.tvservice.playChannel("0", allChannels_T[chn].uuid);
-            $("#name").html(allChannels_T[chn].name);
+                if (flag === false) {
+                    var path = "hisenseUI/" + func_name.trim() + ".txt";
+                    var content = "Test failed on " + localTime;
+                    fh.writeFileToNative(path, content, workroot);
+                }
+
+                done();
+            };
+            model.tvservice.onMainPlayChanged = function (val) {
+                channelChanged = true;
+            }
+            model.video.onVideoFormatInfoChanged = function (val) {
+                format = val;
+                if (val.length != 0) {
+                    info = info + " |" + val;
+                    $("#details").html(info);
+                }
+            }
+            model.video.onVideoFrameAspectChanged = function (val) {
+                aspect = val;
+                if (val.length != 0) {
+                    info = info + " |" + val;
+                    $("#details").html(info);
+                }
+            }
+            model.tvservice.onEitMainNowChanged = function (val) {
+                var pfResultNow = val;
+                if (pfResultNow.length == 12) {
+                    starttimeNow = pfResultNow[2];
+                    stoptimeNow = pfResultNow[3];
+                    var start_now = new Date(pfResultNow[2] * 1000);
+                    var stop_now = new Date(pfResultNow[3] * 1000);
+                    info = info + "|" + pfResultNow[1] + "|" + start_now.toLocaleString() + "|" + stop_now.toLocaleString() + "|" + pfResultNow[8];
+                    $("#details").html(info);
+                }
+            }
+
+            if (sourceType == 1) {
+                model.tvservice.playChannel("0", allChannels_T[chn].uuid);
+                $("#name").html(allChannels_T[chn].name);
+            }
+            else {
+                model.tvservice.playChannel("0", allChannels_C[chn].uuid);
+                $("#name").html(allChannels_C[chn].name);
+            }
+            timerFlag = setTimeout(playInputedChannelTimeout, 4000);
         }
         else {
-            model.tvservice.playChannel("0", allChannels_C[chn].uuid);
-            $("#name").html(allChannels_C[chn].name);
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click 4001_getServicelistT  or 4002_getServicelistC at first!");
         }
-        timerFlag = setTimeout(playInputedChannelTimeout, 4000);
     });
 }
 
@@ -478,35 +510,49 @@ function switchChannel(direction, sourceType, repeat, funcName) {
         var times = repeat;
         var timer;
         //play(direction, sourceType);
-        var done = assert.async(times);
-
-        function playTimeout() {
-            try {
-                if (QUnit.config.interrupt === true) {
-                    throw new Error("Interrupt test case in switchChannel.");
-                }
-                if (i < times) {
-                    assert.equal(play(direction, sourceType), true, "check play ");
-                    i++;
-                    $("#times").html(i);
-                    done();
-                    if (i < times)
-                        setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 1000) + 1000));
-                    else
-                        disableMainPlayChangedCallback();
-                }
-            } catch (e) {
-                console.log(e.message);
-                for (var left = 0; left < times - i; left++) {
-                    done();
-                    disableMainPlayChangedCallback();
-                }
-                //return;
-            }
+        if (((sourceType == 1) && (allChannels_T.length == 0)) || ((sourceType == 0) && (allChannels_C.length == 0))) {
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click 4001_getServicelistT  or 4002_getServicelistC at first!");
         }
+        else {
+            var done = assert.async(times);
 
-        setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 1000) + 1000));
-    });
+            function playTimeout() {
+                try {
+                    if (QUnit.config.interrupt === true) {
+                        throw new Error("Interrupt test case in switchChannel.");
+                    }
+                    if (i < times) {
+                        var result = play(direction, sourceType);
+                        assert.equal(result, true, "check play ");
+
+                        if (result != true) {
+                            var path = "hisenseUI/" + funcName.trim() + ".txt";
+                            var content = "Test failed on " + localTime + ". Assert result: " + result + ", running times: " + i;
+                            fh.writeFileToNative(path, content, workroot);
+                        }
+
+                        i++;
+                        $("#times").html(i);
+                        done();
+                        if (i < times)
+                            setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 1000) + 1000));
+                        else
+                            disableMainPlayChangedCallback();
+                    }
+                } catch (e) {
+                    console.log(e.message);
+                    for (var left = 0; left < times - i; left++) {
+                        done();
+                        disableMainPlayChangedCallback();
+                    }
+                    //return;
+                }
+            }
+
+            setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 1000) + 1000));
+        }
+    	});
 }
 
 function randomSwitchChannel(repeat, funcName) {
@@ -514,43 +560,57 @@ function randomSwitchChannel(repeat, funcName) {
         var i = 0;
         var times = repeat;
         var timer;
-        var currentIndexT = Math.ceil(Math.random() * ((allChannels_T.length - 1) - 0) + 0);
-        var currentIndexC = Math.ceil(Math.random() * ((allChannels_C.length - 1) - 0) + 0);
+        if ((allChannels_T.length > 0) && (allChannels_C.length > 0)) {
+            var currentIndexT = Math.ceil(Math.random() * ((allChannels_T.length - 1) - 0) + 0);
+            var currentIndexC = Math.ceil(Math.random() * ((allChannels_C.length - 1) - 0) + 0);
 
-        function switch_T_C(val) {
-            if (val % 2 == 0) {
-                model.tvservice.playChannel("0", allChannels_T[currentIndexT].uuid);
-                $("#name").html(allChannels_T[currentIndexT].name);
+            function switch_T_C(val) {
+                if (val % 2 == 0) {
+                    model.tvservice.playChannel("0", allChannels_T[currentIndexT].uuid);
+                    $("#name").html(allChannels_T[currentIndexT].name);
+                }
+                else {
+                    model.tvservice.playChannel("0", allChannels_C[currentIndexC].uuid);
+                    $("#name").html(allChannels_C[currentIndexC].name);
+                }
+                return true;
             }
-            else {
-                model.tvservice.playChannel("0", allChannels_C[currentIndexC].uuid);
-                $("#name").html(allChannels_C[currentIndexC].name);
+
+            var done = assert.async(times);
+            var interval = Math.ceil(Math.random() * (10000 - 1000) + 1000);
+
+            try {
+                timer = setInterval(function () {
+                    if (QUnit.config.interrupt == true) {
+                        throw new Error("Interrupt test in randomSwitchChannle.");
+                    }
+                    console.log("......the time is  %d", i);
+                    if (i < times) {
+                        var result = switch_T_C(i)
+                        assert.equal(result, true, "check play ");
+
+                        if (result != true) {
+                            var path = "hisenseUI/" + funcName.trim() + ".txt";
+                            var content = "Test failed on " + localTime + ". Assert result: " + result + ", running times: " + i;
+                            fh.writeFileToNative(path, content, workroot);
+                        }
+
+                        i++;
+                        $("#times").html(i);
+                        done();
+                        if (i == times)
+                            clearInterval(timer);
+                    }
+                }, interval);
+            } catch (ex) {
+                console.log("Interrupt randow switch channel.");
+                console.log(ex.message);
+                return;
             }
-            return true;
         }
-
-        var done = assert.async(times);
-        var interval = Math.ceil(Math.random() * (10000 - 1000) + 1000);
-
-        try {
-            timer = setInterval(function () {
-                if (QUnit.config.interrupt == true) {
-                    throw new Error("Interrupt test in randomSwitchChannle.");
-                }
-                console.log("......the time is  %d", i);
-                if (i < times) {
-                    assert.equal(switch_T_C(i), true, "check play ");
-                    i++;
-                    $("#times").html(i);
-                    done();
-                    if (i == times)
-                        clearInterval(timer);
-                }
-            }, interval);
-        } catch (ex) {
-            console.log("Interrupt randow switch channel.");
-            console.log(ex.message);
-            return;
+        else {
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click 4001_getServicelistT  and 4002_getServicelistC at first!");
         }
     });
 }
@@ -627,6 +687,13 @@ function checkServiceListTByFile(funcName) {
         function serviceToCompare() {
             var result = compare();
             assert.ok(result, "checkServiceListTByFile ");
+
+            if (result === false) {
+                var path = "hisenseUI/" + funcName.trim() + ".txt";
+                var content = "Test failed on " + localTime;
+                fh.writeFileToNative(path, content, workroot);
+            }
+
             done();
         }
 
@@ -667,6 +734,13 @@ function checkServiceListCByFile(funcName) {
         function serviceToCompare() {
             var result = compare();
             assert.ok(result, "checkServiceListCByFile ");
+
+            if (result === false) {
+                var path = "hisenseUI/" + funcName.trim() + ".txt";
+                var content = "Test failed on " + localTime;
+                fh.writeFileToNative(path, content, workroot);
+            }
+
             done();
         }
 
@@ -688,6 +762,13 @@ function getSkipListAllT(expectNum, funcName) {
         function checkServiceSkipTTimeout() {
             $("#details").html(skipChannels_T.length);
             assert.equal(skipChannels_T.length, expectNum, "getSkipListAllT ");
+
+            if (skipChannels_T.length != expectNum) {
+                var path = "hisenseUI/" + funcName.trim() + ".txt";
+                var content = "Test failed on " + localTime + ". Skip channelsT length: " + skipChannels_T.length + ", expect number: " + expectNum;
+                fh.writeFileToNative(path, content, workroot);
+            }
+
             done();
         };
         getSkipListT();
@@ -738,18 +819,24 @@ function onGetSkip_T(m_event) {
 
 function modifySkipListT(attr, flag, chNum, funcName) {
     QUnit.test(funcName, function (assert) {
-        var timerFlag;
-        var done = assert.async(1);
-        $("#details").html("");
-        function modifySkipTTimeout() {
-            $("#details").html(skipChannels_T.length);
-            var val = inSkipListT(allChannels_T[chNum].uuid);
-            assert.equal(val, flag, "modifySkipListT ");
-            done();
-        };
-        modifyAttr(attr, flag, allChannels_T[chNum].uuid);
-        getSkipListT();
-        timerFlag = setTimeout(modifySkipTTimeout, 2000);
+        if (chNum < allChannels_T.length) {
+            var timerFlag;
+            var done = assert.async(1);
+            $("#details").html("");
+            function modifySkipTTimeout() {
+                $("#details").html(skipChannels_T.length);
+                var val = inSkipListT(allChannels_T[chNum].uuid);
+                assert.equal(val, flag, "modifySkipListT ");
+                done();
+            };
+            modifyAttr(attr, flag, allChannels_T[chNum].uuid);
+            getSkipListT();
+            timerFlag = setTimeout(modifySkipTTimeout, 2000);
+        }
+        else {
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click 4001_getServicelistT   at first!");
+        }
     });
 }
 function inSkipListT(uuid) {
@@ -824,18 +911,24 @@ function onGetSkip_C(m_event) {
 
 function modifySkipListC(attr, flag, chNum, funcName) {
     QUnit.test(funcName, function (assert) {
-        var timerFlag;
-        var done = assert.async(1);
-        $("#details").html("");
-        function modifySkipCTimeout() {
-            $("#details").html(skipChannels_C.length);
-            var val = inSkipListC(allChannels_C[chNum].uuid);
-            assert.equal(val, flag, "modifySkipListC ");
-            done();
-        };
-        modifyAttr(attr, flag, allChannels_C[chNum].uuid);
-        getSkipListC();
-        timerFlag = setTimeout(modifySkipCTimeout, 2000);
+        if (chNum < allChannels_C.length) {
+            var timerFlag;
+            var done = assert.async(1);
+            $("#details").html("");
+            function modifySkipCTimeout() {
+                $("#details").html(skipChannels_C.length);
+                var val = inSkipListC(allChannels_C[chNum].uuid);
+                assert.equal(val, flag, "modifySkipListC ");
+                done();
+            };
+            modifyAttr(attr, flag, allChannels_C[chNum].uuid);
+            getSkipListC();
+            timerFlag = setTimeout(modifySkipCTimeout, 2000);
+        }
+        else {
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click  4002_getServicelistC at first!");
+        }
     });
 }
 function inSkipListC(uuid) {
@@ -911,18 +1004,24 @@ function onGetBlock_T(m_event) {
 }
 function modifyBlockListT(attr, flag, chNum, funcName) {
     QUnit.test(funcName, function (assert) {
-        var timerFlag;
-        var done = assert.async(1);
-        $("#details").html("");
-        function modifyBlockTTimeout() {
-            $("#details").html(blockChannels_T.length);
-            var val = inBlockListT(allChannels_T[chNum].uuid);
-            assert.equal(val, flag, "modifyBlockListT ");
-            done();
-        };
-        modifyAttr(attr, flag, allChannels_T[chNum].uuid);
-        getBlockListT();
-        timerFlag = setTimeout(modifyBlockTTimeout, 2000);
+        if (chNum < allChannels_T.length) {
+            var timerFlag;
+            var done = assert.async(1);
+            $("#details").html("");
+            function modifyBlockTTimeout() {
+                $("#details").html(blockChannels_T.length);
+                var val = inBlockListT(allChannels_T[chNum].uuid);
+                assert.equal(val, flag, "modifyBlockListT ");
+                done();
+            };
+            modifyAttr(attr, flag, allChannels_T[chNum].uuid);
+            getBlockListT();
+            timerFlag = setTimeout(modifyBlockTTimeout, 2000);
+        }
+        else {
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click 4001_getServicelistT    at first!");
+        }
     });
 }
 function inBlockListT(uuid) {
@@ -998,18 +1097,24 @@ function onGetBlock_C(m_event) {
 }
 function modifyBlockListC(attr, flag, chNum, funcName) {
     QUnit.test(funcName, function (assert) {
-        var timerFlag;
-        var done = assert.async(1);
-        $("#details").html("");
-        function modifyBlockCTimeout() {
-            $("#details").html(blockChannels_C.length);
-            var val = inBlockListC(allChannels_C[chNum].uuid);
-            assert.equal(val, flag, "modifyBlockListC ");
-            done();
-        };
-        modifyAttr(attr, flag, allChannels_C[chNum].uuid);
-        getBlockListC();
-        timerFlag = setTimeout(modifyBlockCTimeout, 2000);
+        if (chNum < allChannels_C.length) {
+            var timerFlag;
+            var done = assert.async(1);
+            $("#details").html("");
+            function modifyBlockCTimeout() {
+                $("#details").html(blockChannels_C.length);
+                var val = inBlockListC(allChannels_C[chNum].uuid);
+                assert.equal(val, flag, "modifyBlockListC ");
+                done();
+            };
+            modifyAttr(attr, flag, allChannels_C[chNum].uuid);
+            getBlockListC();
+            timerFlag = setTimeout(modifyBlockCTimeout, 2000);
+        }
+        else {
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click  4002_getServicelistC at first!");
+        }
     });
 }
 function inBlockListC(uuid) {
@@ -1027,50 +1132,62 @@ function inBlockListC(uuid) {
 
 function getServicesAttrT(chNum, funcName) {
     QUnit.test(funcName, function (assert) {
-        var timerFlag;
-        var done = assert.async(1);
-        $("#details").html("");
-        function getAttrT() {
-            if (chNum < allChannels_T.length) {
-                $("#details").html(allChannels_T[chNum].attr + ";fav:" + (((allChannels_T[chNum].attr & 0x80) != 0) ? 1 : 0)
-                    + ";skip:" + (((allChannels_T[chNum].attr & 0x20) != 0) ? 1 : 0) + ";block:" + (((allChannels_T[chNum].attr & 0x40) != 0) ? 1 : 0));
-                return true;
+        if (chNum < allChannels_T.length) {
+            var timerFlag;
+            var done = assert.async(1);
+            $("#details").html("");
+            function getAttrT() {
+                if (chNum < allChannels_T.length) {
+                    $("#details").html(allChannels_T[chNum].attr + ";fav:" + (((allChannels_T[chNum].attr & 0x80) != 0) ? 1 : 0)
+                        + ";skip:" + (((allChannels_T[chNum].attr & 0x20) != 0) ? 1 : 0) + ";block:" + (((allChannels_T[chNum].attr & 0x40) != 0) ? 1 : 0));
+                    return true;
+                }
+                else
+                    return false;
             }
-            else
-                return false;
-        }
 
-        function getServicesAttrTTimeout() {
-            var val = getAttrT();
-            assert.ok(val, "getServicesAttrT ");
-            done();
-        };
-        getServiceListT();
-        timerFlag = setTimeout(getServicesAttrTTimeout, 2000);
+            function getServicesAttrTTimeout() {
+                var val = getAttrT();
+                assert.ok(val, "getServicesAttrT ");
+                done();
+            };
+            getServiceListT();
+            timerFlag = setTimeout(getServicesAttrTTimeout, 2000);
+        }
+        else {
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click 4001_getServicelistT  at first!");
+        }
     });
 }
 function getServicesAttrC(chNum, funcName) {
     QUnit.test(funcName, function (assert) {
-        var timerFlag;
-        var done = assert.async(1);
-        $("#details").html("");
-        function getAttrC() {
-            if (chNum < allChannels_C.length) {
-                $("#details").html(allChannels_C[chNum].attr + ";fav:" + (((allChannels_C[chNum].attr & 0x80) != 0) ? 1 : 0)
-                    + ";skip:" + (((allChannels_C[chNum].attr & 0x20) != 0) ? 1 : 0) + ";block:" + (((allChannels_C[chNum].attr & 0x40) != 0) ? 1 : 0));
-                return true;
+        if (chNum < allChannels_C.length) {
+            var timerFlag;
+            var done = assert.async(1);
+            $("#details").html("");
+            function getAttrC() {
+                if (chNum < allChannels_C.length) {
+                    $("#details").html(allChannels_C[chNum].attr + ";fav:" + (((allChannels_C[chNum].attr & 0x80) != 0) ? 1 : 0)
+                        + ";skip:" + (((allChannels_C[chNum].attr & 0x20) != 0) ? 1 : 0) + ";block:" + (((allChannels_C[chNum].attr & 0x40) != 0) ? 1 : 0));
+                    return true;
+                }
+                else
+                    return false;
             }
-            else
-                return false;
-        }
 
-        function getServicesAttrCTimeout() {
-            var val = getAttrC();
-            assert.ok(val, "getServicesAttrC ");
-            done();
-        };
-        getServiceListC();
-        timerFlag = setTimeout(getServicesAttrCTimeout, 2000);
+            function getServicesAttrCTimeout() {
+                var val = getAttrC();
+                assert.ok(val, "getServicesAttrC ");
+                done();
+            };
+            getServiceListC();
+            timerFlag = setTimeout(getServicesAttrCTimeout, 2000);
+        }
+        else {
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click  4002_getServicelistC at first!");
+        }
     });
 }
 
@@ -1089,32 +1206,38 @@ function getMainPlay(funcName) {
 }
 function mainPlayChanged(sourceType, chn, testName) {
     QUnit.test(testName, function (assert) {
-        var done = assert.async(1);
-        var timerFlag;
+        if (((sourceType == 1) && (chn < allChannels_T.length)) || ((sourceType == 0) && (chn < allChannels_C.length))) {
+            var done = assert.async(1);
+            var timerFlag;
 
-        function getMainPlayChangedTimeout() {
-            model.tvservice.onMainPlayChanged = null;
-            assert.ok(false, "mainPlayChanged timeout");
-            done();
-        };
+            function getMainPlayChangedTimeout() {
+                model.tvservice.onMainPlayChanged = null;
+                assert.ok(false, "mainPlayChanged timeout");
+                done();
+            };
 
-        model.tvservice.onMainPlayChanged = function (val) {
-            clearTimeout(timerFlag);
-            model.tvservice.onMainPlayChanged = null;
-            assert.notEqual(val, null, "mainPlayChanged");
-            done();
-            if (val != null)
-                $("#details").html("listUid:" + val[0] + ";uid:" + val[1] + ";number:" + val[2] + ";name:" + val[5] + ";attr:" + val[8]);
-        }
-        if (sourceType == 1) {
-            model.tvservice.playChannel("0", allChannels_T[chn].uuid);
-            $("#name").html(allChannels_T[chn].name);
+            model.tvservice.onMainPlayChanged = function (val) {
+                clearTimeout(timerFlag);
+                model.tvservice.onMainPlayChanged = null;
+                assert.notEqual(val, null, "mainPlayChanged");
+                done();
+                if (val != null)
+                    $("#details").html("listUid:" + val[0] + ";uid:" + val[1] + ";number:" + val[2] + ";name:" + val[5] + ";attr:" + val[8]);
+            }
+            if (sourceType == 1) {
+                model.tvservice.playChannel("0", allChannels_T[chn].uuid);
+                $("#name").html(allChannels_T[chn].name);
+            }
+            else {
+                model.tvservice.playChannel("0", allChannels_C[chn].uuid);
+                $("#name").html(allChannels_C[chn].name);
+            }
+            timerFlag = setTimeout(getMainPlayChangedTimeout, 5000);
         }
         else {
-            model.tvservice.playChannel("0", allChannels_C[chn].uuid);
-            $("#name").html(allChannels_C[chn].name);
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click 4001_getServicelistT  or 4002_getServicelistC at first!");
         }
-        timerFlag = setTimeout(getMainPlayChangedTimeout, 5000);
     });
 }
 function startGetNoSignalMain() {
@@ -1268,18 +1391,24 @@ function getFavListAllT(expectNum, funcName) {
 
 function modifyFavListT(attr, flag, chNum, funcName) {
     QUnit.test(funcName, function (assert) {
-        var timerFlag;
-        var done = assert.async(1);
-        $("#details").html("");
-        function modifyFavTTimeout() {
-            $("#details").html(favChannels_T.length);
-            var val = inFavListT(allChannels_T[chNum].uuid);
-            assert.equal(val, flag, "modifyFavListT ");
-            done();
-        };
-        modifyAttr(attr, flag, allChannels_T[chNum].uuid);
-        getFavListT();
-        timerFlag = setTimeout(modifyFavTTimeout, 2000);
+        if (chNum < allChannels_T.length) {
+            var timerFlag;
+            var done = assert.async(1);
+            $("#details").html("");
+            function modifyFavTTimeout() {
+                $("#details").html(favChannels_T.length);
+                var val = inFavListT(allChannels_T[chNum].uuid);
+                assert.equal(val, flag, "modifyFavListT ");
+                done();
+            };
+            modifyAttr(attr, flag, allChannels_T[chNum].uuid);
+            getFavListT();
+            timerFlag = setTimeout(modifyFavTTimeout, 2000);
+        }
+        else {
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click 4001_getServicelistT  at first!");
+        }
     });
 }
 function inFavListT(uuid) {
@@ -1357,18 +1486,24 @@ function getFavListAllC(expectNum, funcName) {
 
 function modifyFavListC(attr, flag, chNum, funcName) {
     QUnit.test(funcName, function (assert) {
-        var timerFlag;
-        var done = assert.async(1);
-        $("#details").html("");
-        function modifyFavCTimeout() {
-            $("#details").html(favChannels_C.length);
-            var val = inFavListC(allChannels_C[chNum].uuid);
-            assert.equal(val, flag, "modifyFavListC ");
-            done();
-        };
-        modifyAttr(attr, flag, allChannels_C[chNum].uuid);
-        getFavListC();
-        timerFlag = setTimeout(modifyFavCTimeout, 2000);
+        if (chNum < allChannels_C.length) {
+            var timerFlag;
+            var done = assert.async(1);
+            $("#details").html("");
+            function modifyFavCTimeout() {
+                $("#details").html(favChannels_C.length);
+                var val = inFavListC(allChannels_C[chNum].uuid);
+                assert.equal(val, flag, "modifyFavListC ");
+                done();
+            };
+            modifyAttr(attr, flag, allChannels_C[chNum].uuid);
+            getFavListC();
+            timerFlag = setTimeout(modifyFavCTimeout, 2000);
+        }
+        else {
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click  4002_getServicelistC at first!");
+        }
     });
 }
 function inFavListC(uuid) {
