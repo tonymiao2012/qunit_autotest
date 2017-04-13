@@ -117,7 +117,7 @@ function PvrModel(parentModel) {
         //        }
         //    ], "onSpeedTested");
         //set  medium uuid
-        this.registerStringVectorObject(
+        this.registerStringObject(
             PvrModelDefines.SL2_TVAPI_VSTR_PVR_PAR_INFO,
             "null", "setParInfo", "onParInfo",
             null, null);
@@ -128,8 +128,8 @@ function PvrModel(parentModel) {
             PvrModelDefines.SL2_TVAPI_ACTION_PVR_START_RECORD,
             [
                 {
-                    name: "startRecord", method: function (e,p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18) {
-                    return e.invoke(p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18);
+                    name: "startRecord", method: function (e,p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22) {
+                    return e.invoke(p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22);
                 }
                 }
             ], "onStarted","onAddRecordError");
@@ -153,6 +153,10 @@ function PvrModel(parentModel) {
         p16: recordUri,
         p17: volumeId,
         p18: eventId
+        p19:
+        p20:
+        p21:
+        p22: channelNum,
 */
 /***** DBTAG MARK end *****/
         //stop record
@@ -201,8 +205,8 @@ function PvrModel(parentModel) {
             PvrModelDefines.SL2_TVAPI_ACTION_PVR_SCHEDULE_ADD,
             [
                 {
-                    name: "addSchedule", method: function (e,p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18) {
-                    return e.invoke(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18);
+                    name: "addSchedule", method: function (e,p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22) {
+                    return e.invoke(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18,p19,p20,p21,p22);
                 }
                 }
             ], "onScheduleAdded","onScheduleAddERR");
@@ -212,8 +216,8 @@ function PvrModel(parentModel) {
             [
                 {
                     name: "editSchedule",
-                    method: function (e,p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18) {
-                        return e.invoke(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18);
+                    method: function (e,p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22) {
+                        return e.invoke(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18,p19,p20,p21,p22);
                     }
                 }
             ], "onScheduleEdited","onEditRecordEror");
@@ -269,8 +273,8 @@ function PvrModel(parentModel) {
         this.registerActionObject(
             PvrModelDefines.SL2_TVAPI_TIMER_LIST_ENTRY_ADD_MEMO,
             [
-                { name: "addRemindTimer", method: function(e, p1, p2, p3, p4, p5, p6, p7, p8, p9) {
-                    return e.invoke( p1, p2, p3, p4, p5, p6, p7, p8 ,p9
+                { name: "addRemindTimer", method: function(e, p1, p2, p3, p4, p5, p6, p7, p8, p9,p10) {
+                    return e.invoke( p1, p2, p3, p4, p5, p6, p7, p8 ,p9,p10
                     );
                 } }
             ],
@@ -285,6 +289,7 @@ function PvrModel(parentModel) {
         * p7.eventId,
         * p8.listUid
         * p9.repeat_type
+        * p10.channel_number
         * */
 
         //É¾³ýÔ¤Ô¼ÎÄ¼þ

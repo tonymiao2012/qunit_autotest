@@ -101,7 +101,7 @@
     Channelsearch_dvbModelDefines.SL2_TVAPI_I32_CHANNEL_SEARCH_CAM_OP_EXISTS= "de.loewe.sl2.i32.channel.search.cam.op.exists"; //dbtag:20161216 - LEO -Op exist or not
     //dbtag:20161207 - LEO -CI SEARCH END
 
-    Channelsearch_dvbModelDefines.SL2_TVAPI_I32_IN_SCANNING_SETTING = "de.loewe.sl2.i32.i32.in.scanning.setting";
+    Channelsearch_dvbModelDefines.SL2_TVAPI_I32_IN_SCANNING_SETTING = "de.loewe.sl2.i32.in.scanning.setting";
 
     Channelsearch_dvbModelDefines.SL2_TVAPI_DVB_CHANNEL_SEARCH_SOURCE_ANALOG  = 10;
     Channelsearch_dvbModelDefines.SL2_TVAPI_DVB_CHANNEL_SEARCH_SOURCE_DVBT  =  11;

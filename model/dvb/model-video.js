@@ -79,6 +79,7 @@ function VideoModelDefines() {
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_BLUR_REDUCTION_EXIST= "tvapi.i32.video.blur.reduction.exist";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_FILM_MODE_STATE = "tvapi.i32.video.film.mode.state";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_HDMI_DYNAMIC_RANGE = "de.loewe.sl2.i32.video.hdmi.range";
+    VideoModelDefines.SL2_TVAPI_I32_VIDEO_HDMI_DYNAMIC_RANGE_EXIST= "de.loewe.sl2.i32.video.hdmidynamic.range.supported";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_GAMMA_ADJUSTMENT = "de.loewe.sl2.i32.video.gamma";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_GAMMA_ADJUSTMENT_EXIST= "de.loewe.sl2.i32.video.gamma.brightness.exist";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_RGB_ONLY_MODE = "de.loewe.sl2.i32.video.rgb.only";
@@ -316,6 +317,7 @@ function VideoModel(e) {
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_BLUR_REDUCTION_EXIST, "getBlurReductionExist", "setBlurReductionExist", "onBlurReductionExistChaged", null, null);
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_FILM_MODE_STATE, "getFilmModeState", "setFilmModeState", "onFilmModeStateChaged", null, null);
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_HDMI_DYNAMIC_RANGE, "getHdmiDynamicRange", "setHdmiDynamicRange", "onHdmiDynamicRangeChaged", null, null);
+        this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_HDMI_DYNAMIC_RANGE_EXIST,"getHdmiDynamicRangeExist", "setHdmiDynamicRangeExist", "onHdmiDynamicRangeExistChaged", null, null );
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_GAMMA_ADJUSTMENT, "getHdmiGammaAdjustment", "setHdmiGammaAdjustment", "onHdmiGammaAdjustmentChaged", null, null);
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_GAMMA_ADJUSTMENT_EXIST, "getHdmiGammaAdjustmentExist", "setHdmiGammaAdjustmentExist", "onHdmiGammaAdjustmentExistChaged", null, null);
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_RGB_ONLY_MODE, "getRgbOnlyMode", "setRgbOnlyMode", "onRgbOnlyModeChaged", null, null);

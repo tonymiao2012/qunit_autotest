@@ -410,6 +410,8 @@ function SystemModelDefines() {
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_UPGRADE_BUILT_IN_VIDEO_PROGRESS = "de.loewe.sl2.i32.storemode.copy.progress";
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_UPGRADE_BUILT_IN_VIDEO_RETCODE = "de.loewe.sl2.i32.storemode.copy.retcode";
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_SELLER_FLAG = "de.loewe.sl2.i32.system.seller.flag";
+    SystemModelDefines.SL2_TVAPI_ACTION_SYSTEM_STOREMODE_SOUND_RESET = "de.loewe.sl2.action.sound.setting.reset.shopmode.onTimer";
+    SystemModelDefines.SL2_TVAPI_ACTION_SYSTEM_STOREMODE_PICTURE_RESET = "de.loewe.sl2.action.video.reset.picture.settings.shopmode.onTimer";
 
 }
 function SystemModel(_) {
@@ -546,6 +548,26 @@ function SystemModel(_) {
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_UPGRADE_BUILT_IN_VIDEO_PROGRESS, "getUpgradeBuiltInVideoProgress", "setUpgradeBuiltInVideoProgress", "onUpgradeBuiltInVideoProgress", null, null);
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_UPGRADE_BUILT_IN_VIDEO_RETCODE, "getUpgradeBuiltInVideoRetcode", "setUpgradeBuiltInVideoRetcode", "onUpgradeBuiltInVideoRetcode", null, null);
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_SELLER_FLAG, "getSystemSellerFlag", "setSystemSellerFlag", "onSystemSellerFlag", null, null);
+        this.registerActionObject(
+            SystemModelDefines.SL2_TVAPI_ACTION_SYSTEM_STOREMODE_SOUND_RESET,
+            [
+                {
+                    name: "storeModeSoundReset", method: function(object) {
+                    return object.invoke();
+                }
+                }
+            ], null
+        );
+        this.registerActionObject(
+            SystemModelDefines.SL2_TVAPI_ACTION_SYSTEM_STOREMODE_PICTURE_RESET,
+            [
+                {
+                    name: "storeModePictureReset", method: function(object) {
+                    return object.invoke();
+                }
+                }
+            ], null
+        );
   }
 }
 SystemModel.prototype = new SubModel;

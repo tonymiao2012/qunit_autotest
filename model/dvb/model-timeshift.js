@@ -8,8 +8,8 @@
 function TimeshiftModelDefines() {
 }
 {
-    //TimeshiftModelDefines.SL2_TVAPI_ACTION_TSHIFT_SET_PAR = "de.loewe.sl2.action.tshift.set.par";
-    TimeshiftModelDefines.SL2_TVAPI_ACTION_TSHIFT_IS_REGISTERED = "de.loewe.sl2.hdr.is.recorder.medium.registered";
+    TimeshiftModelDefines.SL2_TVAPI_ACTION_TSHIFT_SET_PAR = "de.loewe.sl2.hdr.user.registered.recorder.medium.path";
+    TimeshiftModelDefines.SL2_TVAPI_VSTR_TSHIFT_IS_REGISTERED = "de.loewe.sl2.hdr.is.recorder.medium.registered"
 
     //TimeshiftModelDefines.SL2_TVAPI_ACTION_TSHIFT_PAR_INFO = "de.loewe.sl2.vstr.tshift.par.info";
     TimeshiftModelDefines.SL2_TVAPI_ACTION_TSHIFT_BEGIN_SHIFT = "de.loewe.sl2.hdr.player.play";
@@ -29,7 +29,7 @@ function TimeshiftModelDefines() {
     TimeshiftModelDefines.SL2_TVAPI_HDR_I32_BAR_END_POSITION = "de.loewe.sl2.hdr.bar.end.position";
     TimeshiftModelDefines.SL2_TVAPI_HDR_I32_CURSOR_POSITION = "de.loewe.sl2.hdr.cursor.position";
     TimeshiftModelDefines.SL2_TVAPI_HDR_ACTION_PLAYER_FORWARD_SKIP = "de.loewe.sl2.hdr.player.forward.skip";
-    TimeshiftModelDefines.SL2_TVAPI_HDR_ACTION_PLAYER_BACKWARD_SKIP=  "de.loewe.sl2.hdr.player.backward.skip "
+    TimeshiftModelDefines.SL2_TVAPI_HDR_ACTION_PLAYER_BACKWARD_SKIP=  "de.loewe.sl2.hdr.player.backward.skip";
 
     // enum
     //ENUM_SL2_TVAPI_TSHIFT_REG_DEV_STATE
@@ -145,20 +145,15 @@ function TimeshiftModelDefines() {
 function TimeshiftModel(parentModel) {
     SubModel.call(this, parentModel, TimeshiftModelDefines);
     this.registerSubObject = function (loadType) {
-        // SetPar
-        this.registerActionObject(
+        // set  medium uuid
+        this.registerStringObject(
             TimeshiftModelDefines.SL2_TVAPI_ACTION_TSHIFT_SET_PAR,
-            [
-                {
-                    name: "SetPar", method: function (e, path, size) {
-                    return e.invoke(path, size);
-                }
-                }
-            ], "setParCallback");
+            "null", "SetPar", "onSetPar",
+            null, null);
 
         // is regist
         this.registerIntegerObject(
-            TimeshiftModelDefines.SL2_TVAPI_VSTR_PVR_IS_REGISTERED,
+            TimeshiftModelDefines.SL2_TVAPI_VSTR_TSHIFT_IS_REGISTERED,
             "getIsRegisterd", "null", "onChangeRegisterd",
             null, null);
 

@@ -81,7 +81,7 @@ function Timer_functionsModelDefines() {
     Timer_functionsModelDefines.SL2_TVAPI_ENUM_TIMER_LIST_TABLE_FIELD_SOURCE_MEDIA_ITEM_LOCATOR_NAME =19;
     Timer_functionsModelDefines.SL2_TVAPI_ENUM_TIMER_LIST_TABLE_FIELD_DESTINATION_VOLUME_ID_NAME =20;
     Timer_functionsModelDefines.SL2_TVAPI_ENUM_TIMER_LIST_TABLE_FIELD_SERITES_TAG =21;
-    Timer_functionsModelDefines.SL2_TVAPI_ENUM_TIMER_LIST_TABLE_FIELD_NUMBER_COLUMNS =22;
+    Timer_functionsModelDefines.SL2_TVAPI_ENUM_TIMER_LIST_TABLE_FIELD_CHANNEL_NUMBER =22;
     //dbtag:20161025 --RICK --END
 }
 function Timer_functionsModel(e) {

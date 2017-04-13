@@ -63,7 +63,7 @@
      SatelliteModelDefines.SL2_TVAPI_I32_DVB_SATELLITE_DISEQC_MANUFACTORY_INDEX= "de.loewe.sl2.i32.antenna.dvbs.diseqc.onecable.switch.index";
      SatelliteModelDefines.SL2_TVAPI_I32_DVB_SATELLITE_DISEQC_BROADBAND= "de.loewe.sl2.i32.antenna.dvbs.highband";
      SatelliteModelDefines.SL2_TVAPI_I32_DVB_SATELLITE_DISEQC_PINPROTECT= "de.loewe.sl2.i32.antenna.dvbs.diseqc.onecable.settings.antsat.pin.protection";
-     SatelliteModelDefines.SL2_TVAPI_I32_DVB_SATELLITE_DISEQC_PIN= "de.loewe.sl2.i32.antenna.dvbs.diseqc.onecable.settings.antsat.pin";
+     SatelliteModelDefines.SL2_TVAPI_STR_DVB_SATELLITE_DISEQC_PIN= "de.loewe.sl2.str.antenna.dvbs.diseqc.onecable.settings.antsat.pin";
 
 
 
@@ -358,8 +358,8 @@ function SatelliteModel( parentModel ) {
             "getPinProtectSwitch", "setPinProtectSwitch", "onPinProtectSwitchChaged",
             null, null);
         // pin
-        this.registerIntegerObject(
-            SatelliteModelDefines.SL2_TVAPI_I32_DVB_SATELLITE_DISEQC_PIN,
+        this.registerStringObject(
+            SatelliteModelDefines.SL2_TVAPI_STR_DVB_SATELLITE_DISEQC_PIN,
             "getUserPin", "setUserPin", "onUserPinChaged",
             null, null);
 

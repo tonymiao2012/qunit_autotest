@@ -1,7 +1,7 @@
 function His_factoryModelDefines() {
 }
 {
-    His_factoryModelDefines.SL2_TVAPI_I32_HIS_FACTORY_STATE_OPEN = "tvapi.i32.hisfactory.state.open"; //"de.loewe.sl2.i32.hisfactory.state.open"; ToDo
+    His_factoryModelDefines.SL2_TVAPI_I32_HIS_FACTORY_STATE_OPEN = "de.loewe.sl2.i32.hisfactory.state.open";
     His_factoryModelDefines.SL2_TVAPI_HIS_FACTORY_STATE_OFF = 0;
     His_factoryModelDefines.SL2_TVAPI_HIS_FACTORY_STATE_ON = 1;
     His_factoryModelDefines.SL2_TVAPI_I32_HIS_FACTORY_TO_FACTORY_OPITION = "de.loewe.sl2.i32.hisfactory.tofactory.opition";

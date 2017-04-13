@@ -139,11 +139,11 @@ function EpgModel(parentModel) {
             "getThemsColor", "setThemsColor", "onThemsColorChaged",
             null, null);
 
-    // EPG Complete
-    this.registerIntegerVectorObject(
+        //EPG Complete
+        this.registerIntegerVectorObject(
             EpgModelDefines.SL2_TVAPI_VI32_EPG_SERVICE_COMPLETE,
             "getEpgServiceComplete", null, "onEpgServiceComplete",
-            null, null );
+            null, null);
 
         this.registerActionObject(
             EpgModelDefines.SL2_TVAPI_ACTION_GET_PROGRAM_TIME,
