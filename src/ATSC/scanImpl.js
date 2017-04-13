@@ -1,3 +1,7 @@
+var fh = new fileHandler();
+var workroot = 1;
+var localTime = new Date();
+
 function startSetSource(sourceType) {
     model.channelSearch.setSource(sourceType); //DTV-T means #15.
     if (model.channelSearch.getSource() == sourceType)
@@ -10,6 +14,12 @@ function setSource(sourceType, testName) {
     QUnit.test(testName, function (assert) {
         var result = startSetSource(sourceType);
         assert.equal(result, true, "Test setSource");
+
+        if (result != true) {
+            var path = "hisenseUI/" + testName.trim() + ".txt";
+            var content = "Test setSource failed on " + localTime + ". Assert result: " + result;
+            fh.writeFileToNative(path, content, workroot);
+        }
     });
 }
 
@@ -23,6 +33,12 @@ function getSource(sourceType, testName) {
     QUnit.test(testName, function (assert) {
         var result = startGetSource();
         assert.equal(result, sourceType, "Test getSource");
+
+        if (result != sourceType) {
+            var path = "hisenseUI/" + testName.trim() + ".txt";
+            var content = "Test getSource failed on " + localTime + ". Assert result: " + result;
+            fh.writeFileToNative(path, content, workroot);
+        }
     });
 }
 
@@ -113,12 +129,16 @@ function autoSearch(repeat, expectNum, sourceType, testName) {
                     else {
                         serviceNumDtv = model.channelSearch.getFoundDigitServices();
                         serviceNumAtv = model.channelSearch.getFoundAnalogServices();
-                        assert.equal(serviceNumDtv + serviceNumAtv, expectNum, "check serives");
+                        assert.equal(serviceNumDtv + serviceNumAtv, expectNum, "check services");
                         $("#total").html(serviceNumDtv + serviceNumAtv);
                         if (serviceNumDtv + serviceNumAtv == expectNum)
                             flag = 1;
-                        else
+                        else {
                             flag = 1;//0;
+                            var path = "hisenseUI/" + testName.trim() + ".txt";
+                            var content = "Test failed on " + localTime + ". Assert result: " + serviceNumAtv + serviceNumDtv + ", expect number: " + expectNum + ". Running times: " + i;
+                            fh.writeFileToNative(path, content, workroot);
+                        }
                         model.channelSearch.Finish();
                         if ((i < times) && (flag == 1)) {
                             isSearched = 0;
@@ -162,6 +182,7 @@ function autoSearch(repeat, expectNum, sourceType, testName) {
 }
 
 function autoScanStart(sourceType, testName) {
+    var path = "hisenseUI/" + testName.trim() + ".txt";
     QUnit.test(testName, function (assert) {
         var done = assert.async(1);
         var isSearched = 0;
@@ -172,6 +193,12 @@ function autoScanStart(sourceType, testName) {
             }
             else if ((value == 11) && ((sourceType == 15) || (sourceType == 16))) {
                 assert.equal(isSearched, 1, "scan started dtv");
+
+                if (isSearched != 1) {
+                    var content = "Scan DTV start failed on " + localTime + ". Assert result: " + isSearched;
+                    fh.writeFileToNative(path, content, workroot);
+                }
+
                 done();
                 model.channelSearch.Finish();
                 model.channelSearch.onSearchStateChaged = null;
@@ -183,6 +210,9 @@ function autoScanStart(sourceType, testName) {
                     done();
                     model.channelSearch.Finish();
                     model.channelSearch.onSearchStateChaged = null;
+                } else {
+                    var content = "Scan ATV start failed on " + localTime + ". Assert result: " + isSearched;
+                    fh.writeFileToNative(path, content, workroot);
                 }
             }
         };
@@ -198,64 +228,7 @@ function autoScanStart(sourceType, testName) {
     });
 }
 
-function ScanCancel(repeat, expectNum, sourceType) {
-    QUnit.test("ScanCancel test", function (assert) {
-            modeljs.dbgprint("...............................Going to auto scan. ", 1);
-            var flag = 1;
-            var i = 0;
-            var times = repeat;
-            var isSearched = 0;
-            var left = 0;
-            var done = assert.async(times);
-            model.channelSearch.onSearchStateChaged = function (value) {
-                var serviceNum = 0;
-                if (value == 1) {
-                    isSearched = 1;
-                }
-                else if (value == 11) {
-                    if ((sourceType == 15) || (sourceType == 16))
-                        serviceNum = model.channelSearch.getFoundDigitServices();
-                    else
-                        serviceNum = model.channelSearch.getFoundAnalogServices();
 
-                    assert.equal(serviceNum, expectNum, "check serives");
-
-                    if (serviceNum == expectNum)
-                        flag = 1;
-                    else
-                        flag = 1;//0;
-
-                    if ((i < times) && (isSearched == 1) && (flag == 1)) {
-                        isSearched = 0;
-                        flag = 0;
-                        if ((sourceType == 15) || (sourceType == 16))
-                            startAutoScan(sourceType);
-                        else
-
-                            setTimeout(startAutoScan(sourceType), 4000);
-                        i++;
-                        done();
-                    }
-                    else {
-                        for (left = 0; left <= times - i; left++)
-                            done();
-                    }
-                }
-            };
-
-            model.channelSearch.onSearchingProgressChaged = function (value) {
-                modeljs.dbgprint("......................................Current value:" + value, 1);
-                $("#progress").html(value);
-                if (value >= 20)
-                    model.channelSearch.Stop();
-
-            }
-
-            startAutoScan(sourceType);
-            i++;
-        }
-    );
-}
 function autoScanProgress(sourceType, testName) {
     QUnit.test(testName, function (assert) {
         var done = assert.async(1);
@@ -290,21 +263,38 @@ function autoScanServices(expectNum, sourceType, funcName) {
         model.channelSearch.onSearchStateChaged = function (value) {
             var serviceNumDtv = 0;
             var serviceNumAtv = 0;
+            console.log("...state=", value);
             if (value == 1) {
                 isSearched = 1;
             }
             else if (value == 0) {
                 if (isSearched == 1) {
                     if ((sourceType == 15) || (sourceType == 16)) {
+                        console.log("...end1=");
                         serviceNumDtv = model.channelSearch.getFoundDigitServices();
                         $("#total").html(serviceNumDtv);
-                        assert.equal(serviceNumDtv, expectNum, "get serives");
+                        assert.equal(serviceNumDtv, expectNum, "get services");
+
+                        if (serviceNumDtv != expectNum) {
+                            var path = "hisenseUI/" + funcName.trim() + ".txt";
+                            var content = "Test failed on " + localTime + ". Service number DTV: " + serviceNumDtv + ", expect number: " + expectNum;
+                            fh.writeFileToNative(path, content, workroot);
+                        }
+
                         model.channelSearch.onFoundDigitServicesChaged = null;
                     }
                     else if ((sourceType == 17) || (sourceType == 18)) {
+                        console.log("...end2=");
                         serviceNumAtv = model.channelSearch.getFoundAnalogServices();
                         $("#total").html(serviceNumAtv);
-                        assert.equal(serviceNumAtv, expectNum, "get serives");
+                        assert.equal(serviceNumAtv, expectNum, "get services");
+
+                        if (serviceNumAtv != expectNum) {
+                            var path = "hisenseUI/" + funcName.trim() + ".txt";
+                            var content = "Test failed on " + localTime + ". Service number ATV: " + serviceNumAtv + ", expect number: " + expectNum;
+                            fh.writeFileToNative(path, content, workroot);
+                        }
+
                         model.channelSearch.onFoundAnalogServicesChaged = null;
                     }
                     done();
@@ -342,13 +332,27 @@ function manualScanServices(expectNum, fre, sourceType, funcName) {
                     if ((sourceType == 15) || (sourceType == 16)) {
                         serviceNumDtv = model.channelSearch.getFoundDigitServices();
                         $("#total").html(serviceNumDtv);
-                        assert.equal(serviceNumDtv, expectNum, "get serives");
+                        assert.equal(serviceNumDtv, expectNum, "get services");
+
+                        if(serviceNumDtv != expectNum){
+                            var path = "hisenseUI/" + funcName.trim() + ".txt";
+                            var content = "Test failed on " + localTime + ". Service number DTV: " + serviceNumDtv + ", expect number: " + expectNum;
+                            fh.writeFileToNative(path, content, workroot);
+                        }
+
                         model.channelSearch.onFoundDigitServicesChaged = null;
                     }
                     else if ((sourceType == 17) || (sourceType == 18)) {
                         serviceNumAtv = model.channelSearch.getFoundAnalogServices();
                         $("#total").html(serviceNumAtv);
-                        assert.equal(serviceNumAtv, expectNum, "get serives");
+                        assert.equal(serviceNumAtv, expectNum, "get services");
+
+                        if(serviceNumAtv != expectNum){
+                            var path = "hisenseUI/" + funcName.trim() + ".txt";
+                            var content = "Test failed on " + localTime + ". Service number ATV: " + serviceNumAtv + ", expect number: " + expectNum;
+                            fh.writeFileToNative(path, content, workroot);
+                        }
+
                         model.channelSearch.onFoundAnalogServicesChaged = null;
                     }
                     done();
@@ -467,10 +471,16 @@ function setFrequency(fre) {
 }
 
 function manualScanSetFrequency(fre, sourceType, funcName) {
-    model.channelSearch.setSource(sourceType);
     QUnit.test(funcName, function (assert) {
+        model.channelSearch.setSource(sourceType);
         var result = setFrequency(fre);
         assert.ok(result, "manualScanSetFrequency");
+
+        if(result !== true){
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed on " + localTime + ". Assert result: " + result;
+            fh.writeFileToNative(path, content, workroot);
+        }
     });
 }
 function getRunningState() {
@@ -484,6 +494,12 @@ function ScanIsRunning(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = getRunningState();
         assert.equal(result, false, "ScanIsRunning");
+
+        if(result !== false){
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed on " + localTime + ". Assert result: " + result;
+            fh.writeFileToNative(path, content, workroot);
+        }
     });
 }
 function ScanFinish(sourceType, funcName) {
@@ -509,6 +525,13 @@ function ScanFinish(sourceType, funcName) {
         function checkRunning() {
             var running = model.channelSearch.getRunning();
             assert.equal(running, 0, "finish state");
+
+            if(running != 0){
+                var path = "hisenseUI/" + funcName.trim() + ".txt";
+                var content = "Test failed on " + localTime + ". Assert result: " + running;
+                fh.writeFileToNative(path, content, workroot);
+            }
+
             done();
         }
 
