@@ -364,6 +364,11 @@ function playInputedChannel(sourceType, chn, func_name) {
         }
         else {
             assert.ok(false, "channel length is 0");
+
+            var path = "hisenseUI/" + func_name.trim() + ".txt";
+            var content = "Test failed on " + localTime + ". Channel length is 0.";
+            fh.writeFileToNative(path, content, workroot);
+
             $("#details").html(" Click 4001_getServicelistT  or 4002_getServicelistC at first!");
         }
     });
@@ -512,6 +517,11 @@ function switchChannel(direction, sourceType, repeat, funcName) {
         //play(direction, sourceType);
         if (((sourceType == 1) && (allChannels_T.length == 0)) || ((sourceType == 0) && (allChannels_C.length == 0))) {
             assert.ok(false, "channel length is 0");
+
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed on " + localTime + ". Channel length is 0.";
+            fh.writeFileToNative(path, content, workroot);
+
             $("#details").html(" Click 4001_getServicelistT  or 4002_getServicelistC at first!");
         }
         else {
@@ -610,6 +620,11 @@ function randomSwitchChannel(repeat, funcName) {
         }
         else {
             assert.ok(false, "channel length is 0");
+
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed on " + localTime + ". Channel length is 0.";
+            fh.writeFileToNative(path, content, workroot);
+
             $("#details").html(" Click 4001_getServicelistT  and 4002_getServicelistC at first!");
         }
     });
@@ -827,6 +842,13 @@ function modifySkipListT(attr, flag, chNum, funcName) {
                 $("#details").html(skipChannels_T.length);
                 var val = inSkipListT(allChannels_T[chNum].uuid);
                 assert.equal(val, flag, "modifySkipListT ");
+
+                if(val != flag){
+                    var path = "hisenseUI/" + funcName.trim() + ".txt";
+                    var content = "Test failed on " + localTime + ". Assert value: " + val + ", expect value: " + flag;
+                    fh.writeFileToNative(path, content, workroot);
+                }
+
                 done();
             };
             modifyAttr(attr, flag, allChannels_T[chNum].uuid);
@@ -835,6 +857,11 @@ function modifySkipListT(attr, flag, chNum, funcName) {
         }
         else {
             assert.ok(false, "channel length is 0");
+
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed on " + localTime + ". Channel length is 0.";
+            fh.writeFileToNative(path, content, workroot);
+
             $("#details").html(" Click 4001_getServicelistT   at first!");
         }
     });
@@ -862,6 +889,13 @@ function getSkipListAllC(expectNum, funcName) {
         function checkServiceSkipCTimeout() {
             $("#details").html(skipChannels_C.length);
             assert.equal(skipChannels_C.length, expectNum, "getSkipListAllC ");
+
+            if(skipChannels_C.length != expectNum){
+                var path = "hisenseUI/" + funcName.trim() + ".txt";
+                var content = "Test failed on " + localTime + ". Skip channelsC length: " + skipChannels_C.length + ", expect number: " + expectNum;
+                fh.writeFileToNative(path, content, workroot);
+            }
+
             done();
         };
         getSkipListC();
@@ -919,6 +953,13 @@ function modifySkipListC(attr, flag, chNum, funcName) {
                 $("#details").html(skipChannels_C.length);
                 var val = inSkipListC(allChannels_C[chNum].uuid);
                 assert.equal(val, flag, "modifySkipListC ");
+
+                if(val != flag){
+                    var path = "hisenseUI/" + funcName.trim() + ".txt";
+                    var content = "Test failed on " + localTime + ". Assert value: " + val + ", expect value: " + flag;
+                    fh.writeFileToNative(path, content, workroot);
+                }
+
                 done();
             };
             modifyAttr(attr, flag, allChannels_C[chNum].uuid);
@@ -927,6 +968,11 @@ function modifySkipListC(attr, flag, chNum, funcName) {
         }
         else {
             assert.ok(false, "channel length is 0");
+
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed on " + localTime + ". Channel length is 0.";
+            fh.writeFileToNative(path, content, workroot);
+
             $("#details").html(" Click  4002_getServicelistC at first!");
         }
     });
@@ -955,6 +1001,13 @@ function getBlockListAllT(expectNum, funcName) {
         function checkServiceBlockTTimeout() {
             $("#details").html(blockChannels_T.length);
             assert.equal(blockChannels_T.length, expectNum, "getBlockListAllT ");
+
+            if(blockChannels_T.length != expectNum){
+                var path = "hisenseUI/" + funcName.trim() + ".txt";
+                var content = "Test failed on " + localTime + ". Block channelsT length: " + blockChannels_T.length + ", expect number: " + expectNum;
+                fh.writeFileToNative(path, content, workroot);
+            }
+
             done();
         };
         getBlockListT();
@@ -1012,6 +1065,13 @@ function modifyBlockListT(attr, flag, chNum, funcName) {
                 $("#details").html(blockChannels_T.length);
                 var val = inBlockListT(allChannels_T[chNum].uuid);
                 assert.equal(val, flag, "modifyBlockListT ");
+
+                if(val != flag){
+                    var path = "hisenseUI/" + funcName.trim() + ".txt";
+                    var content = "Test failed on " + localTime + ". Assert value: " + val + ", expect value: " + flag;
+                    fh.writeFileToNative(path, content, workroot);
+                }
+
                 done();
             };
             modifyAttr(attr, flag, allChannels_T[chNum].uuid);
@@ -1020,6 +1080,11 @@ function modifyBlockListT(attr, flag, chNum, funcName) {
         }
         else {
             assert.ok(false, "channel length is 0");
+
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed on " + localTime + ". Channel length is 0.";
+            fh.writeFileToNative(path, content, workroot);
+
             $("#details").html(" Click 4001_getServicelistT    at first!");
         }
     });
@@ -1048,6 +1113,13 @@ function getBlockListAllC(expectNum, funcName) {
         function checkServiceBlockCTimeout() {
             $("#details").html(blockChannels_C.length);
             assert.equal(blockChannels_C.length, expectNum, "getBlockListAllC ");
+
+            if(blockChannels_C.length != expectNum){
+                var path = "hisenseUI/" + funcName.trim() + ".txt";
+                var content = "Test failed on " + localTime + ". Block channelsC length: " + blockChannels_C.length + ", expect number: " + expectNum;
+                fh.writeFileToNative(path, content, workroot);
+            }
+
             done();
         };
         getBlockListC();
@@ -1105,6 +1177,13 @@ function modifyBlockListC(attr, flag, chNum, funcName) {
                 $("#details").html(blockChannels_C.length);
                 var val = inBlockListC(allChannels_C[chNum].uuid);
                 assert.equal(val, flag, "modifyBlockListC ");
+
+                if(val != flag){
+                    var path = "hisenseUI/" + funcName.trim() + ".txt";
+                    var content = "Test failed on " + localTime + ". Assert value: " + val + ", expect value: " + flag;
+                    fh.writeFileToNative(path, content, workroot);
+                }
+
                 done();
             };
             modifyAttr(attr, flag, allChannels_C[chNum].uuid);
@@ -1113,6 +1192,11 @@ function modifyBlockListC(attr, flag, chNum, funcName) {
         }
         else {
             assert.ok(false, "channel length is 0");
+
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed on " + localTime + ". Channel length is 0.";
+            fh.writeFileToNative(path, content, workroot);
+
             $("#details").html(" Click  4002_getServicelistC at first!");
         }
     });
@@ -1149,6 +1233,13 @@ function getServicesAttrT(chNum, funcName) {
             function getServicesAttrTTimeout() {
                 var val = getAttrT();
                 assert.ok(val, "getServicesAttrT ");
+
+                if(val === false){
+                    var path = "hisenseUI/" + funcName.trim() + ".txt";
+                    var content = "Test failed on " + localTime;
+                    fh.writeFileToNative(path, content, workroot);
+                }
+
                 done();
             };
             getServiceListT();
@@ -1156,6 +1247,11 @@ function getServicesAttrT(chNum, funcName) {
         }
         else {
             assert.ok(false, "channel length is 0");
+
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed on " + localTime + ". Channel length is 0.";
+            fh.writeFileToNative(path, content, workroot);
+
             $("#details").html(" Click 4001_getServicelistT  at first!");
         }
     });
@@ -1179,6 +1275,13 @@ function getServicesAttrC(chNum, funcName) {
             function getServicesAttrCTimeout() {
                 var val = getAttrC();
                 assert.ok(val, "getServicesAttrC ");
+
+                if(val === false){
+                    var path = "hisenseUI/" + funcName.trim() + ".txt";
+                    var content = "Test failed on " + localTime;
+                    fh.writeFileToNative(path, content, workroot);
+                }
+
                 done();
             };
             getServiceListC();
@@ -1186,6 +1289,11 @@ function getServicesAttrC(chNum, funcName) {
         }
         else {
             assert.ok(false, "channel length is 0");
+
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed on " + localTime + ". Channel length is 0.";
+            fh.writeFileToNative(path, content, workroot);
+
             $("#details").html(" Click  4002_getServicelistC at first!");
         }
     });
@@ -1202,6 +1310,11 @@ function getMainPlay(funcName) {
         assert.notEqual(val, null, "Test getMainPlay");
         if (val != null)
             $("#details").html("listUid:" + val[0] + ";uid:" + val[1] + ";number:" + val[2] + ";name:" + val[5] + ";attr:" + val[8]);
+        else{
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed on " + localTime;
+            fh.writeFileToNative(path, content, workroot);
+        }
     });
 }
 function mainPlayChanged(sourceType, chn, testName) {
@@ -1213,6 +1326,11 @@ function mainPlayChanged(sourceType, chn, testName) {
             function getMainPlayChangedTimeout() {
                 model.tvservice.onMainPlayChanged = null;
                 assert.ok(false, "mainPlayChanged timeout");
+
+                var path = "hisenseUI/" + testName.trim() + ".txt";
+                var content = "Test failed on " + localTime + ". mainPlayChanged timeout.";
+                fh.writeFileToNative(path, content, workroot);
+
                 done();
             };
 
@@ -1223,6 +1341,11 @@ function mainPlayChanged(sourceType, chn, testName) {
                 done();
                 if (val != null)
                     $("#details").html("listUid:" + val[0] + ";uid:" + val[1] + ";number:" + val[2] + ";name:" + val[5] + ";attr:" + val[8]);
+                else{
+                    var path = "hisenseUI/" + testName.trim() + ".txt";
+                    var content = "Test failed on " + localTime;
+                    fh.writeFileToNative(path, content, workroot);
+                }
             }
             if (sourceType == 1) {
                 model.tvservice.playChannel("0", allChannels_T[chn].uuid);
@@ -1236,6 +1359,11 @@ function mainPlayChanged(sourceType, chn, testName) {
         }
         else {
             assert.ok(false, "channel length is 0");
+
+            var path = "hisenseUI/" + testName.trim() + ".txt";
+            var content = "Test failed on " + localTime + ". Channel length is 0.";
+            fh.writeFileToNative(path, content, workroot);
+
             $("#details").html(" Click 4001_getServicelistT  or 4002_getServicelistC at first!");
         }
     });
@@ -1253,6 +1381,13 @@ function getNoSignalMain(funcName) {
         $("#details").html("");
         var result = startGetNoSignalMain();
         assert.ok(result, "getNoSignalMain");
+
+        if(result === false){
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed on " + localTime;
+            fh.writeFileToNative(path, content, workroot);
+        }
+
     });
 }
 
@@ -1277,6 +1412,13 @@ function getSignalLevel(funcName) {
         function getSignalLevelTimeout() {
             var result = startGetSignalLevel();
             assert.ok(result, "getSignalLevel");
+
+            if(result === false){
+                var path = "hisenseUI/" + funcName.trim() + ".txt";
+                var content = "Test failed on " + localTime;
+                fh.writeFileToNative(path, content, workroot);
+            }
+
             done();
         };
 
@@ -1302,6 +1444,13 @@ function getSignalCn(funcName) {
         function getSignalCnTimeout() {
             var result = startGetSignalCn();
             assert.ok(result, "getSignalLevel");
+
+            if(result === false){
+                var path = "hisenseUI/" + funcName.trim() + ".txt";
+                var content = "Test failed on " + localTime;
+                fh.writeFileToNative(path, content, workroot);
+            }
+
             done();
         };
 
@@ -1321,6 +1470,13 @@ function onChannelListUpdate(funcName) {
         function checkChannelListUpdate() {
             model.tvservice.onChannelListUpdate = null;
             assert.ok(listUpdate, "onChannelListUpdate ");
+
+            if(listUpdate === false){
+                var path = "hisenseUI/" + funcName.trim() + ".txt";
+                var content = "Test failed on " + localTime;
+                fh.writeFileToNative(path, content, workroot);
+            }
+
             done();
         }
 
@@ -1382,6 +1538,13 @@ function getFavListAllT(expectNum, funcName) {
         function checkServiceFavTTimeout() {
             $("#details").html(favChannels_T.length);
             assert.equal(favChannels_T.length, expectNum, "getFavListAllT ");
+
+            if(favChannels_T.length != expectNum){
+                var path = "hisenseUI/" + funcName.trim() + ".txt";
+                var content = "Test failed on " + localTime + ". Fav channelsT length: " + favChannels_T.length + ", expect number: " + expectNum;
+                fh.writeFileToNative(path, content, workroot);
+            }
+
             done();
         };
         getFavListT();
@@ -1399,6 +1562,13 @@ function modifyFavListT(attr, flag, chNum, funcName) {
                 $("#details").html(favChannels_T.length);
                 var val = inFavListT(allChannels_T[chNum].uuid);
                 assert.equal(val, flag, "modifyFavListT ");
+
+                if(val != flag){
+                    var path = "hisenseUI/" + funcName.trim() + ".txt";
+                    var content = "Test failed on " + localTime;
+                    fh.writeFileToNative(path, content, workroot);
+                }
+
                 done();
             };
             modifyAttr(attr, flag, allChannels_T[chNum].uuid);
@@ -1407,6 +1577,11 @@ function modifyFavListT(attr, flag, chNum, funcName) {
         }
         else {
             assert.ok(false, "channel length is 0");
+
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed on " + localTime + ". Channel length is 0.";
+            fh.writeFileToNative(path, content, workroot);
+
             $("#details").html(" Click 4001_getServicelistT  at first!");
         }
     });
@@ -1476,6 +1651,13 @@ function getFavListAllC(expectNum, funcName) {
         function checkServiceFavCTimeout() {
             $("#details").html(favChannels_C.length);
             assert.equal(favChannels_C.length, expectNum, "getFavListAllC ");
+
+            if(favChannels_C.length != expectNum){
+                var path = "hisenseUI/" + funcName.trim() + ".txt";
+                var content = "Test failed on " + localTime + ". Fav channelsC length: " + favChannels_C.length + ", expect number: " + expectNum;
+                fh.writeFileToNative(path, content, workroot);
+            }
+
             done();
         };
         getFavListC();
@@ -1494,6 +1676,13 @@ function modifyFavListC(attr, flag, chNum, funcName) {
                 $("#details").html(favChannels_C.length);
                 var val = inFavListC(allChannels_C[chNum].uuid);
                 assert.equal(val, flag, "modifyFavListC ");
+
+                if(val != flag){
+                    var path = "hisenseUI/" + funcName.trim() + ".txt";
+                    var content = "Test failed on " + localTime;
+                    fh.writeFileToNative(path, content, workroot);
+                }
+
                 done();
             };
             modifyAttr(attr, flag, allChannels_C[chNum].uuid);
@@ -1502,6 +1691,9 @@ function modifyFavListC(attr, flag, chNum, funcName) {
         }
         else {
             assert.ok(false, "channel length is 0");
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed on " + localTime + ", channel length is 0.";
+            fh.writeFileToNative(path, content, workroot);
             $("#details").html(" Click  4002_getServicelistC at first!");
         }
     });

@@ -1,12 +1,12 @@
 function handleRepeatTestCase(inputArray, funcName) {
     var repeat = inputArray[0];
-    if((repeat <1)||isNaN(repeat))
-				repeat=1;
+    if ((repeat < 1) || isNaN(repeat))
+        repeat = 1;
     var expectNum = 0;
     if (inputArray.length > 1) {
         expectNum = inputArray[1];
-        if(isNaN(expectNum))
-        		expectNum=0;
+        if (isNaN(expectNum))
+            expectNum = 0;
     }
     switch (funcName) {
         case "1001_autoScanT":
@@ -18,25 +18,25 @@ function handleRepeatTestCase(inputArray, funcName) {
             autoSearch(repeat, expectNum, sourceType, funcName);
             break;
         case "1003_channelUpT":
-            channelUpT(repeat, funcName);        	
+            channelUpT(repeat, funcName);
             break;
         case "1004_channelDownT":
-            channelDownT(repeat, funcName);          	
+            channelDownT(repeat, funcName);
             break;
         case "1005_channelRandomT":
-            channelRandomT(repeat, funcName);           	
+            channelRandomT(repeat, funcName);
             break;
         case "1006_channelUpC":
-            channelUpC(repeat, funcName);           	
+            channelUpC(repeat, funcName);
             break;
         case "1007_channelDownC":
-            channelDownC(repeat, funcName);         	
+            channelDownC(repeat, funcName);
             break;
         case "1008_channelRandomC":
-            channelRandomC(repeat, funcName);            	
+            channelRandomC(repeat, funcName);
             break;
         case "1009_channelSwitchT_C":
-            randomSwitchChannel(repeat, funcName);          	
+            randomSwitchChannel(repeat, funcName);
             break;
     }
 }
@@ -149,32 +149,32 @@ function handleScanTestCase(inputArray, funcName) {
         case "2023_autoScanDigitServicesDtvT":
             var sourceType = 15;
             var expectNum = inputArray[0];
-            if(isNaN(expectNum))
-        			expectNum=0;
+            if (isNaN(expectNum))
+                expectNum = 0;
             $("#total").html("");
             autoScanServices(expectNum, sourceType, funcName);
             break;
         case "2024_autoScanAnalogServicesAtvT":
             var sourceType = 17;
             var expectNum = inputArray[0];
-        		if(isNaN(expectNum))
-        			expectNum=0;            
+            if (isNaN(expectNum))
+                expectNum = 0;
             $("#total").html("");
             autoScanServices(expectNum, sourceType, funcName);
             break;
         case "2025_autoScanDigitServicesDtvC":
             var sourceType = 16;
             var expectNum = inputArray[0];
-            if(isNaN(expectNum))
-        			expectNum=0;
+            if (isNaN(expectNum))
+                expectNum = 0;
             $("#total").html("");
             autoScanServices(expectNum, sourceType, funcName);
             break;
         case "2026_autoScanAnalogServicesAtvC":
             var sourceType = 18;
             var expectNum = inputArray[0];
-            if(isNaN(expectNum))
-        			expectNum=0;
+            if (isNaN(expectNum))
+                expectNum = 0;
             $("#total").html("");
             autoScanServices(expectNum, sourceType, funcName);
             break;
@@ -343,14 +343,14 @@ function handleServiceListTestCase(inputArray, funcName) {
     switch (funcName) {
         case "4001_getServicelistT":
             var expectNum = inputArray[0];
-            if(isNaN(expectNum))
-            		expectNum=0;
+            if (isNaN(expectNum))
+                expectNum = 0;
             checkServiceT(expectNum, funcName);
             break;
         case "4002_getServicelistC":
             var expectNum = inputArray[0];
-            if(isNaN(expectNum))
-            		expectNum=0;
+            if (isNaN(expectNum))
+                expectNum = 0;
             checkServiceC(expectNum, funcName);
             break;
         case "4003_getFavListT":
@@ -470,7 +470,7 @@ function handleServiceListTestCase(inputArray, funcName) {
             break;
         case "4022_getServicesAttrC":
             var chNum = inputArray[0];
-             getServicesAttrC(chNum, funcName);
+            getServicesAttrC(chNum, funcName);
             break;
         case "4023_onChannelListUpdate":
             onChannelListUpdate(funcName);
@@ -479,7 +479,7 @@ function handleServiceListTestCase(inputArray, funcName) {
             checkServiceListTByFile(funcName);
             break;
         case "4025_checkChannelListC":
-						checkServiceListCByFile(funcName);
+            checkServiceListCByFile(funcName);
             break;
     }
 }
@@ -508,7 +508,7 @@ function handlePCTestCase(inputArray, funcName) {
             break;
         case "5006_getPinRequest":
             var expect = inputArray[0];
-            getPinRequest(expect,funcName);
+            getPinRequest(expect, funcName);
             break;
         case "5007_getStart":
             getStartTime(funcName);
@@ -549,17 +549,17 @@ function handlePCTestCase(inputArray, funcName) {
                     temp1 = parseInt(temp1 / 10);
                     if ((day == 1) && (weekly.indexOf("Mon") == -1))
                         weekly += "Mon,";
-                    else if ((day == 2)&&(weekly.indexOf("Tue")==-1))
+                    else if ((day == 2) && (weekly.indexOf("Tue") == -1))
                         weekly += "Tue,";
-                    else if ((day == 3)&&(weekly.indexOf("Wed")==-1))
+                    else if ((day == 3) && (weekly.indexOf("Wed") == -1))
                         weekly += "Wed,";
-                    else if ((day == 4)&&(weekly.indexOf("Thu")==-1))
+                    else if ((day == 4) && (weekly.indexOf("Thu") == -1))
                         weekly += "Thu,";
-                    else if ((day == 5)&&(weekly.indexOf("Fri")==-1))
+                    else if ((day == 5) && (weekly.indexOf("Fri") == -1))
                         weekly += "Fri,";
-                    else if ((day == 6)&&(weekly.indexOf("Sat")==-1))
+                    else if ((day == 6) && (weekly.indexOf("Sat") == -1))
                         weekly += "Sat,";
-                    else if ((day == 7)&&(weekly.indexOf("Sun")==-1))
+                    else if ((day == 7) && (weekly.indexOf("Sun") == -1))
                         weekly += "Sun,";
                 } while (temp1 != 0)
                 setEndWeekly(weekly, funcName);
@@ -632,17 +632,17 @@ function handlePCTestCase(inputArray, funcName) {
             openVchipDimensionPage(funcName);
             break;
         case "5026_openVchipRatingValuePage":
-            var region=inputArray[0];
-            var dimen=inputArray[1];
-            openVchipRatingValuePage(region,dimen,funcName);
+            var region = inputArray[0];
+            var dimen = inputArray[1];
+            openVchipRatingValuePage(region, dimen, funcName);
             break;
         case "5027_setLevelPage":
-            var region=inputArray[0];
-            var dimen=inputArray[1];
-            var selectlist = inputArray[2]; 
+            var region = inputArray[0];
+            var dimen = inputArray[1];
+            var selectlist = inputArray[2];
             var flag = inputArray[3];
-            setLevelPage(region,dimen,selectlist,flag,funcName);
-            break;          
+            setLevelPage(region, dimen, selectlist, flag, funcName);
+            break;
     }
 }
 
@@ -859,51 +859,50 @@ function handleInfoBarTestCase(inputArray, funcName) {
             checkCcExistChanged(funcName, chn);
             break;
     }
-}   
+}
 function handleAutoTestCase(funcName) {
     switch (funcName) {
         case "8001_autoTest1":
             var serListPath = "config/autoTest1.json";
             var serList = readJSONFileArray(serListPath);
-            for (i=0; i<serList.length;i++)
-            {          
-            var paramArray = new Array();
-						if(serList[i].param0!=null)
-								paramArray[0]=parseInt(serList[i].param0);
-						if(serList[i].param1!=null)
-								paramArray[1]=parseInt(serList[i].param1);  
-						if(serList[i].param2!=null)
-								paramArray[2]=parseInt(serList[i].param2); 	
-						if(serList[i].param3!=null)
-								paramArray[3]=parseInt(serList[i].param3);  
-						if(serList[i].param4!=null)
-								paramArray[4]=parseInt(serList[i].param4); 									
-															          
-            var testType=serList[i].name[0];
-    				switch (testType) {
-        				case '1':
-            			handleRepeatTestCase(paramArray, serList[i].name);
-            			break;
-       					case '2':
-            			handleScanTestCase(paramArray, serList[i].name);
-            			break;
-        				case '3':
-            			handlePlayTestCase(paramArray, serList[i].name);
-           			 	break;
-        				case '4':
-            			handleServiceListTestCase(paramArray, serList[i].name);
-            			break;
-        				case '5':
-            			handlePCTestCase(paramArray, serList[i].name);
-            			break;
-        				case '6':
-            			handleCCTestCase(paramArray, serList[i].name);
-            			break;
-        				case '7':
-            			handleInfoBarTestCase(paramArray, serList[i].name);
-            			break; 
-            		}           
-          	}
+            for (i = 0; i < serList.length; i++) {
+                var paramArray = new Array();
+                if (serList[i].param0 != null)
+                    paramArray[0] = parseInt(serList[i].param0);
+                if (serList[i].param1 != null)
+                    paramArray[1] = parseInt(serList[i].param1);
+                if (serList[i].param2 != null)
+                    paramArray[2] = parseInt(serList[i].param2);
+                if (serList[i].param3 != null)
+                    paramArray[3] = parseInt(serList[i].param3);
+                if (serList[i].param4 != null)
+                    paramArray[4] = parseInt(serList[i].param4);
+
+                var testType = serList[i].name[0];
+                switch (testType) {
+                    case '1':
+                        handleRepeatTestCase(paramArray, serList[i].name);
+                        break;
+                    case '2':
+                        handleScanTestCase(paramArray, serList[i].name);
+                        break;
+                    case '3':
+                        handlePlayTestCase(paramArray, serList[i].name);
+                        break;
+                    case '4':
+                        handleServiceListTestCase(paramArray, serList[i].name);
+                        break;
+                    case '5':
+                        handlePCTestCase(paramArray, serList[i].name);
+                        break;
+                    case '6':
+                        handleCCTestCase(paramArray, serList[i].name);
+                        break;
+                    case '7':
+                        handleInfoBarTestCase(paramArray, serList[i].name);
+                        break;
+                }
+            }
             break;
     }
 } 

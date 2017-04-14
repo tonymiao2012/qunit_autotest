@@ -136,7 +136,7 @@ function autoSearch(repeat, expectNum, sourceType, testName) {
                         else {
                             flag = 1;//0;
                             var path = "hisenseUI/" + testName.trim() + ".txt";
-                            var content = "Test failed on " + localTime + ". Assert result: " + serviceNumAtv + serviceNumDtv + ", expect number: " + expectNum + ". Running times: " + i;
+                            var content = "Test failed on " + localTime + ". Assert result: " + (serviceNumAtv + serviceNumDtv) + ", expect number: " + expectNum + ". Running times: " + i;
                             fh.writeFileToNative(path, content, workroot);
                         }
                         model.channelSearch.Finish();
@@ -210,9 +210,6 @@ function autoScanStart(sourceType, testName) {
                     done();
                     model.channelSearch.Finish();
                     model.channelSearch.onSearchStateChaged = null;
-                } else {
-                    var content = "Scan ATV start failed on " + localTime + ". Assert result: " + isSearched;
-                    fh.writeFileToNative(path, content, workroot);
                 }
             }
         };
