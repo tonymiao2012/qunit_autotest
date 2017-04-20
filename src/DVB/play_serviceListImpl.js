@@ -1,5 +1,6 @@
 var allChannels_T = [];
 var allChannels_C = [];
+var allChannels_S = [];
 var skipChannels_T = [];
 var skipChannels_C = [];
 var favChannels_T = [];
@@ -13,6 +14,12 @@ var ChCount = 0;
 var readCount = 0;
 var readPlus = 0;
 var infoBar;
+var totalCount=0;
+var fh = new fileHandler();
+var workRoot = 1;
+var begin_time=0;
+var end_time=0;
+var path = "hisenseUI/result.json";
 QUnit.config.reorder = false;
 
 function eventRowsToChannels(rows, channelType) {
@@ -27,6 +34,9 @@ function eventRowsToChannels(rows, channelType) {
         chnl.type = row[3];
         chnl.attr = row[4];
         chnl.uuid = row[5];
+        chnl.serviceId = row[6];
+        chnl.streamId = row[7];
+        chnl.networkId = row[8];
         channelType.push(chnl);
     }
     //return chnls;
@@ -44,7 +54,10 @@ function getServiceListT() {
             ServicelistModel.SERVICELIST_FIELD_NO,
             ServicelistModel.SERVICELIST_FIELD_TYPE,
             ServicelistModel.SERVICELIST_FIELD_ATTR,
-            ServicelistModel.SERVICELIST_FIELD_GCN/*uuid*/
+            ServicelistModel.SERVICELIST_FIELD_GCN/*uuid*/,
+            ServicelistModel.SERVICELIST_FIELD_SERVICE_ID,
+            ServicelistModel.SERVICELIST_FIELD_TRANSPORT_STREAM_ID,
+            ServicelistModel.SERVICELIST_FIELD_ORIGINAL_NETWORK_ID            
         ],
         [
             {field: ServicelistModel.SERVICELIST_FIELD_NO, direction: 1}
@@ -106,7 +119,10 @@ function getServiceListC() {
             ServicelistModel.SERVICELIST_FIELD_NO,
             ServicelistModel.SERVICELIST_FIELD_TYPE,
             ServicelistModel.SERVICELIST_FIELD_ATTR,
-            ServicelistModel.SERVICELIST_FIELD_GCN/*uuid*/
+            ServicelistModel.SERVICELIST_FIELD_GCN/*uuid*/,
+            ServicelistModel.SERVICELIST_FIELD_SERVICE_ID,
+            ServicelistModel.SERVICELIST_FIELD_TRANSPORT_STREAM_ID,
+            ServicelistModel.SERVICELIST_FIELD_ORIGINAL_NETWORK_ID            
         ],
         [
             {field: ServicelistModel.SERVICELIST_FIELD_NO, direction: 1}
@@ -167,19 +183,53 @@ function getServiceListS() {
             ServicelistModel.SERVICELIST_FIELD_NO,
             ServicelistModel.SERVICELIST_FIELD_TYPE,
             ServicelistModel.SERVICELIST_FIELD_ATTR,
-            ServicelistModel.SERVICELIST_FIELD_GCN/*uuid*/
+            ServicelistModel.SERVICELIST_FIELD_GCN,
+            ServicelistModel.SERVICELIST_FIELD_SERVICE_ID,
+            ServicelistModel.SERVICELIST_FIELD_TRANSPORT_STREAM_ID,
+            ServicelistModel.SERVICELIST_FIELD_ORIGINAL_NETWORK_ID 
         ],
         [
             {field: ServicelistModel.SERVICELIST_FIELD_NO, direction: 1}
         ],
-        onGetChannels_S.bind(this)
+        onGetChannels_S_new.bind(this)
     );
+}
+function onGetChannels_S_new(m_event) {
+    if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
+         eventRowsToChannels(m_event.rows,allChannels_S);
+         if(totalCount==allChannels_S.length)
+         {
+         	$("#total").html(allChannels_S.length);
+         	var curtime= new Date();
+         	end_time=curtime.getTime();
+         	var usedTime=(end_time-begin_time)/1000;
+				 	console.log(".......end :"+usedTime);
+				 	channelIterator.disconnect();
+				 }
+    }
+    else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
+				//console.log("total channels  is " + m_event.totalCount);
+        modeljs.dbgprint("total channels  is " + m_event.totalCount, 1);
+ 				totalCount = m_event.totalCount;
+ 				console.log("...total count :"+m_event.totalCount+":"+totalCount);
+        if (m_event.totalCount == 0) {
+            onGetChannels_S_new({type: TableIterator.EVENT_TYPE_ROWS_READ, rows: []});
+        }
+        else {
+        	  allChannels_S = [];
+           channelIterator.readNextRows(m_event.totalCount);
+           //channelIterator.readNextRows(totalCount);
+        }
+    }
 }
 function onGetChannels_S(m_event) {
     if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
         if (readCount == 0) {
             eventRowsToChannels(m_event.rows, allChannels_S);
             $("#total").html(allChannels_S.length);
+            modeljs.dbgprint("The channel number = " + allChannels_S.length, 1);
+            var curtime= new Date();
+            console.log(".......end :"+curtime.getTime());
         } else {
             eventRowsToChannels(m_event.rows, allChannels_S);
             readCount--;
@@ -260,32 +310,219 @@ function showServiceList(sourceType) {
     }
 
 }
-function checkServiceT(expectNum, funcName) {
+
+function write2File(sourceType,funcName) {
     QUnit.test(funcName, function (assert) {
-        if (allChannels_T.length > 0) {
-            sourceType = 0;
-            showServiceList(sourceType);
-        }
-        assert.equal(allChannels_T.length, expectNum, "getServiceT ");
-    });
+    	  var timerFlag;
+    	  var done = assert.async(1);	
+    	  $("#total").html("");    	
+        function checkServiceTimeout() {
+        	var list;
+    			if (sourceType == 0)
+        			list = allChannels_T;
+    			else if(sourceType == 1)
+        			list = allChannels_C;
+        	else
+        		  list = allChannels_S;		
+    			var content ="[\n";
+    			for (var i = 0; i < list.length; i++) {
+       	 		content = content+"{\"name\":\"" + list[i].name +"\","+"\"uuid\":\"" + list[i].uuid +"\","+ "\"streamId\":\"" + list[i].streamId +"\","+ "\"networkId\":\"" + list[i].networkId +"\","+ "\"serviceId\":\""+list[i].serviceId+"\"}";
+        		if(i<list.length-1)
+        		{
+        		 content = content+",\n"; 
+        		} 
+    			}
+     			content = content+"]"; 
+    			var result = fh.writeFileToNative(path, content, workRoot);
+        assert.ok(true, "writeToFile ");
+        done();
+        }; 
+         var curtime= new Date();
+				 console.log(".......write2File :begin :"+curtime.getTime());
+        if (sourceType == 0)   
+    	  	getServiceListT();
+    	  else if (sourceType == 1) 
+    	  	getServiceListC(); 
+    	  else
+    	  	getServiceListS();	
+    	  console.log("write2File");	 	            	  
+				timerFlag = setTimeout(checkServiceTimeout, 1800000);            	
+    });  
 }
-function checkServiceC(expectNum, funcName) {
+function checkServiceListTByFile(funcName) {
+   			console.log("............................... checkServiceListTByFile  . ");
+        QUnit.test(funcName, function (assert) {  
+        	  var timerFlag;
+    	  		var done = assert.async(1);	
+        	  function compare()
+        	  { 
+            	var flag = true;
+            	var serListPath = "config/serviceListDVB_T.json";
+            	var serList = readJSONFileArray(serListPath);
+            	if (serList.length == allChannels_T.length) {
+                var i;
+                for (i = 0; i < allChannels_T.length; i++) {
+                    if ((serList[i].name == allChannels_T[i].name) && (serList[i].uuid == allChannels_T[i].uuid)&& (serList[i].serviceId == allChannels_T[i].serviceId)
+                        && (serList[i].streamId == allChannels_T[i].streamId)&& (serList[i].networkId == allChannels_T[i].networkId))
+                        i++;
+                    else
+                        break;
+                }
+                if (i != allChannels_T.length) {
+                    flag = false;
+                }
+            	}
+            	else {
+                flag = false;
+           	  }
+						  return flag;
+           	}
+           	function serviceToCompare()
+           	{
+           		var result=compare();
+           		assert.ok(result, "checkServiceListTByFile "); 
+           		done();         		
+           	}
+           	modeljs.dbgprint("...Begin to get T", 1);
+    	  		getServiceListT();            	  
+						timerFlag = setTimeout(serviceToCompare, 2000);               
+        });
+}
+function checkServiceListCByFile(funcName) {
+    		console.log("............................... checkServiceListCByFile  . ");
+        QUnit.test(funcName, function (assert) {  
+        	  var timerFlag;
+    	  		var done = assert.async(1);	
+        	  function compare()
+        	  { 
+            	var flag = true;
+            	var serListPath = "config/serviceListDVB_C.json";
+            	var serList = readJSONFileArray(serListPath);
+            	if (serList.length == allChannels_C.length) {
+                var i;
+                for (i = 0; i < allChannels_C.length; i++) {
+                    if ((serList[i].name == allChannels_C[i].name) && (serList[i].uuid == allChannels_C[i].uuid)&& (serList[i].serviceId == allChannels_C[i].serviceId)
+                        && (serList[i].streamId == allChannels_C[i].streamId)&& (serList[i].networkId == allChannels_C[i].networkId))
+                        i++;
+                    else
+                        break;
+                }
+                if (i != allChannels_C.length) {
+                    flag = false;
+                }
+            	}
+            	else {
+                flag = false;
+           	  }
+						  return flag;
+           	}
+           	function serviceToCompare()
+           	{
+           		var result=compare();
+           		assert.ok(result, "checkServiceListCByFile ");   
+           		done();       		
+           	}
+    	  		getServiceListC();            	  
+						timerFlag = setTimeout(serviceToCompare, 2000);               
+        });    
+}
+function checkServiceListSByFile(funcName) {
+        QUnit.test(funcName, function (assert) {  
+        	  var timerFlag;
+        	  console.log(".. checkServiceListSByFile  . ");
+    	  		var done = assert.async(1);	
+        	  function compare()
+        	  { 
+            	var flag = true;
+            	var serListPath = "config/serviceListDVB_S.json";
+            	var serList = readJSONFileArray(serListPath);
+            	if (serList.length == allChannels_S.length) {
+                var i;
+                for (i = 0; i < allChannels_S.length; i++) {
+                    if ((serList[i].name == allChannels_S[i].name) && (serList[i].uuid == allChannels_S[i].uuid)&& (serList[i].serviceId == allChannels_S[i].serviceId)
+                        && (serList[i].streamId == allChannels_S[i].streamId)&& (serList[i].networkId == allChannels_S[i].networkId))
+                        i++;
+                    else
+                        break;
+                }
+                if (i != allChannels_S.length) {
+                	  console.log("...checkServiceListSByFile value is error . ");
+                    flag = false;
+                }
+            	}
+            	else {
+            		console.log("...checkServiceListSByFile ,length is error : "+ allChannels_S.length);
+                flag = false;
+           	  }
+						  return flag;
+           	}
+           	function serviceToCompare()
+           	{
+           		var result=compare();
+           		if(result==false)
+           			console.log(".................................................serviceToCompare Fail..."); 
+           		assert.ok(result, "checkServiceListSByFile ");   
+           		done();      		
+           	}
+           	modeljs.dbgprint("...Begin to get S", 1);
+           	var curtime= new Date();
+           	begin_time= curtime.getTime();
+            //console.log(".......Begin to get S :"+curtime.getTime());
+    	  		getServiceListS();            	  
+						timerFlag = setTimeout(serviceToCompare, 40000);               
+        });    
+}
+function checkServiceT(expectNum,flag, funcName) {
     QUnit.test(funcName, function (assert) {
-        if (allChannels_C.length > 0) {
-            sourceType = 1;
-            showServiceList(sourceType);
-        }
-        assert.equal(allChannels_C.length, expectNum, "getServiceC ");
-    });
+    	  var timerFlag;
+    	  var done = assert.async(1);	
+    	  $("#total").html("");    	
+        function checkServiceTTimeout() {
+        		if ((allChannels_T.length > 0)&&(flag==1)) {
+            		sourceType = 1;
+            		showServiceList(sourceType);
+       			}
+        		assert.equal(allChannels_T.length, expectNum, "getServiceT ");
+            done();
+        }; 
+    	  getServiceListT();            	  
+				timerFlag = setTimeout(checkServiceTTimeout, 2000);            	
+    });  
 }
+function checkServiceC(expectNum,flag, funcName) {
+    QUnit.test(funcName, function (assert) {
+    	  var timerFlag;
+    	  var done = assert.async(1);	
+    	  $("#total").html("");    	
+        function checkServiceCTimeout() {
+        		if ((allChannels_C.length > 0)&&(flag==1)) {
+            		sourceType = 0;
+            		showServiceList(sourceType);
+       			}
+        		assert.equal(allChannels_C.length, expectNum, "getServiceC ");
+            done();
+        }; 
+    	  getServiceListC();            	  
+				timerFlag = setTimeout(checkServiceCTimeout, 2000);            	
+    });     
+}
+
 function checkServiceS(expectNum, funcName) {
     QUnit.test(funcName, function (assert) {
-        if (allChannels_S.length > 0) {
-            sourceType = 2;
-            showServiceList(sourceType);
-        }
-        assert.equal(allChannels_S.length, expectNum, "getServiceS ");
-    });
+    	  var timerFlag;
+    	  var done = assert.async(1);	
+    	  $("#total").html("");    	
+        function checkServiceSTimeout() {
+        		if (allChannels_S.length > 0) {
+            		sourceType = 2;
+            		showServiceList(sourceType);
+       			}
+        		assert.equal(allChannels_S.length, expectNum, "getServiceS ");
+            done();
+        }; 
+    	  getServiceListS();            	  
+				timerFlag = setTimeout(checkServiceSTimeout, 2000);            	
+    });     
 }
 function previousChannel_T() {
     currentIndex--;
@@ -360,6 +597,66 @@ function playInputedChannel(sourceType, chn, funcName) {
         assert.ok(true, "check playInputedChannel");
     });
 }
+
+function playInputedChannel(sourceType, chn, func_name) {
+    QUnit.test(func_name, function (assert) {
+        var done = assert.async(1);
+        var timerFlag;
+        var format="";
+        var curTime=0;
+        var aspect="";
+        var starttimeNow=0;
+        var stoptimeNow=0;
+        var flag=false;
+        var channelChanged=false;
+        var info="";
+
+        function playInputedChannelTimeout() {
+        	  model.tvservice.onMainPlayChanged = null;
+    				model.video.onMainPlayVideoFormatInfoChanged = null;
+						if((format.length!=0)&&(aspect.length!=0)&&(channelChanged==true)&&(starttimeNow>0)&&(stoptimeNow>0))
+						   flag=true;
+            assert.ok(flag, "playInputedChannel");
+            done();
+        };
+        
+        model.tvservice.onMainPlayChanged = function (val) {       
+             channelChanged=true;
+        }   
+        model.video.onMainPlayVideoFormatInfoChanged = function (val) {
+    			if (val.length != 0) {
+        			format = val;
+             	info=info+" |"+format;
+						 	$("#details").html(info);
+
+        			aspect = model.tvservice.getVideoInfoFrameaspect();
+             	info=info+" |"+aspect;
+						 	$("#details").html(info);       			 	
+       			 	
+        			var pfResultNow = model.tvservice.getEitMainNow();
+        			if (pfResultNow.length == 12) {
+									starttimeNow = pfResultNow[2];
+      						stoptimeNow = pfResultNow[3];
+      						var start_now = new Date(pfResultNow[2] * 1000);
+      						var stop_now = new Date(pfResultNow[3] * 1000);
+      						info=info+"|"+ pfResultNow[1] + "|" + start_now.toLocaleString() + "|" + stop_now.toLocaleString()+"|"+pfResultNow[8];
+									$("#details").html(info);
+        			}
+    			}
+        }        
+        
+        if (sourceType == 1) {
+            model.tvservice.playChannel(0, allChannels_T[chn].uuid, 0, allChannels_T[chn].type, allChannels_T[chn].id);
+            $("#name").html(allChannels_T[chn].name);
+        }
+        else {
+            model.tvservice.playChannel(0, allChannels_C[chn].uuid, 0, allChannels_C[chn].type, allChannels_C[chn].id);
+            $("#name").html(allChannels_C[chn].name);
+        }
+        timerFlag = setTimeout(playInputedChannelTimeout, 4000);
+    });
+}
+
 
 function ui_getAudioTableInfo(event) {
 
@@ -439,6 +736,7 @@ function onMainPlayChanged(val) {
     readAudioTableInfo(ui_getAudioTableInfo);
 }
 function disableMainPlayChangedCallback() {
+		model.tvservice.onMainPlayChanged = null;
     model.tvservice.onMainPlayVideoFormatInfoChanged = null;
     model.tvservice.onAudioExistChaged = null;
 }
@@ -489,7 +787,7 @@ function switchChannel(direction, sourceType, repeat, funcName) {
                     $("#times").html(i);
                     done();
                     if (i < times)
-                        setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 6000) + 6000));
+                        setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 1000) + 1000));
                     else
                         disableMainPlayChangedCallback();
                 }
@@ -503,7 +801,7 @@ function switchChannel(direction, sourceType, repeat, funcName) {
             }
         }
 
-        setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 6000) + 6000));
+        setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 1000) + 1000));
     });
 }
 
@@ -528,7 +826,7 @@ function randomSwitchChannel(repeat, funcName) {
         }
 
         var done = assert.async(times);
-        var interval = Math.ceil(Math.random() * (10000 - 6000) + 6000);
+        var interval = Math.ceil(Math.random() * (10000 - 1000) + 1000);
 
         try {
             timer = setInterval(function () {
@@ -555,63 +853,46 @@ function randomSwitchChannel(repeat, funcName) {
 function channelUpT(repeat, funcName) {
     console.log("............................... channelUpT. ");
     $("#resultView table").html("");
-    if (allChannels_T.length > 0) {
         var direction = 1;
         var sourceType = 1;
         switchChannel(direction, sourceType, repeat, funcName);
-    }
 }
 
 function channelDownT(repeat, funcName) {
     console.log("............................... channelDownT. ");
-    if (allChannels_T.length > 0) {
+    $("#resultView table").html("");
         var direction = 0;
         var sourceType = 1;
         switchChannel(direction, sourceType, repeat, funcName);
-    }
 }
 function channelRandomT(repeat, funcName) {
     console.log("............................... channelRandomT. ");
-    if (allChannels_T.length > 0) {
+    $("#resultView table").html("");
         var direction = 2;
         var sourceType = 1;
         switchChannel(direction, sourceType, repeat, funcName);
-    }
 }
 function channelUpC(repeat, funcName) {
     console.log("............................... channelUpC. ");
-    if (allChannels_C.length > 0) {
+    $("#resultView table").html("");
         var direction = 1;
         var sourceType = 0;
         switchChannel(direction, sourceType, repeat, funcName);
-    }
 }
 
 function channelDownC(repeat, funcName) {
     console.log("............................... channelDownC. ");
-    if (allChannels_C.length > 0) {
+    $("#resultView table").html("");
         var direction = 0;
         var sourceType = 0;
         switchChannel(direction, sourceType, repeat, funcName);
-    }
 }
 function channelRandomC(repeat, funcName) {
     console.log("............................... channelRandomC. ");
-    if (allChannels_C.length > 0) {
+    $("#resultView table").html("");
         var direction = 2;
         var sourceType = 0;
         switchChannel(direction, sourceType, repeat, funcName);
-    }
-}
-
-function channelSwitchT_C_step1(repeat, funcName) {
-    getServiceListC();
-    setTimeout(channelSwitchT_C_step2, 2000, repeat, funcName);
-}
-function channelSwitchT_C_step2(repeat, funcName) {
-    if ((allChannels_T.length > 0) && (allChannels_C.length > 0)) {
-        randomSwitchChannel(repeat, funcName);
-    }
 }
 
 function getServiceListT_done_check(funcName) {
