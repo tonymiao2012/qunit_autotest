@@ -320,13 +320,15 @@
       {
         "casename": "4001_getServicelistT",
         "input": [
-          "Expect number"
+          "Expect number",
+          "Show flag"
         ]
       },
       {
         "casename": "4002_getServicelistC",
         "input": [
-          "Expect number"
+          "Expect number",
+          "Show flag"
         ]
       },
       {
@@ -404,13 +406,13 @@
       {
         "casename": "4015_getBlockListT",
         "input": [
-          "Expect number"
+          "Expected number"
         ]
       },
       {
         "casename": "4016_getBlockListC",
         "input": [
-          "Expect number"
+          "Expected number"
         ]
       },
       {
@@ -457,6 +459,12 @@
       },
       {
         "casename": "4025_checkChannelListC"
+      },
+      {
+        "casename": "4026_writeT2File"
+      },
+      {
+        "casename": "4027_writeC2File"
       }
     ],
     "icon-class": "fa fa-steam fa-2x"
@@ -486,7 +494,10 @@
         "casename": "5005_reset"
       },
       {
-        "casename": "5006_getPinRequest"
+        "casename": "5006_getPinRequest",
+        "input": [
+          "Expect status"
+        ]
       },
       {
         "casename": "5007_getStart"
@@ -571,12 +582,25 @@
         "casename": "5025_openVchipDimensionPage"
       },
       {
-        "casename": "5026_openVchipRatingValuePage"
+        "casename": "5026_openVchipRatingValuePage",
+        "input": [
+          "Region",
+          "Dimen"
+        ]
       },
       {
         "casename": "5027_setLevelPage",
         "input": [
-          "Set VChip rating value"
+          "Region",
+          "Dimen",
+          "ListID",
+          "Value"
+        ]
+      },
+      {
+        "casename": "5028_delayTime",
+        "input": [
+          "Time"
         ]
       }
     ],
@@ -784,8 +808,27 @@
     "icon-class": "fa fa-television fa-2x"
   },
   {
-    "name": "PVR",
-    "testcase": [],
+    "name": "AutoTest",
+    "testcase": [
+      {
+        "casename": "8001_autoTest1",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
+        "casename": "8002_autoTest2",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
+        "casename": "8003_autoTest3",
+        "input": [
+          "Repeat"
+        ]
+      }
+    ],
     "icon-class": "fa fa-newspaper-o fa-2x"
   }
 ]

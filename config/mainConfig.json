@@ -105,13 +105,15 @@
       {
         "casename": "4001_getServicelistT",
         "input": [
-          "Expect Number"
+          "Expect Number",
+          "Show flag"
         ]
       },
       {
         "casename": "4002_getServicelistC",
         "input": [
-          "Expect Number"
+          "Expect Number",
+          "Show flag"
         ]
       },
       {
@@ -119,6 +121,24 @@
         "input": [
           "Expect Number"
         ]
+      },
+      {
+        "casename": "4004_checkChannelListT"
+      },
+      {
+        "casename": "4005_checkChannelListC"
+      },
+      {
+        "casename": "4006_checkChannelListS"
+      },      
+      {
+        "casename": "4007_writeT2File"
+      },
+      {
+        "casename": "4008_writeC2File"
+      }, 
+      {
+        "casename": "4009_writeS2File"
       }
     ],
     "icon-class": "fa fa-steam fa-2x"
@@ -140,7 +160,14 @@
   },
   {
     "name": "PVR",
-    "testcase": [],
+    "testcase": [
+       {
+        "casename": "8001_autoTest1",
+        "input": [
+          "Repeat"
+        ]
+      }
+    ],
     "icon-class": "fa fa-newspaper-o fa-2x"
   }
 ]
