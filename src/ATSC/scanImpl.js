@@ -73,9 +73,10 @@ function manualScanStart(fre, sourceType, funcName) {
             else if (value == 0) {
                 if (isSearched == 1) {
                     assert.ok(true, "manual start");
-                    done();
-                    model.channelSearch.Finish();
+                    if ((sourceType == 17) || (sourceType == 18))
+                        model.channelSearch.Finish();
                     model.channelSearch.onSearchStateChaged = null;
+                    done();
                 }
             }
         };
@@ -90,7 +91,6 @@ function autoScanStop(sourceType, funcName) {
             if (value == 11) {
                 assert.ok(true, 1, "scan stop");
                 done();
-                model.channelSearch.Finish();
                 model.channelSearch.onSearchingProgressChaged = null;
                 model.channelSearch.onSearchStateChaged = null;
             }
@@ -199,17 +199,17 @@ function autoScanStart(sourceType, testName) {
                     fh.writeFileToNative(path, content, workroot);
                 }
 
-                done();
-                model.channelSearch.Finish();
+                //model.channelSearch.Finish();
                 model.channelSearch.onSearchStateChaged = null;
                 model.channelSearch.onSearchingProgressChaged = null;
+                done();
             }
             else if ((value == 0) && ((sourceType == 17) || (sourceType == 18))) {
                 if (isSearched == 1) {
                     assert.ok(true, "scan started atv");
-                    done();
                     model.channelSearch.Finish();
                     model.channelSearch.onSearchStateChaged = null;
+                    done();
                 }
             }
         };
@@ -237,7 +237,7 @@ function autoScanProgress(sourceType, testName) {
             else if (value == 0) {
                 if (isSearched == 1) {
                     done();
-                    model.channelSearch.Finish();
+                    //model.channelSearch.Finish();
                     model.channelSearch.onSearchingProgressChaged = null;
                     model.channelSearch.onSearchStateChaged = null;
                 }
@@ -293,10 +293,10 @@ function autoScanServices(expectNum, sourceType, funcName) {
                         }
 
                         model.channelSearch.onFoundAnalogServicesChaged = null;
+                        model.channelSearch.Finish();
                     }
-                    done();
-                    model.channelSearch.Finish();
                     model.channelSearch.onSearchStateChaged = null;
+                    done();
                 }
 
             }
@@ -331,7 +331,7 @@ function manualScanServices(expectNum, fre, sourceType, funcName) {
                         $("#total").html(serviceNumDtv);
                         assert.equal(serviceNumDtv, expectNum, "get services");
 
-                        if(serviceNumDtv != expectNum){
+                        if (serviceNumDtv != expectNum) {
                             var path = "hisenseUI/" + funcName.trim() + ".txt";
                             var content = "Test failed on " + localTime + ". Service number DTV: " + serviceNumDtv + ", expect number: " + expectNum;
                             fh.writeFileToNative(path, content, workroot);
@@ -344,17 +344,17 @@ function manualScanServices(expectNum, fre, sourceType, funcName) {
                         $("#total").html(serviceNumAtv);
                         assert.equal(serviceNumAtv, expectNum, "get services");
 
-                        if(serviceNumAtv != expectNum){
+                        if (serviceNumAtv != expectNum) {
                             var path = "hisenseUI/" + funcName.trim() + ".txt";
                             var content = "Test failed on " + localTime + ". Service number ATV: " + serviceNumAtv + ", expect number: " + expectNum;
                             fh.writeFileToNative(path, content, workroot);
                         }
 
                         model.channelSearch.onFoundAnalogServicesChaged = null;
+                        model.channelSearch.Finish();
                     }
-                    done();
-                    model.channelSearch.Finish();
                     model.channelSearch.onSearchStateChaged = null;
+                    done();
                 }
 
             }
@@ -383,16 +383,18 @@ function autoScanCompleteState(sourceType, funcName) {
             else if (value == 0) {
                 if (isSearched == 1) {
                     assert.ok(true, " Complete state");
-                    done();
-                    model.channelSearch.Finish();
+                    if ((sourceType == 17) || (sourceType == 18))
+                        model.channelSearch.Finish();
                     model.channelSearch.onSearchStateChaged = null;
+                    done();
                 }
             }
             else if (value == 11) {
                 assert.ok(false, "cancel state");
-                done();
-                model.channelSearch.Finish();
+                if ((sourceType == 17) || (sourceType == 18))
+                    model.channelSearch.Finish();
                 model.channelSearch.onSearchStateChaged = null;
+                done();
             }
         };
         startAutoScan(sourceType);
@@ -409,16 +411,18 @@ function manualScanCompleteState(fre, sourceType, funcName) {
             else if (value == 0) {
                 if (isSearched == 1) {
                     assert.ok(true, " Complete state");
-                    done();
-                    model.channelSearch.Finish();
+                    if ((sourceType == 17) || (sourceType == 18))
+                        model.channelSearch.Finish();
                     model.channelSearch.onSearchStateChaged = null;
+                    done();
                 }
             }
             else if (value == 11) {
                 assert.ok(false, "cancel state ");
-                done();
-                model.channelSearch.Finish();
+                if ((sourceType == 17) || (sourceType == 18))
+                    model.channelSearch.Finish();
                 model.channelSearch.onSearchStateChaged = null;
+                done();
             }
         };
         startManualScan(fre, sourceType);
@@ -437,7 +441,6 @@ function autoScanCancelState(sourceType, funcName) {
                 if (isSearched == 1) {
                     assert.ok(false, " complete state ");
                     done();
-                    model.channelSearch.Finish();
                     model.channelSearch.onSearchingProgressChaged = null;
                     model.channelSearch.onSearchStateChaged = null;
                 }
@@ -445,7 +448,6 @@ function autoScanCancelState(sourceType, funcName) {
             else if (value == 11) {
                 assert.ok(true, "cancel state");
                 done();
-                model.channelSearch.Finish();
                 model.channelSearch.onSearchingProgressChaged = null;
                 model.channelSearch.onSearchStateChaged = null;
             }
@@ -473,7 +475,7 @@ function manualScanSetFrequency(fre, sourceType, funcName) {
         var result = setFrequency(fre);
         assert.ok(result, "manualScanSetFrequency");
 
-        if(result !== true){
+        if (result !== true) {
             var path = "hisenseUI/" + funcName.trim() + ".txt";
             var content = "Test failed on " + localTime + ". Assert result: " + result;
             fh.writeFileToNative(path, content, workroot);
@@ -492,7 +494,7 @@ function ScanIsRunning(funcName) {
         var result = getRunningState();
         assert.equal(result, false, "ScanIsRunning");
 
-        if(result !== false){
+        if (result !== false) {
             var path = "hisenseUI/" + funcName.trim() + ".txt";
             var content = "Test failed on " + localTime + ". Assert result: " + result;
             fh.writeFileToNative(path, content, workroot);
@@ -508,7 +510,6 @@ function ScanFinish(sourceType, funcName) {
                 isSearched = 1;
             }
             else if (value == 11) {
-                model.channelSearch.Finish();
                 setTimeout(checkRunning, 1000);
                 model.channelSearch.onSearchingProgressChaged = null;
                 model.channelSearch.onSearchStateChaged = null;
@@ -523,7 +524,7 @@ function ScanFinish(sourceType, funcName) {
             var running = model.channelSearch.getRunning();
             assert.equal(running, 0, "finish state");
 
-            if(running != 0){
+            if (running != 0) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime + ". Assert result: " + running;
                 fh.writeFileToNative(path, content, workroot);

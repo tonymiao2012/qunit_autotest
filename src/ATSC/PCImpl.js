@@ -16,25 +16,33 @@ function getPin(funcName) {
         assert.ok(result, "getPin");
     });
 }
-function startSetPin(pinValue) {
-    model.parentlock.setPin(pinValue);
-    if (model.parentlock.getPin() == pinValue)
+function startSetPin(pin) {
+    model.parentlock.setPin(pin);
+    if (model.parentlock.getPin() == pin)
         return true;
     else
         return false;
 }
 function setPin(pinValue, funcName) {
     QUnit.test(funcName, function (assert) {
-    	if ((pinValue>=1000)&&(pinValue<=9999))
-    	{
-        var result = startSetPin(pinValue.toString());
-        assert.ok(result, "Test setPin");
-      }
-      else
-      {
-        assert.ok(false,"setPin");
-        $("#details").html(" Pin length isn't 4");        	
-      }	
+        if (pinValue <= 9999) {
+            var pin;
+            if ((pinValue >= 1000) && (pinValue <= 9999))
+                pin = pinValue.toString();
+            else if ((pinValue >= 100) && (pinValue <= 999))
+                pin = "0" + pinValue.toString();
+            else if ((pinValue >= 10) && (pinValue <= 99))
+                pin = "00" + pinValue.toString();
+            else if ((pinValue >= 0) && (pinValue <= 9))
+                pin = "000" + pinValue.toString();
+
+            var result = startSetPin(pin);
+            assert.ok(result, "Test setPin");
+        }
+        else {
+            assert.ok(false, "setPin");
+            $("#details").html(" Pin length isn't 4");
+        }
     });
 }
 function startGetSModel() {
@@ -51,17 +59,22 @@ function getSModel(funcName) {
         assert.ok(result, "Test getSModel");
     });
 }
-function startSetSModel(flag) {
-    model.parentlock.setSModel(flag);
-    if (model.parentlock.getSModel() == flag)
-        return true;
-    else
-        return false;
-}
+
 function setSModel(flag, funcName) {
     QUnit.test(funcName, function (assert) {
-        var result = startSetSModel(flag);
-        assert.ok(result, "Test setSModel");
+        var done = assert.async(1);
+
+        function setSModelTimeout() {
+            var result;
+            if (model.parentlock.getSModel() == flag)
+                result = true;
+            else
+                result = false;
+            assert.ok(result, "setSModel");
+            done();
+        };
+        model.parentlock.setSModel(flag);
+        setTimeout(setSModelTimeout, 1000);
     });
 }
 function startPCReset() {
@@ -277,15 +290,19 @@ function checkSetUsTvRating(flag, ratingValue, val) {
     }
     return result;
 }
-function startSetUsTvRating(flag, ratingValue) {
-    model.parentlock.ActionSetUsTvRating(ratingValue, flag);
-    var val = model.parentlock.getUsTvRating();
-    return checkSetUsTvRating(flag, ratingValue, val);
-}
+
 function setUsTvRating(flag, ratingValue, funcName) {
     QUnit.test(funcName, function (assert) {
-        var result = startSetUsTvRating(flag, ratingValue);
-        assert.ok(result, "Test setUsTvRating");
+        var done = assert.async(1);
+
+        function setUsTvRatingTimeout() {
+            var val = model.parentlock.getUsTvRating();
+            var result = checkSetUsTvRating(flag, ratingValue, val);
+            assert.ok(result, "setUsTvRating");
+            done();
+        };
+        model.parentlock.ActionSetUsTvRating(ratingValue, flag);
+        setTimeout(setUsTvRatingTimeout, 1000);
     });
 }
 
@@ -449,16 +466,14 @@ function startOpenVchipRatingValuePage(region, dimen) {
 }
 function openVchipRatingValuePage(region, dimen, funcName) {
     QUnit.test(funcName, function (assert) {
-    	if((region<=regionPageNumber)&&(dimen<=dimensionPageNumber))
-    	{
-        var result = startOpenVchipRatingValuePage(region,dimen);
-        assert.ok(result, "Test openVchipRatingValuePage");
-      }
-      else
-      {
-        assert.ok(false,"openVchipRatingValuePage fail");
-        $("#details").html(" The  number is error");        
-      }	
+        if ((region <= regionPageNumber) && (dimen <= dimensionPageNumber)) {
+            var result = startOpenVchipRatingValuePage(region, dimen);
+            assert.ok(result, "Test openVchipRatingValuePage");
+        }
+        else {
+            assert.ok(false, "openVchipRatingValuePage fail");
+            $("#details").html(" The  number is error");
+        }
     });
 }
 function startSetLevelPage(region, dimen, selectlist, flag) {
@@ -470,15 +485,24 @@ function startSetLevelPage(region, dimen, selectlist, flag) {
 }
 function setLevelPage(region, dimen, selectlist, flag, funcName) {
     QUnit.test(funcName, function (assert) {
-    	if ((selectlist<=selectlistNumber)&&(region<=regionPageNumber)&&(dimen<=dimensionPageNumber)&&((flag==0)||(flag==1)))
-    	{
-        var result = startSetLevelPage(region,dimen,selectlist,flag);
-        assert.ok(result, "Test setLevelPage");
-      }
-      else
-      {
-        assert.ok(false,"openVchipRatingValuePage fail");
-        $("#details").html(" input has error");       	
-      }	
+        if ((selectlist <= selectlistNumber) && (region <= regionPageNumber) && (dimen <= dimensionPageNumber) && ((flag == 0) || (flag == 1))) {
+            var result = startSetLevelPage(region, dimen, selectlist, flag);
+            assert.ok(result, "Test setLevelPage");
+        }
+        else {
+            assert.ok(false, "openVchipRatingValuePage fail");
+            $("#details").html(" input has error");
+        }
+    });
+}
+function delayTime(delay, funcName) {
+    QUnit.test(funcName, function (assert) {
+        var done = assert.async(1);
+
+        function delayTimeout() {
+            assert.ok(true, "delayTime");
+            done();
+        };
+        setTimeout(delayTimeout, delay);
     });
 }

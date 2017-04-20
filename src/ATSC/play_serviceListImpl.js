@@ -182,14 +182,44 @@ function showServiceList(sourceType) {
     }
 
 }
+function write2File(sourceType, funcName) {
+    QUnit.test(funcName, function (assert) {
+        var timerFlag;
+        var done = assert.async(1);
+        $("#total").html("");
+        function checkServiceTimeout() {
+            var list;
+            if (sourceType == 0)
+                list = allChannels_T;
+            else
+                list = allChannels_C;
+            var content = "[\n";
+            for (var i = 0; i < list.length; i++) {
+                content = content + "{\"name\":\"" + list[i].name + "\"," + "\"majorNum\":\"" + list[i].majorNum + "\"," + "\"minorNum\":\"" + list[i].minorNum + "\"}";
+                if (i < list.length - 1) {
+                    content = content + ",\n";
+                }
+            }
+            content = content + "]";
+            var result = fh.writeFileToNative(path, content, workRoot);
+            assert.ok(true, "writeToFile ");
+            done();
+        };
+        if (sourceType == 0)
+            getServiceListT();
+        else
+            getServiceListC();
+        timerFlag = setTimeout(checkServiceTimeout, 5000);
+    });
+}
 
-function checkServiceT(expectNum, funcName) {
+function checkServiceT(expectNum, flag, funcName) {
     QUnit.test(funcName, function (assert) {
         var timerFlag;
         var done = assert.async(1);
         $("#total").html("");
         function checkServiceTTimeout() {
-            if (allChannels_T.length > 0) {
+            if ((allChannels_T.length > 0) && (flag == 1)) {
                 sourceType = 1;
                 showServiceList(sourceType);
             }
@@ -207,13 +237,13 @@ function checkServiceT(expectNum, funcName) {
         timerFlag = setTimeout(checkServiceTTimeout, 2000);
     });
 }
-function checkServiceC(expectNum, funcName) {
+function checkServiceC(expectNum, flag, funcName) {
     QUnit.test(funcName, function (assert) {
         var timerFlag;
         var done = assert.async(1);
         $("#total").html("");
         function checkServiceCTimeout() {
-            if (allChannels_C.length > 0) {
+            if ((allChannels_C.length > 0) && (flag == 1)) {
                 sourceType = 0;
                 showServiceList(sourceType);
             }
@@ -313,7 +343,7 @@ function playInputedChannel(sourceType, chn, func_name) {
                 model.tvservice.onEitMainNowChanged = null;
                 if ((format.length != 0) && (aspect.length != 0) && (channelChanged == true) && (starttimeNow > 0) && (stoptimeNow > 0))
                     flag = true;
-                assert.ok(flag, "playInputedChannel");
+                assert.ok(flag, "playInputedChannel:" + chn);
 
                 if (flag === false) {
                     var path = "hisenseUI/" + func_name.trim() + ".txt";
@@ -562,7 +592,7 @@ function switchChannel(direction, sourceType, repeat, funcName) {
 
             setTimeout(playTimeout, Math.ceil(Math.random() * (10000 - 1000) + 1000));
         }
-    	});
+    });
 }
 
 function randomSwitchChannel(repeat, funcName) {
@@ -678,7 +708,7 @@ function checkServiceListTByFile(funcName) {
 
         function compare() {
             var flag = true;
-            var serListPath = "config/serviceListT.json";
+            var serListPath = "config/serviceListATSC_T.json";
             var serList = readJSONFileArray(serListPath);
             if (serList.length == allChannels_T.length) {
                 var i;
@@ -725,7 +755,7 @@ function checkServiceListCByFile(funcName) {
 
         function compare() {
             var flag = true;
-            var serListPath = "config/serviceListC.json";
+            var serListPath = "config/serviceListATSC_C.json";
             var serList = readJSONFileArray(serListPath);
             if (serList.length == allChannels_C.length) {
                 var i;
@@ -843,7 +873,7 @@ function modifySkipListT(attr, flag, chNum, funcName) {
                 var val = inSkipListT(allChannels_T[chNum].uuid);
                 assert.equal(val, flag, "modifySkipListT ");
 
-                if(val != flag){
+                if (val != flag) {
                     var path = "hisenseUI/" + funcName.trim() + ".txt";
                     var content = "Test failed on " + localTime + ". Assert value: " + val + ", expect value: " + flag;
                     fh.writeFileToNative(path, content, workroot);
@@ -890,7 +920,7 @@ function getSkipListAllC(expectNum, funcName) {
             $("#details").html(skipChannels_C.length);
             assert.equal(skipChannels_C.length, expectNum, "getSkipListAllC ");
 
-            if(skipChannels_C.length != expectNum){
+            if (skipChannels_C.length != expectNum) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime + ". Skip channelsC length: " + skipChannels_C.length + ", expect number: " + expectNum;
                 fh.writeFileToNative(path, content, workroot);
@@ -954,7 +984,7 @@ function modifySkipListC(attr, flag, chNum, funcName) {
                 var val = inSkipListC(allChannels_C[chNum].uuid);
                 assert.equal(val, flag, "modifySkipListC ");
 
-                if(val != flag){
+                if (val != flag) {
                     var path = "hisenseUI/" + funcName.trim() + ".txt";
                     var content = "Test failed on " + localTime + ". Assert value: " + val + ", expect value: " + flag;
                     fh.writeFileToNative(path, content, workroot);
@@ -1002,7 +1032,7 @@ function getBlockListAllT(expectNum, funcName) {
             $("#details").html(blockChannels_T.length);
             assert.equal(blockChannels_T.length, expectNum, "getBlockListAllT ");
 
-            if(blockChannels_T.length != expectNum){
+            if (blockChannels_T.length != expectNum) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime + ". Block channelsT length: " + blockChannels_T.length + ", expect number: " + expectNum;
                 fh.writeFileToNative(path, content, workroot);
@@ -1066,7 +1096,7 @@ function modifyBlockListT(attr, flag, chNum, funcName) {
                 var val = inBlockListT(allChannels_T[chNum].uuid);
                 assert.equal(val, flag, "modifyBlockListT ");
 
-                if(val != flag){
+                if (val != flag) {
                     var path = "hisenseUI/" + funcName.trim() + ".txt";
                     var content = "Test failed on " + localTime + ". Assert value: " + val + ", expect value: " + flag;
                     fh.writeFileToNative(path, content, workroot);
@@ -1114,7 +1144,7 @@ function getBlockListAllC(expectNum, funcName) {
             $("#details").html(blockChannels_C.length);
             assert.equal(blockChannels_C.length, expectNum, "getBlockListAllC ");
 
-            if(blockChannels_C.length != expectNum){
+            if (blockChannels_C.length != expectNum) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime + ". Block channelsC length: " + blockChannels_C.length + ", expect number: " + expectNum;
                 fh.writeFileToNative(path, content, workroot);
@@ -1178,7 +1208,7 @@ function modifyBlockListC(attr, flag, chNum, funcName) {
                 var val = inBlockListC(allChannels_C[chNum].uuid);
                 assert.equal(val, flag, "modifyBlockListC ");
 
-                if(val != flag){
+                if (val != flag) {
                     var path = "hisenseUI/" + funcName.trim() + ".txt";
                     var content = "Test failed on " + localTime + ". Assert value: " + val + ", expect value: " + flag;
                     fh.writeFileToNative(path, content, workroot);
@@ -1234,7 +1264,7 @@ function getServicesAttrT(chNum, funcName) {
                 var val = getAttrT();
                 assert.ok(val, "getServicesAttrT ");
 
-                if(val === false){
+                if (val === false) {
                     var path = "hisenseUI/" + funcName.trim() + ".txt";
                     var content = "Test failed on " + localTime;
                     fh.writeFileToNative(path, content, workroot);
@@ -1276,7 +1306,7 @@ function getServicesAttrC(chNum, funcName) {
                 var val = getAttrC();
                 assert.ok(val, "getServicesAttrC ");
 
-                if(val === false){
+                if (val === false) {
                     var path = "hisenseUI/" + funcName.trim() + ".txt";
                     var content = "Test failed on " + localTime;
                     fh.writeFileToNative(path, content, workroot);
@@ -1310,7 +1340,7 @@ function getMainPlay(funcName) {
         assert.notEqual(val, null, "Test getMainPlay");
         if (val != null)
             $("#details").html("listUid:" + val[0] + ";uid:" + val[1] + ";number:" + val[2] + ";name:" + val[5] + ";attr:" + val[8]);
-        else{
+        else {
             var path = "hisenseUI/" + funcName.trim() + ".txt";
             var content = "Test failed on " + localTime;
             fh.writeFileToNative(path, content, workroot);
@@ -1341,7 +1371,7 @@ function mainPlayChanged(sourceType, chn, testName) {
                 done();
                 if (val != null)
                     $("#details").html("listUid:" + val[0] + ";uid:" + val[1] + ";number:" + val[2] + ";name:" + val[5] + ";attr:" + val[8]);
-                else{
+                else {
                     var path = "hisenseUI/" + testName.trim() + ".txt";
                     var content = "Test failed on " + localTime;
                     fh.writeFileToNative(path, content, workroot);
@@ -1382,7 +1412,7 @@ function getNoSignalMain(funcName) {
         var result = startGetNoSignalMain();
         assert.ok(result, "getNoSignalMain");
 
-        if(result === false){
+        if (result === false) {
             var path = "hisenseUI/" + funcName.trim() + ".txt";
             var content = "Test failed on " + localTime;
             fh.writeFileToNative(path, content, workroot);
@@ -1413,7 +1443,7 @@ function getSignalLevel(funcName) {
             var result = startGetSignalLevel();
             assert.ok(result, "getSignalLevel");
 
-            if(result === false){
+            if (result === false) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime;
                 fh.writeFileToNative(path, content, workroot);
@@ -1445,7 +1475,7 @@ function getSignalCn(funcName) {
             var result = startGetSignalCn();
             assert.ok(result, "getSignalLevel");
 
-            if(result === false){
+            if (result === false) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime;
                 fh.writeFileToNative(path, content, workroot);
@@ -1471,7 +1501,7 @@ function onChannelListUpdate(funcName) {
             model.tvservice.onChannelListUpdate = null;
             assert.ok(listUpdate, "onChannelListUpdate ");
 
-            if(listUpdate === false){
+            if (listUpdate === false) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime;
                 fh.writeFileToNative(path, content, workroot);
@@ -1539,7 +1569,7 @@ function getFavListAllT(expectNum, funcName) {
             $("#details").html(favChannels_T.length);
             assert.equal(favChannels_T.length, expectNum, "getFavListAllT ");
 
-            if(favChannels_T.length != expectNum){
+            if (favChannels_T.length != expectNum) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime + ". Fav channelsT length: " + favChannels_T.length + ", expect number: " + expectNum;
                 fh.writeFileToNative(path, content, workroot);
@@ -1563,7 +1593,7 @@ function modifyFavListT(attr, flag, chNum, funcName) {
                 var val = inFavListT(allChannels_T[chNum].uuid);
                 assert.equal(val, flag, "modifyFavListT ");
 
-                if(val != flag){
+                if (val != flag) {
                     var path = "hisenseUI/" + funcName.trim() + ".txt";
                     var content = "Test failed on " + localTime;
                     fh.writeFileToNative(path, content, workroot);
@@ -1652,7 +1682,7 @@ function getFavListAllC(expectNum, funcName) {
             $("#details").html(favChannels_C.length);
             assert.equal(favChannels_C.length, expectNum, "getFavListAllC ");
 
-            if(favChannels_C.length != expectNum){
+            if (favChannels_C.length != expectNum) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime + ". Fav channelsC length: " + favChannels_C.length + ", expect number: " + expectNum;
                 fh.writeFileToNative(path, content, workroot);
@@ -1677,7 +1707,7 @@ function modifyFavListC(attr, flag, chNum, funcName) {
                 var val = inFavListC(allChannels_C[chNum].uuid);
                 assert.equal(val, flag, "modifyFavListC ");
 
-                if(val != flag){
+                if (val != flag) {
                     var path = "hisenseUI/" + funcName.trim() + ".txt";
                     var content = "Test failed on " + localTime;
                     fh.writeFileToNative(path, content, workroot);

@@ -345,13 +345,19 @@ function handleServiceListTestCase(inputArray, funcName) {
             var expectNum = inputArray[0];
             if (isNaN(expectNum))
                 expectNum = 0;
-            checkServiceT(expectNum, funcName);
+            var flag = inputArray[1];
+            if (isNaN(flag))
+                flag = 0;
+            checkServiceT(expectNum, flag, funcName);
             break;
         case "4002_getServicelistC":
             var expectNum = inputArray[0];
             if (isNaN(expectNum))
                 expectNum = 0;
-            checkServiceC(expectNum, funcName);
+            var flag = inputArray[1];
+            if (isNaN(flag))
+                flag = 0;
+            checkServiceC(expectNum, flag, funcName);
             break;
         case "4003_getFavListT":
             var expectNum = inputArray[0];
@@ -480,6 +486,14 @@ function handleServiceListTestCase(inputArray, funcName) {
             break;
         case "4025_checkChannelListC":
             checkServiceListCByFile(funcName);
+            break;
+        case "4026_writeT2File":
+            var sourceType = 0;
+            write2File(sourceType, funcName);
+            break;
+        case "4027_writeC2File":
+            var sourceType = 1;
+            write2File(sourceType, funcName);
             break;
     }
 }
@@ -642,6 +656,10 @@ function handlePCTestCase(inputArray, funcName) {
             var selectlist = inputArray[2];
             var flag = inputArray[3];
             setLevelPage(region, dimen, selectlist, flag, funcName);
+            break;
+        case "5028_delayTime":
+            var delay = inputArray[0];
+            delayTime(delay, funcName);
             break;
     }
 }
@@ -860,49 +878,74 @@ function handleInfoBarTestCase(inputArray, funcName) {
             break;
     }
 }
-function handleAutoTestCase(funcName) {
-    switch (funcName) {
-        case "8001_autoTest1":
-            var serListPath = "config/autoTest1.json";
-            var serList = readJSONFileArray(serListPath);
-            for (i = 0; i < serList.length; i++) {
-                var paramArray = new Array();
-                if (serList[i].param0 != null)
-                    paramArray[0] = parseInt(serList[i].param0);
-                if (serList[i].param1 != null)
-                    paramArray[1] = parseInt(serList[i].param1);
-                if (serList[i].param2 != null)
-                    paramArray[2] = parseInt(serList[i].param2);
-                if (serList[i].param3 != null)
-                    paramArray[3] = parseInt(serList[i].param3);
-                if (serList[i].param4 != null)
-                    paramArray[4] = parseInt(serList[i].param4);
+function parseParam(i, serList) {
+    var paramArray = new Array();
+    if (serList[i].param0 != null)
+        paramArray[0] = parseInt(serList[i].param0);
+    if (serList[i].param1 != null)
+        paramArray[1] = parseInt(serList[i].param1);
+    if (serList[i].param2 != null)
+        paramArray[2] = parseInt(serList[i].param2);
+    if (serList[i].param3 != null)
+        paramArray[3] = parseInt(serList[i].param3);
+    if (serList[i].param4 != null)
+        paramArray[4] = parseInt(serList[i].param4);
 
-                var testType = serList[i].name[0];
-                switch (testType) {
-                    case '1':
-                        handleRepeatTestCase(paramArray, serList[i].name);
-                        break;
-                    case '2':
-                        handleScanTestCase(paramArray, serList[i].name);
-                        break;
-                    case '3':
-                        handlePlayTestCase(paramArray, serList[i].name);
-                        break;
-                    case '4':
-                        handleServiceListTestCase(paramArray, serList[i].name);
-                        break;
-                    case '5':
-                        handlePCTestCase(paramArray, serList[i].name);
-                        break;
-                    case '6':
-                        handleCCTestCase(paramArray, serList[i].name);
-                        break;
-                    case '7':
-                        handleInfoBarTestCase(paramArray, serList[i].name);
-                        break;
-                }
-            }
+    var testType = serList[i].name[0];
+    switch (testType) {
+        case '1':
+            handleRepeatTestCase(paramArray, serList[i].name);
+            break;
+        case '2':
+            handleScanTestCase(paramArray, serList[i].name);
+            break;
+        case '3':
+            handlePlayTestCase(paramArray, serList[i].name);
+            break;
+        case '4':
+            handleServiceListTestCase(paramArray, serList[i].name);
+            break;
+        case '5':
+            handlePCTestCase(paramArray, serList[i].name);
+            break;
+        case '6':
+            handleCCTestCase(paramArray, serList[i].name);
+            break;
+        case '7':
+            handleInfoBarTestCase(paramArray, serList[i].name);
             break;
     }
+}
+
+function handleAutoTestCase(inputArray, funcName) {
+    var serListPath;
+    switch (funcName) {
+        case "8001_autoTest1":
+            serListPath = "config/autoTestATSC_1.json";
+            break;
+        case "8002_autoTest2":
+            serListPath = "config/autoTestATSC_2.json";
+            break;
+        case "8003_autoTest3":
+            serListPath = "config/autoTestATSC_3.json";
+            break;
+    }
+
+    var repeat = inputArray[0];
+    if ((repeat < 1) || isNaN(repeat))
+        repeat = 1;
+    var i = 0, j = 1;
+    var serList = new readJSONFileArray(serListPath);
+    parseParam(0, serList);
+
+    for (j = 1; j < repeat; j++) {
+        for (i = serList.length - 1; i >= 0; i--) {
+            parseParam(i, serList);
+        }
+    }
+
+    for (i = serList.length - 1; i > 0; i--) {
+        parseParam(i, serList);
+    }
+
 } 
