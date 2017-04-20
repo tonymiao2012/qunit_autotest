@@ -929,6 +929,9 @@ function handleAutoTestCase(inputArray, funcName) {
         case "8003_autoTest3":
             serListPath = "config/autoTestATSC_3.json";
             break;
+        case "8004_autoTest4":
+            serListPath = "config/autoTestATSC_MSD6586US-2041.json";
+            break;
     }
 
     var repeat = inputArray[0];

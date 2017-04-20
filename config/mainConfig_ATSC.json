@@ -827,6 +827,12 @@
         "input": [
           "Repeat"
         ]
+      },
+      {
+        "casename": "8004_autoTest4",
+        "input": [
+          "Repeat"
+        ]
       }
     ],
     "icon-class": "fa fa-newspaper-o fa-2x"
