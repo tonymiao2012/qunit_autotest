@@ -97,7 +97,12 @@ function autoScanStop(sourceType, funcName) {
         };
         model.channelSearch.onSearchingProgressChaged = function (value) {
             $("#progress").html(value);
-            if (value >= 5)
+
+            var serviceNumDtv = model.channelSearch.getFoundDigitServices();
+            var serviceNumAtv = model.channelSearch.getFoundAnalogServices();
+            $("#total").html(serviceNumDtv + serviceNumAtv);
+
+            if (value >= 90)
                 model.channelSearch.Stop();
         }
         startAutoScan(sourceType);
