@@ -8,7 +8,7 @@ function Parental_lockModelDefines() {
     Parental_lockModelDefines.SL2_TVAPI_VSTR_PARENTAL_LOCK_PIN_REQUEST = "de.loewe.sl2.vstr.parental.lock.pin.request";
     Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_PIN_REQUEST_CONFIRM = "de.loewe.sl2.action.parental.lock.pin.request.confirm";
 
-//    Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_ALL = "de.loewe.sl2.i32.parental.lock.all";
+    Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_FALLBACK_PIN = "de.loewe.sl2.str.parental.lock.fallback.pin";
     Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_INPUT_SOURCE = "de.loewe.sl2.str.parental.lock.inputSource";
     Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_DAILY_START = "de.loewe.sl2.i32.parental.lock.daily.start";
     Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_DAILY_END = "de.loewe.sl2.i32.parental.lock.daily.end";
@@ -86,6 +86,7 @@ function Parental_lockModel(_) {
     SubModel.call(this, _, Parental_lockModelDefines);
     this.registerSubObject = function () {
         this.registerStringObject(Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_PIN, "getPin", "setPin", "onPinChaged", null, null);
+        this.registerStringObject(Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_FALLBACK_PIN, "getFallbackPin", null, null, null, null);
         this.registerStringVectorObject(Parental_lockModelDefines.SL2_TVAPI_VSTR_PARENTAL_LOCK_PIN_REQUEST, "getPinRequest", "setPinRequest", "onPinRequestChaged", null, null);
         this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_SWITCH_MODE, "getSModel", "setSModel", "onSModelChaged", null, null);
         this.registerActionObject(Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_RESET, [{
@@ -108,7 +109,7 @@ function Parental_lockModel(_) {
         }], "null")
 
 //        this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_ALL, "getLockAll", "setLockAll", "onLockAll", null, null);
-        this.registerStringObject(Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_INPUT_SOURCE, "getInputSourceLock", "setInputSourceLock", "onInputSourceLock", null, null);
+        this.registerStringObject(Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_INPUT_SOURCE, "getInputSourceLock", "setInputSourceLock", "onInputSourceLockChaged", null, null);
         this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_DAILY_START, "getStart", "setStart", "onStartChaged", null, null);
         this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_DAILY_END, "getEnd", "setEnd", "onEndChaged", null, null);
         this.registerStringObject(Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_WEEKLY, "getEndWeekly", "setEndWeekly", "onEndWeeklyChaged", null, null);

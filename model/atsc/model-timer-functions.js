@@ -3,12 +3,17 @@ function Timer_functionsModelDefines() {
 {
     
     //Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_STANDBY_MODE = "tvapi.i32.timerfunctions.standby.mode";
-    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_STANDBY_MODE = "de.loewe.sl2.i32.timerfunctions.alarm.source";
-    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_STANDBY_TIME = "de.loewe.sl2.i32.timerfunctions.standby.once";
+    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_STANDBY_MODE = "de.loewe.sl2.i32.timerfunctions.switch.off.mode";
+    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_STANDBY_ONCE= "de.loewe.sl2.i32.timerfunctions.standby.once";
+    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_STANDBY_DAILY= "de.loewe.sl2.i32.timerfunctions.standby.daily";
     Timer_functionsModelDefines.SL2_TVAPI_VINT32_TIMER_FUNCTIONS_STANDBY_WEEKLY = "tvapi.vint32.timerfunctions.standby.weekly";
     Timer_functionsModelDefines.SL2_TVAPI_ACTION_TIMER_FUNCTIONS_START_STANDBY = "tvapi.action.timerfunctions.start.standby";
-    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_MODE = "de.loewe.sl2.i32.timerfunctions.alarm.source";
-    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_TIME = "de.loewe.sl2.i32.timerfunctions.alarm.once";
+    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_MODE = "de.loewe.sl2.i32.timerfunctions.wake.up.mode";
+    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_ONCE= "de.loewe.sl2.i32.timerfunctions.alarm.once";
+    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_DAILY= "de.loewe.sl2.i32.timerfunctions.alarm.daily";
+//    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_WEEKDAY= "de.loewe.sl2.i32.timerfunctions.alarm.weekday";
+//    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_SATURDAY= "de.loewe.sl2.i32.timerfunctions.alarm.saturday";
+//    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_SUNDAY= "de.loewe.sl2.i32.timerfunctions.alarm.sunday";
     Timer_functionsModelDefines.SL2_TVAPI_VINT32_TIMER_FUNCTIONS_ALARM_WEEKLY = "tvapi.vint32.timerfunctions.alarm.weekly";
     Timer_functionsModelDefines.SL2_TVAPI_ACTION_TIMER_FUNCTIONS_START_ALARM = "tvapi.action.timerfunctions.start.alarm";
     Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_SLEEP_TIMER = "de.loewe.sl2.i32.timerfunctions.hotelmode.sleep.timer";  //dbtag:20161209
@@ -19,9 +24,9 @@ function Timer_functionsModelDefines() {
     Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_TIME_INIT = 5 * 60;
     Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_TIME_MAX = 24 * 60 * 60;
     Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_TIME_UNDEFINED = -1;
-    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_WEEKDAY = "de.loewe.sl2.i32.timerfunctions.alarm.weekday";
-    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_SATURDAY = "de.loewe.sl2.i32.timerfunctions.alarm.saturday";
-    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_SUNDAY = "de.loewe.sl2.i32.timerfunctions.alarm.sunday";
+//    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_WEEKDAY = "de.loewe.sl2.i32.timerfunctions.alarm.weekday";
+//    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_SATURDAY = "de.loewe.sl2.i32.timerfunctions.alarm.saturday";
+//    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_SUNDAY = "de.loewe.sl2.i32.timerfunctions.alarm.sunday";
     Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_VOLUME = "de.loewe.sl2.i32.timerfunctions.alarm.volume";
     Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_VOLUME_INIT = 30;
     Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_VOLUME_MIN = 10;
@@ -49,6 +54,9 @@ function Timer_functionsModelDefines() {
     Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS__SLEEP_TIMER_MIN = 0;
     Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS__SLEEP_TIMER_MAX = 120;
     Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_HOTELMODE_SLEEP_TIME_COUNTER = "de.loewe.sl2.i32.timerfunctions.hotelmode.sleep.time.counter";
+    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_AUTO_SLEEP_SWITCH = "de.loewe.sl2.i32.timerfunctions.auto.sleep";
+    Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_POWER_OFF_NOTIFY ="de.loewe.sl2.i32.timerfunctions.switch.off.notify";
+
     //dbtag:20161025 --RICK --START
     Timer_functionsModelDefines.SL2_TVAPI_TABLE_TIMER_LIST_TABLE = "de.loewe.sl2.timer.list.table";
     Timer_functionsModelDefines.SL2_TVAPI_ENUM_TIMER_LIST_TABLE_FIELD_ENTRY_UUID = 0;
@@ -66,22 +74,53 @@ function Timer_functionsModel(e) {
 
 
         this.registerIntegerObject(Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_STANDBY_MODE, "getStandbyMode", "setStandbyMode", "onStandbyModeChaged", null, null);
-        this.registerIntegerObject(Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_STANDBY_TIME, "getStandbyTime", "setStandbyTime", "onStandbyTimeChaged", null, null);
-        this.registerActionObject(Timer_functionsModelDefines.SL2_TVAPI_ACTION_TIMER_FUNCTIONS_START_STANDBY, [{
-            name: "StartStandby",
-            method: function (e) {
-                return e.invoke()
-            }
-        }], "null");
+        // StandbyOnce
+        this.registerIntegerObject(
+            Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_STANDBY_ONCE,
+            "getStandbyOnce", "setStandbyOnce", "onStandbyOnceChaged",
+            null, null );
+
+        // StandbyDaily
+        this.registerIntegerObject(
+            Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_STANDBY_DAILY,
+            "getStandbyDaily", "setStandbyDaily", "onStandbyDailyChaged",
+            null, null );
+
+
         this.registerIntegerObject(Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_MODE, "getAlarmMode", "setAlarmMode", "onAlarmModeChaged", null, null);
-        this.registerIntegerObject(Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_TIME, "getAlarmTime", "setAlarmTime", "onAlarmTimeChaged", null, null);
-        this.registerActionObject(Timer_functionsModelDefines.SL2_TVAPI_ACTION_TIMER_FUNCTIONS_START_ALARM, [{
-            name: "StartAlarm",
-            method: function (e) {
-                return e.invoke()
-            }
-        }], "null");
+      //  this.registerIntegerObject(Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_TIME, "getAlarmTime", "setAlarmTime", "onAlarmTimeChaged", null, null);
+        // AlarmOnce
+        this.registerIntegerObject(
+            Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_ONCE,
+            "getAlarmOnce", "setAlarmOnce", "onAlarmOnceChaged",
+            null, null );
+        // getAlarmDaily
+        this.registerIntegerObject(
+            Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_DAILY,
+            "getAlarmDaily", "setAlarmDaily", "onAlarmDailyChaged",
+            null, null );
+        // AlarmWeekday
+
+//        this.registerIntegerObject(
+//            Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_WEEKDAY,
+//            "getAlarmWeekday", "setAlarmWeekday", "onAlarmWeekdayChaged",
+//            null, null );
+//
+//        // AlarmSaturday
+//        this.registerIntegerObject(
+//            Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_SATURDAY,
+//            "getAlarmSaturday", "setAlarmSaturday", "onAlarmSaturdayChaged",
+//            null, null );
+//
+//        // AlarmSunday
+//        this.registerIntegerObject(
+//            Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_ALARM_SUNDAY,
+//            "getAlarmSunday", "setAlarmSunday", "onAlarmSundayChaged",
+//            null, null );
+
         this.registerIntegerObject(Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_SLEEP_TIMER, "getHotelmodeSleepTimer", "setHotelmodeSleepTimer", "onHotelmodeSleepTimerChaged", null, null);
+        this.registerIntegerObject(Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_AUTO_SLEEP_SWITCH, "getAutoSleepSwitch", "setAutoSleepSwitch", "onAutoSleepSwitchchanged", null, null);
+        this.registerIntegerObject(Timer_functionsModelDefines.SL2_TVAPI_I32_TIMER_FUNCTIONS_POWER_OFF_NOTIFY, "getPowerOffflag", "setPowerOffflag", "onPowerOffflagchanged", null, null);
         this.registerTableObject(Timer_functionsModelDefines.SL2_TVAPI_TABLE_TIMER_LIST_TABLE,"createScheduleListIterator");
     }
 

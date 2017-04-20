@@ -91,6 +91,7 @@ function VideoModelDefines() {
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_HDR_FLAG= "de.loewe.sl2.i32.video.hdr.flag";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_APPLY_MODE= "de.loewe.sl2.i32.video.apply.mode";
     VideoModelDefines.SL2_TVAPI_VSTR_SIGNAL_DIAGNOSIS= "de.loewe.sl2.str.video.diagnosis.info";
+    VideoModelDefines.SL2_TVAPI_I32_VIDEO_AVAILABLE= "de.loewe.sl2.i32.video.info.main.available";
 
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_ENUM_PICTURE_VIVID = 0;
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_ENUM_PICTURE_STANDARD = 1;
@@ -330,6 +331,7 @@ function VideoModel(e) {
 	      //ApplyMode//ApplyColorTunner//Apply2p_wb//Apply10p_wb
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_APPLY_MODE, "getApplyMode", "setApplyMode", "onApplyModeChaged", null, null );
         this.registerStringVectorObject(VideoModelDefines.SL2_TVAPI_VSTR_SIGNAL_DIAGNOSIS, "getVideoInfo", null, null, null, null);
+        this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_AVAILABLE, "getAvailableMode", "setAvailableMode", "onAvailableModeChaged", null, null );
 
     }
 }

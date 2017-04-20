@@ -5,6 +5,7 @@ function ServiceModeModelDefines() {
     ServiceModeModelDefines.SL2_TVAPI_VINT32_SERVICEMODE_TUNERSIGNALINFO_SIGNALQUALITIES ="de.loewe.sl2.vint32.servicemode.tunersignalinfo.signalqualities";
     ServiceModeModelDefines.SL2_TVAPI_VINT32_SERVICEMODE_TUNERSIGNALINFO_ENABLE = "de.loewe.sl2.i32.servicemode.tunerinfo.enable"
 
+    ServiceModeModelDefines.SL2_TVAPI_STR_SERVICEMODE_VIDEOINFO_SOURCE= "de.loewe.sl2.str.servicemode.videoinfo.source";
 }
 function ServiceModeModel(e) {
     SubModel.call(this, e, ServiceModeModelDefines);
@@ -21,7 +22,7 @@ function ServiceModeModel(e) {
             ServiceModeModelDefines.SL2_TVAPI_VINT32_SERVICEMODE_TUNERSIGNALINFO_ENABLE,
             "getSignalMainEnable", "setSignalMainEnable", "onSignalMainEnableChanged",
             null, null );
-
+        this.registerStringObject(ServiceModeModelDefines.SL2_TVAPI_STR_SERVICEMODE_VIDEOINFO_SOURCE, "getSourceVideoInfo", "setSourceVideoInfo", "onSourceVideoInfoChanged",null, null )
     }
 }
 ServiceModeModel.prototype = new SubModel;
