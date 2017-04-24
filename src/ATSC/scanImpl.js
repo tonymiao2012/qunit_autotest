@@ -102,7 +102,7 @@ function autoScanStop(sourceType, funcName) {
             var serviceNumAtv = model.channelSearch.getFoundAnalogServices();
             $("#total").html(serviceNumDtv + serviceNumAtv);
 
-            if (value >= 90)
+            if (value >= 30)
                 model.channelSearch.Stop();
         }
         startAutoScan(sourceType);

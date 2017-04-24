@@ -115,61 +115,58 @@ function getEitMainNext(funcName) {
 }
 function checkEitMainNowChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
-    	if (chn < allChannels_T.length)
-    	{
-        var done = assert.async(1);
-        var timerFlag;
+        if (chn < allChannels_T.length) {
+            var done = assert.async(1);
+            var timerFlag;
 
-        function onEitMainNowChanngedTimeout() {
-            model.tvservice.onEitMainNowChanged = null;
-            assert.ok(false, "checkEitMainNowChanged fail");
-            done();
-        };
+            function onEitMainNowChanngedTimeout() {
+                model.tvservice.onEitMainNowChanged = null;
+                assert.ok(false, "checkEitMainNowChanged fail");
+                done();
+            };
 
-        model.tvservice.onEitMainNowChanged = function (val) {
-            clearTimeout(timerFlag);
-            model.tvservice.onEitMainNowChanged = null;
-            assert.ok(true, "checkEitMainNowChanged");
-            done();
+            model.tvservice.onEitMainNowChanged = function (val) {
+                clearTimeout(timerFlag);
+                model.tvservice.onEitMainNowChanged = null;
+                assert.ok(true, "checkEitMainNowChanged");
+                done();
+            }
+            model.tvservice.playChannel("0", allChannels_T[chn].uuid);
+            $("#name").html(allChannels_T[chn].name);
+            timerFlag = setTimeout(onEitMainNowChanngedTimeout, 5000);
         }
-        model.tvservice.playChannel("0", allChannels_T[chn].uuid);
-        $("#name").html(allChannels_T[chn].name);
-        timerFlag = setTimeout(onEitMainNowChanngedTimeout, 5000);
-      } 
-      else
-      {
-        assert.ok(false,"channel length is 0");
-        $("#details").html(" Click 4001_getServicelistT  at first!");        	
-      }	     
+        else {
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click 4001_getServicelistT  at first!");
+        }
     });
 }
 function checkEitMainNextChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
-    	if(chn < allChannels_T.length) {
-        var done = assert.async(1);
-        var timerFlag;
+        if (chn < allChannels_T.length) {
+            var done = assert.async(1);
+            var timerFlag;
 
-        function onEitMainNextChanngedTimeout() {
-            model.tvservice.onEitMainNextChanged = null;
-            assert.ok(false, "checkEitMainNextChanged fail");
-            done();
-        };
+            function onEitMainNextChanngedTimeout() {
+                model.tvservice.onEitMainNextChanged = null;
+                assert.ok(false, "checkEitMainNextChanged fail");
+                done();
+            };
 
-        model.tvservice.onEitMainNextChanged = function (val) {
-            clearTimeout(timerFlag);
-            model.tvservice.onEitMainNextChanged = null;
-            assert.ok(true, "checkEitMainNextChanged");
-            done();
+            model.tvservice.onEitMainNextChanged = function (val) {
+                clearTimeout(timerFlag);
+                model.tvservice.onEitMainNextChanged = null;
+                assert.ok(true, "checkEitMainNextChanged");
+                done();
+            }
+            model.tvservice.playChannel("0", allChannels_T[chn].uuid);
+            $("#name").html(allChannels_T[chn].name);
+            timerFlag = setTimeout(onEitMainNextChanngedTimeout, 5000);
         }
-        model.tvservice.playChannel("0", allChannels_T[chn].uuid);
-        $("#name").html(allChannels_T[chn].name);
-        timerFlag = setTimeout(onEitMainNextChanngedTimeout, 5000);
-      }
-      else
-      {
-        		assert.ok(false,"channel length is 0");
-        		$("#details").html(" Click 4001_getServicelistT  at first!");        	
-      }	
+        else {
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click 4001_getServicelistT  at first!");
+        }
     });
 }
 function startGetVideoFormat() {
@@ -187,31 +184,30 @@ function getVideoFormat(funcName) {
 }
 function checkVideoFormatChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
-    	if(chn < allChannels_T.length){
-        var done = assert.async(1);
-        var timerFlag;
+        if (chn < allChannels_T.length) {
+            var done = assert.async(1);
+            var timerFlag;
 
-        function onVideoFormatChanngedTimeout() {
-            model.video.onVideoFormatInfoChanged = null;
-            assert.ok(false, "checkVideoFormatChanged fail");
-            done();
-        };
+            function onVideoFormatChanngedTimeout() {
+                model.video.onVideoFormatInfoChanged = null;
+                assert.ok(false, "checkVideoFormatChanged fail");
+                done();
+            };
 
-        model.video.onVideoFormatInfoChanged = function (val) {
-            clearTimeout(timerFlag);
-            model.video.onVideoFormatInfoChanged = null;
-            assert.ok(true, "checkVideoFormatChanged");
-            done();
+            model.video.onVideoFormatInfoChanged = function (val) {
+                clearTimeout(timerFlag);
+                model.video.onVideoFormatInfoChanged = null;
+                assert.ok(true, "checkVideoFormatChanged");
+                done();
+            }
+            model.tvservice.playChannel("0", allChannels_T[chn].uuid);
+            $("#name").html(allChannels_T[chn].name);
+            timerFlag = setTimeout(onVideoFormatChanngedTimeout, 5000);
         }
-        model.tvservice.playChannel("0", allChannels_T[chn].uuid);
-        $("#name").html(allChannels_T[chn].name);
-        timerFlag = setTimeout(onVideoFormatChanngedTimeout, 5000);
-      }
-      else
-      {
-        		assert.ok(false,"channel length is 0");
-        		$("#details").html(" Click 4001_getServicelistT  at first!");        
-      }	
+        else {
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click 4001_getServicelistT  at first!");
+        }
     });
 }
 
@@ -230,31 +226,30 @@ function getFrameAspect(funcName) {
 }
 function checkFrameAspectChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
-    	if(chn < allChannels_T.length){
-        var done = assert.async(1);
-        var timerFlag;
+        if (chn < allChannels_T.length) {
+            var done = assert.async(1);
+            var timerFlag;
 
-        function onVideoAspectChanngedTimeout() {
-            model.video.onVideoFrameAspectChanged = null;
-            assert.ok(false, "checkFrameAspectChanged fail");
-            done();
-        };
+            function onVideoAspectChanngedTimeout() {
+                model.video.onVideoFrameAspectChanged = null;
+                assert.ok(false, "checkFrameAspectChanged fail");
+                done();
+            };
 
-        model.video.onVideoFrameAspectChanged = function (val) {
-            clearTimeout(timerFlag);
-            model.video.onVideoFrameAspectChanged = null;
-            assert.ok(true, "checkFrameAspectChanged");
-            done();
+            model.video.onVideoFrameAspectChanged = function (val) {
+                clearTimeout(timerFlag);
+                model.video.onVideoFrameAspectChanged = null;
+                assert.ok(true, "checkFrameAspectChanged");
+                done();
+            }
+            model.tvservice.playChannel("0", allChannels_T[chn].uuid);
+            $("#name").html(allChannels_T[chn].name);
+            timerFlag = setTimeout(onVideoAspectChanngedTimeout, 5000);
         }
-        model.tvservice.playChannel("0", allChannels_T[chn].uuid);
-        $("#name").html(allChannels_T[chn].name);
-        timerFlag = setTimeout(onVideoAspectChanngedTimeout, 5000);
-      }
-      else
-      {
-        		assert.ok(false,"channel length is 0");
-        		$("#details").html(" Click 4001_getServicelistT  at first!");        	
-      }	
+        else {
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click 4001_getServicelistT  at first!");
+        }
     });
 }
 
@@ -275,29 +270,29 @@ function getCcExist(funcName) {
 }
 function checkCcExistChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
-    	if(chn < allChannels_T.length){
-        var done = assert.async(1);
-        var timerFlag;
-        function onCcExistChanngedTimeout() {
-            model.video.onCcExistChanged = null;
-            assert.ok(false, "onCcExistChanngedTimeout");
-            done();
-        };
-        model.video.onCcExistChanged = function (val) {
-            clearTimeout(timerFlag);
-            model.video.onCcExistChanged = null;
-            assert.ok(true, "onCcExistChanged");
-            done();
+        if (chn < allChannels_T.length) {
+            var done = assert.async(1);
+            var timerFlag;
+
+            function onCcExistChanngedTimeout() {
+                model.video.onCcExistChanged = null;
+                assert.ok(false, "onCcExistChanngedTimeout");
+                done();
+            };
+            model.video.onCcExistChanged = function (val) {
+                clearTimeout(timerFlag);
+                model.video.onCcExistChanged = null;
+                assert.ok(true, "onCcExistChanged");
+                done();
+            }
+            model.tvservice.playChannel("0", allChannels_T[chn].uuid);
+            $("#name").html(allChannels_T[chn].name);
+            timerFlag = setTimeout(onCcExistChanngedTimeout, 5000);
         }
-        model.tvservice.playChannel("0", allChannels_T[chn].uuid);
-        $("#name").html(allChannels_T[chn].name);
-        timerFlag = setTimeout(onCcExistChanngedTimeout, 5000);
-      }
-      else
-      {
-        		assert.ok(false,"channel length is 0");
-        		$("#details").html(" Click 4001_getServicelistT  at first!");        
-      }	
+        else {
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click 4001_getServicelistT  at first!");
+        }
     });
 }
 function getAudioIndexImpl() {
@@ -357,30 +352,37 @@ function getAudioIdent(funcName) {
 }
 function checkAudioIdentChanged(funcName, chn) {
     QUnit.test(funcName, function (assert) {
-    	if(chn < allChannels_T.length){
-        var done = assert.async(1);
-        var timerFlag;
+        if (chn < allChannels_T.length) {
+            var done = assert.async(1);
+            var timerFlag;
 
-        function onAudioIdentChanngedTimeout() {
-            model.sound.onAudioIdentChaged = null;
-            assert.ok(false, "checkAudioIdentChanged  fail");
-            done();
-        };
+            function onAudioIdentChanngedTimeout() {
+                model.sound.onAudioIdentChaged = null;
+                assert.ok(false, "checkAudioIdentChanged  fail");
+                done();
+            };
 
-        model.sound.onAudioIdentChaged = function (val) {
-            clearTimeout(timerFlag);
-            model.sound.onAudioIdentChaged = null;
-            assert.ok(true, "checkAudioIdentChanged");
-            done();
+            model.sound.onAudioIdentChaged = function (val) {
+                clearTimeout(timerFlag);
+                model.sound.onAudioIdentChaged = null;
+                assert.ok(true, "checkAudioIdentChanged");
+                done();
+            }
+            model.tvservice.playChannel("0", allChannels_T[chn].uuid);
+            $("#name").html(allChannels_T[chn].name);
+            timerFlag = setTimeout(onAudioIdentChanngedTimeout, 5000);
         }
-        model.tvservice.playChannel("0", allChannels_T[chn].uuid);
-        $("#name").html(allChannels_T[chn].name);
-        timerFlag = setTimeout(onAudioIdentChanngedTimeout, 5000);
-      }
-      else
-      {
-        		assert.ok(false,"channel length is 0");
-        		$("#details").html(" Click 4001_getServicelistT  at first!");        	
-      }	
+        else {
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click 4001_getServicelistT  at first!");
+        }
+    });
+}
+function getAvailableMode(flag, funcName) {
+    QUnit.test(funcName, function (assert) {
+        $("#details").html("");
+        var newMode = model.video.getAvailableMode();
+        assert.equal(newMode, flag, "getAvailableMode");
+        $("#details").html(newMode);
     });
 }

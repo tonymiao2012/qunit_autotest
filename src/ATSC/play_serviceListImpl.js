@@ -334,6 +334,7 @@ function playInputedChannel(sourceType, chn, func_name) {
             var stoptimeNow = 0;
             var flag = false;
             var channelChanged = false;
+            var videoMainAvailable = false;
             var info = "";
 
             function playInputedChannelTimeout() {
@@ -341,7 +342,9 @@ function playInputedChannel(sourceType, chn, func_name) {
                 model.video.onVideoFormatInfoChanged = null;
                 model.video.onVideoFrameAspectChanged = null;
                 model.tvservice.onEitMainNowChanged = null;
-                if ((format.length != 0) && (aspect.length != 0) && (channelChanged == true) && (starttimeNow > 0) && (stoptimeNow > 0))
+                model.tvservice.onMainPlayChanged = null;
+                model.video.onAvailableModeChaged = null;
+                if ((videoMainAvailable == 1) && (format.length != 0) && (aspect.length != 0) && (channelChanged == true) && (starttimeNow > 0) && (stoptimeNow > 0))
                     flag = true;
                 assert.ok(flag, "playInputedChannel:" + chn);
 
@@ -355,6 +358,9 @@ function playInputedChannel(sourceType, chn, func_name) {
             };
             model.tvservice.onMainPlayChanged = function (val) {
                 channelChanged = true;
+            }
+            model.video.onAvailableModeChaged = function (val) {
+                videoMainAvailable = val;
             }
             model.video.onVideoFormatInfoChanged = function (val) {
                 format = val;
@@ -709,7 +715,7 @@ function checkServiceListTByFile(funcName) {
         function compare() {
             var flag = true;
             var serListPath = "config/serviceListATSC_T.json";
-            var serList = readJSONFileArray(serListPath);
+            var serList = new readJSONFileArray(serListPath);
             if (serList.length == allChannels_T.length) {
                 var i;
                 for (i = 0; i < allChannels_T.length; i++) {
@@ -756,7 +762,7 @@ function checkServiceListCByFile(funcName) {
         function compare() {
             var flag = true;
             var serListPath = "config/serviceListATSC_C.json";
-            var serList = readJSONFileArray(serListPath);
+            var serList = new readJSONFileArray(serListPath);
             if (serList.length == allChannels_C.length) {
                 var i;
                 for (i = 0; i < allChannels_C.length; i++) {

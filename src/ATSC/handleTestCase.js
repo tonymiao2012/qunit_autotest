@@ -337,6 +337,10 @@ function handlePlayTestCase(inputArray, funcName) {
         case "3008_getSignalCn":
             getSignalCn(funcName);
             break;
+        case "3009_getAvailableMode":
+            var flag = inputArray[0];
+            getAvailableMode(flag, funcName);
+            break;
     }
 }
 function handleServiceListTestCase(inputArray, funcName) {
@@ -930,6 +934,9 @@ function handleAutoTestCase(inputArray, funcName) {
             serListPath = "config/autoTestATSC_3.json";
             break;
         case "8004_autoTest4":
+            serListPath = "config/autoTestATSC_4.json";
+            break;
+        case "8005_MSD6586US_2041":
             serListPath = "config/autoTestATSC_MSD6586US-2041.json";
             break;
     }
