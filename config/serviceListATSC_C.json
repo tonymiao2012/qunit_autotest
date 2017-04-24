@@ -1,12 +1,207 @@
 [
   {
-    "name": "WSB-DT",
+    "name": "KCBS-DT",
     "majorNum": "2",
     "minorNum": "1"
   },
   {
-    "name": "WSB-DT",
-    "majorNum": "2",
+    "name": "NBC-4LA",
+    "majorNum": "4",
+    "minorNum": "1"
+  },
+  {
+    "name": "WNBC_HD",
+    "majorNum": "4",
+    "minorNum": "1"
+  },
+  {
+    "name": "WRC",
+    "majorNum": "4",
+    "minorNum": "1"
+  },
+  {
+    "name": "WNBC_We",
+    "majorNum": "4",
     "minorNum": "2"
+  },
+  {
+    "name": "WNBC_4.",
+    "majorNum": "4",
+    "minorNum": "4"
+  },
+  {
+    "name": "KTLA-DT",
+    "majorNum": "5",
+    "minorNum": "1"
+  },
+  {
+    "name": "WTTG",
+    "majorNum": "5",
+    "minorNum": "2"
+  },
+  {
+    "name": "WABC_HD",
+    "majorNum": "7",
+    "minorNum": "1"
+  },
+  {
+    "name": "WABC_SD",
+    "majorNum": "7",
+    "minorNum": "2"
+  },
+  {
+    "name": "D1_15",
+    "majorNum": "7",
+    "minorNum": "3"
+  },
+  {
+    "name": "KUHT-HD",
+    "majorNum": "8",
+    "minorNum": "1"
+  },
+  {
+    "name": "KUHT-SD",
+    "majorNum": "8",
+    "minorNum": "2"
+  },
+  {
+    "name": "KUHTSD2",
+    "majorNum": "8",
+    "minorNum": "3"
+  },
+  {
+    "name": "KUHT-TF",
+    "majorNum": "8",
+    "minorNum": "4"
+  },
+  {
+    "name": "RF11-11",
+    "majorNum": "11",
+    "minorNum": "11"
+  },
+  {
+    "name": "RF25-4",
+    "majorNum": "25",
+    "minorNum": "4"
+  },
+  {
+    "name": "RF25-6",
+    "majorNum": "25",
+    "minorNum": "6"
+  },
+  {
+    "name": "RF25-7",
+    "majorNum": "25",
+    "minorNum": "7"
+  },
+  {
+    "name": "RF25-8",
+    "majorNum": "25",
+    "minorNum": "8"
+  },
+  {
+    "name": "RF25-123",
+    "majorNum": "25",
+    "minorNum": "123"
+  },
+  {
+    "name": "RF40-509",
+    "majorNum": "40",
+    "minorNum": "509"
+  },
+  {
+    "name": "RF51-11",
+    "majorNum": "51",
+    "minorNum": "11"
+  },
+  {
+    "name": "RF51-13",
+    "majorNum": "51",
+    "minorNum": "13"
+  },
+  {
+    "name": "RF51-15",
+    "majorNum": "51",
+    "minorNum": "15"
+  },
+  {
+    "name": "RF51-17",
+    "majorNum": "51",
+    "minorNum": "17"
+  },
+  {
+    "name": "RF51-19",
+    "majorNum": "51",
+    "minorNum": "19"
+  },
+  {
+    "name": "RF51-21",
+    "majorNum": "51",
+    "minorNum": "21"
+  },
+  {
+    "name": "RF55",
+    "majorNum": "55",
+    "minorNum": "0"
+  },
+  {
+    "name": "TBN",
+    "majorNum": "63",
+    "minorNum": "1"
+  },
+  {
+    "name": "RF98",
+    "majorNum": "98",
+    "minorNum": "0"
+  },
+  {
+    "name": "RF109-14",
+    "majorNum": "109",
+    "minorNum": "14"
+  },
+  {
+    "name": "RF109-15",
+    "majorNum": "109",
+    "minorNum": "15"
+  },
+  {
+    "name": "RF127-336",
+    "majorNum": "127",
+    "minorNum": "336"
+  },
+  {
+    "name": "RF127-339",
+    "majorNum": "127",
+    "minorNum": "339"
+  },
+  {
+    "name": "UNKNOWN",
+    "majorNum": "318",
+    "minorNum": "1"
+  },
+  {
+    "name": "UNKNOWN",
+    "majorNum": "319",
+    "minorNum": "1"
+  },
+  {
+    "name": "UNKNOWN",
+    "majorNum": "320",
+    "minorNum": "1"
+  },
+  {
+    "name": "UNKNOWN",
+    "majorNum": "321",
+    "minorNum": "1"
+  },
+  {
+    "name": "UNKNOWN",
+    "majorNum": "605",
+    "minorNum": "1"
+  },
+  {
+    "name": "UNKNOWN",
+    "majorNum": "612",
+    "minorNum": "1"
   }
 ]

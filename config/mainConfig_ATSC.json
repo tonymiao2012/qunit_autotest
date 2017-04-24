@@ -310,6 +310,12 @@
       },
       {
         "casename": "3008_getSignalCn"
+      },
+      {
+        "casename": "3009_getAvailableMode",
+        "input": [
+          "Flag"
+        ]
       }
     ],
     "icon-class": "fa fa-play-circle-o fa-2x"
@@ -830,6 +836,12 @@
       },
       {
         "casename": "8004_autoTest4",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
+        "casename": "8005_MSD6586US_2041",
         "input": [
           "Repeat"
         ]

@@ -96,6 +96,58 @@ function handleRepeatTestCase(inputArray, funcName) {
             break;
     }
 }
+function handleScanTestCase(inputArray, funcName) {
+    switch (funcName) {
+        case "2001_getSource":
+            var val = inputArray[0];
+            getSource(val, funcName);
+            break;
+        case "2002_setSourceATV":
+            var sourceType = 10;
+            setSource(sourceType, funcName);
+            break;
+        case "2003_setSourceT":
+            var sourceType = 11;
+            setSource(sourceType, funcName);
+            break;
+        case "2004_setSourceC":
+            var sourceType = 12;
+            setSource(sourceType, funcName);
+            break;
+        case "2005_setSourceS":
+            var sourceType = 13;
+            setSource(sourceType, funcName);
+            break;
+        case "2006_getScramble":
+            var val = inputArray[0];
+            getScramble(val, funcName);
+            break;
+        case "2007_setScrambleFree":
+            var scram = 0;
+            setScramble(scram, funcName);
+            break;
+        case "2008_setScrambleAll":
+            var scram = 1;
+            setScramble(scram, funcName);
+            break;
+        case "2009_getDvbtScanMode":
+            var val = inputArray[0];
+            getDvbtScanMode(val, funcName);
+            break;
+        case "2010_setDvbtScanMode":
+            var scan = inputArray[0];
+            setDvbtScanMode(scan, funcName);
+            break;
+        case "2011_getDvbcScanMode":
+            var val = inputArray[0];
+            getDvbcScanMode(val, funcName);
+            break;
+        case "2012_setDvbcScanMode":
+            var scan = inputArray[0];
+            setDvbcScanMode(scan, funcName);
+            break;
+    }
+}
 function handlePlayTestCase(inputArray, funcName) {
     switch (funcName) {
         case "3001_playChannelT":
@@ -165,54 +217,67 @@ function handleServiceListTestCase(inputArray, funcName) {
             break;
     }
 }
+function parseParam(i, serList) {
+    var paramArray = new Array();
+    if (serList[i].param0 != null)
+        paramArray[0] = parseInt(serList[i].param0);
+    if (serList[i].param1 != null)
+        paramArray[1] = parseInt(serList[i].param1);
+    if (serList[i].param2 != null)
+        paramArray[2] = parseInt(serList[i].param2);
+    if (serList[i].param3 != null)
+        paramArray[3] = parseInt(serList[i].param3);
+    if (serList[i].param4 != null)
+        paramArray[4] = parseInt(serList[i].param4);
+
+    var testType = serList[i].name[0];
+    switch (testType) {
+        case '1':
+            handleRepeatTestCase(paramArray, serList[i].name);
+            break;
+        case '2':
+            handleScanTestCase(paramArray, serList[i].name);
+            break;
+        case '3':
+            handlePlayTestCase(paramArray, serList[i].name);
+            break;
+        case '4':
+            handleServiceListTestCase(paramArray, serList[i].name);
+            break;
+        case '5':
+            handlePCTestCase(paramArray, serList[i].name);
+            break;
+        case '6':
+            handleCCTestCase(paramArray, serList[i].name);
+            break;
+        case '7':
+            handleInfoBarTestCase(paramArray, serList[i].name);
+            break;
+    }
+}
+
 function handleAutoTestCase(inputArray, funcName) {
+    var serListPath;
     switch (funcName) {
         case "8001_autoTest1":
-            var repeat = inputArray[0];
-            if ((repeat < 1) || isNaN(repeat))
-                repeat = 1;
-            var i = 0, j = 0;
-            var serListPath = "config/autoTestDVB_1.json";
-            var serList = readJSONFileArray(serListPath);
-            for (j = 0; j < repeat; j++) {
-                for (i = 0; i < serList.length; i++) {
-                    var paramArray = new Array();
-                    if (serList[i].param0 != null)
-                        paramArray[0] = parseInt(serList[i].param0);
-                    if (serList[i].param1 != null)
-                        paramArray[1] = parseInt(serList[i].param1);
-                    if (serList[i].param2 != null)
-                        paramArray[2] = parseInt(serList[i].param2);
-                    if (serList[i].param3 != null)
-                        paramArray[3] = parseInt(serList[i].param3);
-                    if (serList[i].param4 != null)
-                        paramArray[4] = parseInt(serList[i].param4);
-                    var testType = serList[i].name[0];
-                    switch (testType) {
-                        case '1':
-                            handleRepeatTestCase(paramArray, serList[i].name);
-                            break;
-                        case '2':
-                            handleScanTestCase(paramArray, serList[i].name);
-                            break;
-                        case '3':
-                            handlePlayTestCase(paramArray, serList[i].name);
-                            break;
-                        case '4':
-                            handleServiceListTestCase(paramArray, serList[i].name);
-                            break;
-                        case '5':
-                            handlePCTestCase(paramArray, serList[i].name);
-                            break;
-                        case '6':
-                            handleCCTestCase(paramArray, serList[i].name);
-                            break;
-                        case '7':
-                            handleInfoBarTestCase(paramArray, serList[i].name);
-                            break;
-                    }
-                }
-            }
+            serListPath = "config/autoTestDVB_1.json";
             break;
+    }
+
+    var repeat = inputArray[0];
+    if ((repeat < 1) || isNaN(repeat))
+        repeat = 1;
+    var i = 0, j = 1;
+    var serList = new readJSONFileArray(serListPath);
+    parseParam(0, serList);
+
+    for (j = 1; j < repeat; j++) {
+        for (i = serList.length - 1; i >= 0; i--) {
+            parseParam(i, serList);
+        }
+    }
+
+    for (i = serList.length - 1; i > 0; i--) {
+        parseParam(i, serList);
     }
 } 

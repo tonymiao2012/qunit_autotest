@@ -131,3 +131,77 @@ function autoSearch(repeat, expectNum, sourceType, chan_mode, scan_mode, search_
     });
 }
 
+function getSource(val, funcName) {
+    QUnit.test(funcName, function (assert) {
+        $("#details").html("");
+        var sourceType = model.channelSearch.getSource();
+        assert.equal(sourceType, val, "getSource");
+        $("#details").html(sourceType);
+    });
+}
+function setSource(sourceType, funcName) {
+    QUnit.test(funcName, function (assert) {
+        model.channelSearch.setSource(sourceType);
+        var newValue = model.channelSearch.getSource();
+        assert.equal(newValue, sourceType, "setSource");
+    });
+}
+function getScramble(val, funcName) {
+    QUnit.test(funcName, function (assert) {
+        $("#details").html("");
+        var scram = model.channelSearch.getScramble();
+        assert.equal(scram, val, "getScramble");
+        $("#details").html(scram);
+    });
+}
+function setScramble(scram, funcName) {
+    QUnit.test(funcName, function (assert) {
+        model.channelSearch.setScramble(scram);
+        var newValue = model.channelSearch.getScramble();
+        assert.equal(newValue, scram, "setScramble");
+    });
+}
+function getDvbtScanMode(val, funcName) {
+    QUnit.test(funcName, function (assert) {
+        $("#details").html("");
+        var scan = model.channelSearch.getDvbtScanMode();
+        assert.equal(scan, val, "getDvbtScanMode");
+        $("#details").html(scan);
+    });
+}
+function setDvbtScanMode(scan, funcName) {
+    QUnit.test(funcName, function (assert) {
+        if ((scan >= 0) && (scan <= 2))
+        {
+            model.channelSearch.setDvbtScanMode(scan);
+            var newValue = model.channelSearch.getDvbtScanMode();
+            assert.equal(newValue, scan, "setDvbtScanMode");
+        }
+        else {
+            assert.ok(false, "setDvbtScanMode");
+            $("#details").html("scan mode error");
+        }
+    });
+}
+function getDvbcScanMode(val, funcName) {
+    QUnit.test(funcName, function (assert) {
+        $("#details").html("");
+        var scan = model.channelSearch.getDvbcScanMode();
+        assert.equal(scan, val, "getDvbcScanMode");
+        $("#details").html(scan);
+    });
+}
+function setDvbcScanMode(scan, funcName) {
+    QUnit.test(funcName, function (assert) {
+        if ((scan >= 0) && (scan <= 2))
+        {
+            model.channelSearch.setDvbcScanMode(scan);
+            var newValue = model.channelSearch.getDvbcScanMode();
+            assert.equal(newValue, scan, "setDvbcScanMode");
+        }
+        else {
+            assert.ok(false, "setDvbcScanMode");
+            $("#details").html("scan mode error");
+        }
+    });
+}

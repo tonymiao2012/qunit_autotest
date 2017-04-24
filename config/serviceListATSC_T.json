@@ -1,8 +1,172 @@
 [
-  {"name": "WSB-DT","majorNum": "2","minorNum": "1"},
+  {
+    "name": "WSB-DT",
+    "majorNum": "2",
+    "minorNum": "1"
+  },
   {
     "name": "WSB-DT",
     "majorNum": "2",
     "minorNum": "2"
+  },
+  {
+    "name": "KUHT-HD",
+    "majorNum": "8",
+    "minorNum": "1"
+  },
+  {
+    "name": "KUHT-SD",
+    "majorNum": "8",
+    "minorNum": "2"
+  },
+  {
+    "name": "KUHTSD2",
+    "majorNum": "8",
+    "minorNum": "3"
+  },
+  {
+    "name": "KUHT-TF",
+    "majorNum": "8",
+    "minorNum": "4"
+  },
+  {
+    "name": "SRNF1",
+    "majorNum": "10",
+    "minorNum": "1"
+  },
+  {
+    "name": "SRNF2",
+    "majorNum": "10",
+    "minorNum": "2"
+  },
+  {
+    "name": "SRNF3",
+    "majorNum": "10",
+    "minorNum": "3"
+  },
+  {
+    "name": "SRNF4",
+    "majorNum": "10",
+    "minorNum": "4"
+  },
+  {
+    "name": "SRNF5",
+    "majorNum": "10",
+    "minorNum": "5"
+  },
+  {
+    "name": "SRNF6",
+    "majorNum": "10",
+    "minorNum": "6"
+  },
+  {
+    "name": "SRNF7",
+    "majorNum": "10",
+    "minorNum": "7"
+  },
+  {
+    "name": "SRNF8",
+    "majorNum": "10",
+    "minorNum": "8"
+  },
+  {
+    "name": "SRNF9",
+    "majorNum": "10",
+    "minorNum": "9"
+  },
+  {
+    "name": "SRNF10",
+    "majorNum": "10",
+    "minorNum": "10"
+  },
+  {
+    "name": "KHOU-DT",
+    "majorNum": "11",
+    "minorNum": "1"
+  },
+  {
+    "name": "KHOU-SD",
+    "majorNum": "11",
+    "minorNum": "2"
+  },
+  {
+    "name": "ION",
+    "majorNum": "14",
+    "minorNum": "1"
+  },
+  {
+    "name": "qubo",
+    "majorNum": "14",
+    "minorNum": "2"
+  },
+  {
+    "name": "IONLife",
+    "majorNum": "14",
+    "minorNum": "3"
+  },
+  {
+    "name": "Prog 3",
+    "majorNum": "14",
+    "minorNum": "3"
+  },
+  {
+    "name": "Worship",
+    "majorNum": "14",
+    "minorNum": "4"
+  },
+  {
+    "name": "WATC-DT",
+    "majorNum": "57",
+    "minorNum": "1"
+  },
+  {
+    "name": "TV57-2",
+    "majorNum": "57",
+    "minorNum": "2"
+  },
+  {
+    "name": "WMBC DT",
+    "majorNum": "63",
+    "minorNum": "1"
+  },
+  {
+    "name": "TBN",
+    "majorNum": "63",
+    "minorNum": "1"
+  },
+  {
+    "name": "CGN-TV",
+    "majorNum": "63",
+    "minorNum": "3"
+  },
+  {
+    "name": "SinoVSN",
+    "majorNum": "63",
+    "minorNum": "4"
+  },
+  {
+    "name": "NTDTV",
+    "majorNum": "63",
+    "minorNum": "5"
+  },
+  {
+    "name": "Azteca",
+    "majorNum": "63",
+    "minorNum": "6"
+  },
+  {
+    "name": "Aliento",
+    "majorNum": "63",
+    "minorNum": "7"
+  },
+  {
+    "name": "WDNJ",
+    "majorNum": "63",
+    "minorNum": "8"
+  },
+  {
+    "name": "KCBN",
+    "majorNum": "63",
+    "minorNum": "9"
   }
 ]
