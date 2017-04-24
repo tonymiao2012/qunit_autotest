@@ -65,48 +65,29 @@ function getServiceListT() {
         onGetChannels_T.bind(this)
     );
 }
-
 function onGetChannels_T(m_event) {
     if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
-        if (readCount == 0) {
-            eventRowsToChannels(m_event.rows, allChannels_T);
+        eventRowsToChannels(m_event.rows, allChannels_T);
+        if (totalCount == allChannels_T.length) {
             $("#total").html(allChannels_T.length);
-        } else {
-            eventRowsToChannels(m_event.rows, allChannels_T);
-            readCount--;
-            readPlus++;
-            channelIterator.seekToRow(readOnce * readPlus, TableIterator.SEEK_SET);
-            if (readCount != 0 || (ChCount % readOnce == 0)) {
-                channelIterator.readNextRows(readOnce);
-            } else {
-                channelIterator.readNextRows(ChCount % readOnce);
-            }
+            channelIterator.disconnect();
         }
     }
     else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
-        allChannels_T = [];
+        console.log("total channels  is " + m_event.totalCount);
+        modeljs.dbgprint("total channels  is " + m_event.totalCount, 1);
+        totalCount = m_event.totalCount;
         if (m_event.totalCount == 0) {
             onGetChannels_T({type: TableIterator.EVENT_TYPE_ROWS_READ, rows: []});
-        } else {
-            ChCount = m_event.totalCount;
-            readCount = 0;
-            readPlus = 0;
-            if (ChCount <= readOnce) {
-                channelIterator.readNextRows(ChCount);
-            } else {
-                if (ChCount % readOnce != 0) {
-                    readCount = Math.floor(ChCount / readOnce);
-                } else {
-                    readCount = Math.floor(ChCount / readOnce) - 1;
-                }
-                channelIterator.seekToRow(0, TableIterator.SEEK_SET);
-                channelIterator.readNextRows(readOnce);
-            }
         }
-    } else if (m_event.type == TableIterator.EVENT_TYPE_SEEK_TO_ROW) {
-    } else {
+        else {
+            allChannels_T = [];
+            channelIterator.readNextRows(m_event.totalCount);
+            //channelIterator.readNextRows(totalCount);
+        }
     }
 }
+
 function getServiceListC() {
     channelIterator = model.servicelist.createServicelistIterator(
         true,
@@ -132,43 +113,24 @@ function getServiceListC() {
 }
 function onGetChannels_C(m_event) {
     if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
-        if (readCount == 0) {
-            eventRowsToChannels(m_event.rows, allChannels_C);
+        eventRowsToChannels(m_event.rows, allChannels_C);
+        if (totalCount == allChannels_C.length) {
             $("#total").html(allChannels_C.length);
-        } else {
-            eventRowsToChannels(m_event.rows, allChannels_C);
-            readCount--;
-            readPlus++;
-            channelIterator.seekToRow(readOnce * readPlus, TableIterator.SEEK_SET);
-            if (readCount != 0 || (ChCount % readOnce == 0)) {
-                channelIterator.readNextRows(readOnce);
-            } else {
-                channelIterator.readNextRows(ChCount % readOnce);
-            }
+            channelIterator.disconnect();
         }
     }
     else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
-        allChannels_C = [];
+        console.log("total channels  is " + m_event.totalCount);
+        modeljs.dbgprint("total channels  is " + m_event.totalCount, 1);
+        totalCount = m_event.totalCount;
         if (m_event.totalCount == 0) {
             onGetChannels_C({type: TableIterator.EVENT_TYPE_ROWS_READ, rows: []});
-        } else {
-            ChCount = m_event.totalCount;
-            readCount = 0;
-            readPlus = 0;
-            if (ChCount <= readOnce) {
-                channelIterator.readNextRows(ChCount);
-            } else {
-                if (ChCount % readOnce != 0) {
-                    readCount = Math.floor(ChCount / readOnce);
-                } else {
-                    readCount = Math.floor(ChCount / readOnce) - 1;
-                }
-                channelIterator.seekToRow(0, TableIterator.SEEK_SET);
-                channelIterator.readNextRows(readOnce);
-            }
         }
-    } else if (m_event.type == TableIterator.EVENT_TYPE_SEEK_TO_ROW) {
-    } else {
+        else {
+            allChannels_C = [];
+            channelIterator.readNextRows(m_event.totalCount);
+            //channelIterator.readNextRows(totalCount);
+        }
     }
 }
 function getServiceListS() {
@@ -191,28 +153,23 @@ function getServiceListS() {
         [
             {field: ServicelistModel.SERVICELIST_FIELD_NO, direction: 1}
         ],
-        onGetChannels_S_new.bind(this)
+        onGetChannels_S.bind(this)
     );
 }
-function onGetChannels_S_new(m_event) {
+function onGetChannels_S(m_event) {
     if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
         eventRowsToChannels(m_event.rows, allChannels_S);
         if (totalCount == allChannels_S.length) {
             $("#total").html(allChannels_S.length);
-            var curtime = new Date();
-            end_time = curtime.getTime();
-            var usedTime = (end_time - begin_time) / 1000;
-            console.log(".......end :" + usedTime);
             channelIterator.disconnect();
         }
     }
     else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
-        //console.log("total channels  is " + m_event.totalCount);
+        console.log("total channels  is " + m_event.totalCount);
         modeljs.dbgprint("total channels  is " + m_event.totalCount, 1);
         totalCount = m_event.totalCount;
-        console.log("...total count :" + m_event.totalCount + ":" + totalCount);
         if (m_event.totalCount == 0) {
-            onGetChannels_S_new({type: TableIterator.EVENT_TYPE_ROWS_READ, rows: []});
+            onGetChannels_S({type: TableIterator.EVENT_TYPE_ROWS_READ, rows: []});
         }
         else {
             allChannels_S = [];
@@ -221,51 +178,7 @@ function onGetChannels_S_new(m_event) {
         }
     }
 }
-function onGetChannels_S(m_event) {
-    if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
-        if (readCount == 0) {
-            eventRowsToChannels(m_event.rows, allChannels_S);
-            $("#total").html(allChannels_S.length);
-            modeljs.dbgprint("The channel number = " + allChannels_S.length, 1);
-            var curtime = new Date();
-            console.log(".......end :" + curtime.getTime());
-        } else {
-            eventRowsToChannels(m_event.rows, allChannels_S);
-            readCount--;
-            readPlus++;
-            channelIterator.seekToRow(readOnce * readPlus, TableIterator.SEEK_SET);
-            if (readCount != 0 || (ChCount % readOnce == 0)) {
-                channelIterator.readNextRows(readOnce);
-            } else {
-                channelIterator.readNextRows(ChCount % readOnce);
-            }
-        }
-    }
-    else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
-        console.log("total channels  is " + m_event.totalCount);
-        allChannels_S = [];
-        if (m_event.totalCount == 0) {
-            onGetChannels_S({type: TableIterator.EVENT_TYPE_ROWS_READ, rows: []});
-        } else {
-            ChCount = m_event.totalCount;
-            readCount = 0;
-            readPlus = 0;
-            if (ChCount <= readOnce) {
-                channelIterator.readNextRows(ChCount);
-            } else {
-                if (ChCount % readOnce != 0) {
-                    readCount = Math.floor(ChCount / readOnce);
-                } else {
-                    readCount = Math.floor(ChCount / readOnce) - 1;
-                }
-                channelIterator.seekToRow(0, TableIterator.SEEK_SET);
-                channelIterator.readNextRows(readOnce);
-            }
-        }
-    } else if (m_event.type == TableIterator.EVENT_TYPE_SEEK_TO_ROW) {
-    } else {
-    }
-}
+
 function showServiceList(sourceType) {
     var list;
     //Insert a channel list to right side.
@@ -335,8 +248,7 @@ function write2File(sourceType, funcName) {
             assert.ok(true, "writeToFile ");
             done();
         };
-        var curtime = new Date();
-        console.log(".......write2File :begin :" + curtime.getTime());
+
         if (sourceType == 0)
             getServiceListT();
         else if (sourceType == 1)
@@ -344,7 +256,7 @@ function write2File(sourceType, funcName) {
         else
             getServiceListS();
         console.log("write2File");
-        timerFlag = setTimeout(checkServiceTimeout, 1800000);
+        timerFlag = setTimeout(checkServiceTimeout, 3000);
     });
 }
 function checkServiceListTByFile(funcName) {
@@ -356,10 +268,10 @@ function checkServiceListTByFile(funcName) {
         function compare() {
             var flag = true;
             var serListPath = "config/serviceListDVB_T.json";
-            var serList = readJSONFileArray(serListPath);
+            var serList = new readJSONFileArray(serListPath);
             if (serList.length == allChannels_T.length) {
                 var i;
-                for (i = 0; i < allChannels_T.length; i++) {
+                for (i = 0; i < allChannels_T.length;) {
                     if ((serList[i].name == allChannels_T[i].name) && (serList[i].uuid == allChannels_T[i].uuid) && (serList[i].serviceId == allChannels_T[i].serviceId)
                         && (serList[i].streamId == allChannels_T[i].streamId) && (serList[i].networkId == allChannels_T[i].networkId))
                         i++;
@@ -384,7 +296,7 @@ function checkServiceListTByFile(funcName) {
 
         modeljs.dbgprint("...Begin to get T", 1);
         getServiceListT();
-        timerFlag = setTimeout(serviceToCompare, 2000);
+        timerFlag = setTimeout(serviceToCompare, 3000);
     });
 }
 function checkServiceListCByFile(funcName) {
@@ -396,10 +308,10 @@ function checkServiceListCByFile(funcName) {
         function compare() {
             var flag = true;
             var serListPath = "config/serviceListDVB_C.json";
-            var serList = readJSONFileArray(serListPath);
+            var serList = new readJSONFileArray(serListPath);
             if (serList.length == allChannels_C.length) {
                 var i;
-                for (i = 0; i < allChannels_C.length; i++) {
+                for (i = 0; i < allChannels_C.length;) {
                     if ((serList[i].name == allChannels_C[i].name) && (serList[i].uuid == allChannels_C[i].uuid) && (serList[i].serviceId == allChannels_C[i].serviceId)
                         && (serList[i].streamId == allChannels_C[i].streamId) && (serList[i].networkId == allChannels_C[i].networkId))
                         i++;
@@ -423,7 +335,7 @@ function checkServiceListCByFile(funcName) {
         }
 
         getServiceListC();
-        timerFlag = setTimeout(serviceToCompare, 2000);
+        timerFlag = setTimeout(serviceToCompare, 3000);
     });
 }
 function checkServiceListSByFile(funcName) {
@@ -435,10 +347,10 @@ function checkServiceListSByFile(funcName) {
         function compare() {
             var flag = true;
             var serListPath = "config/serviceListDVB_S.json";
-            var serList = readJSONFileArray(serListPath);
+            var serList = new readJSONFileArray(serListPath);
             if (serList.length == allChannels_S.length) {
                 var i;
-                for (i = 0; i < allChannels_S.length; i++) {
+                for (i = 0; i < allChannels_S.length;) {
                     if ((serList[i].name == allChannels_S[i].name) && (serList[i].uuid == allChannels_S[i].uuid) && (serList[i].serviceId == allChannels_S[i].serviceId)
                         && (serList[i].streamId == allChannels_S[i].streamId) && (serList[i].networkId == allChannels_S[i].networkId))
                         i++;
@@ -466,9 +378,6 @@ function checkServiceListSByFile(funcName) {
         }
 
         modeljs.dbgprint("...Begin to get S", 1);
-        var curtime = new Date();
-        begin_time = curtime.getTime();
-        //console.log(".......Begin to get S :"+curtime.getTime());
         getServiceListS();
         timerFlag = setTimeout(serviceToCompare, 40000);
     });
