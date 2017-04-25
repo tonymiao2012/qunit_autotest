@@ -201,7 +201,7 @@ function write2File(sourceType, funcName) {
                 }
             }
             content = content + "]";
-            var result = fh.writeFileToNative(path, content, workRoot);
+            var result = fh.appendStrToFile(path, content, workRoot);
             assert.ok(true, "writeToFile ");
             done();
         };
@@ -228,7 +228,7 @@ function checkServiceT(expectNum, flag, funcName) {
             if (allChannels_T.length != expectNum) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime + ". All channelsT length: " + allChannels_T.length + ", expect number: " + expectNum;
-                fh.writeFileToNative(path, content, workroot);
+                fh.appendStrToFile(path, content, workroot);
             }
 
             done();
@@ -252,7 +252,7 @@ function checkServiceC(expectNum, flag, funcName) {
             if (allChannels_C.length != expectNum) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime + ". All channelsC length: " + allChannels_C.length + ", expect number: " + expectNum;
-                fh.writeFileToNative(path, content, workroot);
+                fh.appendStrToFile(path, content, workroot);
             }
 
             done();
@@ -351,7 +351,7 @@ function playInputedChannel(sourceType, chn, func_name) {
                 if (flag === false) {
                     var path = "hisenseUI/" + func_name.trim() + ".txt";
                     var content = "Test failed on " + localTime;
-                    fh.writeFileToNative(path, content, workroot);
+                    fh.appendStrToFile(path, content, workroot);
                 }
 
                 done();
@@ -403,7 +403,7 @@ function playInputedChannel(sourceType, chn, func_name) {
 
             var path = "hisenseUI/" + func_name.trim() + ".txt";
             var content = "Test failed on " + localTime + ". Channel length is 0.";
-            fh.writeFileToNative(path, content, workroot);
+            fh.appendStrToFile(path, content, workroot);
 
             $("#details").html(" Click 4001_getServicelistT  or 4002_getServicelistC at first!");
         }
@@ -556,7 +556,7 @@ function switchChannel(direction, sourceType, repeat, funcName) {
 
             var path = "hisenseUI/" + funcName.trim() + ".txt";
             var content = "Test failed on " + localTime + ". Channel length is 0.";
-            fh.writeFileToNative(path, content, workroot);
+            fh.appendStrToFile(path, content, workroot);
 
             $("#details").html(" Click 4001_getServicelistT  or 4002_getServicelistC at first!");
         }
@@ -575,7 +575,7 @@ function switchChannel(direction, sourceType, repeat, funcName) {
                         if (result != true) {
                             var path = "hisenseUI/" + funcName.trim() + ".txt";
                             var content = "Test failed on " + localTime + ". Assert result: " + result + ", running times: " + i;
-                            fh.writeFileToNative(path, content, workroot);
+                            fh.appendStrToFile(path, content, workroot);
                         }
 
                         i++;
@@ -638,7 +638,7 @@ function randomSwitchChannel(repeat, funcName) {
                         if (result != true) {
                             var path = "hisenseUI/" + funcName.trim() + ".txt";
                             var content = "Test failed on " + localTime + ". Assert result: " + result + ", running times: " + i;
-                            fh.writeFileToNative(path, content, workroot);
+                            fh.appendStrToFile(path, content, workroot);
                         }
 
                         i++;
@@ -659,7 +659,7 @@ function randomSwitchChannel(repeat, funcName) {
 
             var path = "hisenseUI/" + funcName.trim() + ".txt";
             var content = "Test failed on " + localTime + ". Channel length is 0.";
-            fh.writeFileToNative(path, content, workroot);
+            fh.appendStrToFile(path, content, workroot);
 
             $("#details").html(" Click 4001_getServicelistT  and 4002_getServicelistC at first!");
         }
@@ -742,7 +742,7 @@ function checkServiceListTByFile(funcName) {
             if (result === false) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime;
-                fh.writeFileToNative(path, content, workroot);
+                fh.appendStrToFile(path, content, workroot);
             }
 
             done();
@@ -789,7 +789,7 @@ function checkServiceListCByFile(funcName) {
             if (result === false) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime;
-                fh.writeFileToNative(path, content, workroot);
+                fh.appendStrToFile(path, content, workroot);
             }
 
             done();
@@ -817,7 +817,7 @@ function getSkipListAllT(expectNum, funcName) {
             if (skipChannels_T.length != expectNum) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime + ". Skip channelsT length: " + skipChannels_T.length + ", expect number: " + expectNum;
-                fh.writeFileToNative(path, content, workroot);
+                fh.appendStrToFile(path, content, workroot);
             }
 
             done();
@@ -882,7 +882,7 @@ function modifySkipListT(attr, flag, chNum, funcName) {
                 if (val != flag) {
                     var path = "hisenseUI/" + funcName.trim() + ".txt";
                     var content = "Test failed on " + localTime + ". Assert value: " + val + ", expect value: " + flag;
-                    fh.writeFileToNative(path, content, workroot);
+                    fh.appendStrToFile(path, content, workroot);
                 }
 
                 done();
@@ -896,7 +896,7 @@ function modifySkipListT(attr, flag, chNum, funcName) {
 
             var path = "hisenseUI/" + funcName.trim() + ".txt";
             var content = "Test failed on " + localTime + ". Channel length is 0.";
-            fh.writeFileToNative(path, content, workroot);
+            fh.appendStrToFile(path, content, workroot);
 
             $("#details").html(" Click 4001_getServicelistT   at first!");
         }
@@ -929,7 +929,7 @@ function getSkipListAllC(expectNum, funcName) {
             if (skipChannels_C.length != expectNum) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime + ". Skip channelsC length: " + skipChannels_C.length + ", expect number: " + expectNum;
-                fh.writeFileToNative(path, content, workroot);
+                fh.appendStrToFile(path, content, workroot);
             }
 
             done();
@@ -993,7 +993,7 @@ function modifySkipListC(attr, flag, chNum, funcName) {
                 if (val != flag) {
                     var path = "hisenseUI/" + funcName.trim() + ".txt";
                     var content = "Test failed on " + localTime + ". Assert value: " + val + ", expect value: " + flag;
-                    fh.writeFileToNative(path, content, workroot);
+                    fh.appendStrToFile(path, content, workroot);
                 }
 
                 done();
@@ -1007,7 +1007,7 @@ function modifySkipListC(attr, flag, chNum, funcName) {
 
             var path = "hisenseUI/" + funcName.trim() + ".txt";
             var content = "Test failed on " + localTime + ". Channel length is 0.";
-            fh.writeFileToNative(path, content, workroot);
+            fh.appendStrToFile(path, content, workroot);
 
             $("#details").html(" Click  4002_getServicelistC at first!");
         }
@@ -1041,7 +1041,7 @@ function getBlockListAllT(expectNum, funcName) {
             if (blockChannels_T.length != expectNum) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime + ". Block channelsT length: " + blockChannels_T.length + ", expect number: " + expectNum;
-                fh.writeFileToNative(path, content, workroot);
+                fh.appendStrToFile(path, content, workroot);
             }
 
             done();
@@ -1105,7 +1105,7 @@ function modifyBlockListT(attr, flag, chNum, funcName) {
                 if (val != flag) {
                     var path = "hisenseUI/" + funcName.trim() + ".txt";
                     var content = "Test failed on " + localTime + ". Assert value: " + val + ", expect value: " + flag;
-                    fh.writeFileToNative(path, content, workroot);
+                    fh.appendStrToFile(path, content, workroot);
                 }
 
                 done();
@@ -1119,7 +1119,7 @@ function modifyBlockListT(attr, flag, chNum, funcName) {
 
             var path = "hisenseUI/" + funcName.trim() + ".txt";
             var content = "Test failed on " + localTime + ". Channel length is 0.";
-            fh.writeFileToNative(path, content, workroot);
+            fh.appendStrToFile(path, content, workroot);
 
             $("#details").html(" Click 4001_getServicelistT    at first!");
         }
@@ -1153,7 +1153,7 @@ function getBlockListAllC(expectNum, funcName) {
             if (blockChannels_C.length != expectNum) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime + ". Block channelsC length: " + blockChannels_C.length + ", expect number: " + expectNum;
-                fh.writeFileToNative(path, content, workroot);
+                fh.appendStrToFile(path, content, workroot);
             }
 
             done();
@@ -1217,7 +1217,7 @@ function modifyBlockListC(attr, flag, chNum, funcName) {
                 if (val != flag) {
                     var path = "hisenseUI/" + funcName.trim() + ".txt";
                     var content = "Test failed on " + localTime + ". Assert value: " + val + ", expect value: " + flag;
-                    fh.writeFileToNative(path, content, workroot);
+                    fh.appendStrToFile(path, content, workroot);
                 }
 
                 done();
@@ -1231,7 +1231,7 @@ function modifyBlockListC(attr, flag, chNum, funcName) {
 
             var path = "hisenseUI/" + funcName.trim() + ".txt";
             var content = "Test failed on " + localTime + ". Channel length is 0.";
-            fh.writeFileToNative(path, content, workroot);
+            fh.appendStrToFile(path, content, workroot);
 
             $("#details").html(" Click  4002_getServicelistC at first!");
         }
@@ -1273,7 +1273,7 @@ function getServicesAttrT(chNum, funcName) {
                 if (val === false) {
                     var path = "hisenseUI/" + funcName.trim() + ".txt";
                     var content = "Test failed on " + localTime;
-                    fh.writeFileToNative(path, content, workroot);
+                    fh.appendStrToFile(path, content, workroot);
                 }
 
                 done();
@@ -1286,7 +1286,7 @@ function getServicesAttrT(chNum, funcName) {
 
             var path = "hisenseUI/" + funcName.trim() + ".txt";
             var content = "Test failed on " + localTime + ". Channel length is 0.";
-            fh.writeFileToNative(path, content, workroot);
+            fh.appendStrToFile(path, content, workroot);
 
             $("#details").html(" Click 4001_getServicelistT  at first!");
         }
@@ -1315,7 +1315,7 @@ function getServicesAttrC(chNum, funcName) {
                 if (val === false) {
                     var path = "hisenseUI/" + funcName.trim() + ".txt";
                     var content = "Test failed on " + localTime;
-                    fh.writeFileToNative(path, content, workroot);
+                    fh.appendStrToFile(path, content, workroot);
                 }
 
                 done();
@@ -1328,7 +1328,7 @@ function getServicesAttrC(chNum, funcName) {
 
             var path = "hisenseUI/" + funcName.trim() + ".txt";
             var content = "Test failed on " + localTime + ". Channel length is 0.";
-            fh.writeFileToNative(path, content, workroot);
+            fh.appendStrToFile(path, content, workroot);
 
             $("#details").html(" Click  4002_getServicelistC at first!");
         }
@@ -1349,7 +1349,7 @@ function getMainPlay(funcName) {
         else {
             var path = "hisenseUI/" + funcName.trim() + ".txt";
             var content = "Test failed on " + localTime;
-            fh.writeFileToNative(path, content, workroot);
+            fh.appendStrToFile(path, content, workroot);
         }
     });
 }
@@ -1365,7 +1365,7 @@ function mainPlayChanged(sourceType, chn, testName) {
 
                 var path = "hisenseUI/" + testName.trim() + ".txt";
                 var content = "Test failed on " + localTime + ". mainPlayChanged timeout.";
-                fh.writeFileToNative(path, content, workroot);
+                fh.appendStrToFile(path, content, workroot);
 
                 done();
             };
@@ -1380,7 +1380,7 @@ function mainPlayChanged(sourceType, chn, testName) {
                 else {
                     var path = "hisenseUI/" + testName.trim() + ".txt";
                     var content = "Test failed on " + localTime;
-                    fh.writeFileToNative(path, content, workroot);
+                    fh.appendStrToFile(path, content, workroot);
                 }
             }
             if (sourceType == 1) {
@@ -1398,7 +1398,7 @@ function mainPlayChanged(sourceType, chn, testName) {
 
             var path = "hisenseUI/" + testName.trim() + ".txt";
             var content = "Test failed on " + localTime + ". Channel length is 0.";
-            fh.writeFileToNative(path, content, workroot);
+            fh.appendStrToFile(path, content, workroot);
 
             $("#details").html(" Click 4001_getServicelistT  or 4002_getServicelistC at first!");
         }
@@ -1421,7 +1421,7 @@ function getNoSignalMain(funcName) {
         if (result === false) {
             var path = "hisenseUI/" + funcName.trim() + ".txt";
             var content = "Test failed on " + localTime;
-            fh.writeFileToNative(path, content, workroot);
+            fh.appendStrToFile(path, content, workroot);
         }
 
     });
@@ -1452,7 +1452,7 @@ function getSignalLevel(funcName) {
             if (result === false) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime;
-                fh.writeFileToNative(path, content, workroot);
+                fh.appendStrToFile(path, content, workroot);
             }
 
             done();
@@ -1484,7 +1484,7 @@ function getSignalCn(funcName) {
             if (result === false) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime;
-                fh.writeFileToNative(path, content, workroot);
+                fh.appendStrToFile(path, content, workroot);
             }
 
             done();
@@ -1510,7 +1510,7 @@ function onChannelListUpdate(funcName) {
             if (listUpdate === false) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime;
-                fh.writeFileToNative(path, content, workroot);
+                fh.appendStrToFile(path, content, workroot);
             }
 
             done();
@@ -1578,7 +1578,7 @@ function getFavListAllT(expectNum, funcName) {
             if (favChannels_T.length != expectNum) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime + ". Fav channelsT length: " + favChannels_T.length + ", expect number: " + expectNum;
-                fh.writeFileToNative(path, content, workroot);
+                fh.appendStrToFile(path, content, workroot);
             }
 
             done();
@@ -1602,7 +1602,7 @@ function modifyFavListT(attr, flag, chNum, funcName) {
                 if (val != flag) {
                     var path = "hisenseUI/" + funcName.trim() + ".txt";
                     var content = "Test failed on " + localTime;
-                    fh.writeFileToNative(path, content, workroot);
+                    fh.appendStrToFile(path, content, workroot);
                 }
 
                 done();
@@ -1616,7 +1616,7 @@ function modifyFavListT(attr, flag, chNum, funcName) {
 
             var path = "hisenseUI/" + funcName.trim() + ".txt";
             var content = "Test failed on " + localTime + ". Channel length is 0.";
-            fh.writeFileToNative(path, content, workroot);
+            fh.appendStrToFile(path, content, workroot);
 
             $("#details").html(" Click 4001_getServicelistT  at first!");
         }
@@ -1691,7 +1691,7 @@ function getFavListAllC(expectNum, funcName) {
             if (favChannels_C.length != expectNum) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed on " + localTime + ". Fav channelsC length: " + favChannels_C.length + ", expect number: " + expectNum;
-                fh.writeFileToNative(path, content, workroot);
+                fh.appendStrToFile(path, content, workroot);
             }
 
             done();
@@ -1716,7 +1716,7 @@ function modifyFavListC(attr, flag, chNum, funcName) {
                 if (val != flag) {
                     var path = "hisenseUI/" + funcName.trim() + ".txt";
                     var content = "Test failed on " + localTime;
-                    fh.writeFileToNative(path, content, workroot);
+                    fh.appendStrToFile(path, content, workroot);
                 }
 
                 done();
@@ -1729,7 +1729,7 @@ function modifyFavListC(attr, flag, chNum, funcName) {
             assert.ok(false, "channel length is 0");
             var path = "hisenseUI/" + funcName.trim() + ".txt";
             var content = "Test failed on " + localTime + ", channel length is 0.";
-            fh.writeFileToNative(path, content, workroot);
+            fh.appendStrToFile(path, content, workroot);
             $("#details").html(" Click  4002_getServicelistC at first!");
         }
     });

@@ -244,7 +244,7 @@ function write2File(sourceType, funcName) {
                 }
             }
             content = content + "]";
-            var result = fh.writeFileToNative(path, content, workRoot);
+            var result = fh.appendStrToFile(path, content, workRoot);
             assert.ok(true, "writeToFile ");
             done();
         };
