@@ -17,7 +17,7 @@ Developed by Hisense Co. Shenzhen Research Center. Private owned.
 7. 测试代码架构的调整，方便后续扩充和维护.
 
 
-适配平台版本号：更新至ATSC-H0307，DVB-H0309
+适配平台版本号：ATSC-H0307，DVB-H0309
 
 ### V 1.2
 1. 采用VUE Component方法，设计并实现了动态测试用例队列和动态参数输入域。
@@ -27,12 +27,20 @@ Developed by Hisense Co. Shenzhen Research Center. Private owned.
 5. 更新DVB的model JS接口至2017-03-15版本。
 6. Update on 2017-03-30：更新model JS接口这2017-03-27版本。DVB压测用例更新。修复了一个BUG。
 
-适配平台版本号： ATSC-H0327，DVB-H0329
+适配平台版本号：ATSC-H0327，DVB-H0329
 
 ### V 1.3
-1. 整合Debug.js。可以將debug信息打印在串口并寫入log.txt文件。
-2. 對接HisenseJS模塊，增加對Linux系統文件CURD的file handler，用來保存測試用例相關信息。
-3. 更新model JS和API，適應最新的開發環境。
-4. 修復了一些BUG。
+1. 整合Debug.js。可以将debug信息打印在串口并写入log.txt文件。
+2. 对接HisenseJS模块，增加对Linux系统文件CURD的file handler，用来保存测试用例相关信息。
+3. 更新model JS和API，适应最新的开发环境。
+4. 修复了一些BUG。
 
-適配平台版本號： ATSC-H0327，DVB-H0405
+适配平台版本号：ATSC-H0327，DVB-H0405
+
+### V 1.4
+1. 在HisenseJS模块增加了文件append操作方法API。用来解决文件结果覆盖问题。
+2. 进一步完善了ATSC和DVB平台测试用例。
+3. 加入了场景模拟测试脚本集AutoTest。用来模拟场景测试和重现难复现BUG。
+4. 修复了BUG若干。
+
+适应平台版本号：ATSC-H0425， DVB-H0425
