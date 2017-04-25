@@ -34,7 +34,7 @@ function autoSearch(repeat, expectNum, sourceType, chan_mode, scan_mode, search_
                     assert.equal(curServiceNumDtv + curServiceNumAtv, expectNum, "check serives");
                     if (curServiceNumDtv + curServiceNumAtv != expectNum) {
                         var content = "Function name: " + funcName + ". Times: " + i + " failed.";
-                        var result = fh.writeFileToNative(path, content, workRoot);
+                        var result = fh.appendStrToFile(path, content, workRoot);
                         if (result)
                             console.log("...............Write file finished..............");
                     }

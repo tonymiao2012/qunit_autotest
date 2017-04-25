@@ -7,7 +7,7 @@ var favChannels_C = [];
 var blockChannels_T = [];
 var blockChannels_C = [];
 var channelIterator = null;
-var currentIndex = 0;
+var currentIndex = 0
 var workroot = 1;
 var localTime = new Date();
 QUnit.config.reorder = false;
@@ -201,7 +201,8 @@ function write2File(sourceType, funcName) {
                 }
             }
             content = content + "]";
-            var result = fh.appendStrToFile(path, content, workRoot);
+            var path = "hisenseUI/result.json";
+            var result = fh.writeFileToNative(path, content, workroot);
             assert.ok(true, "writeToFile ");
             done();
         };
