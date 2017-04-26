@@ -9,7 +9,7 @@ var blockChannels_C = [];
 var channelIterator = null;
 var currentIndex = 0
 var workroot = 1;
-var localTime = new Date();
+var localTime = Math.round(new Date().getTime() / 1000);
 QUnit.config.reorder = false;
 var fh = new fileHandler();
 

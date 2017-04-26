@@ -1,3 +1,19 @@
+var workroot = 1;
+var localTime = Math.round(new Date().getTime() / 1000);
+var fh = new fileHandler();
+
+function logWhenAssertOk(funcName) {
+    var path = "hisenseUI/" + funcName.trim() + ".txt";
+    var content = "Test failed. Time stamp: " + localTime;
+    fh.appendStrToFile(path, content, workroot);
+}
+
+function logWhenAssertEqual(funcName, newVal, val) {
+    var path = "hisenseUI/" + funcName.trim() + ".txt";
+    var content = "Test failed. Time stamp: " + localTime + " Result value: " + newVal + ", expect value: " + val;
+    fh.appendStrToFile(path, content, workroot);
+}
+
 function startGetControl() {
     var val = model.closedcaption.getControl();
     $("#details").html(val);
@@ -11,12 +27,20 @@ function getControl(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetControl();
         assert.ok(result, "getControl");
+
+        if (result != true) {
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function checkSetControl(val, funcName) {
     QUnit.test(funcName, function (assert) {
         var newVal = model.closedcaption.getControl();
         assert.equal(newVal, val, "setControl");
+
+        if (newVal !== val) {
+            logWhenAssertEqual(funcName, newVal, val);
+        }
     });
 }
 function setControl(val, funcName) {
@@ -36,12 +60,20 @@ function getAnalogMode(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetAnalogMode();
         assert.ok(result, "getAnalogMode");
+
+        if (result != true) {
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function checkSetAnalogMode(val, funcName) {
     QUnit.test(funcName, function (assert) {
         var newVal = model.closedcaption.getControlAnalogMode();
         assert.equal(newVal, val, "setAnalogMode");
+
+        if (newVal !== val) {
+            logWhenAssertEqual(funcName, newVal, val);
+        }
     });
 }
 function setAnalogMode(val, funcName) {
@@ -61,6 +93,10 @@ function getDigitalMode(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetDigitalMode();
         assert.ok(result, "getDigitalMode");
+
+        if (result != true) {
+            logWhenAssertOk(funcName);
+        }
     });
 }
 
@@ -68,6 +104,10 @@ function checkSetDigitalMode(val, funcName) {
     QUnit.test(funcName, function (assert) {
         var newVal = model.closedcaption.getControlDigitalMode();
         assert.equal(newVal, val, "setDigitalMode");
+
+        if (newVal !== val) {
+            logWhenAssertEqual(funcName, newVal, val);
+        }
     });
 }
 function setDigitalMode(val, funcName) {
@@ -87,6 +127,10 @@ function getDigitalStyle(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetDigitalStyle();
         assert.ok(result, "getDigitalStyle");
+
+        if (result != true) {
+            logWhenAssertOk(funcName);
+        }
     });
 }
 
@@ -94,6 +138,10 @@ function checkSetDigitalStyle(val, funcName) {
     QUnit.test(funcName, function (assert) {
         var newVal = model.closedcaption.getControlDigitalStyle();
         assert.equal(newVal, val, "setDigitalStyle");
+
+        if (newVal !== val) {
+            logWhenAssertEqual(funcName, newVal, val);
+        }
     });
 }
 function setDigitalStyle(val, funcName) {
@@ -113,6 +161,10 @@ function getDigitalSize(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetDigitalSize();
         assert.ok(result, "getDigitalSize");
+
+        if (result != true) {
+            logWhenAssertOk(funcName);
+        }
     });
 }
 
@@ -120,6 +172,10 @@ function checkSetDigitalSize(val, funcName) {
     QUnit.test(funcName, function (assert) {
         var newVal = model.closedcaption.getControlDigitalSize();
         assert.equal(newVal, val, "setDigitalSize");
+
+        if (newVal !== val) {
+            logWhenAssertEqual(funcName, newVal, val);
+        }
     });
 }
 function setDigitalSize(val, funcName) {
@@ -138,6 +194,10 @@ function getDigitalFont(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetDigitalFont();
         assert.ok(result, "getDigitalFont");
+
+        if (result != true) {
+            logWhenAssertOk(funcName);
+        }
     });
 }
 
@@ -145,6 +205,10 @@ function checkSetDigitalFont(val, funcName) {
     QUnit.test(funcName, function (assert) {
         var newVal = model.closedcaption.getControlDigitalFont();
         assert.equal(newVal, val, "setDigitalFont");
+
+        if (newVal !== val) {
+            logWhenAssertEqual(funcName, newVal, val);
+        }
     });
 }
 function setDigitalFont(val, funcName) {
@@ -169,6 +233,10 @@ function getDigitalcolor(colorType, funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetDigitalcolor(colorType);
         assert.ok(result, "getDigitalcolor");
+
+        if (result != true) {
+            logWhenAssertOk(funcName);
+        }
     });
 }
 
@@ -184,6 +252,10 @@ function checkSetDigitalcolor(colorType, val, funcName) {
             var newVal = model.closedcaption.getControlDigitalEdgecolor();
         }
         assert.equal(newVal, val, "setDigitalcolor");
+
+        if (newVal !== val) {
+            logWhenAssertEqual(funcName, newVal, val);
+        }
     });
 }
 function setDigitalcolor(colorType, val, funcName) {
@@ -214,6 +286,10 @@ function getDigitalOpacity(opaType, funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetDigitalOpacity(opaType);
         assert.ok(result, "getDigitalOpacity");
+
+        if (result != true) {
+            logWhenAssertOk(funcName);
+        }
     });
 }
 
@@ -226,6 +302,10 @@ function checkSetDigitalOpacity(opaType, val, funcName) {
             var newVal = model.closedcaption.getControlDigitalBgopacity();
         }
         assert.equal(newVal, val, "setDigitalOpacity");
+
+        if (newVal !== val) {
+            logWhenAssertEqual(funcName, newVal, val);
+        }
     });
 }
 function setDigitalOpacity(opaType, val, funcName) {
@@ -249,6 +329,10 @@ function getDigitalEdgeeffect(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetDigitalEdgeeffect();
         assert.ok(result, "getDigitalEdgeeffect");
+
+        if (result != true) {
+            logWhenAssertOk(funcName);
+        }
     });
 }
 
@@ -256,6 +340,10 @@ function checkSetDigitalEdgeeffect(val, funcName) {
     QUnit.test(funcName, function (assert) {
         var newVal = model.closedcaption.getControlDigitalEdgeeffect();
         assert.equal(newVal, val, "setDigitalEdgeeffect");
+
+        if (newVal !== val) {
+            logWhenAssertEqual(funcName, newVal, val);
+        }
     });
 }
 function setDigitalEdgeeffect(val, funcName) {

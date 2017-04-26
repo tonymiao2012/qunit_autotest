@@ -2,6 +2,16 @@ var inputPin = null;
 var regionPageNumber = 0;
 var dimensionPageNumber = 0;
 var selectlistNumber = 0;
+var workroot = 1;
+var localTime = Math.round(new Date().getTime() / 1000);
+var fh = new fileHandler();
+
+function logWhenAssertOk(funcName) {
+    var path = "hisenseUI/" + funcName.trim() + ".txt";
+    var content = "Test failed. Time stamp: " + localTime;
+    fh.appendStrToFile(path, content, workroot);
+}
+
 function startGetPin() {
     var val = model.parentlock.getPin();
     $("#details").html(val);
@@ -14,6 +24,10 @@ function getPin(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetPin();
         assert.ok(result, "getPin");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function startSetPin(pin) {
@@ -38,10 +52,18 @@ function setPin(pinValue, funcName) {
 
             var result = startSetPin(pin);
             assert.ok(result, "Test setPin");
+
+            if(result != true){
+                logWhenAssertOk(funcName);
+            }
         }
         else {
             assert.ok(false, "setPin");
             $("#details").html(" Pin length isn't 4");
+
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed. Time stamp: " + localTime + ". Pin length isn't 4";
+            fh.appendStrToFile(path, content, workroot);
         }
     });
 }
@@ -57,6 +79,10 @@ function getSModel(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetSModel();
         assert.ok(result, "Test getSModel");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 
@@ -71,6 +97,11 @@ function setSModel(flag, funcName) {
             else
                 result = false;
             assert.ok(result, "setSModel");
+
+            if(result != true){
+                logWhenAssertOk(funcName);
+            }
+
             done();
         };
         model.parentlock.setSModel(flag);
@@ -85,6 +116,10 @@ function PCReset(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startPCReset();
         assert.ok(result, "Test PCReset");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function startGetPinRequest(expect) {
@@ -99,6 +134,10 @@ function getPinRequest(expect, funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetPinRequest(expect);
         assert.ok(result, "Test getPinRequest");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 
@@ -115,6 +154,10 @@ function getStartTime(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetStartTime();
         assert.ok(result, "Test getStartTime");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function startSetStartTime(startTime) {
@@ -128,6 +171,10 @@ function setStartTime(startTime, funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startSetStartTime(startTime);
         assert.ok(result, "Test setStartTime");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function startGetEndTime() {
@@ -142,6 +189,10 @@ function getEndTime(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetEndTime();
         assert.ok(result, "Test getEndTime");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function startSetEndTime(endTime) {
@@ -155,6 +206,10 @@ function setEndTime(endTime, funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startSetEndTime(endTime);
         assert.ok(result, "Test setEndTime");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function startGetEndWeekly() {
@@ -166,6 +221,10 @@ function getEndWeekly(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetEndWeekly();
         assert.ok(result, "Test getEndWeekly");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function startSetEndWeekly(weekly) {
@@ -179,6 +238,10 @@ function setEndWeekly(weekly, funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startSetEndWeekly(weekly);
         assert.ok(result, "Test setEndWeekly");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 
@@ -194,6 +257,10 @@ function getBlockUnrated(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetBlockUnrated();
         assert.ok(result, "Test getBlockUnrated");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function startSetBlockUnrated(ratingValue) {
@@ -207,6 +274,10 @@ function setBlockUnrated(ratingValue, funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startSetBlockUnrated(ratingValue);
         assert.ok(result, "Test setBlockUnrated");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function startGetUsTvRating() {
@@ -221,6 +292,10 @@ function getUsTvRating(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetUsTvRating();
         assert.ok(result, "Test getUsTvRating");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function checkSetUsTvRating(flag, ratingValue, val) {
@@ -299,6 +374,11 @@ function setUsTvRating(flag, ratingValue, funcName) {
             var val = model.parentlock.getUsTvRating();
             var result = checkSetUsTvRating(flag, ratingValue, val);
             assert.ok(result, "setUsTvRating");
+
+            if(result != true){
+                logWhenAssertOk(funcName);
+            }
+
             done();
         };
         model.parentlock.ActionSetUsTvRating(ratingValue, flag);
@@ -319,6 +399,10 @@ function getUsMovieRating(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetUsMovieRating();
         assert.ok(result, "Test getUsMovieRating");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function startSetUsMovieRating(ratingValue) {
@@ -332,6 +416,10 @@ function setUsMovieRating(ratingValue, funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startSetUsMovieRating(ratingValue);
         assert.ok(result, "Test setUsMovieRating");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 
@@ -347,6 +435,10 @@ function getCanEnglishRating(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetCanEnglishRating();
         assert.ok(result, "Test getCanEnglishRating");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function startSetCanEnglishRating(ratingValue) {
@@ -360,6 +452,10 @@ function setCanEnglishRating(ratingValue, funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startSetCanEnglishRating(ratingValue);
         assert.ok(result, "Test setCanEnglishRating");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 
@@ -375,6 +471,10 @@ function getCanFrenchRating(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startGetCanFrenchRating();
         assert.ok(result, "Test getCanFrenchRating");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function startSetCanFrenchRating(ratingValue) {
@@ -388,6 +488,10 @@ function setCanFrenchRating(ratingValue, funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startSetCanFrenchRating(ratingValue);
         assert.ok(result, "Test setCanFrenchRating");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function blockChannelDtvT_1() {
@@ -404,6 +508,13 @@ function pinRequestConfirm(funcName) {
         function checkPinRequestConfirm() {
             var val = model.parentlock.getPinRequest();
             assert.equal(val[0], 0, "pinRequestConfirm");
+
+            if(val[0] !== 0){
+                var path = "hisenseUI/" + funcName.trim() + ".txt";
+                var content = "Test failed. Time stamp: " + localTime + ". Result value: " + val[0] + ", expect value: " + 0;
+                fh.appendStrToFile(path, content, workroot);
+            }
+
             done();
         };
         var val = model.parentlock.getPin();
@@ -430,6 +541,10 @@ function openVchipRegionPage(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startOpenVchipRegionPage();
         assert.ok(result, "Test openVchipRegionPage");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function startOpenVchipDimensionPage() {
@@ -449,6 +564,10 @@ function openVchipDimensionPage(funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startOpenVchipDimensionPage();
         assert.ok(result, "Test openVchipDimensionPage");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function startOpenVchipRatingValuePage(region, dimen) {
@@ -469,10 +588,18 @@ function openVchipRatingValuePage(region, dimen, funcName) {
         if ((region <= regionPageNumber) && (dimen <= dimensionPageNumber)) {
             var result = startOpenVchipRatingValuePage(region, dimen);
             assert.ok(result, "Test openVchipRatingValuePage");
+
+            if(result != true){
+                logWhenAssertOk(funcName);
+            }
         }
         else {
             assert.ok(false, "openVchipRatingValuePage fail");
             $("#details").html(" The  number is error");
+
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed. Time stamp: " + localTime + ". The number is illegal.";
+            fh.appendStrToFile(path, content, workroot);
         }
     });
 }
@@ -488,10 +615,16 @@ function setLevelPage(region, dimen, selectlist, flag, funcName) {
         if ((selectlist <= selectlistNumber) && (region <= regionPageNumber) && (dimen <= dimensionPageNumber) && ((flag == 0) || (flag == 1))) {
             var result = startSetLevelPage(region, dimen, selectlist, flag);
             assert.ok(result, "Test setLevelPage");
+
+            i
         }
         else {
             assert.ok(false, "openVchipRatingValuePage fail");
             $("#details").html(" input has error");
+
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed. Time stamp: " + localTime + ". Input is illegal.";
+            fh.appendStrToFile(path, content, workroot);
         }
     });
 }

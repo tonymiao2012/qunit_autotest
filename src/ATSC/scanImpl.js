@@ -1,6 +1,6 @@
 var fh = new fileHandler();
 var workroot = 1;
-var localTime = new Date();
+var localTime = Math.round(new Date().getTime() / 1000);
 
 function startSetSource(sourceType) {
     model.channelSearch.setSource(sourceType); //DTV-T means #15.
