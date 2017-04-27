@@ -1,3 +1,19 @@
+var workroot = 1;
+var localTime = Math.round(new Date().getTime() / 1000);
+var fh = new fileHandler();
+
+function logWhenAssertOk(funcName) {
+    var path = "hisenseUI/" + funcName.trim() + ".txt";
+    var content = "Test failed. Time stamp: " + localTime;
+    fh.appendStrToFile(path, content, workroot);
+}
+
+function logWhenAssertCompare(funcName, newVal, val) {
+    var path = "hisenseUI/" + funcName.trim() + ".txt";
+    var content = "Test failed. Time stamp: " + localTime + " Result value: " + newVal + ", expect value: " + val;
+    fh.appendStrToFile(path, content, workroot);
+}
+
 function startGetCurLocalTime() {
     var val = model.datetime.getCurLocalTime();
     return val;
@@ -7,6 +23,11 @@ function getCurLocalTime(funcName) {
         var result;
         result = startGetCurLocalTime();
         assert.notEqual(result, 0, "Test getCurLocalTime");
+
+        if(result == 0){
+            logWhenAssertCompare(funcName, result, 0);
+        }
+
         var date = new Date(result * 1000);
         $("#details").html(date.toLocaleString());
     });
@@ -26,6 +47,10 @@ function getTimeZone(funcName) {
         var result;
         result = startGetTimeZone();
         assert.ok(result, "getTimeZone");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 
@@ -40,6 +65,10 @@ function setTimeZone(zone, funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startSetTimeZone(zone);
         assert.equal(result, true, "setTimeZone");
+
+        if(result != true){
+            logWhenAssertCompare(funcName, result, true);
+        }
     });
 }
 
@@ -56,6 +85,10 @@ function getTimeFormat(funcName) {
         var result;
         result = startGetTimeFormat();
         assert.ok(result, "getTimeFormat");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 
@@ -70,6 +103,10 @@ function setTimeFormat(format, funcName) {
     QUnit.test(funcName, function (assert) {
         var result = startSetTimeFromat(format);
         assert.ok(result, "setTimeFormat");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 
@@ -83,6 +120,11 @@ function getEitMainNow(funcName) {
         var pfResultNow;
         pfResultNow = getEitNow();
         assert.equal(pfResultNow.length, 12, " getEitMainNow");
+
+        if(pfResultNow.length != 12){
+            logWhenAssertCompare(funcName, pfResultNow.length, 12);
+        }
+
         if (pfResultNow.length == 12) {
             var startime = new Date(pfResultNow[2] * 1000);
             var stoptime = new Date(pfResultNow[3] * 1000);
@@ -103,6 +145,11 @@ function getEitMainNext(funcName) {
         var pfResultNext;
         pfResultNext = getEitNext();
         assert.equal(pfResultNext.length, 12, " getEitMainNext");
+
+        if(pfResultNext.length != 12){
+            logWhenAssertCompare(funcName, pfResultNext.length, 12);
+        }
+
         if (pfResultNext.length == 12) {
             var startime = new Date(pfResultNext[2] * 1000);
             var stoptime = new Date(pfResultNext[3] * 1000);
@@ -122,6 +169,9 @@ function checkEitMainNowChanged(funcName, chn) {
             function onEitMainNowChanngedTimeout() {
                 model.tvservice.onEitMainNowChanged = null;
                 assert.ok(false, "checkEitMainNowChanged fail");
+
+                logWhenAssertOk(funcName);
+
                 done();
             };
 
@@ -137,6 +187,11 @@ function checkEitMainNowChanged(funcName, chn) {
         }
         else {
             assert.ok(false, "channel length is 0");
+
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed. Time stamp: " + localTime + ". Channel length is 0.";
+            fh.appendStrToFile(path, content, workroot);
+
             $("#details").html(" Click 4001_getServicelistT  at first!");
         }
     });
@@ -150,6 +205,9 @@ function checkEitMainNextChanged(funcName, chn) {
             function onEitMainNextChanngedTimeout() {
                 model.tvservice.onEitMainNextChanged = null;
                 assert.ok(false, "checkEitMainNextChanged fail");
+
+                logWhenAssertOk(funcName);
+
                 done();
             };
 
@@ -165,6 +223,11 @@ function checkEitMainNextChanged(funcName, chn) {
         }
         else {
             assert.ok(false, "channel length is 0");
+
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed. Time stamp: " + localTime + ". Channel length is 0.";
+            fh.appendStrToFile(path, content, workroot);
+
             $("#details").html(" Click 4001_getServicelistT  at first!");
         }
     });
@@ -178,6 +241,11 @@ function getVideoFormat(funcName) {
         var format;
         format = startGetVideoFormat();
         assert.notEqual(format.length, 0, "Test getVideoFormat");
+
+        if(format.length == 0){
+            logWhenAssertCompare(funcName, format.length, 0);
+        }
+
         if (format.length > 0)
             $("#details").html(format);
     });
@@ -191,6 +259,9 @@ function checkVideoFormatChanged(funcName, chn) {
             function onVideoFormatChanngedTimeout() {
                 model.video.onVideoFormatInfoChanged = null;
                 assert.ok(false, "checkVideoFormatChanged fail");
+
+                logWhenAssertOk(funcName);
+
                 done();
             };
 
@@ -206,6 +277,11 @@ function checkVideoFormatChanged(funcName, chn) {
         }
         else {
             assert.ok(false, "channel length is 0");
+
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed. Time stamp: " + localTime + ". Channel length is 0.";
+            fh.appendStrToFile(path, content, workroot);
+
             $("#details").html(" Click 4001_getServicelistT  at first!");
         }
     });
@@ -220,6 +296,11 @@ function getFrameAspect(funcName) {
         var aspect;
         aspect = startGetFrameAspect();
         assert.notEqual(aspect.length, 0, "Test getFrameAspect");
+
+        if(aspect.length == 0){
+            logWhenAssertCompare(funcName, aspect.length, 0);
+        }
+
         if (aspect.length > 0)
             $("#details").html(aspect);
     });
@@ -233,6 +314,9 @@ function checkFrameAspectChanged(funcName, chn) {
             function onVideoAspectChanngedTimeout() {
                 model.video.onVideoFrameAspectChanged = null;
                 assert.ok(false, "checkFrameAspectChanged fail");
+
+                logWhenAssertOk(funcName);
+
                 done();
             };
 
@@ -248,6 +332,11 @@ function checkFrameAspectChanged(funcName, chn) {
         }
         else {
             assert.ok(false, "channel length is 0");
+
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed. Time stamp: " + localTime + ". Channel length is 0.";
+            fh.appendStrToFile(path, content, workroot);
+
             $("#details").html(" Click 4001_getServicelistT  at first!");
         }
     });
@@ -266,6 +355,10 @@ function getCcExist(funcName) {
         var cc;
         cc = startGetCcExist();
         assert.ok(cc, "getCcExist");
+
+        if(cc != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function checkCcExistChanged(funcName, chn) {
@@ -277,6 +370,9 @@ function checkCcExistChanged(funcName, chn) {
             function onCcExistChanngedTimeout() {
                 model.video.onCcExistChanged = null;
                 assert.ok(false, "onCcExistChanngedTimeout");
+
+                logWhenAssertOk(funcName);
+
                 done();
             };
             model.video.onCcExistChanged = function (val) {
@@ -291,6 +387,11 @@ function checkCcExistChanged(funcName, chn) {
         }
         else {
             assert.ok(false, "channel length is 0");
+
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed. Time stamp: " + localTime + ". Channel length is 0.";
+            fh.appendStrToFile(path, content, workroot);
+
             $("#details").html(" Click 4001_getServicelistT  at first!");
         }
     });
@@ -309,6 +410,10 @@ function getAudioIndex(funcName) {
         var result;
         result = getAudioIndexImpl();
         assert.ok(result, "getAudioIndex");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 
@@ -319,6 +424,9 @@ function getAudioTable(funcName) {
 
         function onGetAudioTableTimeout() {
             assert.ok(false, "onGetAudioTableTimeout");
+
+            logWhenAssertOk(funcName);
+
             done();
         };
         function onGetAudioTable(event) {
@@ -348,6 +456,10 @@ function getAudioIdent(funcName) {
         var result;
         result = getAudioIdentImpl();
         assert.ok(result, "Test getAudioIdent");
+
+        if(result != true){
+            logWhenAssertOk(funcName);
+        }
     });
 }
 function checkAudioIdentChanged(funcName, chn) {
@@ -359,6 +471,9 @@ function checkAudioIdentChanged(funcName, chn) {
             function onAudioIdentChanngedTimeout() {
                 model.sound.onAudioIdentChaged = null;
                 assert.ok(false, "checkAudioIdentChanged  fail");
+
+                logWhenAssertOk(funcName);
+
                 done();
             };
 
@@ -374,6 +489,11 @@ function checkAudioIdentChanged(funcName, chn) {
         }
         else {
             assert.ok(false, "channel length is 0");
+
+            var path = "hisenseUI/" + funcName.trim() + ".txt";
+            var content = "Test failed. Time stamp: " + localTime + ". Channel length is 0.";
+            fh.appendStrToFile(path, content, workroot);
+
             $("#details").html(" Click 4001_getServicelistT  at first!");
         }
     });
@@ -383,6 +503,11 @@ function getAvailableMode(flag, funcName) {
         $("#details").html("");
         var newMode = model.video.getAvailableMode();
         assert.equal(newMode, flag, "getAvailableMode");
+
+        if(newMode != flag){
+            logWhenAssertCompare(funcName, newMode, flag);
+        }
+
         $("#details").html(newMode);
     });
 }
