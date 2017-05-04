@@ -1,0 +1,94 @@
+[  
+  {
+    "name": "4001_getServicelistT",
+    "param0": "34",
+ 		"param1": "0"
+  }, 
+  {
+    "name": "3001_playChannelT",
+    "param0": "0"
+  },    
+  {
+    "name": "5002_setPin",
+    "param0": "1234"
+  },  
+  {
+    "name": "5004_setSModel",
+    "param0": "1"
+  },    
+  {
+    "name": "5006_getPinRequest",
+    "param0": "0"
+  },  
+  {
+    "name": "5016_actionSetUsTvRating",
+    "param0": "9",
+ 		"param1": "1"
+  },
+  {
+    "name": "5028_delayTime",
+    "param0": "2000"
+  },   
+  {
+    "name": "5006_getPinRequest",
+    "param0": "1"
+  },  
+  {
+    "name": "3001_playChannelT",
+    "param0": "1"
+  },    
+  {
+    "name": "5028_delayTime",
+    "param0": "2000"
+  },  
+  {
+    "name": "5006_getPinRequest",
+    "param0": "0"
+  },  
+  {
+    "name": "3001_playChannelT",
+    "param0": "0"
+  },     
+  {
+    "name": "5028_delayTime",
+    "param0": "2000"
+  },  
+  {
+    "name": "5006_getPinRequest",
+    "param0": "1"
+  },  
+  {
+    "name": "3001_playChannelT",
+    "param0": "1"
+  },  
+  {
+    "name": "5028_delayTime",
+    "param0": "2000"
+  }, 
+  {
+    "name": "5006_getPinRequest",
+    "param0": "0"
+  },   
+  {
+    "name": "3001_playChannelT",
+    "param0": "0"
+  },   
+  {
+    "name": "5028_delayTime",
+    "param0": "2000"
+  }, 
+  {
+    "name": "5006_getPinRequest",
+    "param0": "1"
+  },    
+  {
+    "name": "5023_pinRequestConfirm"
+  }, 
+  {
+    "name": "5006_getPinRequest",
+    "param0": "0"
+  },
+  {
+     "name": "5005_reset"
+  }     
+]

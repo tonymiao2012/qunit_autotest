@@ -1,0 +1,39 @@
+[ 
+  {
+    "name": "4002_getServicelistC",
+    "param0": "41",
+    "param1": "0"
+  },  
+  {
+    "name": "6002_setControl",
+    "param0": "1"
+  },   
+  {
+    "name": "6004_setAnalogMode",
+    "param0": "1"
+  },   
+  {
+    "name": "6006_setDigitalMode",
+    "param0": "1"
+  },    
+  {
+    "name": "6008_setDigitalStyle",
+    "param0": "0"
+  },     
+  {
+    "name": "3002_playChannelC",
+    "param0": "0"
+  },    
+  {
+    "name": "3002_playChannelC",
+    "param0": "1"
+  },  
+  {
+    "name": "3002_playChannelC",
+    "param0": "2"
+  },    
+  {
+    "name": "3002_playChannelC",
+    "param0": "3"
+  } 
+]

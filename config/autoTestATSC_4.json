@@ -6,10 +6,7 @@
   {
     "name": "2024_autoScanAnalogServicesAtvT",
     "param0": "0"
-  },
-  {
-    "name": "4024_checkChannelListT"
-  },
+  },  
   {
     "name": "2025_autoScanDigitServicesDtvC",
     "param0": "39"
@@ -17,8 +14,26 @@
   {
     "name": "2026_autoScanAnalogServicesAtvC",
     "param0": "2"
-  },
+  }, 
+  {
+    "name": "2001_setSourceDtvT"
+  },    
+  {
+    "name": "2046_Finish"
+  },    
+  {
+    "name": "4024_checkChannelListT"
+  },  
   {
     "name": "4025_checkChannelListC"
+  },
+  {
+    "name": "3001_playChannelT",
+    "param0": "0"
+  },    
+  {
+    "name": "3002_playChannelC",
+    "param0": "0"
   }
+     
 ]
