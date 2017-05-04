@@ -73,8 +73,8 @@ function manualScanStart(fre, sourceType, funcName) {
             else if (value == 0) {
                 if (isSearched == 1) {
                     assert.ok(true, "manual start");
-                    if ((sourceType == 17) || (sourceType == 18))
-                        model.channelSearch.Finish();
+                    //if((sourceType==17)||(sourceType==18))
+                    //model.channelSearch.Finish();
                     model.channelSearch.onSearchStateChaged = null;
                     done();
                 }
@@ -116,39 +116,60 @@ function autoSearch(repeat, expectNum, sourceType, testName) {
         var times = repeat;
         var isSearched = 0;
         var left = 0;
-        var isAtv = 0;
+        var scanOrder = 1;
+        var curSource;
+        var serviceNumDtvT = 0;
+        var serviceNumAtvT = 0;
+        var serviceNumDtvC = 0;
+        var serviceNumAtvC = 0;
+        var serviceTotal = 0;
         var done = assert.async(times);
         model.channelSearch.onSearchStateChaged = function (value) {
-            var serviceNumDtv = 0;
-            var serviceNumAtv = 0;
             if (value == 1) {
                 isSearched = 1;
             }
             else if (value == 0) {
                 if (isSearched == 1) {
-                    if (isAtv == 0) {
-                        isAtv = 1;
+                    if (scanOrder < 4) {
+                        scanOrder++;
                         isSearched = 0;
-                        startAutoScan(sourceType + 2);
+                        if (curSource == 15) {
+                            serviceNumDtvT = model.channelSearch.getFoundDigitServices();
+                            curSource += 2;
+                        }
+                        if (curSource == 16) {
+                            serviceNumDtvC = model.channelSearch.getFoundDigitServices();
+                            curSource += 2;
+                        }
+                        else if (curSource == 17) {
+                            serviceNumAtvT = model.channelSearch.getFoundAnalogServices();
+                            curSource -= 1;
+                        }
+                        else if (curSource == 18) {
+                            serviceNumAtvC = model.channelSearch.getFoundAnalogServices();
+                            curSource -= 3;
+                        }
+                        startAutoScan(curSource);
                     }
                     else {
-                        serviceNumDtv = model.channelSearch.getFoundDigitServices();
-                        serviceNumAtv = model.channelSearch.getFoundAnalogServices();
-                        assert.equal(serviceNumDtv + serviceNumAtv, expectNum, "check services");
-                        $("#total").html(serviceNumDtv + serviceNumAtv);
-                        if (serviceNumDtv + serviceNumAtv == expectNum)
+                        serviceTotal = serviceNumDtvT + serviceNumDtvC + serviceNumAtvT + serviceNumAtvC;
+                        assert.equal(serviceTotal, expectNum, "check services");
+                        $("#total").html(serviceTotal);
+                        if (serviceTotal == expectNum)
                             flag = 1;
                         else {
                             flag = 1;//0;
                             var path = "hisenseUI/" + testName.trim() + ".txt";
-                            var content = "Test failed on " + localTime + ". Assert result: " + (serviceNumAtv + serviceNumDtv) + ", expect number: " + expectNum + ". Running times: " + i;
+                            var content = "Test failed on " + localTime + ". Assert result: " + (serviceTotal) + ", expect number: " + expectNum + ". Running times: " + i;
                             fh.appendStrToFile(path, content, workroot);
                         }
+                        model.channelSearch.setSource(sourceType);
                         model.channelSearch.Finish();
                         if ((i < times) && (flag == 1)) {
                             isSearched = 0;
                             flag = 0;
-                            isAtv = 0;
+                            scanOrder = 1;
+                            curSource = sourceType;
                             setTimeout(startAutoScan, 3000, sourceType);
                             i++;
                             $("#times").html(i);
@@ -172,15 +193,22 @@ function autoSearch(repeat, expectNum, sourceType, testName) {
         };
         model.channelSearch.onSearchingProgressChaged = function (value) {
             var newValue = 0;
-            if (isAtv == 0) {
-                newValue = Math.ceil(value / 2);
+            if (scanOrder == 1) {
+                newValue = Math.ceil(value / 4);
+            }
+            else if (scanOrder == 2) {
+                newValue = 25 + Math.ceil(value / 4);
+            }
+            else if (scanOrder == 3) {
+                newValue = 50 + Math.ceil(value / 4);
             }
             else {
-                newValue = 50 + Math.ceil(value / 2);
+                newValue = 75 + Math.ceil(value / 4);
             }
             $("#progress").html(newValue);
         }
         startAutoScan(sourceType);
+        curSource = sourceType;
         i++;
         $("#times").html(i);
     });
@@ -212,7 +240,7 @@ function autoScanStart(sourceType, testName) {
             else if ((value == 0) && ((sourceType == 17) || (sourceType == 18))) {
                 if (isSearched == 1) {
                     assert.ok(true, "scan started atv");
-                    model.channelSearch.Finish();
+                    // model.channelSearch.Finish();
                     model.channelSearch.onSearchStateChaged = null;
                     done();
                 }
@@ -229,7 +257,6 @@ function autoScanStart(sourceType, testName) {
         startAutoScan(sourceType);
     });
 }
-
 
 function autoScanProgress(sourceType, testName) {
     QUnit.test(testName, function (assert) {
@@ -298,7 +325,7 @@ function autoScanServices(expectNum, sourceType, funcName) {
                         }
 
                         model.channelSearch.onFoundAnalogServicesChaged = null;
-                        model.channelSearch.Finish();
+                        //model.channelSearch.Finish();
                     }
                     model.channelSearch.onSearchStateChaged = null;
                     done();
@@ -356,7 +383,7 @@ function manualScanServices(expectNum, fre, sourceType, funcName) {
                         }
 
                         model.channelSearch.onFoundAnalogServicesChaged = null;
-                        model.channelSearch.Finish();
+                        //model.channelSearch.Finish();
                     }
                     model.channelSearch.onSearchStateChaged = null;
                     done();
@@ -388,16 +415,16 @@ function autoScanCompleteState(sourceType, funcName) {
             else if (value == 0) {
                 if (isSearched == 1) {
                     assert.ok(true, " Complete state");
-                    if ((sourceType == 17) || (sourceType == 18))
-                        model.channelSearch.Finish();
+                    //if((sourceType==17)||(sourceType==18))
+                    //model.channelSearch.Finish();
                     model.channelSearch.onSearchStateChaged = null;
                     done();
                 }
             }
             else if (value == 11) {
                 assert.ok(false, "cancel state");
-                if ((sourceType == 17) || (sourceType == 18))
-                    model.channelSearch.Finish();
+                //if((sourceType==17)||(sourceType==18))
+                //model.channelSearch.Finish();
                 model.channelSearch.onSearchStateChaged = null;
                 done();
             }
@@ -416,16 +443,16 @@ function manualScanCompleteState(fre, sourceType, funcName) {
             else if (value == 0) {
                 if (isSearched == 1) {
                     assert.ok(true, " Complete state");
-                    if ((sourceType == 17) || (sourceType == 18))
-                        model.channelSearch.Finish();
+                    //if((sourceType==17)||(sourceType==18))
+                    //model.channelSearch.Finish();
                     model.channelSearch.onSearchStateChaged = null;
                     done();
                 }
             }
             else if (value == 11) {
                 assert.ok(false, "cancel state ");
-                if ((sourceType == 17) || (sourceType == 18))
-                    model.channelSearch.Finish();
+                //if((sourceType==17)||(sourceType==18))
+                //model.channelSearch.Finish();
                 model.channelSearch.onSearchStateChaged = null;
                 done();
             }
@@ -515,6 +542,7 @@ function ScanFinish(sourceType, funcName) {
                 isSearched = 1;
             }
             else if (value == 11) {
+                model.channelSearch.Finish();
                 setTimeout(checkRunning, 1000);
                 model.channelSearch.onSearchingProgressChaged = null;
                 model.channelSearch.onSearchStateChaged = null;
@@ -539,5 +567,12 @@ function ScanFinish(sourceType, funcName) {
         }
 
         startAutoScan(sourceType);
+    });
+}
+
+function finishScan(funcName) {
+    QUnit.test(funcName, function (assert) {
+        model.channelSearch.Finish();
+        assert.ok(true, "finishScan");
     });
 }

@@ -301,6 +301,9 @@ function handleScanTestCase(inputArray, funcName) {
             var sourceType = 16;
             ScanFinish(sourceType, funcName);
             break;
+        case "2046_Finish":
+            finishScan(funcName);
+            break;
     }
 }
 function handlePlayTestCase(inputArray, funcName) {
@@ -936,8 +939,38 @@ function handleAutoTestCase(inputArray, funcName) {
         case "8004_autoTest4":
             serListPath = "config/autoTestATSC_4.json";
             break;
-        case "8005_MSD6586US_2041":
-            serListPath = "config/autoTestATSC_MSD6586US-2041.json";
+        case "8005_autoTest5":
+            serListPath = "config/autoTestATSC_5.json";
+            break;
+        case "8006_autoTest6":
+            serListPath = "config/autoTestATSC_6.json";
+            break;
+        case "8007_autoTest7":
+            serListPath = "config/autoTestATSC_7.json";
+            break;
+        case "8008_autoTest8":
+            serListPath = "config/autoTestATSC_8.json";
+            break;
+        case "8009_autoTest9":
+            serListPath = "config/autoTestATSC_9.json";
+            break;
+        case "8010_autoTest10":
+            serListPath = "config/autoTestATSC_10.json";
+            break;
+        case "8011_autoTest11":
+            serListPath = "config/autoTestATSC_11.json";
+            break;
+        case "8012_autoTest12":
+            serListPath = "config/autoTestATSC_12.json";
+            break;
+        case "8013_autoTest13":
+            serListPath = "config/autoTestATSC_13.json";
+            break;
+        case "8014_autoTest14":
+            serListPath = "config/autoTestATSC_14.json";
+            break;
+        case "8015_autoTest15":
+            serListPath = "config/autoTestATSC_15.json";
             break;
     }
 
