@@ -268,6 +268,9 @@
       },
       {
         "casename": "2045_ScanFinishDtvC"
+      },
+      {
+        "casename": "2046_Finish"
       }
     ],
     "icon-class": "fa fa-signal fa-2x"
@@ -841,7 +844,67 @@
         ]
       },
       {
-        "casename": "8005_MSD6586US_2041",
+        "casename": "8005_autoTest5",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
+        "casename": "8006_autoTest6",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
+        "casename": "8007_autoTest7",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
+        "casename": "8008_autoTest8",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
+        "casename": "8009_autoTest9",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
+        "casename": "8010_autoTest10",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
+        "casename": "8011_autoTest11",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
+        "casename": "8012_autoTest12",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
+        "casename": "8013_autoTest13",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
+        "casename": "8014_autoTest14",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
+        "casename": "8015_autoTest15",
         "input": [
           "Repeat"
         ]
