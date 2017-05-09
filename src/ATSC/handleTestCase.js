@@ -990,5 +990,4 @@ function handleAutoTestCase(inputArray, funcName) {
     for (i = serList.length - 1; i > 0; i--) {
         parseParam(i, serList);
     }
-
 } 
