@@ -212,6 +212,9 @@ function autoSearch(repeat, expectNum, sourceType, testName) {
         i++;
         $("#times").html(i);
     });
+    /*
+    QUnit.testDone(QunitTestCallBack(details, testName, workroot, fh));
+    */
 }
 
 function autoScanStart(sourceType, testName) {
