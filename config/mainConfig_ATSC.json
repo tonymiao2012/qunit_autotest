@@ -69,6 +69,42 @@
         "input": [
           "Repeat"
         ]
+      },
+      {
+        "casename": "1010_channelUpT_2",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
+        "casename": "1011_channelDownT_2",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
+        "casename": "1012_channelRandomT_2",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
+        "casename": "1013_channelUpC_2",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
+        "casename": "1014_channelDownC_2",
+        "input": [
+          "Repeat"
+        ]
+      },
+      {
+        "casename": "1015_channelRandomC_2",
+        "input": [
+          "Repeat"
+        ]
       }
     ],
     "icon-class": "fa fa-repeat fa-2x"

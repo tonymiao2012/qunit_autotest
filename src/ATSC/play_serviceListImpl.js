@@ -303,8 +303,12 @@ function playInputedChannel(sourceType, chn, func_name) {
                         flag = true;
                 }
 
-                if (flag == false)
+                if (flag == false) {
                     console.log("play fail!videoMainAvailable= " + videoMainAvailable + "/channelChanged=" + channelChanged + "/formatL:" + format.length + "/aspectL:" + aspect.length + "/startNow" + starttimeNow);
+                    var path = "hisenseUI/" + func_name.trim() + ".txt";
+                    var content = "Test playInputedChannel failed on " + getLocalTime() + ". Assert flag: " + flag;
+                    fh.appendStrToFile(path, content, workroot);
+                }
                 assert.ok(flag, "playInputedChannel:" + chn);
                 done();
             };
@@ -586,6 +590,137 @@ function randomSwitchChannel(repeat, funcName) {
         }
     });
 }
+function switchChannel_2(direction, sourceType, repeat, funcName) {
+    QUnit.test(funcName, function (assert) {
+        var i = 0;
+        var times = repeat;
+        var timer;
+        var format = "";
+        var curTime = 0;
+        var aspect = "";
+        var starttimeNow = 0;
+        var stoptimeNow = 0;
+        var flag = false;
+        var channelChanged = false;
+        var videoMainAvailable = false;
+        var info = "";
+        console.log("............switchChannel2.");
+        //play(direction, sourceType);
+        if (((sourceType == 1) && (allChannels_T.length == 0)) || ((sourceType == 0) && (allChannels_C.length == 0))) {
+            assert.ok(false, "channel length is 0");
+            $("#details").html(" Click 4001_getServicelistT  or 4002_getServicelistC at first!");
+        }
+        else {
+            var done = assert.async(times);
+
+            function play2(direction, sourceType) {
+                $("#details").html("");
+                info = "";
+                flag = false;
+                console.log("play begin:" + getLocalTime());
+                if (direction == 1) {
+                    if (sourceType == 1)
+                        nextChannel_T();
+                    else
+                        nextChannel_C();
+                }
+                else if (direction == 0) {
+                    if (sourceType == 1)
+                        previousChannel_T();
+                    else
+                        previousChannel_C();
+                }
+                else {
+                    if (sourceType == 1)
+                        randomChannel_T();
+                    else
+                        randomChannel_C();
+                }
+            }
+
+            function playTimeout() {
+                if ((sourceType == 1) && ((allChannels_T[currentIndex].attr & 0x200) == 0) || (sourceType == 0) && ((allChannels_C[currentIndex].attr & 0x200) == 0)) {
+                    if ((videoMainAvailable == 1) && (format.length != 0) && (aspect.length != 0) && (channelChanged == true) && (starttimeNow >= 0) && (stoptimeNow >= 0))
+                        flag = true;
+                }
+                else {
+                    if ((channelChanged == true) && (starttimeNow >= 0) && (stoptimeNow >= 0))
+                        flag = true;
+                }
+                if (flag == false) {
+                    console.log("play fail!videoMainAvailable= " + videoMainAvailable + "/channelChanged=" + channelChanged + "/formatL:" + format.length + "/aspectL:" + aspect.length + "/startNow" + starttimeNow);
+                    var path = "hisenseUI/" + funcName.trim() + ".txt";
+                    var content = "Test playInputedChannel failed on " + getLocalTime() + ". Assert flag: " + flag + ".Channel:" + currentIndex;
+                    fh.appendStrToFile(path, content, workroot);
+                    assert.ok(false, "switchChannel2");
+                    for (left = 0; left <= times - i; left++)
+                        done();
+                    model.tvservice.onMainPlayChanged = null;
+                    model.video.onVideoFormatInfoChanged = null;
+                    model.video.onVideoFrameAspectChanged = null;
+                    model.tvservice.onEitMainNowChanged = null;
+                    model.tvservice.onMainPlayChanged = null;
+                    model.video.onAvailableModeChaged = null;
+                }
+                else {
+                    assert.ok(true, "switchChannel2");
+                    if (i < times) {
+                        play2(direction, sourceType);
+                        i++;
+                        $("#times").html(i);
+                        done();
+                        setTimeout(playTimeout, 5000);
+                    }
+                    else {
+                        done();
+                        model.tvservice.onMainPlayChanged = null;
+                        model.video.onVideoFormatInfoChanged = null;
+                        model.video.onVideoFrameAspectChanged = null;
+                        model.tvservice.onEitMainNowChanged = null;
+                        model.tvservice.onMainPlayChanged = null;
+                        model.video.onAvailableModeChaged = null;
+                    }
+                }
+            }
+
+            model.tvservice.onMainPlayChanged = function (val) {
+                channelChanged = true;
+            }
+            model.video.onAvailableModeChaged = function (val) {
+                videoMainAvailable = val;
+                console.log("play 2:" + getLocalTime());
+            }
+            model.video.onVideoFormatInfoChanged = function (val) {
+                format = val;
+                if (val.length != 0) {
+                    info = info + " |" + val;
+                    $("#details").html(info);
+                }
+            }
+            model.video.onVideoFrameAspectChanged = function (val) {
+                aspect = val;
+                if (val.length != 0) {
+                    info = info + " |" + val;
+                    $("#details").html(info);
+                }
+            }
+            model.tvservice.onEitMainNowChanged = function (val) {
+                var pfResultNow = val;
+                if (pfResultNow.length == 12) {
+                    starttimeNow = pfResultNow[2];
+                    stoptimeNow = pfResultNow[3];
+                    var start_now = new Date(pfResultNow[2] * 1000);
+                    var stop_now = new Date(pfResultNow[3] * 1000);
+                    info = info + "|" + pfResultNow[1] + "|" + start_now.toLocaleString() + "|" + stop_now.toLocaleString() + "|" + pfResultNow[8];
+                    $("#details").html(info);
+                }
+            }
+            play2(direction, sourceType);
+            i++;
+            setTimeout(playTimeout, 5000);
+        }
+    });
+}
 function channelUpT(repeat, funcName) {
     console.log("............................... channelUpT. ");
     $("#resultView table").html("");
@@ -625,6 +760,43 @@ function channelRandomC(repeat, funcName) {
     var direction = 2;
     var sourceType = 0;
     switchChannel(direction, sourceType, repeat, funcName);
+}
+function channelUpT_2(repeat, funcName) {
+    console.log("............................... channelUpT. ");
+    $("#resultView table").html("");
+    var direction = 1;
+    var sourceType = 1;
+    switchChannel_2(direction, sourceType, repeat, funcName);
+}
+function channelDownT_2(repeat, funcName) {
+    console.log("............................... channelDownT. ");
+    var direction = 0;
+    var sourceType = 1;
+    switchChannel_2(direction, sourceType, repeat, funcName);
+}
+function channelRandomT_2(repeat, funcName) {
+    console.log("............................... channelRandomT. ");
+    var direction = 2;
+    var sourceType = 1;
+    switchChannel_2(direction, sourceType, repeat, funcName);
+}
+function channelUpC_2(repeat, funcName) {
+    console.log("............................... channelUpC. ");
+    var direction = 1;
+    var sourceType = 0;
+    switchChannel_2(direction, sourceType, repeat, funcName);
+}
+function channelDownC_2(repeat, funcName) {
+    console.log("............................... channelDownC. ");
+    var direction = 0;
+    var sourceType = 0;
+    switchChannel_2(direction, sourceType, repeat, funcName);
+}
+function channelRandomC_2(repeat, funcName) {
+    console.log("............................... channelRandomC. ");
+    var direction = 2;
+    var sourceType = 0;
+    switchChannel_2(direction, sourceType, repeat, funcName);
 }
 
 function checkServiceListTByFile(funcName) {

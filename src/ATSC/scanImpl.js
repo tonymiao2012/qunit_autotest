@@ -1,25 +1,24 @@
 var fh = new fileHandler();
 var workroot = 1;
-var localTime = Math.round(new Date().getTime() / 1000);
 
-function startSetSource(sourceType) {
-    model.channelSearch.setSource(sourceType); //DTV-T means #15.
-    if (model.channelSearch.getSource() == sourceType)
-        return true;
-    else
-        return false;
-}
 
 function setSource(sourceType, testName) {
     QUnit.test(testName, function (assert) {
-        var result = startSetSource(sourceType);
-        assert.equal(result, true, "Test setSource");
+        var done = assert.async(1);
 
-        if (result != true) {
-            var path = "hisenseUI/" + testName.trim() + ".txt";
-            var content = "Test setSource failed on " + localTime + ". Assert result: " + result;
-            fh.appendStrToFile(path, content, workroot);
+        function setSourceTimeout() {
+            var result = model.channelSearch.getSource();
+            assert.equal(result, sourceType, "Test setSource");
+            done();
+            if (result != true) {
+                var path = "hisenseUI/" + testName.trim() + ".txt";
+                var content = "Test setSource failed on " + getLocalTime() + ". Assert result: " + result;
+                fh.appendStrToFile(path, content, workroot);
+            }
         }
+
+        model.channelSearch.setSource(sourceType);
+        setTimeout(setSourceTimeout, 1000);
     });
 }
 
@@ -36,7 +35,7 @@ function getSource(sourceType, testName) {
 
         if (result != sourceType) {
             var path = "hisenseUI/" + testName.trim() + ".txt";
-            var content = "Test getSource failed on " + localTime + ". Assert result: " + result;
+            var content = "Test getSource failed on " + getLocalTime() + ". Assert result: " + result;
             fh.appendStrToFile(path, content, workroot);
         }
     });
@@ -125,6 +124,7 @@ function autoSearch(repeat, expectNum, sourceType, testName) {
         var serviceTotal = 0;
         var done = assert.async(times);
         model.channelSearch.onSearchStateChaged = function (value) {
+            console.log("autoSearch  value:" + value);
             if (value == 1) {
                 isSearched = 1;
             }
@@ -160,7 +160,7 @@ function autoSearch(repeat, expectNum, sourceType, testName) {
                         else {
                             flag = 1;//0;
                             var path = "hisenseUI/" + testName.trim() + ".txt";
-                            var content = "Test failed on " + localTime + ". Assert result: " + (serviceTotal) + ", expect number: " + expectNum + ". Running times: " + i;
+                            var content = "Test failed on " + getLocalTime() + ". Assert result: " + serviceTotal + ", expect number: " + expectNum + ". Running times: " + i;
                             fh.appendStrToFile(path, content, workroot);
                         }
                         model.channelSearch.setSource(sourceType);
@@ -213,8 +213,8 @@ function autoSearch(repeat, expectNum, sourceType, testName) {
         $("#times").html(i);
     });
     /*
-    QUnit.testDone(QunitTestCallBack(details, testName, workroot, fh));
-    */
+     QUnit.testDone(QunitTestCallBack(details, testName, workroot, fh));
+     */
 }
 
 function autoScanStart(sourceType, testName) {
@@ -231,7 +231,7 @@ function autoScanStart(sourceType, testName) {
                 assert.equal(isSearched, 1, "scan started dtv");
 
                 if (isSearched != 1) {
-                    var content = "Scan DTV start failed on " + localTime + ". Assert result: " + isSearched;
+                    var content = "Scan DTV start failed on " + getLocalTime() + ". Assert result: " + isSearched;
                     fh.appendStrToFile(path, content, workroot);
                 }
 
@@ -309,7 +309,7 @@ function autoScanServices(expectNum, sourceType, funcName) {
 
                         if (serviceNumDtv != expectNum) {
                             var path = "hisenseUI/" + funcName.trim() + ".txt";
-                            var content = "Test failed on " + localTime + ". Service number DTV: " + serviceNumDtv + ", expect number: " + expectNum;
+                            var content = "Test failed on " + getLocalTime() + ". Service number DTV: " + serviceNumDtv + ", expect number: " + expectNum;
                             fh.appendStrToFile(path, content, workroot);
                         }
 
@@ -323,7 +323,7 @@ function autoScanServices(expectNum, sourceType, funcName) {
 
                         if (serviceNumAtv != expectNum) {
                             var path = "hisenseUI/" + funcName.trim() + ".txt";
-                            var content = "Test failed on " + localTime + ". Service number ATV: " + serviceNumAtv + ", expect number: " + expectNum;
+                            var content = "Test failed on " + getLocalTime() + ". Service number ATV: " + serviceNumAtv + ", expect number: " + expectNum;
                             fh.appendStrToFile(path, content, workroot);
                         }
 
@@ -368,7 +368,7 @@ function manualScanServices(expectNum, fre, sourceType, funcName) {
 
                         if (serviceNumDtv != expectNum) {
                             var path = "hisenseUI/" + funcName.trim() + ".txt";
-                            var content = "Test failed on " + localTime + ". Service number DTV: " + serviceNumDtv + ", expect number: " + expectNum;
+                            var content = "Test failed on " + getLocalTime() + ". Service number DTV: " + serviceNumDtv + ", expect number: " + expectNum;
                             fh.appendStrToFile(path, content, workroot);
                         }
 
@@ -381,7 +381,7 @@ function manualScanServices(expectNum, fre, sourceType, funcName) {
 
                         if (serviceNumAtv != expectNum) {
                             var path = "hisenseUI/" + funcName.trim() + ".txt";
-                            var content = "Test failed on " + localTime + ". Service number ATV: " + serviceNumAtv + ", expect number: " + expectNum;
+                            var content = "Test failed on " + getLocalTime() + ". Service number ATV: " + serviceNumAtv + ", expect number: " + expectNum;
                             fh.appendStrToFile(path, content, workroot);
                         }
 
@@ -512,7 +512,7 @@ function manualScanSetFrequency(fre, sourceType, funcName) {
 
         if (result !== true) {
             var path = "hisenseUI/" + funcName.trim() + ".txt";
-            var content = "Test failed on " + localTime + ". Assert result: " + result;
+            var content = "Test failed on " + getLocalTime() + ". Assert result: " + result;
             fh.appendStrToFile(path, content, workroot);
         }
     });
@@ -531,7 +531,7 @@ function ScanIsRunning(funcName) {
 
         if (result !== false) {
             var path = "hisenseUI/" + funcName.trim() + ".txt";
-            var content = "Test failed on " + localTime + ". Assert result: " + result;
+            var content = "Test failed on " + getLocalTime() + ". Assert result: " + result;
             fh.appendStrToFile(path, content, workroot);
         }
     });
@@ -562,7 +562,7 @@ function ScanFinish(sourceType, funcName) {
 
             if (running != 0) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
-                var content = "Test failed on " + localTime + ". Assert result: " + running;
+                var content = "Test failed on " + getLocalTime() + ". Assert result: " + running;
                 fh.appendStrToFile(path, content, workroot);
             }
 
@@ -575,7 +575,20 @@ function ScanFinish(sourceType, funcName) {
 
 function finishScan(funcName) {
     QUnit.test(funcName, function (assert) {
+        var done = assert.async(1);
+
+        function finishTimeout() {
+            var result = model.channelSearch.getRunning();
+            assert.equal(result, false, "Test finishScan");
+            done();
+            if (result == true) {
+                var path = "hisenseUI/" + funcName.trim() + ".txt";
+                var content = "Test finishScan failed on " + getLocalTime() + ". Assert result: " + result;
+                fh.appendStrToFile(path, content, workroot);
+            }
+        }
+
         model.channelSearch.Finish();
-        assert.ok(true, "finishScan");
+        setTimeout(finishTimeout, 1000);
     });
 }

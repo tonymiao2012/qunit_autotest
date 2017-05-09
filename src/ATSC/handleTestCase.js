@@ -38,6 +38,24 @@ function handleRepeatTestCase(inputArray, funcName) {
         case "1009_channelSwitchT_C":
             randomSwitchChannel(repeat, funcName);
             break;
+        case "1010_channelUpT_2":
+            channelUpT_2(repeat, funcName);
+            break;
+        case "1011_channelDownT_2":
+            channelDownT_2(repeat, funcName);
+            break;
+        case "1012_channelRandomT_2":
+            channelRandomT_2(repeat, funcName);
+            break;
+        case "1013_channelUpC_2":
+            channelUpC_2(repeat, funcName);
+            break;
+        case "1014_channelDownC_2":
+            channelDownC_2(repeat, funcName);
+            break;
+        case "1015_channelRandomC_2":
+            channelRandomC_2(repeat, funcName);
+            break;
     }
 }
 function handleScanTestCase(inputArray, funcName) {
