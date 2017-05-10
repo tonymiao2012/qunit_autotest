@@ -34,7 +34,7 @@ function autoSearch(repeat, expectNum, sourceType, chan_mode, scan_mode, search_
                     assert.equal(curServiceNumDtv + curServiceNumAtv, expectNum, "check serives");
                     if (curServiceNumDtv + curServiceNumAtv != expectNum) {
                         var content = "Function name: " + funcName + ". Times: " + i + " failed.";
-                        var result = fh.appendStrToFile(path, content, workRoot);
+                        var result = fh.writeFileToNative(path, content, workRoot);
                         if (result)
                             console.log("...............Write file finished..............");
                     }
@@ -171,8 +171,7 @@ function getDvbtScanMode(val, funcName) {
 }
 function setDvbtScanMode(scan, funcName) {
     QUnit.test(funcName, function (assert) {
-        if ((scan >= 0) && (scan <= 2))
-        {
+        if ((scan >= 0) && (scan <= 2)) {
             model.channelSearch.setDvbtScanMode(scan);
             var newValue = model.channelSearch.getDvbtScanMode();
             assert.equal(newValue, scan, "setDvbtScanMode");
@@ -193,8 +192,7 @@ function getDvbcScanMode(val, funcName) {
 }
 function setDvbcScanMode(scan, funcName) {
     QUnit.test(funcName, function (assert) {
-        if ((scan >= 0) && (scan <= 2))
-        {
+        if ((scan >= 0) && (scan <= 2)) {
             model.channelSearch.setDvbcScanMode(scan);
             var newValue = model.channelSearch.getDvbcScanMode();
             assert.equal(newValue, scan, "setDvbcScanMode");
