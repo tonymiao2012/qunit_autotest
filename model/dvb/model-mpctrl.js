@@ -29,7 +29,7 @@ function MpCtrlModelDefines() {
     MpCtrlModelDefines.SL2_TVAPI_MPCTRL_ACTION_SPEED = "de.loewe.sl2.mpctrl.action.speed";
     MpCtrlModelDefines.SL2_TVAPI_STR_MPCTRL_FORMAT_INFO = "tvapi.str.videoplayer.format.info";
     MpCtrlModelDefines.SL2_TVAPI_I32_MPCTRL_PLAYER_ERROR = "de.loewe.sl2.mpctrl.i32.player.error";//"tvapi.i32.mpctrl.player.error";
-    MpCtrlModelDefines.SL2_TVAPI_STR_VIDEOPLAYER_MUSIC_COVER = "tvapi.i32.videoplayer.music.cover";
+    MpCtrlModelDefines.SL2_TVAPI_STR_VIDEOPLAYER_MUSIC_COVER = "de.loewe.sl2.mpctrl.str.music.cover";
     MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_CAN_SEEK = "tvapi.i32.videoplayer.can.seek";
     MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_VIDEO_SUBTITLE_TOTAL_NUM = "tvapi.i32.videoplayer.vd.subtitle.total.num";
     //dbtag:20160812--add subtitle
@@ -292,7 +292,7 @@ function MpCtrlModel(_) {
         this.registerStringVectorObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_VSTR_STATE, "getMpCtrlStat", "setMapCtrlStat", "onMpCtrlStatchanged", null, null);
         this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_MPCTRL_PLAYER_ERROR, "getMpCtrlPlayerError", "setMpCtrlPlayerError", "onMpCtrlPlayerErrorchanged", null, null);
         //this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_I32_VIDEOPLAYER_CAN_SEEK, "getVideoPlayerCanSeek", "setVideoPlayerCanSeek", "onVideoPlayerCanSeekchanged", null, null);
-        //this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_STR_VIDEOPLAYER_MUSIC_COVER, "getMpCtrlMusicCover", "setMpCtrlMusicCover", "onMpCtrlMusicCoverchanged", null, null);
+        this.registerIntegerObject(MpCtrlModelDefines.SL2_TVAPI_STR_VIDEOPLAYER_MUSIC_COVER, "getMpCtrlMusicCover", "setMpCtrlMusicCover", "onMpCtrlMusicCoverchanged", null, null);
         this.registerStringVectorObject(MpCtrlModelDefines.SL2_TVAPI_MPCTRL_VSTR_METADATA, "getMetadata", "setMetadata", "onMetadataChanged", null, null);
         //this.registerStringObject(MpCtrlModelDefines.SL2_TVAPI_STR_MPCTRL_FORMAT_INFO, "getFormatInfo", "setFormatInfo", "onFormatInfoChanged", null, null);
         this.registerStringVectorObject(MpCtrlModelDefines.SL2_TVAPI_VSTR_MPCTRL_INFO, "getMpctrlInfo", "setMpctrlInfo", "onMpctrlInfoChanged", null, null);

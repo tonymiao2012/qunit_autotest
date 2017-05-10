@@ -18,7 +18,7 @@ function EpgModelDefines() {
     EpgModelDefines.SL2_TVAPI_ACTION_GET_PROGRAM_TIME = "tvapi.action.epg.data.import";
     // enum or defined is here
     EpgModelDefines.SL2_TVAPI_I32_EPG_BARKERCHANNEL_ACTIVE = "de.loewe.sl2.i32.epg.barkerchannel.active";
-    EpgModelDefines.SL2_TVAPI_I32_EPG_AUTO_UPDATE = "tvapi.i32.epg.auto.update";
+    EpgModelDefines.SL2_TVAPI_I32_EPG_AUTO_UPDATE = "de.loewe.sl2.i32.epg.auto.update";
     EpgModelDefines.SL2_TVAPI_VI32_EPG_SERVICE_COMPLETE = "de.loewe.sl2.vint.epg.service.complete";
 
     EpgModelDefines.TABLE_FIELD_EPG_SERVICE_ID = 2000;

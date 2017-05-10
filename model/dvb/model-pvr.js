@@ -29,8 +29,12 @@ function PvrModelDefines() {
     PvrModelDefines.SL2_TVAPI_ACTION_HDR_PLAYER_PLAY = "de.loewe.sl2.hdr.player.play";
     PvrModelDefines.SL2_TVAPI_I32_PVR_PLAY_STATE= "de.loewe.sl2.hdr.player.state";
     PvrModelDefines.SL2_TVAPI_TIMER_LIST_ENTRY_ADD_MEMO = "de.loewe.sl2.timer.list.entry.add.memo";
-    PvrModelDefines.SL2_TVAPI_HDR_VSTR_DELETE_RECORDER_FILES = "de.loewe.sl2.hdr.delete.recorder.files";
+    PvrModelDefines.SL2_TVAPI_HDR_VSTR_DELETE_RECORDER_FILES = "de.loewe.sl2.hdr.action.archive.remove";
 
+    PvrModelDefines.SL2_TVAPI_STR_PVR_RECORDER_FILES_UUID = "de.loewe.sl2.volume.recorder.files.uuid";
+    PvrModelDefines.SL2_TVAPI_VSTR_PVR_SPACE_SIZE = "de.loewe.sl2.volume.recorder.files.totalspace";
+    PvrModelDefines.SL2_TVAPI_VSTR_PVR_FREE_SPACE_SIZE = "de.loewe.sl2.volume.recorder.files.freespace";
+    PvrModelDefines.SL2_TVAPI_I32_PVR_MANUAL_STOP_ENDTIME = "de.loewe.sl2.hdr.rec.manual.stop.endtime";
 
 /***** DBTAG MARK 20161028 *****/
 
@@ -119,7 +123,7 @@ function PvrModel(parentModel) {
         //set  medium uuid
         this.registerStringObject(
             PvrModelDefines.SL2_TVAPI_VSTR_PVR_PAR_INFO,
-            "null", "setParInfo", "onParInfo",
+            "getParInfo", "setParInfo", "onParInfo",
             null, null);
         //start record
 
@@ -296,8 +300,8 @@ function PvrModel(parentModel) {
         this.registerActionObject(
             PvrModelDefines.SL2_TVAPI_HDR_VSTR_DELETE_RECORDER_FILES,
             [
-                {name: "deletePVR", method: function (object, url) {
-                    return object.invoke(url);
+                {name: "deletePVR", method: function (object, uuid) {
+                    return object.invoke(uuid);
                 }}
             ], "deletePVRHandler","deletePVRHandlerERR");
         //»ñÈ¡²¥·Å×´Ì¬
@@ -307,7 +311,26 @@ function PvrModel(parentModel) {
             null, null );
 /***** DBTAG MARK end *****/
 
-    }
+/*   read  space size*/
+        this.registerStringObject(
+            PvrModelDefines.SL2_TVAPI_STR_PVR_RECORDER_FILES_UUID,
+            null, "setFilesUUID", null,
+            null, null);
+        this.registerIntegerObject(
+            PvrModelDefines.SL2_TVAPI_VSTR_PVR_SPACE_SIZE,
+            "getRecordMediumTotalSpace", "setRecordMediumTotalSpace", "onRecordMediumTotalSpace",
+            null, null);
+        this.registerIntegerObject(
+            PvrModelDefines.SL2_TVAPI_VSTR_PVR_FREE_SPACE_SIZE,
+            "getRecordMediumFreeSpace", "setRecordMediumFreeSpace", "onRecordMediumFreeSpace",
+            null, null);
+        this.registerIntegerObject(
+            PvrModelDefines.SL2_TVAPI_I32_PVR_MANUAL_STOP_ENDTIME,
+            "null", "null", "onManualStopTimeChanged",
+            null, null);
+
+
+      }
 }
 PvrModel.prototype = new SubModel;
 PvrModel.prototype.constructor = PvrModel;

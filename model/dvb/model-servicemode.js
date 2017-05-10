@@ -9,6 +9,7 @@ function ServiceModeModelDefines() {
     //ServiceModeModelDefines.SL2_TVAPI_VSTR_SERVICEMODE_TUNERINFO_PARAMS_DVBT2_BANDWIDTHS= "de.loewe.sl2.vstr.servicemode.tunerinfo.params.dvbt2.bandwidths";
     //--dbtag :pete 2016-10-26 add to map DTV-T bandwidth --end
     ServiceModeModelDefines.SL2_TVAPI_STR_SERVICEMODE_VIDEOINFO_SOURCE= "de.loewe.sl2.str.servicemode.videoinfo.source";
+    ServiceModeModelDefines.SL2_TVAPI_STR_SERVICEMODE_VIDEOINFO_ENCODING_TYPE= "de.loewe.sl2.str.servicemode.videoinfo.encodingtype";
 }
 function ServiceModeModel(e) {
     SubModel.call(this, e, ServiceModeModelDefines);
@@ -23,7 +24,8 @@ function ServiceModeModel(e) {
         this.registerStringVectorObject(ServiceModeModelDefines.SL2_TVAPI_VSTR_SERVICEMODE_TUNERINFO_PARAMS_DVBT_BANDWIDTHS, "getTunerinfoParamsDvbtBandwidths", "setTunerinfoParamsDvbtBandwidths", "onTunerinfoParamsDvbtBandwidthsChaged",null, null )
         //this.registerStringVectorObject(ServiceModeModelDefines.SL2_TVAPI_VSTR_SERVICEMODE_TUNERINFO_PARAMS_DVBT2_BANDWIDTHS,"getTunerinfoParamsDvbt2Bandwidths", "setTunerinfoParamsDvbt2Bandwidths", "onTunerinfoParamsDvbt2BandwidthsChaged",null, null )
         //--dbtag :pete 2016-10-26 add to map DTV-T bandwidth --end
-        this.registerStringObject(ServiceModeModelDefines.SL2_TVAPI_STR_SERVICEMODE_VIDEOINFO_SOURCE, "getSourceVideoInfo", "setSourceVideoInfo", "onSourceVideoInfoChanged",null, null )
+        this.registerStringObject(ServiceModeModelDefines.SL2_TVAPI_STR_SERVICEMODE_VIDEOINFO_SOURCE, "getSourceVideoInfo", "setSourceVideoInfo", "onSourceVideoInfoChanged",null, null );
+        this.registerStringObject(ServiceModeModelDefines.SL2_TVAPI_STR_SERVICEMODE_VIDEOINFO_ENCODING_TYPE, "getVideoEncodingType", "setVideoEncodingType", "onVideoEncodingTypeChanged",null, null );
     }
 }
 ServiceModeModel.prototype = new SubModel;

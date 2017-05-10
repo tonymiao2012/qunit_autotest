@@ -18,6 +18,7 @@ function SystemModelDefines() {
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_SHOW_WIZARD_STEP = "de.loewe.sl2.system.show.wizard.step";
 //    SystemModelDefines.SL2_TVAPI_I32_SYSTEM_WIZARD_STEP = "tvapi.i32.system.wizardstep";
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_FIRST_INSTALLATION_WIZARD_ACTIVE = "de.loewe.sl2.system.firstInstallation.wizard.active";
+    SystemModelDefines.SL2_TVAPI_I32_SYSTEM_FIRST_FTESHOW = "de.loewe.sl2.i32.system.FTEShow";
     SystemModelDefines.SL2_TVAPI_ACTION_SYSTEM_FACTORY_RESET = "de.loewe.sl2.action.system.factory.reset";
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_GUI_LOOP_STARTED = "de.loewe.sl2.i32.system.gui.loop.started";
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_BLOCK_ALL_KEYS = "de.loewe.sl2.i32.system.block.all.keys";
@@ -39,7 +40,7 @@ function SystemModelDefines() {
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_AUDIO_LANGUAGE_SELECT = "de.loewe.sl2.i32.tvservice.audio.index"; //DBTAG -MARK 20160929
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_LIVETV_DEFAULT_INPUT = "tvapi.i32.system.livetv.default.input";
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_RETURNLOCALAPP_FLAG = "tvapi.i32.system.returnlocalapp.flag";
-    SystemModelDefines.SL2_TVAPI_STR_SYSTEM_CUR_BRAND = "tvapi.str.system.cur.brand";
+    SystemModelDefines.SL2_TVAPI_STR_SYSTEM_CUR_BRAND = "de.loewe.sl2.str.hisfactory.logo";
 //    SystemModelDefines.SL2_TVAPI_I32_SYSTEM_TELETEXT_SELECT = "de.loewe.sl2.i32.ttx.state.open";    //dbtag:20160923 RICK
 //    SystemModelDefines.SL2_TVAPI_I32_SYSTEM_TELETEXT_STATUS = "de.loewe.sl2.i32.ttx.state.open"; //"tvapi.i32.system.teletext.statuS";
 //    SystemModelDefines.SL2_TVAPI_I32_SYSTEM_TELETEXT_STATE_AVAILABLE = "de.loewe.sl2.i32.ttx.state.available";
@@ -63,7 +64,6 @@ function SystemModelDefines() {
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_NOTIFICATIONS_CONTROL = "de.loewe.sl2.i32.system.notifications.control";//DBTAG -Pete 20161011
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_ENTER_HIMEDIA_FLAG = "de.loewe.sl2.i32.system.enter.himedia.flag";
     SystemModelDefines.SL2_TVAPI_I32_VALUE_WINDOW_CONTROL_FLAG = "de.loewe.sl2.i32.value-added.window.control";
-    SystemModelDefines.SL2_TVAPI_TABLE_TVSERVICE_AUDIO_TABLE = "de.loewe.sl2.tvservice.audio.table"; //DBTAG -MARK 20160929
     SystemModelDefines.SL2_TVAPI_STR_BASIC_SETTINGS_TV_FEATURECODE = "de.loewe.sl2.str.basic.settings.tv.featurecode";
 
     SystemModelDefines.SL2_TVAPI_I32_SYSTEM_ENUM_PWR_USE_CASE_IDLE = 0;
@@ -425,7 +425,6 @@ function SystemModel(_) {
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_FIRST_INSTALLATION, "getFirstInstallation", "setFirstInstallation", "onFirstInstallationChaged", null, null);
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_USER_MODE, "getUserMode", "setUserMode", "onUserModeChaged", null, null);
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_MENU_HIGHLIGHT_CONTROL, "getMenuHighLightControl", "setMenuHighLightControl", "onMenuHighLightControlChanged", null, null);
-        this.registerTableObject(SystemModelDefines.SL2_TVAPI_TABLE_TVSERVICE_AUDIO_TABLE, "createAudioTableIterator");//DBTAG -MARK 20160929
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_SYSTEM_I32_ON, "getOn", "setOn", "onOnChaged", null, null);
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_ENUM_PWR_USE_CASE, "getEnumPwrUseCase", "setEnumPwrUseCase", "onEnumPwrUseCaseChaged", null, null);
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_ENUM_SCREEN_STATE, "getEnumScreenState", "setEnumScreenState", "onEnumScreenStateChaged", null, null);
@@ -485,6 +484,7 @@ function SystemModel(_) {
         }], "null");
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_SHOW_WIZARD_STEP , "getWizardStep", "setWizardStep", "onWizardStepChaged", null, null);
         this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_FIRST_INSTALLATION_WIZARD_ACTIVE, "getFirstInstallationWizardActive", "setFirstInstallationWizardActive", "onFirstInstallationWizardActiveChaged", null, null);
+        this.registerIntegerObject(SystemModelDefines.SL2_TVAPI_I32_SYSTEM_FIRST_FTESHOW , "getFteshow", "setFteshow", "onFteshowChaged", null, null);
         this.registerActionObject(SystemModelDefines.SL2_TVAPI_ACTION_SYSTEM_FACTORY_RESET, [{
             name: "FactoryReset",
             method: function (_) {

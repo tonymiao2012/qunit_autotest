@@ -67,7 +67,7 @@ function ServicelistModelDefines() {
     ServicelistModelDefines.SL2_TVAPI_TABLE_ACTION_FAVOURITE_LIST_REMOVE = "de.loewe.sl2.action.favouritelist.remove";//add to remove all channels under the correspongding tunermode
     ServicelistModelDefines.SL2_TVAPI_TABLE_ACTION_SERVICELIST_MOVE= "de.loewe.sl2.action.move.favouritelist"; //dbtag:20161010 - change to solve the channel move isseues
     ServicelistModelDefines.SL2_TVAPI_TABLE_ACTION_SERVICELIST_SWAP= "tvapi.action.servicelist.swap";
-    ServicelistModelDefines.SL2_TVAPI_I32_SERVICELIST_CHANNELLIST_UPDATE_AUTO= "tvapi.i32.servicelist.channellist.update.auto";
+    ServicelistModelDefines.SL2_TVAPI_I32_SERVICELIST_CHANNELLIST_UPDATE_AUTO= "de.loewe.sl2.i32.channel.search.dcm.auto.update";
     ServicelistModelDefines.SL2_TVAPI_I32_SERVICELIST_CHANNELLIST_NEED_UPDATE= "tvapi.i32.servicelist.channellist.need.update";
     ServicelistModelDefines.SL2_TVAPI_ACTION_SERVICELIST_LIST_IMPORT= "de.loewe.sl2.table.servicelist.list.import";
     ServicelistModelDefines.SL2_TVAPI_ACTION_SERVICELIST_LIST_EXPORT= "de.loewe.sl2.table.servicelist.list.export";

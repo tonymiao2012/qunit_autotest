@@ -85,13 +85,14 @@ function VideoModelDefines() {
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_RGB_ONLY_MODE = "de.loewe.sl2.i32.video.rgb.only";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_WHITE_BALANCE_10_2_POINTS = "tvapi.i32.video.white.balance.ten.two.points.mode";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_DMP_FLAG = "tvapi.i32.video.dmp.flag";
-    VideoModelDefines.SL2_TVAPI_I32_VIDEO_UHD_FLAG= "tvapi.i32.video.uhd.flag";
+    VideoModelDefines.SL2_TVAPI_I32_VIDEO_UHD_FLAG= "de.loewe.sl2.i32.video.overscan.supported";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_HDR_FLAG= "de.loewe.sl2.i32.video.hdr.flag";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_APPLY_MODE= "de.loewe.sl2.i32.video.apply.mode";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_APPLY_COLOR_TUNNER= "de.loewe.sl2.i32.video.apply.color.tuner";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_APPLY_2P_WB= "de.loewe.sl2.i32.video.apply.2point.wb";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_APPLY_10P_WB= "de.loewe.sl2.i32.video.apply.10point.wb";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_ENUM_HDMI_SIGNAL_FORMAT= "de.loewe.sl2.i32.video.enum.hdmi.signal.format";
+    VideoModelDefines.SL2_TVAPI_STR_VIDEO_FRAME_ASPECT_INFO = "de.loewe.sl2.str.video.frame.aspect";
 
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_ENUM_PICTURE_VIVID = 0;
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_ENUM_PICTURE_STANDARD = 1;
@@ -331,6 +332,7 @@ function VideoModel(e) {
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_APPLY_COLOR_TUNNER, "getApplyColorTunner", "setApplyColorTunner", "onApplyColorTunnerChaged", null, null );
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_APPLY_2P_WB, "getApply2p_wb", "setApply2p_wb", "onApply2p_wbChaged", null, null );
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_APPLY_10P_WB, "getApply10p_wb", "setApply10p_wb", "onApply10p_wbChaged", null, null );
+        this.registerStringObject(VideoModelDefines.SL2_TVAPI_STR_VIDEO_FRAME_ASPECT_INFO, "getVideoFrameAspect", "setVideoFrameAspect", "onVideoFrameAspectChanged",null, null);
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_ENUM_HDMI_SIGNAL_FORMAT, "getHdmiSignalFormat", "setHdmiSignalFormat", "onHdmiSignalFormatChaged", null, null);
 
     }

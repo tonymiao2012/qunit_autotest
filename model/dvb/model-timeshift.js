@@ -30,6 +30,8 @@ function TimeshiftModelDefines() {
     TimeshiftModelDefines.SL2_TVAPI_HDR_I32_CURSOR_POSITION = "de.loewe.sl2.hdr.cursor.position";
     TimeshiftModelDefines.SL2_TVAPI_HDR_ACTION_PLAYER_FORWARD_SKIP = "de.loewe.sl2.hdr.player.forward.skip";
     TimeshiftModelDefines.SL2_TVAPI_HDR_ACTION_PLAYER_BACKWARD_SKIP=  "de.loewe.sl2.hdr.player.backward.skip";
+    TimeshiftModelDefines.SL2_TVAPI_I32_PLAYER_SMART_JUMP_DISTANCE = "de.loewe.sl2.hdr.player.smartjump.distance";
+
 
     // enum
     //ENUM_SL2_TVAPI_TSHIFT_REG_DEV_STATE
@@ -148,7 +150,7 @@ function TimeshiftModel(parentModel) {
         // set  medium uuid
         this.registerStringObject(
             TimeshiftModelDefines.SL2_TVAPI_ACTION_TSHIFT_SET_PAR,
-            "null", "SetPar", "onSetPar",
+            "getPar", "SetPar", "onSetPar",
             null, null);
 
         // is regist
@@ -286,6 +288,11 @@ function TimeshiftModel(parentModel) {
                 }}
             ], null
         );
+        // PlayerSmartjumpDistance
+        this.registerIntegerObject(
+            TimeshiftModelDefines.SL2_TVAPI_I32_PLAYER_SMART_JUMP_DISTANCE,
+            "getPlayerSmartjumpDistance", "setPlayerSmartjumpDistance", "onPlayerSmartjumpDistanceChaged",
+            null, null);
 
     }
 }

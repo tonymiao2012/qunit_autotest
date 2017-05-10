@@ -2,6 +2,7 @@
 }
 {
     SoundModelDefines.SL2_TVAPI_I32_SOUND_MAIN_VOLUME = "de.loewe.sl2.i32.sound.main.volume";
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_MAIN_VOLUME_DEV = "de.loewe.sl2.i32.sound.main.volume.dev";
     SoundModelDefines.SL2_TVAPI_I32_SOUND_MAIN_MUTE = "de.loewe.sl2.i32.sound.main.mute";
     SoundModelDefines.SL2_TVAPI_VINT32_SOUND_SOUND_MODE_LIST = "tvapi.vint32.sound.sound.mode.list";
     SoundModelDefines.SL2_TVAPI_I32_SOUND_SOUND_MODE = "de.loewe.sl2.i32.sound.enum.adjust";    //dbtag: 20160729 Rick
@@ -201,6 +202,7 @@ function SoundModel(e) {
 
     this.registerSubObject = function () {
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_MAIN_VOLUME, "getMainVolume", "setMainVolume", "onMainVolumeChaged", null, null);
+        this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_MAIN_VOLUME_DEV, "getMainVolumeDev", "setMainVolumeDev", "onMainVolumeDevChaged", null, null);
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_MAIN_MUTE, "getMainMute", "setMainMute", "onMainMuteChaged", null, null);
 
         this.registerIntegerVectorObject(SoundModelDefines.SL2_TVAPI_VINT32_SOUND_SOUND_MODE_LIST, "getSoundModeList", "setSoundModeList", "onSoundModeListChaged", null, null);

@@ -16,6 +16,7 @@ function His_factoryModelDefines() {
     His_factoryModelDefines.SL2_TVAPI_I32_HIS_FACTORY_LANGUAGE = "de.loewe.sl2.i32.hisfactory.language";
     His_factoryModelDefines.SL2_TVAPI_STR_HIS_FACTORY_SOFTWARE_VERSION = "de.loewe.sl2.str.hisfactory.software.version";
     His_factoryModelDefines.SL2_TVAPI_STR_HIS_FACTORY_DATA_VERSION = "de.loewe.sl2.str.hisfactory.data.version";
+    His_factoryModelDefines.SL2_TVAPI_STR_HIS_FACTORY_HSSO = "de.loewe.sl2.str.hisfactory.hsso";
 
 }
 function His_factoryModel(e) {
@@ -34,6 +35,7 @@ function His_factoryModel(e) {
         this.registerIntegerObject(His_factoryModelDefines.SL2_TVAPI_I32_HIS_FACTORY_LANGUAGE, "getHisFactoryLanguage", "setHisFactoryLanguage", "onHisFactoryLanguageChaged", null, null);
         this.registerStringObject(His_factoryModelDefines.SL2_TVAPI_STR_HIS_FACTORY_SOFTWARE_VERSION, "getSoftwareVersion", null, null, null, null);
         this.registerStringObject(His_factoryModelDefines.SL2_TVAPI_STR_HIS_FACTORY_DATA_VERSION, "getDataVersion", null, null, null, null);
+        this.registerStringObject(His_factoryModelDefines.SL2_TVAPI_STR_HIS_FACTORY_HSSO, "getHsso", null, null, null, null);
 
     }
 }

@@ -338,7 +338,10 @@
         MessagesModelDefines.SL2_TVAPI_MESSAGE_ID_ENERGY_EFF_CHANGE_2  =  315;
         MessagesModelDefines.SL2_TVAPI_MESSAGE_ID_DVB_NOLIVE  =  316;
         MessagesModelDefines.SL2_TVAPI_MESSAGE_ID_RECOMMENDATIONS  =  317;
+        MessagesModelDefines.SL2_TVAPI_MESSAGE_ID_REMOVE_TIMER_LIST  =  355;
         MessagesModelDefines.SL2_TVAPI_MESSAGE_ID_HDR_STANDBY_DURING_RECORDING = 362;
+        MessagesModelDefines.SL2_TVAPI_MESSAGE_ID_HDR_START_TIMESHIFT_FAIL = 363;
+        MessagesModelDefines.SL2_TVAPI_MESSAGE_ID_EPGNOTE_RECORD = 364;
 
         MessagesModelDefines.SL2_TVAPI_MESSAGES_SELECTOR_BUTTON_OK  =  0;
         MessagesModelDefines.SL2_TVAPI_MESSAGES_SELECTOR_BUTTON_CANCEL  =  1;

@@ -8,7 +8,7 @@ function CecModelDefines() {
   //  CecModelDefines.SL2_TVAPI_I32_CEC_ENUM_HDMI_DEVICES_COUNT = "de.loewe.sl2.i32.cec.hdmi.devices.count";
     CecModelDefines.SL2_TVAPI_VSTR_CEC_HDMI_DEVICES_NAME = "de.loewe.sl2.cec.input.names";    //dbtag:20161130 --rick
     CecModelDefines.SL2_TVAPI_VINT32_CEC_HDMI_DEVICES_TYPE = "de.loewe.sl2.vint32.cec.hdmi.devices.type";  // dbtag:20161130 --rick
-    CecModelDefines.SL2_TVAPI_I32_CEC_HDMI_DEVICES_ARC_STATE = "de.loewe.sl2.i32.cec.hdmi.devices.arc.state";
+    CecModelDefines.SL2_TVAPI_I32_CEC_HDMI_DEVICES_ARC_STATE = "de.loewe.sl2.i32.cec.amp.audiomode";//"de.loewe.sl2.i32.cec.hdmi.devices.arc.state";
     CecModelDefines.SL2_TVAPI_I32_CEC_IS_DEVICE_EXIST = "de.loewe.sl2.i32.cec.is.device.exist";
     CecModelDefines.SL2_TVAPI_ACTION_CEC_JUDGE_AUDIO_DEVICE_EXIST = "de.loewe.sl2.action.cec.judge.device.exist";
     CecModelDefines.SL2_TVAPI_ACTION_CEC_HDMI_DEVICES_OPERATE = "de.loewe.sl2.cec.devices.list.action";  //dbtag:20161130 --rick

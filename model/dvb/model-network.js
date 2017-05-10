@@ -3,6 +3,7 @@ function NetworkModelDefines() {
 {
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_NETWORK_CONFIG = "tvapi.i32.network.enum.network.config";
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_NETWORK_AVAILABLE = "de.loewe.sl2.i32.local.network.available";
+    NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_EXTERNAL_NETWORK_AVAILABLE = "de.loewe.sl2.i32.external.network.available";
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_NETWORK_ETHERNET_UNPLUG = "tvapi.i32.network.enum.network.ether.unplug";
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_NETWORKING = "de.loewe.sl2.i32.network.enum.networking";
     NetworkModelDefines.SL2_TVAPI_VINT32_NETWORK_NETWORKING_CAPABILITY = "de.loewe.sl2.vint32.network.networking.capability";
@@ -13,9 +14,10 @@ function NetworkModelDefines() {
     NetworkModelDefines.SL2_TVAPI_STR_NETWORK_GATEWAY = "de.loewe.sl2.str.network.gateway";
     NetworkModelDefines.SL2_TVAPI_STR_NETWORK_DNS_SERVER_1 = "de.loewe.sl2.str.network.dns-server-1";
     NetworkModelDefines.SL2_TVAPI_STR_NETWORK_DNS_SERVER_2 = "de.loewe.sl2.str.network.dns-server-2";
-    NetworkModelDefines.SL2_TVAPI_STR_NETWORK_MAC_ADDRESS = "de.loewe.sl2.str.network.mac-address";
+    NetworkModelDefines.SL2_TVAPI_STR_NETWORK_MAC_ADDRESS = "de.loewe.sl2.str.network.mac-address-ethernet";
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_MAC_ADDRESS_EXIST = "de.loewe.sl2.i32.network.mac-address.exist";
     NetworkModelDefines.SL2_TVAPI_STR_NETWORK_SSID = "de.loewe.sl2.str.network.ssid";
+    NetworkModelDefines.SL2_TVAPI_STR_NETWORK_LAST_ACCESS_POINT_SSID = "de.loewe.sl2.str.network.last.access-point.ssid";
     NetworkModelDefines.SL2_TVAPI_STR_NETWORK_MAC_ADDRESS_WIFI = "de.loewe.sl2.str.network.mac-address-wifi";
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_MAC_ADDRESS_WIFI_EXIST = "de.loewe.sl2.i32.network.mac-address-wifi.exist";
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_LINKINFO_ENABLE = "de.loewe.sl2.i32.network.linkinfo.enable";
@@ -31,6 +33,7 @@ function NetworkModelDefines() {
     NetworkModelDefines.SL2_TVAPI_VINT32_NETWORK_ACCESS_POINTS_AUTHENTICATION = "tvapi.vint32.network.access-points.authentication";
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_AUTHENTICATION = "tvapi.i32.network.enum.authentication";
     NetworkModelDefines.SL2_TVAPI_STR_NETWORK_ENCRYPTION_PASSPHRASE = "de.loewe.sl2.str.network.encryption.passphrase";
+    NetworkModelDefines.SL2_TVAPI_STR_NETWORK_LAST_ACCESS_POINT_PASSWORD = "de.loewe.sl2.str.network.last.access-point.password";
     NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENCRYPTION_WEP_INDEX = "de.loewe.sl2.i32.network.encryption.wep-index";
     NetworkModelDefines.SL2_TVAPI_STR_NETWORK_HOST_NAME = "de.loewe.sl2.str.network.host-name";
     NetworkModelDefines.SL2_TVAPI_ACTION_NETWORK_WIRED_SET = "de.loewe.sl2.action.network.wired.set";
@@ -125,6 +128,7 @@ function NetworkModel(parentModel) {
     this.registerSubObject = function (loadType) {
         this.registerIntegerObject(NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_NETWORK_CONFIG, "getEnumNetworkConfig", "setEnumNetworkConfig", "onEnumNetworkConfigChaged", null, null);
         this.registerIntegerObject(NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_NETWORK_AVAILABLE, "getEnumNetworkAvailable", "setEnumNetworkAvailable", "onEnumNetworkAvailableChaged", null, null);
+        this.registerIntegerObject(NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_EXTERNAL_NETWORK_AVAILABLE, "getEnumExternalNetworkAvailable", "setEnumExternalNetworkAvailable", "onEnumExternalNetworkAvailableChaged", null, null);
         this.registerIntegerObject(NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_NETWORK_ETHERNET_UNPLUG, "getEnumNetworkEtherUnplug", "setEnumNetworkEtherUnplug", "onEnumNetworkEtherUnplugChaged", null, null);
         this.registerIntegerObject(NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_NETWORKING, "getEnumNetworking", "setEnumNetworking", "onEnumNetworkingChaged", null, null);
         this.registerIntegerVectorObject(NetworkModelDefines.SL2_TVAPI_VINT32_NETWORK_NETWORKING_CAPABILITY, "getNetworkingCapability", "setNetworkingCapability", "onNetworkingCapabilityChaged", null, null);
@@ -138,6 +142,7 @@ function NetworkModel(parentModel) {
         this.registerStringObject(NetworkModelDefines.SL2_TVAPI_STR_NETWORK_MAC_ADDRESS, "getMac_address", "setMac_address", "onMac_addressChaged", null, null);
         this.registerIntegerObject(NetworkModelDefines.SL2_TVAPI_I32_NETWORK_MAC_ADDRESS_EXIST, "getMac_addressExist", "setMac_addressExist", "onMac_addressExistChaged", null, null);
         this.registerStringObject(NetworkModelDefines.SL2_TVAPI_STR_NETWORK_SSID, "getSsid", "setSsid", "onSsidChaged", null, null);
+        this.registerStringObject(NetworkModelDefines.SL2_TVAPI_STR_NETWORK_LAST_ACCESS_POINT_SSID, "getLastAccessPointSsid", "setLastAccessPointSsid", "onLastAccessPointSsidChaged", null, null);
         this.registerStringObject(NetworkModelDefines.SL2_TVAPI_STR_NETWORK_MAC_ADDRESS_WIFI, "getMac_address_wifi", "setMac_address_wifi", "onMac_address_wifiChaged", null, null);
         this.registerIntegerObject(NetworkModelDefines.SL2_TVAPI_I32_NETWORK_MAC_ADDRESS_WIFI_EXIST, "getMac_address_wifiExist", "setMac_address_wifiExist", "onMac_address_wifiExistChaged", null, null);
         this.registerIntegerObject(NetworkModelDefines.SL2_TVAPI_I32_NETWORK_LINKINFO_ENABLE, "getLinkinfoEnable", "setLinkinfoEnable", "onLinkinfoEnableChaged", null, null);
@@ -154,6 +159,7 @@ function NetworkModel(parentModel) {
         this.registerIntegerVectorObject(NetworkModelDefines.SL2_TVAPI_VINT32_NETWORK_ACCESS_POINTS_AUTHENTICATION, "getAccess_pointsAuthentication", "setAccess_pointsAuthentication", "onAccess_pointsAuthenticationChaged", null, null);
         this.registerIntegerObject(NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENUM_AUTHENTICATION, "getEnumAuthentication", "setEnumAuthentication", "onEnumAuthenticationChaged", null, null);
         this.registerStringObject(NetworkModelDefines.SL2_TVAPI_STR_NETWORK_ENCRYPTION_PASSPHRASE, "getEncryptionPassphrase", "setEncryptionPassphrase", "onEncryptionPassphraseChaged", null, null);
+        this.registerStringObject(NetworkModelDefines.SL2_TVAPI_STR_NETWORK_LAST_ACCESS_POINT_PASSWORD, "getLastAccessPointPassword", "setLastAccessPointPassword", "onLastAccessPointPasswordChaged", null, null);
         this.registerIntegerObject(NetworkModelDefines.SL2_TVAPI_I32_NETWORK_ENCRYPTION_WEP_INDEX, "getEncryptionWep_index", "setEncryptionWep_index", "onEncryptionWep_indexChaged", null, null);
         this.registerStringObject(NetworkModelDefines.SL2_TVAPI_STR_NETWORK_HOST_NAME, "getHost_name", "setHost_name", "onHost_nameChaged", null, null);
         this.registerStringObject(NetworkModelDefines.SL2_TVAPI_STR_NETWORK_CHANGE_MSG, "getNetworkChangeMsg", "setNetworkChangeMsg", "onNetworkChangeMsgChanged", null, null);
