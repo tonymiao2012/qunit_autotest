@@ -494,20 +494,6 @@ function randomChannel_C() {
     }
 }
 
-function playInputedChannel(sourceType, chn, funcName) {
-    QUnit.test(funcName, function (assert) {
-        if (sourceType == 1) {
-            model.tvservice.playChannel(0, allChannels_T[chn].uuid, 0, allChannels_T[chn].type, allChannels_T[chn].id);
-            $("#name").html(allChannels_T[chn].name);
-        }
-        else {
-            model.tvservice.playChannel(0, allChannels_C[chn].uuid, 0, allChannels_C[chn].type, allChannels_C[chn].id);
-            $("#name").html(allChannels_C[chn].name);
-        }
-        assert.ok(true, "check playInputedChannel");
-    });
-}
-
 function playInputedChannel(sourceType, chn, func_name) {
     QUnit.test(func_name, function (assert) {
         var done = assert.async(1);
@@ -524,7 +510,7 @@ function playInputedChannel(sourceType, chn, func_name) {
         function playInputedChannelTimeout() {
             model.tvservice.onMainPlayChanged = null;
             model.video.onMainPlayVideoFormatInfoChanged = null;
-            if ((format.length != 0) && (aspect.length != 0) && (channelChanged == true) && (starttimeNow > 0) && (stoptimeNow > 0))
+            if ((format.length != 0) && (aspect.length != 0) && (channelChanged == true) && (starttimeNow >= 0) && (stoptimeNow >= 0))
                 flag = true;
             assert.ok(flag, "playInputedChannel");
             done();

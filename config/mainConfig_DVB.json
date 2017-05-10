@@ -5,7 +5,8 @@
     "testImpl": [
       "handleTestCase.js",
       "scanImpl.js",
-      "play_serviceListImpl.js"
+      "play_serviceListImpl.js",
+      "infoBarImpl.js"
     ]
   },
   {
@@ -75,9 +76,9 @@
       }
     ],
     "icon-class": "fa fa-repeat fa-2x"
-  }
+  },
   {
-    "name": "Sca,
+    "name": "Scan",
     "testcase": [
       {
         "casename": "2001_getSource",
@@ -114,112 +115,115 @@
         "input": [
           "mode"
         ]
+      },
       {
-        "casename": "2010_setDvbtScanMode"
+        "casename": "2010_setDvbtScanMode",
         "input": [
           "mode"
-          },
-          {
-            "casename": "2011_getDvbcScanMode",
-            "input": [
-              "mode"
-            ]
-          },
-          {
-            "casename": "2012_setDvbcScanMode",
-            "input": [
-              "mode"
-              }
-            ],
-            "icon-class": "fa fa-signal fa-2x"
-          },
-          {
-            "name": "Play",
-            "testcase": [
-              {
-                "casename": "3001_playChannelT",
-                "input": [
-                  "Channel Number"
-                ]
-              },
-              {
-                "casename": "3002_playChannelC",
-                "input": [
-                  "Channel Number"
-                ]
-              }
-            ],
-            "icon-class": "fa fa-play-circle-o fa-2x"
-          },
-          {
-            "name": "ServiceList",
-            "testcase": [
-              {
-                "casename": "4001_getServicelistT",
-                "input": [
-                  "Expect Number",
-                  "Show flag"
-                ]
-              },
-              {
-                "casename": "4002_getServicelistC",
-                "input": [
-                  "Expect Number",
-                  "Show flag"
-                ]
-              },
-              {
-                "casename": "4003_getServicelistS",
-                "input": [
-                  "Expect Number"
-                ]
-              },
-              {
-                "casename": "4004_checkChannelListT"
-              },
-              {
-                "casename": "4005_checkChannelListC"
-              },
-              {
-                "casename": "4006_checkChannelListS"
-              },
-              {
-                "casename": "4007_writeT2File"
-              },
-              {
-                "casename": "4008_writeC2File"
-              },
-              {
-                "casename": "4009_writeS2File"
-              }
-            ],
-            "icon-class": "fa fa-steam fa-2x"
-          },
-          {
-            "name": "PC",
-            "testcase": [],
-            "icon-class": "fa fa-users fa-2x"
-          },
-          {
-            "name": "CC",
-            "testcase": [],
-            "icon-class": "fa fa-cc fa-2x"
-          },
-          {
-            "name": "InfoBar",
-            "testcase": [],
-            "icon-class": "fa fa-television fa-2x"
-          },
-          {
-            "name": "PVR",
-            "testcase": [
-              {
-                "casename": "8001_autoTest1",
-                "input": [
-                  "Repeat"
-                ]
-              }
-            ],
-            "icon-class": "fa fa-newspaper-o fa-2x"
-          }
         ]
+      },
+      {
+        "casename": "2011_getDvbcScanMode",
+        "input": [
+          "mode"
+        ]
+      },
+      {
+        "casename": "2012_setDvbcScanMode",
+        "input": [
+          "mode"
+        ]
+      }
+    ],
+    "icon-class": "fa fa-signal fa-2x"
+  },
+  {
+    "name": "Play",
+    "testcase": [
+      {
+        "casename": "3001_playChannelT",
+        "input": [
+          "Channel Number"
+        ]
+      },
+      {
+        "casename": "3002_playChannelC",
+        "input": [
+          "Channel Number"
+        ]
+      }
+    ],
+    "icon-class": "fa fa-play-circle-o fa-2x"
+  },
+  {
+    "name": "ServiceList",
+    "testcase": [
+      {
+        "casename": "4001_getServicelistT",
+        "input": [
+          "Expect Number",
+          "Show flag"
+        ]
+      },
+      {
+        "casename": "4002_getServicelistC",
+        "input": [
+          "Expect Number",
+          "Show flag"
+        ]
+      },
+      {
+        "casename": "4003_getServicelistS",
+        "input": [
+          "Expect Number"
+        ]
+      },
+      {
+        "casename": "4004_checkChannelListT"
+      },
+      {
+        "casename": "4005_checkChannelListC"
+      },
+      {
+        "casename": "4006_checkChannelListS"
+      },
+      {
+        "casename": "4007_writeT2File"
+      },
+      {
+        "casename": "4008_writeC2File"
+      },
+      {
+        "casename": "4009_writeS2File"
+      }
+    ],
+    "icon-class": "fa fa-steam fa-2x"
+  },
+  {
+    "name": "PC",
+    "testcase": [],
+    "icon-class": "fa fa-users fa-2x"
+  },
+  {
+    "name": "CC",
+    "testcase": [],
+    "icon-class": "fa fa-cc fa-2x"
+  },
+  {
+    "name": "InfoBar",
+    "testcase": [],
+    "icon-class": "fa fa-television fa-2x"
+  },
+  {
+    "name": "PVR",
+    "testcase": [
+      {
+        "casename": "8001_autoTest1",
+        "input": [
+          "Repeat"
+        ]
+      }
+    ],
+    "icon-class": "fa fa-newspaper-o fa-2x"
+  }
+]
