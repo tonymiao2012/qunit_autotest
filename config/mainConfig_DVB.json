@@ -201,7 +201,26 @@
   },
   {
     "name": "PC",
-    "testcase": [],
+    "testcase": [
+      {
+        "casename": "5001_getPin"
+      },
+      {
+        "casename": "5002_setPin",
+        "input": [
+          "New pin number"
+        ]
+      },
+      {
+        "casename": "5003_getSModel"
+      },
+      {
+        "casename": "5004_setSModel",
+        "input": [
+          "PC on/off number"
+        ]
+      }
+    ],
     "icon-class": "fa fa-users fa-2x"
   },
   {

@@ -21,3 +21,43 @@ function getSModel(funcName){
 function setSModel(){
 
 }
+
+function startGetPin(){
+    var val = model.parentlock.getPin();
+    $("#details").html(val);
+    if(val.length != 0)
+        return true;
+    else
+        return false;
+}
+
+function getPin(funcName){
+    QUnit.test(funcName, function(assert){
+        var result = startGetPin();
+        assert.ok(result, "getPin");
+    });
+}
+
+function startSetPin(pin){
+    model.parentlock.setPin(pin);
+    if(model.parentlock.getPin() == pin){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function setPin(pinValue, funcName){
+    QUnit.test(funcName, function(assert){
+        if(pinValue <= 9999 && pinValue >= 1000){
+            var pin;
+            pin = pinValue.toString();
+
+            var result = startSetPin(pin);
+            assert.ok(result, "Test setPin");
+        }else{
+            assert.ok(false, "setPin");
+            $("#details").html(" Pin length is not 4");
+        }
+    });
+}

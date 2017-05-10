@@ -217,6 +217,23 @@ function handleServiceListTestCase(inputArray, funcName) {
             break;
     }
 }
+
+function handlePCTestCase(inputArray, funcName){
+    switch(funcName){
+        case "5001_getPin":
+            getPin(funcName);
+            break;
+        case "5002_setPin":
+            var pinValue = inputArray[0];
+            setPin(pinValue, funcName);
+            break;
+        case "5003_getSModel":
+            break;
+        case "5004_setSModel":
+            break;
+    }
+}
+
 function parseParam(i, serList) {
     var paramArray = new Array();
     if (serList[i].param0 != null)
