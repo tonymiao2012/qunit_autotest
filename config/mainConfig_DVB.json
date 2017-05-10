@@ -6,7 +6,8 @@
       "handleTestCase.js",
       "scanImpl.js",
       "play_serviceListImpl.js",
-      "infoBarImpl.js"
+      "infoBarImpl.js",
+      "PCImpl.js"
     ]
   },
   {
