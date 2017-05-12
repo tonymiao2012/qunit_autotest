@@ -219,6 +219,12 @@ function handleServiceListTestCase(inputArray, funcName) {
 }
 
 function handlePCTestCase(inputArray, funcName){
+    require.config({
+        paths: {
+            "PC_Prototype": "./src/COMMON/PC_Prototype"
+        }
+    });
+
     require(["PC_Prototype"], function(PC_COMMON){
         switch(funcName){
             case "5001_getPin":
@@ -238,6 +244,10 @@ function handlePCTestCase(inputArray, funcName){
                 }else{
                     $("#details").html("SModel is 0 or 1");
                 }
+                break;
+            case "5005_getStartTime":
+                break;
+            case "5006_setStartTime":
                 break;
         }
     });

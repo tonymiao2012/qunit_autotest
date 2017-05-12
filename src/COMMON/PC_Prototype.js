@@ -84,12 +84,85 @@ define(function () {
             setTimeout(setSModelTimeout, 1000);
         });
     }
+    function getAllDaily(){
+
+    }
+
+    function setAllDaily(){
+
+    }
+
+    function startGetStartTime(){
+        var val = model.parentlock.getStart();
+        $("#details").html(val);
+        if((val >= 0) && (val <= 86340))
+            return true;
+        else
+            return false;
+    }
+
+    function getStartTime(funcName){
+        QUnit.test(funcName, function(assert){
+            var result = startGetStartTime();
+            assert.ok(result, "Test getStartTime");
+        });
+    }
+
+    function startSetStartTime(startTime){
+        model.parentlock.setStart(startTime);
+        if(model.parentlock.getStart() == startTime)
+            return true;
+        else
+            return false;
+    }
+
+    function setStartTime(startTime, funcName){
+        QUnit.test(funcName, function(assert){
+            var result = startSetStartTime(startTime);
+            assert.ok(result, "Test setStartTime");
+        });
+    }
+
+    function startGetEndTime(){
+        var val = model.parentlock.getEnd();
+        $("#details").html(val);
+        if(val >= 0 && val <= 86340)
+            return true;
+        else
+            return false;
+    }
+
+    function getEndTime(funcName){
+        QUnit.test(funcName, function(assert){
+            var result = startGetEndTime();
+            assert.ok(result, "Test getEndTime");
+        });
+    }
+
+    function startSetEndTime(endTime) {
+        model.parentlock.setEnd(endTime);
+        if(model.parentlock.getEnd() == endTime)
+            return true;
+        else
+            return false;
+    }
+
+    function setEndTime(endTime, funcName){
+        QUnit.test(funcName, function(assert){
+            var result = startSetEndTime(endTime);
+            assert.ok(result, "Test setEndTime");
+        });
+    }
 
     return {
         getPin: getPinVal,
         setPin: setPinVal,
         getSModel: getSModelTest,
-        setSModel: setSModelTest
+        setSModel: setSModelTest,
+        getStartTime: getStartTime,
+        setStartTime: setStartTime,
+        getEndTime: getEndTime,
+        setEndTIme: setEndTime
     }
 });
 
