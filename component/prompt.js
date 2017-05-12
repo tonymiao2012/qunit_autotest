@@ -12,6 +12,6 @@ new Vue({
 });
 
 Vue.component('prompt', {
-    props: info,
+    props: ['info'],
     template: "<span></span><p>{{ info }}</p>"
 });
