@@ -219,19 +219,28 @@ function handleServiceListTestCase(inputArray, funcName) {
 }
 
 function handlePCTestCase(inputArray, funcName){
-    switch(funcName){
-        case "5001_getPin":
-            getPin(funcName);
-            break;
-        case "5002_setPin":
-            var pinValue = inputArray[0];
-            setPin(pinValue, funcName);
-            break;
-        case "5003_getSModel":
-            break;
-        case "5004_setSModel":
-            break;
-    }
+    require(["PC_Prototype"], function(PC_COMMON){
+        switch(funcName){
+            case "5001_getPin":
+                PC_COMMON.getPin(funcName);
+                break;
+            case "5002_setPin":
+                var pinValue = inputArray[0];
+                PC_COMMON.setPin(pinValue, funcName);
+                break;
+            case "5003_getSModel":
+                PC_COMMON.getSModel(funcName);
+                break;
+            case "5004_setSModel":
+                var flag = inputArray[0];
+                if(flag == 0 || flag == 1){
+                    PC_COMMON.setSModel(flag, funcName);
+                }else{
+                    $("#details").html("SModel is 0 or 1");
+                }
+                break;
+        }
+    });
 }
 
 function parseParam(i, serList) {

@@ -3,7 +3,7 @@
  * Description: Create a PC prototype module here.
  * Dependency: Qunit module, model module
  */
-define(["PC_Prototype.js/../../../lib/qunit-2.0.1", "PC_Prototype.js/../../../model/model"], function (QUnit, model) {
+define(function () {
     //Implementations here.
     function startGetPin() {
         var val = model.parentlock.getPin();
@@ -74,7 +74,7 @@ define(["PC_Prototype.js/../../../lib/qunit-2.0.1", "PC_Prototype.js/../../../mo
                     result = false;
                 assert.ok(result, "setSModel");
 
-                if(result != true){
+                if (result != true) {
                     logWhenAssertOk(funcName);
                 }
 
@@ -84,6 +84,7 @@ define(["PC_Prototype.js/../../../lib/qunit-2.0.1", "PC_Prototype.js/../../../mo
             setTimeout(setSModelTimeout, 1000);
         });
     }
+
     return {
         getPin: getPinVal,
         setPin: setPinVal,
