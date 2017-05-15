@@ -218,15 +218,15 @@ function handleServiceListTestCase(inputArray, funcName) {
     }
 }
 
-function handlePCTestCase(inputArray, funcName){
+function handlePCTestCase(inputArray, funcName) {
     require.config({
         paths: {
             "PC_Prototype": "./src/COMMON/PC_Prototype"
         }
     });
 
-    require(["PC_Prototype"], function(PC_COMMON){
-        switch(funcName){
+    require(["PC_Prototype"], function (PC_COMMON) {
+        switch (funcName) {
             case "5001_getPin":
                 PC_COMMON.getPin(funcName);
                 break;
@@ -239,15 +239,67 @@ function handlePCTestCase(inputArray, funcName){
                 break;
             case "5004_setSModel":
                 var flag = inputArray[0];
-                if(flag == 0 || flag == 1){
+                if (flag == 0 || flag == 1) {
                     PC_COMMON.setSModel(flag, funcName);
-                }else{
+                } else {
                     $("#details").html("SModel is 0 or 1");
                 }
                 break;
             case "5005_getStartTime":
+                PC_COMMON.getStartTime(funcName);
                 break;
             case "5006_setStartTime":
+                var startTime = inputArray[0];
+                if (startTime >= 0 && startTime <= 86340) {
+                    startTime = (startTime / 60) * 60;
+                    PC_COMMON.setStartTime(startTime, funcName);
+                } else
+                    $("#details").html("The range of startTime is 0 to 86340");
+                break;
+            case "5007_getEndTime":
+                PC_COMMON.getEndTime(funcName);
+                break;
+            case "5008_setEndTime":
+                var endTime = inputArray[0];
+                if (endTime >= 0 && endTime <= 86340) {
+                    endTime = (endTime / 60) * 60;
+                    PC_COMMON.setEndTime(endTime, funcName);
+                } else
+                    $("#details").html("The range of endTime is 0 to 86340");
+                break;
+            case "5009_getEndWeekly":
+                PC_COMMON.getEndWeekly(funcName);
+                break;
+            case "5010_setEndWeekly":
+                var temp1 = inputArray[0];
+                if (temp1 > 0) {
+                    var weekly = "";
+                    var day;
+
+                    do
+                    {
+                        day = temp1 % 10;
+                        temp1 = parseInt(temp1 / 10);
+                        if ((day == 1) && (weekly.indexOf("Mon") == -1))
+                            weekly += "Mon,";
+                        else if ((day == 2) && (weekly.indexOf("Tue") == -1))
+                            weekly += "Tue,";
+                        else if ((day == 3) && (weekly.indexOf("Wed") == -1))
+                            weekly += "Wed,";
+                        else if ((day == 4) && (weekly.indexOf("Thu") == -1))
+                            weekly += "Thu,";
+                        else if ((day == 5) && (weekly.indexOf("Fri") == -1))
+                            weekly += "Fri,";
+                        else if ((day == 6) && (weekly.indexOf("Sat") == -1))
+                            weekly += "Sat,";
+                        else if ((day == 7) && (weekly.indexOf("Sun") == -1))
+                            weekly += "Sun,";
+                    } while (temp1 != 0)
+                    PC_COMMON.setEndWeekly(weekly, funcName);
+                } else
+                    $("#details").html("please input a string of numbers, number is 1-7");
+                break;
+            case "5011_getPinRequest":
                 break;
         }
     });

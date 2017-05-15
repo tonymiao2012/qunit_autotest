@@ -208,7 +208,8 @@ define(function () {
         getEndTime: getEndTime,
         setEndTIme: setEndTime,
         getEndWeekly: getEndWeekly,
-        setEndWeekly: setEndWeekly
+        setEndWeekly: setEndWeekly,
+        getPinRequest: getPinRequest
     }
 });
 
