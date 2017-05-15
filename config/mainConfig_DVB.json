@@ -220,6 +220,45 @@
         "input": [
           "PC on/off number"
         ]
+      },
+      {
+        "casename": "5005_getStartTime"
+      },
+      {
+        "casename": "5006_setStartTime",
+        "input": [
+          "Set start time value"
+        ]
+      },
+      {
+        "casename": "5007_getEndTime"
+      },
+      {
+        "casename": "5008_setEndTime",
+        "input": [
+          "Set end time value"
+        ]
+      },
+      {
+        "casename": "5009_getEndWeekly"
+      },
+      {
+        "casename": "5010_setEndWeekly",
+        "input": [
+          "Set week value"
+        ]
+      },
+      {
+        "casename": "5011_getPinRequest",
+        "input": [
+          "Expect status"
+        ]
+      },
+      {
+        "casename": "5012_setPinRequest",
+        "input": [
+          "Set value for pin request"
+        ]
       }
     ],
     "icon-class": "fa fa-users fa-2x"

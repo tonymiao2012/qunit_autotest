@@ -25,7 +25,7 @@ function getPin(funcName) {
         var result = startGetPin();
         assert.ok(result, "getPin");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -53,7 +53,7 @@ function setPin(pinValue, funcName) {
             var result = startSetPin(pin);
             assert.ok(result, "Test setPin");
 
-            if(result != true){
+            if (result != true) {
                 logWhenAssertOk(funcName);
             }
         }
@@ -80,7 +80,7 @@ function getSModel(funcName) {
         var result = startGetSModel();
         assert.ok(result, "Test getSModel");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -98,7 +98,7 @@ function setSModel(flag, funcName) {
                 result = false;
             assert.ok(result, "setSModel");
 
-            if(result != true){
+            if (result != true) {
                 logWhenAssertOk(funcName);
             }
 
@@ -117,7 +117,7 @@ function PCReset(funcName) {
         var result = startPCReset();
         assert.ok(result, "Test PCReset");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -135,7 +135,7 @@ function getPinRequest(expect, funcName) {
         var result = startGetPinRequest(expect);
         assert.ok(result, "Test getPinRequest");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -155,7 +155,7 @@ function getStartTime(funcName) {
         var result = startGetStartTime();
         assert.ok(result, "Test getStartTime");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -172,7 +172,7 @@ function setStartTime(startTime, funcName) {
         var result = startSetStartTime(startTime);
         assert.ok(result, "Test setStartTime");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -190,7 +190,7 @@ function getEndTime(funcName) {
         var result = startGetEndTime();
         assert.ok(result, "Test getEndTime");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -207,7 +207,7 @@ function setEndTime(endTime, funcName) {
         var result = startSetEndTime(endTime);
         assert.ok(result, "Test setEndTime");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -222,7 +222,7 @@ function getEndWeekly(funcName) {
         var result = startGetEndWeekly();
         assert.ok(result, "Test getEndWeekly");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -239,7 +239,7 @@ function setEndWeekly(weekly, funcName) {
         var result = startSetEndWeekly(weekly);
         assert.ok(result, "Test setEndWeekly");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -258,7 +258,7 @@ function getBlockUnrated(funcName) {
         var result = startGetBlockUnrated();
         assert.ok(result, "Test getBlockUnrated");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -275,7 +275,7 @@ function setBlockUnrated(ratingValue, funcName) {
         var result = startSetBlockUnrated(ratingValue);
         assert.ok(result, "Test setBlockUnrated");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -293,7 +293,7 @@ function getUsTvRating(funcName) {
         var result = startGetUsTvRating();
         assert.ok(result, "Test getUsTvRating");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -375,7 +375,7 @@ function setUsTvRating(flag, ratingValue, funcName) {
             var result = checkSetUsTvRating(flag, ratingValue, val);
             assert.ok(result, "setUsTvRating");
 
-            if(result != true){
+            if (result != true) {
                 logWhenAssertOk(funcName);
             }
 
@@ -400,7 +400,7 @@ function getUsMovieRating(funcName) {
         var result = startGetUsMovieRating();
         assert.ok(result, "Test getUsMovieRating");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -417,7 +417,7 @@ function setUsMovieRating(ratingValue, funcName) {
         var result = startSetUsMovieRating(ratingValue);
         assert.ok(result, "Test setUsMovieRating");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -436,7 +436,7 @@ function getCanEnglishRating(funcName) {
         var result = startGetCanEnglishRating();
         assert.ok(result, "Test getCanEnglishRating");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -453,7 +453,7 @@ function setCanEnglishRating(ratingValue, funcName) {
         var result = startSetCanEnglishRating(ratingValue);
         assert.ok(result, "Test setCanEnglishRating");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -472,7 +472,7 @@ function getCanFrenchRating(funcName) {
         var result = startGetCanFrenchRating();
         assert.ok(result, "Test getCanFrenchRating");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -489,7 +489,7 @@ function setCanFrenchRating(ratingValue, funcName) {
         var result = startSetCanFrenchRating(ratingValue);
         assert.ok(result, "Test setCanFrenchRating");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -509,7 +509,7 @@ function pinRequestConfirm(funcName) {
             var val = model.parentlock.getPinRequest();
             assert.equal(val[0], 0, "pinRequestConfirm");
 
-            if(val[0] !== 0){
+            if (val[0] !== 0) {
                 var path = "hisenseUI/" + funcName.trim() + ".txt";
                 var content = "Test failed. Time stamp: " + localTime + ". Result value: " + val[0] + ", expect value: " + 0;
                 fh.appendStrToFile(path, content, workroot);
@@ -542,7 +542,7 @@ function openVchipRegionPage(funcName) {
         var result = startOpenVchipRegionPage();
         assert.ok(result, "Test openVchipRegionPage");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -565,7 +565,7 @@ function openVchipDimensionPage(funcName) {
         var result = startOpenVchipDimensionPage();
         assert.ok(result, "Test openVchipDimensionPage");
 
-        if(result != true){
+        if (result != true) {
             logWhenAssertOk(funcName);
         }
     });
@@ -589,7 +589,7 @@ function openVchipRatingValuePage(region, dimen, funcName) {
             var result = startOpenVchipRatingValuePage(region, dimen);
             assert.ok(result, "Test openVchipRatingValuePage");
 
-            if(result != true){
+            if (result != true) {
                 logWhenAssertOk(funcName);
             }
         }

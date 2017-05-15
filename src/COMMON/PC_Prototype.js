@@ -154,6 +154,50 @@ define(function () {
         });
     }
 
+    function startGetEndWeekly(){
+        var val = model.parentlock.getEndWeekly();
+        $("#details").html(val);
+        return true;
+    }
+
+    function getEndWeekly(funcName){
+        QUnit.test(funcName, function(assert){
+            var result = startGetEndWeekly();
+            assert.ok(result, "Test getEndWeekly");
+        });
+    }
+
+    function startSetEndWeekly(weekly){
+        model.parentlock.setEndWeekly(weekly);
+        if(model.parentlock.getEndWeekly() == weekly)
+            return true
+        else
+            return false;
+    }
+
+    function setEndWeekly(weekly, funcName){
+        QUnit.test(funcName, function(assert){
+            var result = startSetEndWeekly(weekly);
+            assert.ok(result, "Test setEndWeekly");
+        });
+    }
+
+    function startGetPinRequest(expect){
+        var val = model.parentlock.getPinRequest();
+        $("#details").html(val[0]);
+        if(val[0] == expect)
+            return true;
+        else
+            return false;
+    }
+
+    function getPinRequest(expect, funcName){
+        QUnit.test(funcName, function(assert){
+            var result = startGetPinRequest(expect);
+            assert.ok(result, "Test getPinRequest");
+        });
+    }
+
     return {
         getPin: getPinVal,
         setPin: setPinVal,
@@ -162,7 +206,9 @@ define(function () {
         getStartTime: getStartTime,
         setStartTime: setStartTime,
         getEndTime: getEndTime,
-        setEndTIme: setEndTime
+        setEndTIme: setEndTime,
+        getEndWeekly: getEndWeekly,
+        setEndWeekly: setEndWeekly
     }
 });
 

@@ -604,7 +604,7 @@ function handlePCTestCase(inputArray, funcName) {
                 setEndWeekly(weekly, funcName);
             }
             else
-                $("#details").html("please input a string of  numbers ,  number is 1-7");
+                $("#details").html("please input a string of numbers, number is 1-7");
             break;
         case "5013_getBlockUnrated":
             getBlockUnrated(funcName);
