@@ -221,11 +221,12 @@ function handleServiceListTestCase(inputArray, funcName) {
 function handlePCTestCase(inputArray, funcName) {
     require.config({
         paths: {
-            "PC_Prototype": "./src/COMMON/PC_Prototype"
+            "PC_Common": "./src/COMMON/PC_Common",
+            "PC_DVB": "./src/DVB/PCImpl"
         }
     });
 
-    require(["PC_Prototype"], function (PC_COMMON) {
+    require(["PC_Common", "PC_DVB"], function (PC_COMMON, PC_DVB) {
         switch (funcName) {
             case "5001_getPin":
                 PC_COMMON.getPin(funcName);
@@ -302,6 +303,28 @@ function handlePCTestCase(inputArray, funcName) {
             case "5011_getPinRequest":
                 var expect = inputArray[0];
                 PC_COMMON.getPinRequest(expect, funcName);
+                break;
+            case "5012_getAge_related":
+                PC_DVB.getAge_related();
+                break;
+            case "5013_setAge_related":
+                var trigger = inputArray[0];
+                if (trigger != 1 || trigger != 0) {
+                    $("#details").html("Input 0 or 1");
+                    break;
+                }
+                PC_DVB.setAge_related(trigger, funcName);
+                break;
+            case "5014_getAge":
+                PC_DVB.getAge();
+                break;
+            case "5015_setAge":
+                var age = inputArray[0];
+                if (age > 18 || age < 3) {
+                    $("#details").html("The age is not in range 3 to 18");
+                    break;
+                }
+                PC_DVB.setAge(age, funcName);
                 break;
         }
     });

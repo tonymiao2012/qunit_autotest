@@ -253,6 +253,33 @@
         "input": [
           "Expect status"
         ]
+      },
+      {
+        "casename": "5012_getAge_related"
+      },
+      {
+        "casename": "5013_setAge_related",
+        "input": [
+          "Turn on/off age block"
+        ]
+      },
+      {
+        "casename": "5014_getAge"
+      },
+      {
+        "casename": "5015_setAge",
+        "input": [
+          "Set age block(3 to 18)"
+        ]
+      },
+      {
+        "casename": "5016_getAllDaily"
+      },
+      {
+        "casename": "5017_setAllDaily",
+        "input": [
+          "Turn on(1) or off(0) time block"
+        ]
       }
     ],
     "icon-class": "fa fa-users fa-2x"
