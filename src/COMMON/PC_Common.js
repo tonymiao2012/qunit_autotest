@@ -84,13 +84,6 @@ define(function () {
             setTimeout(setSModelTimeout, 1000);
         });
     }
-    function getAllDaily(){
-
-    }
-
-    function setAllDaily(){
-
-    }
 
     function startGetStartTime(){
         var val = model.parentlock.getStart();
@@ -191,8 +184,8 @@ define(function () {
             return false;
     }
 
-    function getPinRequest(expect, funcName){
-        QUnit.test(funcName, function(assert){
+    function getPinRequest(expect, funcName) {
+        QUnit.test(funcName, function (assert) {
             var result = startGetPinRequest(expect);
             assert.ok(result, "Test getPinRequest");
         });
@@ -206,7 +199,7 @@ define(function () {
         getStartTime: getStartTime,
         setStartTime: setStartTime,
         getEndTime: getEndTime,
-        setEndTIme: setEndTime,
+        setEndTime: setEndTime,
         getEndWeekly: getEndWeekly,
         setEndWeekly: setEndWeekly,
         getPinRequest: getPinRequest

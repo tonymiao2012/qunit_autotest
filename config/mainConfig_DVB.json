@@ -253,12 +253,6 @@
         "input": [
           "Expect status"
         ]
-      },
-      {
-        "casename": "5012_setPinRequest",
-        "input": [
-          "Set value for pin request"
-        ]
       }
     ],
     "icon-class": "fa fa-users fa-2x"

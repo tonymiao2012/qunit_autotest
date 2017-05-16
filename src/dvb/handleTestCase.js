@@ -300,6 +300,8 @@ function handlePCTestCase(inputArray, funcName) {
                     $("#details").html("please input a string of numbers, number is 1-7");
                 break;
             case "5011_getPinRequest":
+                var expect = inputArray[0];
+                PC_COMMON.getPinRequest(expect, funcName);
                 break;
         }
     });
