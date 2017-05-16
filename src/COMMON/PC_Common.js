@@ -1,6 +1,6 @@
 /**
  * Created by miaozixiong on 2017/5/11.
- * Description: Create a PC prototype module here.
+ * Description: Create a PC common module here.
  * Dependency: Qunit module, model module
  */
 define(function () {
@@ -85,48 +85,48 @@ define(function () {
         });
     }
 
-    function startGetStartTime(){
+    function startGetStartTime() {
         var val = model.parentlock.getStart();
         $("#details").html(val);
-        if((val >= 0) && (val <= 86340))
+        if ((val >= 0) && (val <= 86340))
             return true;
         else
             return false;
     }
 
-    function getStartTime(funcName){
-        QUnit.test(funcName, function(assert){
+    function getStartTime(funcName) {
+        QUnit.test(funcName, function (assert) {
             var result = startGetStartTime();
             assert.ok(result, "Test getStartTime");
         });
     }
 
-    function startSetStartTime(startTime){
+    function startSetStartTime(startTime) {
         model.parentlock.setStart(startTime);
-        if(model.parentlock.getStart() == startTime)
+        if (model.parentlock.getStart() == startTime)
             return true;
         else
             return false;
     }
 
-    function setStartTime(startTime, funcName){
-        QUnit.test(funcName, function(assert){
+    function setStartTime(startTime, funcName) {
+        QUnit.test(funcName, function (assert) {
             var result = startSetStartTime(startTime);
             assert.ok(result, "Test setStartTime");
         });
     }
 
-    function startGetEndTime(){
+    function startGetEndTime() {
         var val = model.parentlock.getEnd();
         $("#details").html(val);
-        if(val >= 0 && val <= 86340)
+        if (val >= 0 && val <= 86340)
             return true;
         else
             return false;
     }
 
-    function getEndTime(funcName){
-        QUnit.test(funcName, function(assert){
+    function getEndTime(funcName) {
+        QUnit.test(funcName, function (assert) {
             var result = startGetEndTime();
             assert.ok(result, "Test getEndTime");
         });
@@ -134,51 +134,51 @@ define(function () {
 
     function startSetEndTime(endTime) {
         model.parentlock.setEnd(endTime);
-        if(model.parentlock.getEnd() == endTime)
+        if (model.parentlock.getEnd() == endTime)
             return true;
         else
             return false;
     }
 
-    function setEndTime(endTime, funcName){
-        QUnit.test(funcName, function(assert){
+    function setEndTime(endTime, funcName) {
+        QUnit.test(funcName, function (assert) {
             var result = startSetEndTime(endTime);
             assert.ok(result, "Test setEndTime");
         });
     }
 
-    function startGetEndWeekly(){
+    function startGetEndWeekly() {
         var val = model.parentlock.getEndWeekly();
         $("#details").html(val);
         return true;
     }
 
-    function getEndWeekly(funcName){
-        QUnit.test(funcName, function(assert){
+    function getEndWeekly(funcName) {
+        QUnit.test(funcName, function (assert) {
             var result = startGetEndWeekly();
             assert.ok(result, "Test getEndWeekly");
         });
     }
 
-    function startSetEndWeekly(weekly){
+    function startSetEndWeekly(weekly) {
         model.parentlock.setEndWeekly(weekly);
-        if(model.parentlock.getEndWeekly() == weekly)
+        if (model.parentlock.getEndWeekly() == weekly)
             return true
         else
             return false;
     }
 
-    function setEndWeekly(weekly, funcName){
-        QUnit.test(funcName, function(assert){
+    function setEndWeekly(weekly, funcName) {
+        QUnit.test(funcName, function (assert) {
             var result = startSetEndWeekly(weekly);
             assert.ok(result, "Test setEndWeekly");
         });
     }
 
-    function startGetPinRequest(expect){
+    function startGetPinRequest(expect) {
         var val = model.parentlock.getPinRequest();
         $("#details").html(val[0]);
-        if(val[0] == expect)
+        if (val[0] == expect)
             return true;
         else
             return false;
