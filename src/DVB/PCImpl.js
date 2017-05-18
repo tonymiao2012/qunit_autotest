@@ -193,7 +193,7 @@ define(function () {
 
     function getInputSource(funcName){
         QUnit.test(funcName, function(assert){
-            var source = model.parentlock.getInputSource();
+            var source = model.parentlock.getInputSourceLock();
             $("#details").html(source);
             var temp = inputSource.indexOf(source);
             var result;
@@ -217,7 +217,7 @@ define(function () {
 
             function setInputSourceTimeout(){
                 var result;
-                if(model.parentlock.getInputSource() == sourceStr)
+                if(model.parentlock.setInputSourceLock() == sourceStr)
                     result = true;
                 else
                     result = false;
