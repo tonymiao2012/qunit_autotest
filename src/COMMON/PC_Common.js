@@ -191,6 +191,18 @@ define(function () {
         });
     }
 
+    function startPCReset() {
+        model.parentlock.Reset();
+        return true;
+    }
+
+    function PCReset(funcName) {
+        QUnit.test(funcName, function (assert) {
+            var result = startPCReset();
+            assert.ok(result, "Test PCReset");
+        });
+    }
+
     return {
         getPin: getPinVal,
         setPin: setPinVal,
@@ -202,7 +214,8 @@ define(function () {
         setEndTime: setEndTime,
         getEndWeekly: getEndWeekly,
         setEndWeekly: setEndWeekly,
-        getPinRequest: getPinRequest
+        getPinRequest: getPinRequest,
+        PCReset: PCReset
     }
 });
 
