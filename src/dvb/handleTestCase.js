@@ -305,7 +305,7 @@ function handlePCTestCase(inputArray, funcName) {
                 PC_COMMON.getPinRequest(expect, funcName);
                 break;
             case "5012_getAge_related":
-                PC_DVB.getAge_related();
+                PC_DVB.getAge_related(funcName);
                 break;
             case "5013_setAge_related":
                 var trigger = inputArray[0];
@@ -316,7 +316,7 @@ function handlePCTestCase(inputArray, funcName) {
                 PC_DVB.setAge_related(trigger, funcName);
                 break;
             case "5014_getAge":
-                PC_DVB.getAge();
+                PC_DVB.getAge(funcName);
                 break;
             case "5015_setAge":
                 var age = inputArray[0];
@@ -325,6 +325,62 @@ function handlePCTestCase(inputArray, funcName) {
                     break;
                 }
                 PC_DVB.setAge(age, funcName);
+                break;
+            case "5016_getAllDaily":
+                PC_DVB.getAllDaily(funcName);
+                break;
+            case "5017_setAllDaily":
+                var timeBlock = inputArray[0];
+                if(timeBlock == 0 || timeBlock == 1)
+                    PC_DVB.setAllDaily(timeBlock, funcName);
+                else
+                    $("#details").html("Input 0 or 1.");
+                break;
+            case "5018_getAll":
+                PC_DVB.getAll(funcName);
+                break;
+            case "5019_setAll":
+                var lock = inputArray[0];
+                if(lock == 0 || lock == 1)
+                    PC_DVB.setAll(lock, funcName);
+                else
+                    $("#details").html("Input 0 or 1.");
+                break;
+            case "5020_pinRequestConfirm":
+                PC_DVB.pinRequestConfirm(funcName);
+                break;
+            case "5021_getPinMemorised":
+                PC_DVB.getPinMemorised(funcName);
+                break;
+            case "5022_setPinMemorised":
+                var temp = inputArray[0];
+                if(temp == 0 || temp == 1)
+                    PC_DVB.setPinMemorised(temp, funcName);
+                else
+                    $("#details").html("Input 0 or 1.");
+                break;
+            case "5023_getInputSource":
+                PC_DVB.getInputSource(funcName);
+                break;
+            case "5024_setInputSource":
+                var source = inputArray[0];
+                if(source >= 0 && source <= 5)
+                    PC_DVB.setInputSource(source, funcName);
+                else
+                    $("#details").html("Input a source in 0 ~ 5.");
+                break;
+            case "5025_getFallbackPin":
+                PC_DVB.getFallbackPin(funcName);
+                break;
+            case "5026_setFallbackPin":
+                var pin = inputArray[0];
+                if(pin.length == 4)
+                    PC_DVB.setFallbackPin(pin, funcName);
+                else
+                    $("#details").html("Input a four digit pin.");
+                break;
+            case "5027_PCReset":
+                PC_COMMON.PCReset();
                 break;
         }
     });

@@ -280,6 +280,48 @@
         "input": [
           "Turn on(1) or off(0) time block"
         ]
+      },
+      {
+        "casename": "5018_getAll"
+      },
+      {
+        "casename": "5019_setAll",
+        "input": [
+          "Set all stations lock(0: on, 1: off)"
+        ]
+      },
+      {
+        "casename": "5020_pinRequestConfirm"
+      },
+      {
+        "casename": "5021_getPinMemorised"
+      },
+      {
+        "casename": "5022_setPinMemorised",
+        "input": [
+          "Set password exist or not(0: no, 1: yes)"
+        ]
+      },
+      {
+        "casename": "5023_getInputSource"
+      },
+      {
+        "casename": "5024_setInputSource",
+        "input": [
+          "Set source lock by source number"
+        ]
+      },
+      {
+        "casename": "5025_getFallbackPin"
+      },
+      {
+        "casename": "5026_setFallbackPin",
+        "input": [
+          "Set fallback access code"
+        ]
+      },
+      {
+        "casename": "5027_PCReset"
       }
     ],
     "icon-class": "fa fa-users fa-2x"
