@@ -108,12 +108,12 @@ define(function () {
         });
     }
 
-    function getAll(funcName){
-        QUnit.test(funcName, function(assert){
+    function getAll(funcName) {
+        QUnit.test(funcName, function (assert) {
             var ret = model.parentlock.getAll();
             $("#details").html(ret);
             var result;
-            if(ret == 0 || ret == 1)
+            if (ret == 0 || ret == 1)
                 result = true;
             else
                 result = false;
@@ -122,13 +122,13 @@ define(function () {
         });
     }
 
-    function setAll(val, funcName){
-        QUnit.test(funcName, function(assert){
+    function setAll(val, funcName) {
+        QUnit.test(funcName, function (assert) {
             var done = assert.async(1);
 
-            function setAllTimeout(){
+            function setAllTimeout() {
                 var result;
-                if(model.parentlock.getAll() == val)
+                if (model.parentlock.getAll() == val)
                     result = true;
                 else
                     result = false;
@@ -157,12 +157,12 @@ define(function () {
         });
     }
 
-    function getPinMemorised(funcName){
-        QUnit.test(funcName, function(assert){
+    function getPinMemorised(funcName) {
+        QUnit.test(funcName, function (assert) {
             var ret = model.parentlock.getPinMemorised();
             $("#details").html(ret);
             var result;
-            if(ret == 0 || ret == 1)
+            if (ret == 0 || ret == 1)
                 result = true;
             else
                 result = false;
@@ -171,13 +171,13 @@ define(function () {
         });
     }
 
-    function setPinMemorised(val, funcName){
-        QUnit.test(funcName, function(assert){
+    function setPinMemorised(val, funcName) {
+        QUnit.test(funcName, function (assert) {
             var done = assert.async(1);
 
-            function setPinMemorisedTimeout(){
+            function setPinMemorisedTimeout() {
                 var result;
-                if(model.parentlock.getPinMemorised() == val)
+                if (model.parentlock.getPinMemorised() == val)
                     result = true;
                 else
                     result = false;
@@ -191,14 +191,14 @@ define(function () {
         });
     }
 
-    function getInputSource(funcName){
-        QUnit.test(funcName, function(assert){
+    function getInputSource(funcName) {
+        QUnit.test(funcName, function (assert) {
             var source = model.parentlock.getInputSourceLock();
             $("#details").html(source);
             var temp = inputSource.indexOf(source);
             var result;
 
-            if(temp == -1)
+            if (temp == -1)
                 result = false;
             else
                 result = true;
@@ -207,17 +207,17 @@ define(function () {
         });
     }
 
-    function setInputSource(sourceInt, funcName){
-        QUnit.test(funcName, function(assert){
+    function setInputSource(sourceInt, funcName) {
+        QUnit.test(funcName, function (assert) {
             var done = assert.async(1);
             var sourceStr;
-            if(sourceInt >= 0 && sourceInt < inputSource.length){
+            if (sourceInt >= 0 && sourceInt < inputSource.length) {
                 sourceStr = inputSource[sourceInt];
             }
 
-            function setInputSourceTimeout(){
+            function setInputSourceTimeout() {
                 var result;
-                if(model.parentlock.setInputSourceLock() == sourceStr)
+                if (model.parentlock.getInputSourceLock() == sourceStr)
                     result = true;
                 else
                     result = false;
@@ -226,18 +226,18 @@ define(function () {
                 done();
             }
 
-            model.parentlock.setInputSource(sourceStr);
+            model.parentlock.setInputSourceLock(sourceStr);
             setTimeout(setInputSourceTimeout, 1000);
         });
     }
 
-    function getFallbackPin(funcName){
-        QUnit.test(funcName, function(assert){
+    function getFallbackPin(funcName) {
+        QUnit.test(funcName, function (assert) {
             var fallBackPin = model.parentlock.getFallbackPin();
             $("#details").html(fallBackPin);
             var result;
 
-            if(fallBackPin.length == 4 && typeof(fallBackPin) === "string")
+            if (fallBackPin.length == 4 && typeof(fallBackPin) === "string")
                 result = true;
             else
                 result = false;
@@ -246,12 +246,14 @@ define(function () {
         });
     }
 
-    function setFallbackPin(fallbackPin, funcName){
-        QUnit.test(funcName, function(assert){
+    //This method is not used in model JS API, but it was documented in API manual.
+    function setFallbackPin(fallbackPin, funcName) {
+        QUnit.test(funcName, function (assert) {
             var done = assert.async(1);
-            function setFallbackPinTimeout(){
+
+            function setFallbackPinTimeout() {
                 var result;
-                if(model.parentlock.setFallbackPin() == fallbackPin)
+                if (model.parentlock.getFallbackPin() == fallbackPin)
                     result = true;
                 else
                     result = false;

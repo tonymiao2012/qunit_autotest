@@ -192,7 +192,7 @@ function handleServiceListTestCase(inputArray, funcName) {
             var expectNum = inputArray[0];
             if (isNaN(expectNum))
                 expectNum = 0;
-            checkServiceS(expectNum, funcName);
+            checkServiceS(expectNum,flag, funcName);
             break;
         case "4004_checkChannelListT":
             checkServiceListTByFile(funcName);
@@ -362,14 +362,7 @@ function handlePCTestCase(inputArray, funcName) {
             case "5023_getFallbackPin":
                 PC_DVB.getFallbackPin(funcName);
                 break;
-            case "5024_setFallbackPin":
-                var pin = inputArray[0];
-                if(pin.length == 4)
-                    PC_DVB.setFallbackPin(pin, funcName);
-                else
-                    $("#details").html("Input a four digit pin.");
-                break;
-            case "5025_PCReset":
+            case "5024_PCReset":
                 PC_COMMON.PCReset();
                 break;
         }

@@ -161,6 +161,7 @@ function onGetChannels_S(m_event) {
         eventRowsToChannels(m_event.rows, allChannels_S);
         if (totalCount == allChannels_S.length) {
             $("#total").html(allChannels_S.length);
+            console.log("getServiceListS <-:" + getLocalTime());
             channelIterator.disconnect();
         }
     }
@@ -173,8 +174,8 @@ function onGetChannels_S(m_event) {
         }
         else {
             allChannels_S = [];
-            channelIterator.readNextRows(m_event.totalCount);
-            //channelIterator.readNextRows(totalCount);
+            //channelIterator.readNextRows(m_event.totalCount);
+            channelIterator.readNextRows(totalCount);
         }
     }
 }
@@ -379,7 +380,7 @@ function checkServiceListSByFile(funcName) {
 
         modeljs.dbgprint("...Begin to get S", 1);
         getServiceListS();
-        timerFlag = setTimeout(serviceToCompare, 40000);
+        timerFlag = setTimeout(serviceToCompare, 4000);
     });
 }
 function checkServiceT(expectNum, flag, funcName) {
@@ -417,21 +418,22 @@ function checkServiceC(expectNum, flag, funcName) {
     });
 }
 
-function checkServiceS(expectNum, funcName) {
+function checkServiceS(expectNum, flag, funcName) {
     QUnit.test(funcName, function (assert) {
         var timerFlag;
         var done = assert.async(1);
         $("#total").html("");
         function checkServiceSTimeout() {
-            if (allChannels_S.length > 0) {
+            if ((allChannels_S.length > 0) && (flag == 1)) {
                 sourceType = 2;
                 showServiceList(sourceType);
             }
             assert.equal(allChannels_S.length, expectNum, "getServiceS ");
             done();
         };
+        console.log("getServiceListS ->:" + getLocalTime());
         getServiceListS();
-        timerFlag = setTimeout(checkServiceSTimeout, 2000);
+        timerFlag = setTimeout(checkServiceSTimeout, 4000);
     });
 }
 function previousChannel_T() {

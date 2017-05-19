@@ -306,13 +306,7 @@
         "casename": "5023_getFallbackPin"
       },
       {
-        "casename": "5024_setFallbackPin",
-        "input": [
-          "Set fallback access code"
-        ]
-      },
-      {
-        "casename": "5025_PCReset"
+        "casename": "5024_PCReset"
       }
     ],
     "icon-class": "fa fa-users fa-2x"
