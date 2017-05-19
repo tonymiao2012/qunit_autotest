@@ -22,17 +22,9 @@
     "name": "2046_Finish"
   },
   {
-    "name": "4024_checkChannelListT"
+    "name": "4026_writeT2File"
   },
   {
-    "name": "4025_checkChannelListC"
-  },
-  {
-    "name": "3002_playChannelC",
-    "param0": "0"
-  },
-  {
-    "name": "3001_playChannelT",
-    "param0": "0"
+    "name": "4027_writeC2File"
   }
 ]

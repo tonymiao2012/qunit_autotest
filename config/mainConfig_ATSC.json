@@ -944,6 +944,12 @@
         "input": [
           "Repeat"
         ]
+      },
+      {
+        "casename": "8016_autoTest16",
+        "input": [
+          "Repeat"
+        ]
       }
     ],
     "icon-class": "fa fa-newspaper-o fa-2x"
