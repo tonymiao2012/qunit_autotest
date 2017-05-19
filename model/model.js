@@ -969,7 +969,7 @@ function Model() {
             //if (!TVMode) console.log("create sub model: " + v.name + ", " + v.modelClass);
             registerModel(v.name, eval(v.modelClass), loadType);
         });
-    }
+    };
 
     /**
      * Initializes the model. This method must be called

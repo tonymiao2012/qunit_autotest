@@ -7,8 +7,8 @@ function SoundModelDefines() {
     SoundModelDefines.SL2_TVAPI_I32_SOUND_SOUND_MODE = "de.loewe.sl2.i32.sound.enum.adjust";    //dbtag: 20160729 Rick
     SoundModelDefines.SL2_TVAPI_I32_SOUND_HEADPHONE_VOLUME = "de.loewe.sl2.i32.sound.headphone.volume";
     SoundModelDefines.SL2_TVAPI_I32_SOUND_HEADPHONE_VOLUME_EXIST = "de.loewe.sl2.i32.sound.headphone.volume.exist";
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_HEADPHONE_INSERT= "de.loewe.sl2.i32.sound.headphone.exist";  //dbtag:20161208 RICK
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_HEADPHONE_MODE= "de.loewe.sl2.i32.sound.headphone.mode";
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_HEADPHONE_INSERT = "de.loewe.sl2.i32.sound.headphone.exist";  //dbtag:20161208 RICK
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_HEADPHONE_MODE = "de.loewe.sl2.i32.sound.headphone.mode";
     SoundModelDefines.SL2_TVAPI_VINT32_SOUND_TOTAL_SONICS = "de.loewe.sl2.vint32.sound.dbx";     //dbtag:20160731 Rick
     SoundModelDefines.SL2_TVAPI_VINT32_SOUND_TOTAL_SURROUND = "de.loewe.sl2.vint32.sound.dbx";    //dbtag:20160731 Rick
     SoundModelDefines.SL2_TVAPI_VINT32_SOUND_TOTAL_VOLUME = "de.loewe.sl2.vint32.sound.dbx";    //dbtag:20160731 Rick
@@ -27,6 +27,7 @@ function SoundModelDefines() {
 
     SoundModelDefines.SL2_TVAPI_I32_SOUND_DIGITAL_AUDIO_OUT = "de.loewe.sl2.i32.sound.spdif.mode";    //dbtag:20160729   Rick
     SoundModelDefines.SL2_TVAPI_I32_SOUND_DIGITAL_AUDIO_DELAY = "de.loewe.sl2.i32.sound.spdif.delay.time";      //dbtag:20160729 Rick
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ARCDEV_EXIST = "de.loewe.sl2.i32.sound.arcdev.exist";    
     SoundModelDefines.SL2_TVAPI_I32_SOUND_SPEAKER_ARC = "de.loewe.sl2.i32.sound.speaker.arc.mode";    //dbtag:20160726 Rick
     SoundModelDefines.SL2_TVAPI_I32_SOUND_AUDIO_OUT = "de.loewe.sl2.i32.sound.audio.out";
     SoundModelDefines.SL2_TVAPI_I32_SOUND_AUDIO_TYPE = "de.loewe.sl2.i32.sound.audiodescription";    //dbtag:20161013 --RICK
@@ -36,15 +37,17 @@ function SoundModelDefines() {
     SoundModelDefines.SL2_TVAPI_I32_SOUND_SUBWOOFER_DEVICE_EXIST = "tvapi.i32.sound.subwoofer.device.exist";
     SoundModelDefines.SL2_TVAPI_I32_SOUND_BASS_BOOST_DEVICE_EXIST = "tvapi.i32.sound.bass.boost.device.exist";
     SoundModelDefines.SL2_TVAPI_I32_SOUND_AUDIO_OUT_DEVICE_EXIST = "tvapi.i32.sound.audio.out.device.exist";
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_APPLY_MODE= "tvapi.i32.sound.apply.mode";
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_APPLY_MODE = "tvapi.i32.sound.apply.mode";
     SoundModelDefines.SL2_TVAPI_I32_SOUND_TV_SPEAKER = "tvapi.i32.sound.tv.speaker";
     SoundModelDefines.SL2_TVAPI_ACTION_SOUND_RESET_EQUALIZER = "de.loewe.sl2.action.sound.reset.equalizer";
     SoundModelDefines.SL2_TVAPI_I32_SOUND_WALL_MODE = "de.loewe.sl32.i32.sound.wallmount"; //dbtag:20160910
     SoundModelDefines.SL2_TVAPI_I32_SOUND_EXTERN_DEVICE = "tvapi.i32.sound.extern.device";
     SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT = "de.loewe.sl2.i32.sound.enum.ident";
+    SoundModelDefines.SL2_TVAPI_STR_AUDIO_DIAGNOSIS_INFO = "de.loewe.sl2.str.audio.diagnosis.info";
     SoundModelDefines.SL2_TVAPI_I32_SOUND_DTS_BASS_BOOST = "de.loewe.sl2.i32.sound.dts.bass.boost";
     SoundModelDefines.SL2_TVAPI_I32_SOUND_DTS_SURROUND_SOUND = "de.loewe.sl2.i32.sound.dts.surround.sound";
     SoundModelDefines.SL2_TVAPI_I32_SOUND_DTS_DIALOG_CLARIFY = "de.loewe.sl2.i32.sound.dts.dialog.clarity";
+    SoundModelDefines.SL2_TVAPI_VINT32_SOUND_AVC_OUTPUT = "de.loewe.sl2.vint32.sound.avc.output";    //dbtag:20160731 Rick
     SoundModelDefines.SL2_TVAPI_SOUND_VOLUME_MIN = 0;
     SoundModelDefines.SL2_TVAPI_SOUND_VOLUME_MAX = 100;
     SoundModelDefines.SL2_TVAPI_SOUND_VOLUME_DEFAULT = 20;
@@ -86,33 +89,33 @@ function SoundModelDefines() {
     SoundModelDefines.SL2_TVAPI_I32_SOUND_DESCRIPTION_VOLUME_MAX = 50;
     SoundModelDefines.SL2_TVAPI_I32_SOUND_DESCRIPTION_VOLUME_MIN = -50;
 
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_ANALOG_MONO  = 0;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_ANALOG_STEREO= 1;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_ANALOG_DUAL  = 2;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_MONO         = 3;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_STEREO       = 4;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DUAL         = 5;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_PCM_STEREO   = 6;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_ANALOG_MONO = 0;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_ANALOG_STEREO = 1;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_ANALOG_DUAL = 2;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_MONO = 3;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_STEREO = 4;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DUAL = 5;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_PCM_STEREO = 6;
     SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DPLII_STEREO = 7;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_MPEG         = 8;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DTS_10       = 9;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DTS_20       = 10;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DTS_21       = 11;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DTS_30       = 12;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DTS_31       = 13;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DTS_40       = 14;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DTS_41       = 15;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DTS_50       = 16;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DTS_51       = 17;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_10        = 18;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_20        = 19;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_21        = 20;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_30        = 21;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_31        = 22;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_40        = 23;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_41        = 24;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_50        = 25;
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_51        = 26;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_MPEG = 8;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DTS_10 = 9;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DTS_20 = 10;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DTS_21 = 11;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DTS_30 = 12;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DTS_31 = 13;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DTS_40 = 14;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DTS_41 = 15;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DTS_50 = 16;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DTS_51 = 17;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_10 = 18;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_20 = 19;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_21 = 20;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_30 = 21;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_31 = 22;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_40 = 23;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_41 = 24;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_50 = 25;
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_51 = 26;
     SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_20_STEREO_FIX = 27;
     SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_UNDEFINED = 28;
     SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT_DD_PLUS_10 = 29;
@@ -224,33 +227,40 @@ function SoundModel(e) {
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_BALANCE, "getBalance", "setBalance", "onBalanceChaged", null, null);
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_DIGITAL_AUDIO_OUT, "getDigitalAudioOut", "setDigitalAudioOut", "onDigitalAudioOutChaged", null, null);
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_DIGITAL_AUDIO_DELAY, "getDigitalAudioDelay", "setDigitalAudioDelay", "onDigitalAudioDelayChaged", null, null);
+        this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_ARCDEV_EXIST, "getArcDevExist", "setArcDevExist", "onArcDevExistChaged", null, null);
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_SPEAKER_ARC, "getSpeakerArc", "setSpeakerArc", "onSpeakerArcChaged", null, null);
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_AUDIO_OUT, "getAudioOut", "setAudioOut", "onAudioOutChaged", null, null);
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_AUDIO_TYPE, "getAudioType", "setAudioType", "onAudioTypeChaged", null, null);
-        this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_APPLY_MODE, "getApplyMode", "setApplyMode", "onApplyModeChaged", null, null );
+        this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_APPLY_MODE, "getApplyMode", "setApplyMode", "onApplyModeChaged", null, null);
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_DESCRIPTION_OUTPUT, "getDescriptionOutput", "setDescriptionOutput", "onDescriptionOutputChaged", null, null);
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_DESCRIPTION_VOLUME, "getDescriptionVolume", "setDescriptionVolume", "onDescriptionVolumeChaged", null, null);
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_EXTERN_DEVICE, "getExternalDevice", "setExternalDevice", "onExternalDeviceChaged", null, null);
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_DTS_BASS_BOOST, "getDTSBassBoost", "setDTSBassBoost", "onDTSBassBoostChanged", null, null);
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_DTS_SURROUND_SOUND, "getDTSSurroundSound", "setDTSSurroundSound", "onDTSSurroundSoundChanged", null, null);
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_DTS_DIALOG_CLARIFY, "getDTSDialogClarify", "setDTSDialogClarify", "onDTSDialogClarifyChanged", null, null);
-        this.registerActionObject(SoundModelDefines.SL2_TVAPI_ACTION_SOUND_RESTORE_DEFAULT_AUDIO_SETTINGS, [{
-            name: "RestoreDefaultAudioSettings",
-            method: function (e) {
-                return e.invoke()
+        this.registerIntegerVectorObject(SoundModelDefines.SL2_TVAPI_VINT32_SOUND_AVC_OUTPUT, "getAvcOutput", "setAvcOutput", "onAvcOutputChaged", null, null);
+        this.registerActionObject(SoundModelDefines.SL2_TVAPI_ACTION_SOUND_RESTORE_DEFAULT_AUDIO_SETTINGS, [
+            {
+                name: "RestoreDefaultAudioSettings",
+                method: function (e) {
+                    return e.invoke()
+                }
             }
-        }], "null");
-        this.registerActionObject(SoundModelDefines.SL2_TVAPI_ACTION_SOUND_RESET_EQUALIZER, [{
-            name: "ResetEqualizer",
-            method: function (e) {
-                return e.invoke()
+        ], "null");
+        this.registerActionObject(SoundModelDefines.SL2_TVAPI_ACTION_SOUND_RESET_EQUALIZER, [
+            {
+                name: "ResetEqualizer",
+                method: function (e) {
+                    return e.invoke()
+                }
             }
-        }], "ResetEqualizerResult");
+        ], "ResetEqualizerResult");
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_SUBWOOFER_DEVICE_EXIST, "getSubwooferDeviceExist", "setSubwooferDeviceExist", "onSubwooferDeviceExistChaged", null, null);
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_BASS_BOOST_DEVICE_EXIST, "getBassBoostDeviceExist", "setBassBoostDeviceExist", "onBassBoostDeviceExistChaged", null, null);
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_AUDIO_OUT_DEVICE_EXIST, "getAudioOutDeviceExist", "setAudioOutDeviceExist", "onAudioOutDeviceExistChaged", null, null);
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_TV_SPEAKER, "getTvSpeaker", "setTvSpeaker", "onTvSpeakerChaged", null, null);
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_ENUM_IDENT, "getAudioIdent", "setAudioIdent", "onAudioIdentChaged", null, null)
+        this.registerStringVectorObject(SoundModelDefines.SL2_TVAPI_STR_AUDIO_DIAGNOSIS_INFO, "getAudioFormat", null, null, null, null)
 
     }
 
@@ -258,8 +268,10 @@ function SoundModel(e) {
 SoundModel.prototype = new SubModel;
 SoundModel.prototype.constructor = SoundModel;
 {
-    SubModel.registerStaticConstants(SoundModel, SoundModelDefines, [{
-        groupPrefix: "SL2_TVAPI_I32_SOUND_ENUM_IDENT_",
-        stripPrefix: "SL2_TVAPI_I32_SOUND_ENUM_"
-    }])
+    SubModel.registerStaticConstants(SoundModel, SoundModelDefines, [
+        {
+            groupPrefix: "SL2_TVAPI_I32_SOUND_ENUM_IDENT_",
+            stripPrefix: "SL2_TVAPI_I32_SOUND_ENUM_"
+        }
+    ])
 }
