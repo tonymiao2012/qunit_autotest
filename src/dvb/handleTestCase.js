@@ -192,7 +192,7 @@ function handleServiceListTestCase(inputArray, funcName) {
             var expectNum = inputArray[0];
             if (isNaN(expectNum))
                 expectNum = 0;
-            checkServiceS(expectNum,flag, funcName);
+            checkServiceS(expectNum, flag, funcName);
             break;
         case "4004_checkChannelListT":
             checkServiceListTByFile(funcName);
@@ -309,11 +309,10 @@ function handlePCTestCase(inputArray, funcName) {
                 break;
             case "5013_setAge_related":
                 var trigger = inputArray[0];
-                if (trigger != 1 || trigger != 0) {
+                if (trigger == 0 || trigger == 1)
+                    PC_DVB.setAge_related(trigger, funcName);
+                else
                     $("#details").html("Input 0 or 1");
-                    break;
-                }
-                PC_DVB.setAge_related(trigger, funcName);
                 break;
             case "5014_getAge":
                 PC_DVB.getAge(funcName);
@@ -331,7 +330,7 @@ function handlePCTestCase(inputArray, funcName) {
                 break;
             case "5017_setAllDaily":
                 var timeBlock = inputArray[0];
-                if(timeBlock == 0 || timeBlock == 1)
+                if (timeBlock == 0 || timeBlock == 1)
                     PC_DVB.setAllDaily(timeBlock, funcName);
                 else
                     $("#details").html("Input 0 or 1.");
@@ -344,7 +343,7 @@ function handlePCTestCase(inputArray, funcName) {
                 break;
             case "5020_setPinMemorised":
                 var temp = inputArray[0];
-                if(temp == 0 || temp == 1)
+                if (temp == 0 || temp == 1)
                     PC_DVB.setPinMemorised(temp, funcName);
                 else
                     $("#details").html("Input 0 or 1.");
@@ -354,7 +353,7 @@ function handlePCTestCase(inputArray, funcName) {
                 break;
             case "5022_setInputSource":
                 var source = inputArray[0];
-                if(source >= 0 && source <= 5)
+                if (source >= 0 && source <= 5)
                     PC_DVB.setInputSource(source, funcName);
                 else
                     $("#details").html("Input a source in 0 ~ 5.");
