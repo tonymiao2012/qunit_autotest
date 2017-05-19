@@ -10,7 +10,7 @@ function setSource(sourceType, testName) {
             var result = model.channelSearch.getSource();
             assert.equal(result, sourceType, "Test setSource");
             done();
-            if (result != true) {
+            if (result != sourceType) {
                 var path = "hisenseUI/" + testName.trim() + ".txt";
                 var content = "Test setSource failed on " + getLocalTime() + ". Assert result: " + result;
                 fh.appendStrToFile(path, content, workroot);
@@ -137,7 +137,7 @@ function autoSearch(repeat, expectNum, sourceType, testName) {
                             serviceNumDtvT = model.channelSearch.getFoundDigitServices();
                             curSource += 2;
                         }
-                        if (curSource == 16) {
+                        else if (curSource == 16) {
                             serviceNumDtvC = model.channelSearch.getFoundDigitServices();
                             curSource += 2;
                         }
@@ -152,13 +152,19 @@ function autoSearch(repeat, expectNum, sourceType, testName) {
                         startAutoScan(curSource);
                     }
                     else {
+                        if (curSource == 17) {
+                            serviceNumAtvT = model.channelSearch.getFoundAnalogServices();
+                        }
+                        else if (curSource == 18) {
+                            serviceNumAtvC = model.channelSearch.getFoundAnalogServices();
+                        }
                         serviceTotal = serviceNumDtvT + serviceNumDtvC + serviceNumAtvT + serviceNumAtvC;
                         assert.equal(serviceTotal, expectNum, "check services");
                         $("#total").html(serviceTotal);
                         if (serviceTotal == expectNum)
                             flag = 1;
                         else {
-                            flag = 1;//0;
+                            flag = 0;
                             var path = "hisenseUI/" + testName.trim() + ".txt";
                             var content = "Test failed on " + getLocalTime() + ". Assert result: " + serviceTotal + ", expect number: " + expectNum + ". Running times: " + i;
                             fh.appendStrToFile(path, content, workroot);
@@ -212,9 +218,6 @@ function autoSearch(repeat, expectNum, sourceType, testName) {
         i++;
         $("#times").html(i);
     });
-    /*
-     QUnit.testDone(QunitTestCallBack(details, testName, workroot, fh));
-     */
 }
 
 function autoScanStart(sourceType, testName) {
