@@ -995,17 +995,15 @@ function handleAutoTestCase(inputArray, funcName) {
     var repeat = inputArray[0];
     if ((repeat < 1) || isNaN(repeat))
         repeat = 1;
-    var i = 0, j = 1;
+    var i = 0;
     var serList = new readJSONFileArray(serListPath);
+
+    QUnit.config.batchingConfig = {
+        repeat: repeat,
+        index: i,
+        servList: serList,
+        isBatching: true
+    };
+
     parseParam(0, serList);
-
-    for (j = 1; j < repeat; j++) {
-        for (i = serList.length - 1; i >= 0; i--) {
-            parseParam(i, serList);
-        }
-    }
-
-    for (i = serList.length - 1; i > 0; i--) {
-        parseParam(i, serList);
-    }
 } 
