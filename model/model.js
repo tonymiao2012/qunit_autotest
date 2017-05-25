@@ -75,18 +75,18 @@ function TableIterator(table, readOnly, selections, fields, orders, handler) {
     var handleReadRowChunk = function (rowsRead) {
         //DBG_ERROR("enter handleReadRowChunk...11111");
         /*
-        var convertedRows = new Array();
-        // For every row
-        for (var i = 0; i < rowsRead.length; i++) {
-            var rowRead = rowsRead[i];
-            var convertedRow = new Array();
-            // For every column in row
-            for (var j = 0; j < rowRead.length; j++) {
-                convertedRow.push(rowRead[j]);
-            }
-            convertedRows.push(convertedRow);
-        }
-        */
+         var convertedRows = new Array();
+         // For every row
+         for (var i = 0; i < rowsRead.length; i++) {
+         var rowRead = rowsRead[i];
+         var convertedRow = new Array();
+         // For every column in row
+         for (var j = 0; j < rowRead.length; j++) {
+         convertedRow.push(rowRead[j]);
+         }
+         convertedRows.push(convertedRow);
+         }
+         */
         //DBG_ERROR("enter handleReadRowChunk...222");
         var convertedRows;
         try {
