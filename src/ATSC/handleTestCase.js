@@ -1002,8 +1002,10 @@ function handleAutoTestCase(inputArray, funcName) {
         repeat: repeat,
         index: i,
         servList: serList,
-        isBatching: true
+        isBatching: true,
+        funcName: funcName
     };
-
-    parseParam(0, serList);
+    QUnit.module(funcName + "(" + 1 + ")", function () {
+        parseParam(0, serList);
+    });
 } 
