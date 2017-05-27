@@ -44,3 +44,12 @@ Developed by Hisense Co. Shenzhen Research Center. Private owned.
 4. 修复了BUG若干。
 
 适应平台版本号：ATSC-H0425， DVB-H0425
+
+### V 1.5
+1. 为场景模拟测试AutoTest增加一个新状态和新的handler，在每个用例执行完后加载组内下一个用例并执行。
+2. 为AutoTest定制module的显示方式。结构化AutoTest测试结果。
+3. 引入了requireJS来实现COMMONJS的模块化需求。
+4. 增加了DVB平台的PC接口。并优化了ATSC平台若干测试用例。
+5. 修复了BUG若干。
+
+适应平台版本号：ATSC-H0525， DVB-H0525
