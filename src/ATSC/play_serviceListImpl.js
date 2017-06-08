@@ -8,9 +8,11 @@ var blockChannels_T = [];
 var blockChannels_C = [];
 var channelIterator = null;
 var currentIndex = 0;
+var totalCount = 0;
 var fh = new fileHandler();
 var workRoot = 1;
-var path = "hisenseUI/result.json";
+var path_T = "hisenseUI/result_T.json";
+var path_C = "hisenseUI/result_C.json";
 QUnit.config.reorder = false;
 
 function eventRowsToChannels(rows) {
@@ -25,9 +27,23 @@ function eventRowsToChannels(rows) {
         chnl.minorNum = row[3];
         chnl.attr = row[4];
         chnl.uuid = row[5];
+        chnl.freq = row[6];
         chnls.push(chnl);
     }
     return chnls;
+}
+function eventRowsToChannels_2(rows, channelType) {
+    for (var i = 0; i < rows.length; i++) {
+        var row = rows[i], chnl = {};
+        chnl.name = row[0];
+        chnl.frontEnd = row[1];
+        chnl.majorNum = row[2];
+        chnl.minorNum = row[3];
+        chnl.attr = row[4];
+        chnl.uuid = row[5];
+        chnl.freq = row[6];
+        channelType.push(chnl);
+    }
 }
 
 function getServiceListT() {
@@ -42,7 +58,8 @@ function getServiceListT() {
             ServicelistModel.SERVICELIST_FIELD_MAJOR_CHANNEL_NUMBER,
             ServicelistModel.SERVICELIST_FIELD_MINOR_CHANNEL_NUMBER,
             ServicelistModel.SERVICELIST_FIELD_ATTR,
-            ServicelistModel.SERVICELIST_FIELD_GCN/*uuid*/
+            ServicelistModel.SERVICELIST_FIELD_GCN, /*uuid*/
+            ServicelistModel.SERVICELIST_FIELD_FREQUENCY
         ],
         [
             {field: ServicelistModel.SERVICELIST_FIELD_NO, direction: 1},
@@ -54,16 +71,22 @@ function getServiceListT() {
 function onGetChannels_T(m_event) {
 
     if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
-        allChannels_T = eventRowsToChannels(m_event.rows);
+        eventRowsToChannels_2(m_event.rows, allChannels_T);
+        if (totalCount == allChannels_T.length) {
+            $("#total").html(allChannels_T.length);
+            console.log("getServiceListT <-:" + getLocalTime());
+        }
 
     }
     else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
-
+        console.log("totalCount:" + m_event.totalCount);
+        totalCount = m_event.totalCount;
         modeljs.dbgprint("total channels  is " + m_event.totalCount, 1);
         if (m_event.totalCount == 0) {
             onGetChannels_T({type: TableIterator.EVENT_TYPE_ROWS_READ, rows: []});
         }
         else {
+            allChannels_T = [];
             channelIterator.readNextRows(m_event.totalCount);
         }
     }
@@ -82,7 +105,8 @@ function getServiceListC() {
             ServicelistModel.SERVICELIST_FIELD_MAJOR_CHANNEL_NUMBER,
             ServicelistModel.SERVICELIST_FIELD_MINOR_CHANNEL_NUMBER,
             ServicelistModel.SERVICELIST_FIELD_ATTR,
-            ServicelistModel.SERVICELIST_FIELD_GCN/*uuid*/
+            ServicelistModel.SERVICELIST_FIELD_GCN, /*uuid*/
+            ServicelistModel.SERVICELIST_FIELD_FREQUENCY
         ],
         [
             {field: ServicelistModel.SERVICELIST_FIELD_NO, direction: 1},
@@ -95,16 +119,21 @@ function getServiceListC() {
 function onGetChannels_C(m_event) {
 
     if (m_event.type == TableIterator.EVENT_TYPE_ROWS_READ) {
-        allChannels_C = eventRowsToChannels(m_event.rows);
-
+        eventRowsToChannels_2(m_event.rows, allChannels_C);
+        if (totalCount == allChannels_C.length) {
+            $("#total").html(allChannels_C.length);
+            console.log("getServiceListC <-:" + getLocalTime());
+        }
     }
     else if (m_event.type == TableIterator.EVENT_TYPE_TOTAL_COUNT) {
 
         modeljs.dbgprint("total channels  is " + m_event.totalCount, 1);
+        totalCount = m_event.totalCount;
         if (m_event.totalCount == 0) {
             onGetChannels_C({type: TableIterator.EVENT_TYPE_ROWS_READ, rows: []});
         }
         else {
+            allChannels_C = [];
             channelIterator.readNextRows(m_event.totalCount);
         }
     }
@@ -159,13 +188,17 @@ function write2File(sourceType, funcName) {
                 list = allChannels_C;
             var content = "[\n";
             for (var i = 0; i < list.length; i++) {
-                content = content + "{\"name\":\"" + list[i].name + "\"," + "\"majorNum\":\"" + list[i].majorNum + "\"," + "\"minorNum\":\"" + list[i].minorNum + "\"}";
+                content = content + "{\"freq\":\"" + list[i].freq + "\"," + "\"majorNum\":\"" + list[i].majorNum + "\"," + "\"minorNum\":\"" + list[i].minorNum + "\"," + "\"name\":\"" + list[i].name + "\"}";
                 if (i < list.length - 1) {
                     content = content + ",\n";
                 }
             }
             content = content + "]";
-            var result = fh.writeFileToNative(path, content, workRoot);
+            var result;
+            if (sourceType == 0)
+                result = fh.writeFileToNative(path_T, content, workRoot);
+            else
+                result = fh.writeFileToNative(path_C, content, workRoot);
             assert.ok(true, "writeToFile ");
             done();
         };
@@ -190,8 +223,9 @@ function checkServiceT(expectNum, flag, funcName) {
             assert.equal(allChannels_T.length, expectNum, "getServiceT ");
             done();
         };
+        console.log("getServiceListT ->:" + getLocalTime());
         getServiceListT();
-        timerFlag = setTimeout(checkServiceTTimeout, 2000);
+        timerFlag = setTimeout(checkServiceTTimeout, 3000);
     });
 }
 function checkServiceC(expectNum, flag, funcName) {
@@ -208,7 +242,7 @@ function checkServiceC(expectNum, flag, funcName) {
             done();
         };
         getServiceListC();
-        timerFlag = setTimeout(checkServiceCTimeout, 2000);
+        timerFlag = setTimeout(checkServiceCTimeout, 3000);
     });
 }
 
@@ -352,6 +386,7 @@ function playInputedChannel(sourceType, chn, func_name) {
                 model.tvservice.playChannel("0", allChannels_C[chn].uuid);
                 $("#name").html(allChannels_C[chn].name);
             }
+            currentIndex = chn;
             timerFlag = setTimeout(playInputedChannelTimeout, 5000);
         }
         else {
@@ -496,12 +531,12 @@ function play(direction, sourceType) {
 }
 
 function switchChannel(direction, sourceType, repeat, funcName) {
-    console.log("............switchChannel.");
     QUnit.test(funcName, function (assert) {
         var i = 0;
         var times = repeat;
         var timer;
         //play(direction, sourceType);
+        console.log("............switchChannel.");
         if (((sourceType == 1) && (allChannels_T.length == 0)) || ((sourceType == 0) && (allChannels_C.length == 0))) {
             assert.ok(false, "channel length is 0");
             $("#details").html(" Click 4001_getServicelistT  or 4002_getServicelistC at first!");
@@ -617,7 +652,7 @@ function switchChannel_2(direction, sourceType, repeat, funcName) {
                 $("#details").html("");
                 info = "";
                 flag = false;
-                console.log("play begin:" + getLocalTime());
+                console.log("play chn:" + (currentIndex + 1));
                 if (direction == 1) {
                     if (sourceType == 1)
                         nextChannel_T();
@@ -650,7 +685,7 @@ function switchChannel_2(direction, sourceType, repeat, funcName) {
                 if (flag == false) {
                     console.log("play fail!videoMainAvailable= " + videoMainAvailable + "/channelChanged=" + channelChanged + "/formatL:" + format.length + "/aspectL:" + aspect.length + "/startNow" + starttimeNow);
                     var path = "hisenseUI/" + funcName.trim() + ".txt";
-                    var content = "Test playInputedChannel failed on " + getLocalTime() + ". Assert flag: " + flag + ".Channel:" + currentIndex;
+                    var content = "Test playInputedChannel failed on " + getLocalTime() + ". Assert flag: " + flag + ".Channel:" + currentIndex + ".videoMainAvailable:" + videoMainAvailable;
                     fh.appendStrToFile(path, content, workroot);
                     assert.ok(false, "switchChannel2");
                     for (left = 0; left <= times - i; left++)
@@ -659,7 +694,6 @@ function switchChannel_2(direction, sourceType, repeat, funcName) {
                     model.video.onVideoFormatInfoChanged = null;
                     model.video.onVideoFrameAspectChanged = null;
                     model.tvservice.onEitMainNowChanged = null;
-                    model.tvservice.onMainPlayChanged = null;
                     model.video.onAvailableModeChaged = null;
                 }
                 else {
@@ -677,7 +711,6 @@ function switchChannel_2(direction, sourceType, repeat, funcName) {
                         model.video.onVideoFormatInfoChanged = null;
                         model.video.onVideoFrameAspectChanged = null;
                         model.tvservice.onEitMainNowChanged = null;
-                        model.tvservice.onMainPlayChanged = null;
                         model.video.onAvailableModeChaged = null;
                     }
                 }
@@ -688,7 +721,6 @@ function switchChannel_2(direction, sourceType, repeat, funcName) {
             }
             model.video.onAvailableModeChaged = function (val) {
                 videoMainAvailable = val;
-                console.log("play 2:" + getLocalTime());
             }
             model.video.onVideoFormatInfoChanged = function (val) {
                 format = val;
