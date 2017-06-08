@@ -322,6 +322,22 @@ function handleScanTestCase(inputArray, funcName) {
         case "2046_Finish":
             finishScan(funcName);
             break;
+        case "2047_autoScanT":
+            var sourceType = 15;
+            var expectNum = inputArray[0];
+            if (isNaN(expectNum))
+                expectNum = 0;
+            $("#total").html("");
+            autoScanOnce(expectNum, sourceType, funcName);
+            break;
+        case "2048_autoScanC":
+            var sourceType = 16;
+            var expectNum = inputArray[0];
+            if (isNaN(expectNum))
+                expectNum = 0;
+            $("#total").html("");
+            autoScanOnce(expectNum, sourceType, funcName);
+            break;
     }
 }
 function handlePlayTestCase(inputArray, funcName) {
@@ -990,6 +1006,10 @@ function handleAutoTestCase(inputArray, funcName) {
         case "8015_autoTest15":
             serListPath = "config/autoTestATSC_15.json";
             break;
+        case "8016_autoTest16":
+            serListPath = "config/autoTestATSC_16.json";
+            break;
+
     }
 
     var repeat = inputArray[0];
