@@ -26,10 +26,10 @@ function VideoModelDefines() {
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_SHARPNESS = "de.loewe.sl2.i32.video.sharpness";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_SKIN_TONE = "tvapi.i32.video.skintone";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_ENUM_SMOOTH_MOTION = "de.loewe.sl2.i32.video.enum.filmquality";
-    VideoModelDefines.SL2_TVAPI_I32_VIDEO_ENUM_SMOOTH_MOTION_EXIST= "de.loewe.sl2.i32.video.filmquality.exist";
+    VideoModelDefines.SL2_TVAPI_I32_VIDEO_ENUM_SMOOTH_MOTION_EXIST = "de.loewe.sl2.i32.video.filmquality.exist";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_ENUM_NOISE_REDUCTION = "de.loewe.sl2.i32.video.enum.dnc";
-    VideoModelDefines.SL2_TVAPI_I32_VIDEO_LOCAL_DIMMING = "tvapi.i32.video.enum.local.dimming";
-    VideoModelDefines.SL2_TVAPI_I32_VIDEO_LOCAL_DIMMING_EXIST = "tvapi.i32.video.local.dimming.exist";
+    VideoModelDefines.SL2_TVAPI_I32_VIDEO_LOCAL_DIMMING = "de.loewe.sl2.i32.video.autodimming.video";
+    VideoModelDefines.SL2_TVAPI_I32_VIDEO_LOCAL_DIMMING_EXIST = "de.loewe.sl2.i32.video.local.dimming.supported";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_ADAPTIVE_CONTRAST = "de.loewe.sl2.i32.video.dynamic.contrast";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_ENUM_COLOUR_TEMPERATURE = "de.loewe.sl2.i32.video.enum.colour.temperature";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_WHITE_BALANCE = "tvapi.i32.video.white.balance";
@@ -51,7 +51,7 @@ function VideoModelDefines() {
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_COLOR_SATURATION = "de.loewe.sl2.i32.video.color.tuner.sat";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_COLOR_BRIGHTNESS = "de.loewe.sl2.i32.video.color.tuner.luma";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_COLOR_SPACE = "de.loewe.sl2.i32.video.color.space";
-    VideoModelDefines.SL2_TVAPI_I32_VIDEO_COLOR_SPACE_EXIST= "de.loewe.sl2.i32.video.color.space.supported";
+    VideoModelDefines.SL2_TVAPI_I32_VIDEO_COLOR_SPACE_EXIST = "de.loewe.sl2.i32.video.color.space.supported";
     VideoModelDefines.SL2_TVAPI_ACTION_VIDEO_RESTORE_COLOR_TUNER_SETTINGS = "de.loewe.sl2.action.video.reset.colour.tuner";
     VideoModelDefines.SL2_TVAPI_ACTION_VIDEO_RESTORE_DEFAULT_PICTURE_SETTINGS = "de.loewe.sl2.action.video.reset.picture.settings";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_3D_SUPPORTED = "tvapi.i32.video.3d.supported";
@@ -74,27 +74,27 @@ function VideoModelDefines() {
     VideoModelDefines.SL2_TVAPI_VINT32_VIDEO_SIGNAL_INFO = "tvapi.vint32.video.signal.info";
     VideoModelDefines.SL2_TVAPI_VINT32_VIDEO_WINDOW0 = "de.loewe.sl2.vint32.video.window0";//dbtag:20160906 - add to intergrate the window setting segment under EPG
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_JUDDER_REDUCTION = "de.loewe.sl2.i32.video.judder.reduction";
-    VideoModelDefines.SL2_TVAPI_I32_VIDEO_JUDDER_REDUCTION_EXIST= "tvapi.i32.video.judder.reduction.exist";
+    VideoModelDefines.SL2_TVAPI_I32_VIDEO_JUDDER_REDUCTION_EXIST = "tvapi.i32.video.judder.reduction.exist";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_BLUR_REDUCTION = "de.loewe.sl2.i32.video.blur.reduction";
-    VideoModelDefines.SL2_TVAPI_I32_VIDEO_BLUR_REDUCTION_EXIST= "tvapi.i32.video.blur.reduction.exist";
+    VideoModelDefines.SL2_TVAPI_I32_VIDEO_BLUR_REDUCTION_EXIST = "tvapi.i32.video.blur.reduction.exist";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_FILM_MODE_STATE = "tvapi.i32.video.film.mode.state";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_HDMI_DYNAMIC_RANGE = "de.loewe.sl2.i32.video.hdmi.range";
-    VideoModelDefines.SL2_TVAPI_I32_VIDEO_HDMI_DYNAMIC_RANGE_EXIST= "de.loewe.sl2.i32.video.hdmidynamic.range.supported";
+    VideoModelDefines.SL2_TVAPI_I32_VIDEO_HDMI_DYNAMIC_RANGE_EXIST = "de.loewe.sl2.i32.video.hdmidynamic.range.supported";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_GAMMA_ADJUSTMENT = "de.loewe.sl2.i32.video.gamma";
-    VideoModelDefines.SL2_TVAPI_I32_VIDEO_GAMMA_ADJUSTMENT_EXIST= "de.loewe.sl2.i32.video.gamma.brightness.exist";
+    VideoModelDefines.SL2_TVAPI_I32_VIDEO_GAMMA_ADJUSTMENT_EXIST = "de.loewe.sl2.i32.video.gamma.supported";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_RGB_ONLY_MODE = "de.loewe.sl2.i32.video.rgb.only";
-    VideoModelDefines.SL2_TVAPI_I32_VIDEO_WHITE_BALANCE_10_2_POINTS = "tvapi.i32.video.white.balance.ten.two.points.mode";
+    VideoModelDefines.SL2_TVAPI_I32_VIDEO_WHITE_BALANCE_10_2_POINTS = "de.loewe.sl2.i32.video.wb.ten.two.point.mode";//"tvapi.i32.video.white.balance.ten.two.points.mode";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_DMP_FLAG = "tvapi.i32.video.dmp.flag";
-    VideoModelDefines.SL2_TVAPI_I32_VIDEO_UHD_FLAG= "tvapi.i32.video.uhd.flag";
+    VideoModelDefines.SL2_TVAPI_I32_VIDEO_UHD_FLAG = "tvapi.i32.video.uhd.flag";
     VideoModelDefines.SL2_TVAPI_STR_VIDEO_FORMAT_INFO = "de.loewe.sl2.str.video.format.info";
     VideoModelDefines.SL2_TVAPI_STR_VIDEO_FRAME_ASPECT_INFO = "de.loewe.sl2.str.video.frame.aspect";
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_CC_EXIST = "de.loewe.sl2.i32.video.cc.exist";
-    VideoModelDefines.SL2_TVAPI_I32_VIDEO_HDR_FLAG= "de.loewe.sl2.i32.video.hdr.flag";
-    VideoModelDefines.SL2_TVAPI_I32_VIDEO_APPLY_MODE= "de.loewe.sl2.i32.video.apply.mode";
-    VideoModelDefines.SL2_TVAPI_VSTR_SIGNAL_DIAGNOSIS= "de.loewe.sl2.str.video.diagnosis.info";
-    VideoModelDefines.SL2_TVAPI_I32_VIDEO_ENUM_HDMI_SIGNAL_FORMAT= "de.loewe.sl2.i32.video.enum.hdmi.signal.format";
-  
-    VideoModelDefines.SL2_TVAPI_I32_VIDEO_AVAILABLE= "de.loewe.sl2.i32.video.info.main.available";
+    VideoModelDefines.SL2_TVAPI_I32_VIDEO_HDR_FLAG = "de.loewe.sl2.i32.video.hdr.flag";
+    VideoModelDefines.SL2_TVAPI_I32_VIDEO_APPLY_MODE = "de.loewe.sl2.i32.video.apply.mode";
+    VideoModelDefines.SL2_TVAPI_VSTR_SIGNAL_DIAGNOSIS = "de.loewe.sl2.str.video.diagnosis.info";
+    VideoModelDefines.SL2_TVAPI_I32_VIDEO_ENUM_HDMI_SIGNAL_FORMAT = "de.loewe.sl2.i32.video.enum.hdmi.signal.format";
+
+    VideoModelDefines.SL2_TVAPI_I32_VIDEO_AVAILABLE = "de.loewe.sl2.i32.video.info.main.available";
 
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_ENUM_PICTURE_VIVID = 0;
     VideoModelDefines.SL2_TVAPI_I32_VIDEO_ENUM_PICTURE_STANDARD = 1;
@@ -216,7 +216,7 @@ function VideoModel(e) {
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_ENUM_PICTURE_MODE, "getEnumPictureMode", "setEnumPictureMode", "onEnumPictureModeChaged", null, null);
         this.registerActionObject(VideoModelDefines.SL2_TVAPI_ACTION_VIDEO_SET_PICTURE_MODE, [{
             name: "SetPictureAdjustment",
-            method: function (object, index, input, configflag){
+            method: function (object, index, input, configflag) {
                 return object.invoke(index, input, configflag);
             }
         }], null);
@@ -281,7 +281,7 @@ function VideoModel(e) {
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_COLOR_HUE, "getColorHue", "setColorHue", "onColorHueChaged", null, null);
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_COLOR_SATURATION, "getColorSaturation", "setColorSaturation", "onColorSaturationChaged", null, null);
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_COLOR_BRIGHTNESS, "getColorBrightness", "setColorBrightness", "onColorBrightnessChaged", null, null);
-        this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_COLOR_SPACE, "getColorSpace", "setColorSpace", "onColorGamutChaged", null, null);
+        this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_COLOR_SPACE, "getColorSpace", "setColorSpace", "onColorSpaceChaged", null, null);
         //dbtag20160803 - Integrate the name with current UI.
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_COLOR_SPACE_EXIST, "getColorSpaceExist", "setColorSpaceExist", "onColorSpaceExistChaged", null, null);
         this.registerActionObject(VideoModelDefines.SL2_TVAPI_ACTION_VIDEO_RESTORE_COLOR_TUNER_SETTINGS, [{
@@ -320,7 +320,7 @@ function VideoModel(e) {
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_BLUR_REDUCTION_EXIST, "getBlurReductionExist", "setBlurReductionExist", "onBlurReductionExistChaged", null, null);
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_FILM_MODE_STATE, "getFilmModeState", "setFilmModeState", "onFilmModeStateChaged", null, null);
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_HDMI_DYNAMIC_RANGE, "getHdmiDynamicRange", "setHdmiDynamicRange", "onHdmiDynamicRangeChaged", null, null);
-        this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_HDMI_DYNAMIC_RANGE_EXIST,"getHdmiDynamicRangeExist", "setHdmiDynamicRangeExist", "onHdmiDynamicRangeExistChaged", null, null );
+        this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_HDMI_DYNAMIC_RANGE_EXIST, "getHdmiDynamicRangeExist", "setHdmiDynamicRangeExist", "onHdmiDynamicRangeExistChaged", null, null);
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_GAMMA_ADJUSTMENT, "getHdmiGammaAdjustment", "setHdmiGammaAdjustment", "onHdmiGammaAdjustmentChaged", null, null);
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_GAMMA_ADJUSTMENT_EXIST, "getHdmiGammaAdjustmentExist", "setHdmiGammaAdjustmentExist", "onHdmiGammaAdjustmentExistChaged", null, null);
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_RGB_ONLY_MODE, "getRgbOnlyMode", "setRgbOnlyMode", "onRgbOnlyModeChaged", null, null);
@@ -328,15 +328,15 @@ function VideoModel(e) {
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_DMP_FLAG, "getDmpFlag", "setDmpFlag", "onDmpFlagChanged", null, null);
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_UHD_FLAG, "getUhdFlag", "setUhdFlag", "onUhdFlagChaged", null, null);
         // Format,Aspect info
-        this.registerStringObject(VideoModelDefines.SL2_TVAPI_STR_VIDEO_FORMAT_INFO, "getVideoFormatInfo", "setFormatInfo", "onVideoFormatInfoChanged",null, null);
-        this.registerStringObject(VideoModelDefines.SL2_TVAPI_STR_VIDEO_FRAME_ASPECT_INFO, "getVideoFrameAspect", "setVideoFrameAspect", "onVideoFrameAspectChanged",null, null);
+        this.registerStringObject(VideoModelDefines.SL2_TVAPI_STR_VIDEO_FORMAT_INFO, "getVideoFormatInfo", "setFormatInfo", "onVideoFormatInfoChanged", null, null);
+        this.registerStringObject(VideoModelDefines.SL2_TVAPI_STR_VIDEO_FRAME_ASPECT_INFO, "getVideoFrameAspect", "setVideoFrameAspect", "onVideoFrameAspectChanged", null, null);
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_CC_EXIST, "getCcExist", "setCcExist", "onCcExistChanged", null, null);
         this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_HDR_FLAG, "getHdrFlag", "setHdrFlag", "onHdrFlagChaged", null, null);
-	      //ApplyMode//ApplyColorTunner//Apply2p_wb//Apply10p_wb
-        this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_APPLY_MODE, "getApplyMode", "setApplyMode", "onApplyModeChaged", null, null );
+        //ApplyMode//ApplyColorTunner//Apply2p_wb//Apply10p_wb
+        this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_APPLY_MODE, "getApplyMode", "setApplyMode", "onApplyModeChaged", null, null);
         this.registerStringVectorObject(VideoModelDefines.SL2_TVAPI_VSTR_SIGNAL_DIAGNOSIS, "getVideoInfo", null, null, null, null);
-	        this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_ENUM_HDMI_SIGNAL_FORMAT, "getHdmiSignalFormat", "setHdmiSignalFormat", "onHdmiSignalFormatChaged", null, null);
-	this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_AVAILABLE, "getAvailableMode", "setAvailableMode", "onAvailableModeChaged", null, null );
+        this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_ENUM_HDMI_SIGNAL_FORMAT, "getHdmiSignalFormat", "setHdmiSignalFormat", "onHdmiSignalFormatChaged", null, null);
+        this.registerIntegerObject(VideoModelDefines.SL2_TVAPI_I32_VIDEO_AVAILABLE, "getAvailableMode", "setAvailableMode", "onAvailableModeChaged", null, null);
 
     }
 }

@@ -2,6 +2,7 @@ function Parental_lockModelDefines() {
 }
 {
     Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_PIN = "de.loewe.sl2.str.parental.lock.pin";
+    Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_IN_PERIOD = "de.loewe.sl2.i32.parental.lock.in.period";
     Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_SWITCH_MODE = "de.loewe.sl2.i32.parental.lock.switch.mode";
     Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_RESET = "de.loewe.sl2.action.parental.lock.reset";
     Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_PIN_CHECK_REQUEST = "de.loewe.sl2.action.parental.lock.pin.check";
@@ -47,20 +48,20 @@ function Parental_lockModelDefines() {
 
     //programLock
     Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_ITEM_NONE = 0,
-    Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_ITEM_Y = 1,
-    Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_ITEM_Y7 = 2,
-    Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_ITEM_G = 3,
-    Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_ITEM_PG = 4,
-    Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_ITEM_14 = 5,
-    Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_ITEM_MA = 6,
-    Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_ITEM_SIZE = 7,
-    Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_MASK_ALL = 0x01,
-    Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_MASK_D = 0x02,
-    Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_MASK_L = 0x04,
-    Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_MASK_S = 0x08,
-    Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_MASK_V = 0x10,
-    Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_MASK_FV = 0x20,
-    Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_US_TV_PARAMS_Y_ALL = 0;
+        Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_ITEM_Y = 1,
+        Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_ITEM_Y7 = 2,
+        Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_ITEM_G = 3,
+        Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_ITEM_PG = 4,
+        Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_ITEM_14 = 5,
+        Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_ITEM_MA = 6,
+        Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_ITEM_SIZE = 7,
+        Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_MASK_ALL = 0x01,
+        Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_MASK_D = 0x02,
+        Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_MASK_L = 0x04,
+        Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_MASK_S = 0x08,
+        Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_MASK_V = 0x10,
+        Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_RATING_MASK_FV = 0x20,
+        Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_US_TV_PARAMS_Y_ALL = 0;
     Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_US_TV_PARAMS_Y7_ALL = 1;
     Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_US_TV_PARAMS_Y7_FV = 2;
     Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_US_TV_PARAMS_G_ALL = 3;
@@ -89,6 +90,7 @@ function Parental_lockModel(_) {
         this.registerStringObject(Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_FALLBACK_PIN, "getFallbackPin", null, null, null, null);
         this.registerStringVectorObject(Parental_lockModelDefines.SL2_TVAPI_VSTR_PARENTAL_LOCK_PIN_REQUEST, "getPinRequest", "setPinRequest", "onPinRequestChaged", null, null);
         this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_SWITCH_MODE, "getSModel", "setSModel", "onSModelChaged", null, null);
+        this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_IN_PERIOD, "getInPeriod", "setInPeriod", "null", null, null);
         this.registerActionObject(Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_RESET, [{
             name: "Reset",
             method: function (_) {
@@ -114,7 +116,7 @@ function Parental_lockModel(_) {
         this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_DAILY_END, "getEnd", "setEnd", "onEndChaged", null, null);
         this.registerStringObject(Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_WEEKLY, "getEndWeekly", "setEndWeekly", "onEndWeeklyChaged", null, null);
 
-    //program lock
+        //program lock
         this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_UNRATED, "getBlockUnrated", "setBlockUnrated", "onBlockUnratedChaged", null, null);
         this.registerIntegerVectorObject(Parental_lockModelDefines.SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV, "getUsTvRating", "setUsTvRating", "onUsTvRatingChaged", null, null);
         this.registerActionObject(Parental_lockModelDefines.SL2_TVAPI_ACTION_PARENTAL_LOCK_US_TV, [{
@@ -128,79 +130,69 @@ function Parental_lockModel(_) {
         this.registerIntegerObject(Parental_lockModelDefines.SL2_TVAPI_I32_PARENTAL_LOCK_CA_FRENCH_RATING, "getCanFrenchRating", "setCanFrenchRating", "onCanFrenchRatingChaged", null, null);
         this.registerStringObject(Parental_lockModelDefines.SL2_TVAPI_STR_PARENTAL_LOCK_OPEN_VCHIP, "getOpenVchip", "setOpenVchip", "onOpenVchipChaged", null, null);
 
-        this.openVchipRegionPage = function()
-        {
-            try
-            {
+        this.openVchipRegionPage = function () {
+            try {
                 var retval = {
-                    "datalist":[],
-                    "selectlist":[]
+                    "datalist": [],
+                    "selectlist": []
                 }
-                var temp=this.getOpenVchip();
-                DBG_ERROR("openVchip"+JSON.stringify(temp));
-                try{
-                   var openVchip = JSON.parse(temp);
+                var temp = this.getOpenVchip();
+                DBG_ERROR("openVchip" + JSON.stringify(temp));
+                try {
+                    var openVchip = JSON.parse(temp);
                 }
-                catch(ex) {
+                catch (ex) {
                     DBG_ERROR(ex.message);
-                    openVchip={"Open V-chip":[]}
+                    openVchip = {"Open V-chip": []}
                 }
-                DBG_ERROR("openVchip"+JSON.stringify(openVchip))
+                DBG_ERROR("openVchip" + JSON.stringify(openVchip))
                 var regionNames = [];
-                for (var i = 0; i < openVchip['Open V-chip'].length; i++)
-                {
+                for (var i = 0; i < openVchip['Open V-chip'].length; i++) {
                     regionNames[i] = openVchip['Open V-chip'][i]['regionName'];
                 }
 
                 retval.datalist = regionNames;
                 return retval;
             }
-            catch (e)
-            {
+            catch (e) {
                 DBG_ERROR(e.message)
             }
         };
-        this.openVchipDimensionPage = function(RegionSelect)
-        {
-            try
-            {
+        this.openVchipDimensionPage = function (RegionSelect) {
+            try {
                 var retval = {
-                    "datalist":[],
-                    "selectlist":[]
+                    "datalist": [],
+                    "selectlist": []
                 }
 
                 var openVchip = JSON.parse(this.getOpenVchip());
                 var dimensionNames = [];
                 var dimensionInfo = openVchip['Open V-chip'][RegionSelect]['dimensionInfo'];
 
-                for (var dimIdx = 0; dimIdx < dimensionInfo.length; dimIdx++)
-                {
+                for (var dimIdx = 0; dimIdx < dimensionInfo.length; dimIdx++) {
                     dimensionNames[dimIdx] = dimensionInfo[dimIdx]['dimensionName'];
                 }
                 retval.datalist = dimensionNames;
                 return retval;
             }
-            catch (e)
-            {
+            catch (e) {
                 DBG_ERROR(e.message)
             }
         };
-        this.openVchipRatingValuePage = function(RegionSelect, DimensionSelect)
-        {
-            try
-            {
+        this.openVchipRatingValuePage = function (RegionSelect, DimensionSelect) {
+            try {
                 var retval = {
-                    "datalist":[],
-                    "selectlist":[]
+                    "datalist": [],
+                    "selectlist": []
                 }
-                var temp=this.getOpenVchip();
-                DBG_ERROR("getOpenVchip"+JSON.stringify(temp));
-                try{
+                var temp = this.getOpenVchip();
+                DBG_ERROR("getOpenVchip" + JSON.stringify(temp));
+                try {
                     var openVchip = JSON.parse(temp);
                 }
-                catch(ex) {
+                catch (ex) {
                     DBG_ERROR(ex.message);
-                    openVchip={"Open V-chip":[]}
+                    openVchip = {"Open V-chip": []}
                 }
 
                 //var openVchip = JSON.parse(this.getOpenVchip());
@@ -210,33 +202,26 @@ function Parental_lockModel(_) {
                 var ratingInfo = openVchip['Open V-chip'][RegionSelect]['dimensionInfo'][DimensionSelect]['ratingValue'];
                 var settingValue = openVchip['Open V-chip'][RegionSelect]['dimensionInfo'][DimensionSelect]['setting'];
 
-                if(!ratingInfo[0]['abbrev'].length)
-                {
+                if (!ratingInfo[0]['abbrev'].length) {
                     DBG_INFO("first rating NA!");
                     isFirstRatingNA = true;
                 }
 
-                for (var ratingIdx = 0; ratingIdx < ratingInfo.length; ratingIdx++)
-                {
-                    if((ratingIdx == 0) && isFirstRatingNA)
-                    {
+                for (var ratingIdx = 0; ratingIdx < ratingInfo.length; ratingIdx++) {
+                    if ((ratingIdx == 0) && isFirstRatingNA) {
                         continue;
                     }
-                    else
-                    {
+                    else {
                         ratingValues.push(ratingInfo[ratingIdx]['abbrev']);
                     }
                 }
 
-                for (var i = 0; i < ratingInfo.length; i++)
-                {
-                    if((i == 0) && isFirstRatingNA)
-                    {
+                for (var i = 0; i < ratingInfo.length; i++) {
+                    if ((i == 0) && isFirstRatingNA) {
                         continue;
                     }
-                    else
-                    {
-                        selectList.push(settingValue&(1<<i)?1:0)
+                    else {
+                        selectList.push(settingValue & (1 << i) ? 1 : 0)
                     }
                 }
 
@@ -245,15 +230,12 @@ function Parental_lockModel(_) {
 
                 return retval;
             }
-            catch (e)
-            {
+            catch (e) {
                 DBG_ERROR(e.message)
             }
         };
-        this.setLevelPage = function(regionSelect, dimensionSelect, ratingValueSelect, enLock)
-        {
-            try
-            {
+        this.setLevelPage = function (regionSelect, dimensionSelect, ratingValueSelect, enLock) {
+            try {
                 var openVchip = JSON.parse(this.getOpenVchip());
                 var ratingInfo = openVchip['Open V-chip'][regionSelect]['dimensionInfo'][dimensionSelect]['ratingValue'];
                 var settingValue = openVchip['Open V-chip'][regionSelect]['dimensionInfo'][dimensionSelect]['setting'];
@@ -261,65 +243,52 @@ function Parental_lockModel(_) {
 
                 var isFirstRatingNA = false;
                 var ratingInfoLength = ratingInfo.length;
-                if(!ratingInfo[0]['abbrev'].length)
-                {
+                if (!ratingInfo[0]['abbrev'].length) {
                     DBG_INFO("first rating NA!");
                     isFirstRatingNA = true;
                 }
 
-                if(isFirstRatingNA)
-                {
+                if (isFirstRatingNA) {
                     ratingInfoLength--;
-                    settingValue = settingValue>>1;
+                    settingValue = settingValue >> 1;
                 }
 
-                if(gradScale ==1)
-                {
-                    if(!enLock)
-                    {
-                        for(var i = 0; i <= ratingValueSelect; i++)
-                        {
-                            settingValue &= ~(1<<i);
+                if (gradScale == 1) {
+                    if (!enLock) {
+                        for (var i = 0; i <= ratingValueSelect; i++) {
+                            settingValue &= ~(1 << i);
                         }
                     }
-                    else
-                    {
-                        for(var i = ratingValueSelect; i < ratingInfoLength; i++)
-                        {
-                            settingValue |= (1<<i);
+                    else {
+                        for (var i = ratingValueSelect; i < ratingInfoLength; i++) {
+                            settingValue |= (1 << i);
                         }
                     }
                 }
-                else if(gradScale ==0)
-                {
-                    if(!enLock)
-                    {
-                        settingValue &= ~(1<<ratingValueSelect);
+                else if (gradScale == 0) {
+                    if (!enLock) {
+                        settingValue &= ~(1 << ratingValueSelect);
                     }
-                    else
-                    {
-                        settingValue |= (1<<ratingValueSelect);
+                    else {
+                        settingValue |= (1 << ratingValueSelect);
                     }
                 }
 
                 var selectList = [];
-                for (var i = 0; i < ratingInfoLength; i++)
-                {
-                    selectList.push(settingValue&(1<<i)?1:0)
+                for (var i = 0; i < ratingInfoLength; i++) {
+                    selectList.push(settingValue & (1 << i) ? 1 : 0)
                 }
 
-                if(isFirstRatingNA)
-                {
-                	settingValue = settingValue<<1;
+                if (isFirstRatingNA) {
+                    settingValue = settingValue << 1;
                 }
 
-                openVchip['Open V-chip'][regionSelect]['dimensionInfo'][dimensionSelect]['setting']=settingValue;
+                openVchip['Open V-chip'][regionSelect]['dimensionInfo'][dimensionSelect]['setting'] = settingValue;
                 this.setOpenVchip(JSON.stringify(openVchip));
 
                 return selectList;
             }
-            catch (e)
-            {
+            catch (e) {
                 DBG_ERROR(e.message)
             }
         };
@@ -331,9 +300,9 @@ Parental_lockModel.prototype = new SubModel;
 Parental_lockModel.prototype.constructor = Parental_lockModel;
 {
     SubModel.registerStaticConstants(Parental_lockModel, Parental_lockModelDefines,
-        [ { groupPrefix: "SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_", stripPrefix: "SL2_TVAPI_VI32_" },
-              { groupPrefix: "SL2_TVAPI_ACTION_PARENTAL_LOCK_US_TV_", stripPrefix: "SL2_TVAPI_ACTION_" },
-              { groupPrefix: "SL2_TVAPI_PARENTAL_", stripPrefix: "SL2_TVAPI_" }
+        [{groupPrefix: "SL2_TVAPI_VI32_PARENTAL_LOCK_US_TV_", stripPrefix: "SL2_TVAPI_VI32_"},
+            {groupPrefix: "SL2_TVAPI_ACTION_PARENTAL_LOCK_US_TV_", stripPrefix: "SL2_TVAPI_ACTION_"},
+            {groupPrefix: "SL2_TVAPI_PARENTAL_", stripPrefix: "SL2_TVAPI_"}
         ]);
 }
 

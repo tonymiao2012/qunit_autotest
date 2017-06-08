@@ -72,7 +72,8 @@ function ServicelistModelDefines() {
     ServicelistModelDefines.SL2_TVAPI_TABLE_SERVICE_BITMASK_IS_SKIPPED = 32;
     ServicelistModelDefines.SL2_TVAPI_TABLE_SERVICE_BITMASK_IS_LOCKED = 64;
     ServicelistModelDefines.SL2_TVAPI_TABLE_SERVICE_BITMASK_IS_FAVORITE = 128;
-    ServicelistModelDefines.SL2_TVAPI_TABLE_SERVICE_BITMASK_IS_ANALOG  = 256;
+    ServicelistModelDefines.SL2_TVAPI_TABLE_SERVICE_BITMASK_IS_ANALOG = 256;
+    ServicelistModelDefines.SL2_TVAPI_TABLE_SERVICE_BITMASK_AUDIO_ONLY = 512;
 
     ServicelistModelDefines.SL2_TVAPI_TABLE_ACTION_SERVICELIST_REMOVE = "tvapi.action.servicelist.remove";
     ServicelistModelDefines.SL2_TVAPI_TABLE_ACTION_FAVOURITE_LIST_RENAME = "tvapi.action.favouritelist.rename";
@@ -85,10 +86,10 @@ function ServicelistModel(parentModel) {
         this.registerTableObject(ServicelistModelDefines.SL2_TVAPI_TABLE_FAVORITE_LIST_LIST, "createFavoritelistIterator");
         this.registerTableObject(ServicelistModelDefines.SL2_TVAPI_TABLE_SERVICELIST_LIST, "createServicelistIterator");
 
-       this.registerActionObject(ServicelistModelDefines.SL2_TVAPI_TABLE_ACTION_SET_SERVICE_ATTRIBUTE, [{
+        this.registerActionObject(ServicelistModelDefines.SL2_TVAPI_TABLE_ACTION_SET_SERVICE_ATTRIBUTE, [{
             name: "SetServiceAttribute",
             method: function (object, attrType, operation, uuids) {
-                var str = '"' + attrType + '","' + operation + '","' + uuids.toString().replace(new RegExp(",","g"),'","') + '"';
+                var str = '"' + attrType + '","' + operation + '","' + uuids.toString().replace(new RegExp(",", "g"), '","') + '"';
                 return eval("object.invoke(" + str + ")");
             }
         }], "SetServiceAttributeCallback");
@@ -153,10 +154,14 @@ ServicelistModel.prototype.constructor = ServicelistModel;
     }, {
         groupPrefix: "SL2_TVAPI_TABLE_SERVICELIST_FAVORITE_ATTR_",
         stripPrefix: "SL2_TVAPI_TABLE_"
-    }, {groupPrefix: "SL2_TVAPI_TABLE_SERVICELIST_FIELD_",
+    }, {
+        groupPrefix: "SL2_TVAPI_TABLE_SERVICELIST_FIELD_",
         stripPrefix: "SL2_TVAPI_TABLE_"
-    }, {groupPrefix: "SL2_TVAPI_TABLE_SERVICE_ATTR_",
+    }, {
+        groupPrefix: "SL2_TVAPI_TABLE_SERVICE_ATTR_",
         stripPrefix: "SL2_TVAPI_TABLE_"
-    }, {groupPrefix: "SL2_TVAPI_TABLE_SERVICE_BITMASK_",
-        stripPrefix: "SL2_TVAPI_TABLE_"}])
+    }, {
+        groupPrefix: "SL2_TVAPI_TABLE_SERVICE_BITMASK_",
+        stripPrefix: "SL2_TVAPI_TABLE_"
+    }])
 }

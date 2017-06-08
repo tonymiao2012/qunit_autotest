@@ -15,6 +15,7 @@ function Channelsearch_atscModelDefines() {
     Channelsearch_atscModelDefines.SL2_TVAPI_ATSC_CHANNEL_SEARCH_TABLE_SKIP_ACTION_SET = "tvapi.action.atsc.channel.search.skip.set";
     Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_RUNNING = "de.loewe.sl2.i32.channel.search.running";
     Channelsearch_atscModelDefines.SL2_TVAPI_ACTION_CHANNEL_SEARCH_FINISH = "de.loewe.sl2.action.channel.search.finish";
+    Channelsearch_atscModelDefines.SL2_TVAPI_ACTION_CHANNEL_SEARCH_CLEAR = "de.loewe.sl2.action.channel.search.clear";
     Channelsearch_atscModelDefines.SL2_TVAPI_ATSC_CHANNEL_SEARCH_SOURCE_ANALOG = 10;
     Channelsearch_atscModelDefines.SL2_TVAPI_ATSC_CHANNEL_SEARCH_SOURCE_DVBT = 11;
     Channelsearch_atscModelDefines.SL2_TVAPI_ATSC_CHANNEL_SEARCH_SOURCE_DVBC = 12;
@@ -30,13 +31,13 @@ function Channelsearch_atscModelDefines() {
     Channelsearch_atscModelDefines.ENUM_ATSC_CHANNEL_SEARCH_FOUND_CHANNELS_SKIP = 7;
     Channelsearch_atscModelDefines.ENUM_ATSC_CHANNEL_SEARCH_FOUND_CHANNELS_SERVICE_TYPE_UNKNOWN = 0
 }
-function Channelsearch_atscModel(e,type) {
+function Channelsearch_atscModel(e, type) {
     SubModel.call(this, e, Channelsearch_atscModelDefines);
     this.registerSubObject = function () {
         this.registerIntegerObject(Channelsearch_atscModelDefines.SL2_TVAPI_I32_ATSC_CHANNEL_SEARCH_SOURCE, "getSource", "setSource", "onSourceChaged", null, null);
         this.registerActionObject(Channelsearch_atscModelDefines.SL2_TVAPI_ACTION_ATSC_CHANNEL_SEARCH_START, [{
             name: "Start",
-            method: function (e,type) {
+            method: function (e, type) {
                 return e.invoke(type)
             }
         }], "null");
@@ -66,6 +67,12 @@ function Channelsearch_atscModel(e,type) {
         }], "onSkipSetCallback");
         this.registerActionObject(Channelsearch_atscModelDefines.SL2_TVAPI_ACTION_CHANNEL_SEARCH_FINISH, [{
             name: "Finish",
+            method: function (e) {
+                return e.invoke()
+            }
+        }], "null");
+        this.registerActionObject(Channelsearch_atscModelDefines.SL2_TVAPI_ACTION_CHANNEL_SEARCH_CLEAR, [{
+            name: "Clear",
             method: function (e) {
                 return e.invoke()
             }

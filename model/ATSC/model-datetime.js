@@ -12,7 +12,7 @@ function DatetimeModelDefines() {
 
     // DatetimeModelDefines.SL2_TVAPI_I64_TIMER_FUNCTIONS_CUR_TIME = "de.loewe.sl2.i64.datetime.current.time";
     // DatetimeModelDefines.SL2_TVAPI_I64_DATETIME_TIME_UPTIMEOFFSET = "de.loewe.sl2.i64.datetime.time.uptimeoffset";
-     DatetimeModelDefines.SL2_TVAPI_I64_TIMER_FUNCTIONS_CUR_LOCAL_TIME = "de.loewe.sl2.i64.datetime.local.time";
+    DatetimeModelDefines.SL2_TVAPI_I64_TIMER_FUNCTIONS_CUR_LOCAL_TIME = "de.loewe.sl2.i64.datetime.local.time";
 }
 function DatetimeModel(e) {
     SubModel.call(this, e, DatetimeModelDefines);
@@ -66,7 +66,7 @@ function DatetimeModel(e) {
             "onDeviationFromutcChaged",
             null, null);
 
-         this.registerIntegerObject(DatetimeModelDefines.SL2_TVAPI_I64_TIMER_FUNCTIONS_CUR_LOCAL_TIME, "getCurLocalTime", "setCurLocalTime", "CurLocalTimeOnChaged", null, null);//dbtag:20161020 change type
+        this.registerIntegerObject(DatetimeModelDefines.SL2_TVAPI_I64_TIMER_FUNCTIONS_CUR_LOCAL_TIME, "getCurLocalTime", "setCurLocalTime", "CurLocalTimeOnChaged", null, null);//dbtag:20161020 change type
 
         // this.registerIntegerObject(Timer_functionsModelDefines.SL2_TVAPI_I64_TIMER_FUNCTIONS_CUR_TIME, "getCurTime", "setCurTime", "onCurTimeChaged", null, null);
 

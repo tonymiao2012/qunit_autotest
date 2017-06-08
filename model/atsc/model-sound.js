@@ -2,6 +2,7 @@ function SoundModelDefines() {
 }
 {
     SoundModelDefines.SL2_TVAPI_I32_SOUND_MAIN_VOLUME = "de.loewe.sl2.i32.sound.main.volume";
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_MAIN_VOLUME_DEV = "de.loewe.sl2.i32.sound.main.volume.dev";
     SoundModelDefines.SL2_TVAPI_I32_SOUND_MAIN_MUTE = "de.loewe.sl2.i32.sound.main.mute";
     SoundModelDefines.SL2_TVAPI_VINT32_SOUND_SOUND_MODE_LIST = "tvapi.vint32.sound.sound.mode.list";
     SoundModelDefines.SL2_TVAPI_I32_SOUND_SOUND_MODE = "de.loewe.sl2.i32.sound.enum.adjust";    //dbtag: 20160729 Rick
@@ -27,7 +28,7 @@ function SoundModelDefines() {
 
     SoundModelDefines.SL2_TVAPI_I32_SOUND_DIGITAL_AUDIO_OUT = "de.loewe.sl2.i32.sound.spdif.mode";    //dbtag:20160729   Rick
     SoundModelDefines.SL2_TVAPI_I32_SOUND_DIGITAL_AUDIO_DELAY = "de.loewe.sl2.i32.sound.spdif.delay.time";      //dbtag:20160729 Rick
-    SoundModelDefines.SL2_TVAPI_I32_SOUND_ARCDEV_EXIST = "de.loewe.sl2.i32.sound.arcdev.exist";    
+    SoundModelDefines.SL2_TVAPI_I32_SOUND_ARCDEV_EXIST = "de.loewe.sl2.i32.sound.arcdev.exist";
     SoundModelDefines.SL2_TVAPI_I32_SOUND_SPEAKER_ARC = "de.loewe.sl2.i32.sound.speaker.arc.mode";    //dbtag:20160726 Rick
     SoundModelDefines.SL2_TVAPI_I32_SOUND_AUDIO_OUT = "de.loewe.sl2.i32.sound.audio.out";
     SoundModelDefines.SL2_TVAPI_I32_SOUND_AUDIO_TYPE = "de.loewe.sl2.i32.sound.audiodescription";    //dbtag:20161013 --RICK
@@ -202,6 +203,7 @@ function SoundModel(e) {
 
     this.registerSubObject = function () {
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_MAIN_VOLUME, "getMainVolume", "setMainVolume", "onMainVolumeChaged", null, null);
+        this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_MAIN_VOLUME_DEV, "getMainVolumeDev", "setMainVolumeDev", "onMainVolumeDevChaged", null, null);
         this.registerIntegerObject(SoundModelDefines.SL2_TVAPI_I32_SOUND_MAIN_MUTE, "getMainMute", "setMainMute", "onMainMuteChaged", null, null);
 
         this.registerIntegerVectorObject(SoundModelDefines.SL2_TVAPI_VINT32_SOUND_SOUND_MODE_LIST, "getSoundModeList", "setSoundModeList", "onSoundModeListChaged", null, null);
