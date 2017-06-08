@@ -1005,7 +1005,7 @@ function handleAutoTestCase(inputArray, funcName) {
         isBatching: true,
         funcName: funcName
     };
-    QUnit.module(funcName + "(" + repeat + ")-" + Date.now(), function () {
+    QUnit.module(funcName + "(" + repeat + ")-" + new Date().Format("yyyy-MM-dd hh:mm:ss"), function () {
         parseParam(0, serList);
     });
 } 
