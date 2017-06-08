@@ -104,6 +104,8 @@ function autoScanStop(sourceType, funcName) {
             if (value >= 30)
                 model.channelSearch.Stop();
         }
+        model.channelSearch.Clear();
+        model.channelSearch.getSearchingProgress();
         startAutoScan(sourceType);
     });
 }
@@ -161,7 +163,7 @@ function autoSearch(repeat, expectNum, sourceType, testName) {
                         serviceTotal = serviceNumDtvT + serviceNumDtvC + serviceNumAtvT + serviceNumAtvC;
                         assert.equal(serviceTotal, expectNum, "check services");
                         $("#total").html(serviceTotal);
-                        if (serviceTotal == expectNum)
+                        if (serviceTotal >= expectNum)
                             flag = 1;
                         else {
                             flag = 0;
@@ -176,6 +178,8 @@ function autoSearch(repeat, expectNum, sourceType, testName) {
                             flag = 0;
                             scanOrder = 1;
                             curSource = sourceType;
+                            model.channelSearch.Clear();
+                            model.channelSearch.getSearchingProgress();
                             setTimeout(startAutoScan, 3000, sourceType);
                             i++;
                             $("#times").html(i);
@@ -213,13 +217,99 @@ function autoSearch(repeat, expectNum, sourceType, testName) {
             }
             $("#progress").html(newValue);
         }
+        model.channelSearch.Clear();
+        model.channelSearch.getSearchingProgress();
         startAutoScan(sourceType);
         curSource = sourceType;
         i++;
         $("#times").html(i);
     });
 }
-
+function autoScanOnce(expectNum, sourceType, funcName) {
+    QUnit.test(funcName, function (assert) {
+        var isSearched = 0;
+        var scanOrder = 1;
+        var curSource;
+        var serviceNumDtvT = 0;
+        var serviceNumAtvT = 0;
+        var serviceNumDtvC = 0;
+        var serviceNumAtvC = 0;
+        var serviceTotal = 0;
+        var done = assert.async(1);
+        model.channelSearch.onSearchStateChaged = function (value) {
+            console.log("autoSearch  value:" + value);
+            if (value == 1) {
+                isSearched = 1;
+            }
+            else if (value == 0) {
+                if (isSearched == 1) {
+                    if (scanOrder < 4) {
+                        scanOrder++;
+                        isSearched = 0;
+                        if (curSource == 15) {
+                            serviceNumDtvT = model.channelSearch.getFoundDigitServices();
+                            curSource += 2;
+                        }
+                        else if (curSource == 16) {
+                            serviceNumDtvC = model.channelSearch.getFoundDigitServices();
+                            curSource += 2;
+                        }
+                        else if (curSource == 17) {
+                            serviceNumAtvT = model.channelSearch.getFoundAnalogServices();
+                            curSource -= 1;
+                        }
+                        else if (curSource == 18) {
+                            serviceNumAtvC = model.channelSearch.getFoundAnalogServices();
+                            curSource -= 3;
+                        }
+                        startAutoScan(curSource);
+                    }
+                    else {
+                        if (curSource == 17) {
+                            serviceNumAtvT = model.channelSearch.getFoundAnalogServices();
+                        }
+                        else if (curSource == 18) {
+                            serviceNumAtvC = model.channelSearch.getFoundAnalogServices();
+                        }
+                        serviceTotal = serviceNumDtvT + serviceNumDtvC + serviceNumAtvT + serviceNumAtvC;
+                        assert.equal(serviceTotal, expectNum, "check services");
+                        $("#total").html(serviceTotal);
+                        if (serviceTotal < expectNum) {
+                            var path = "hisenseUI/" + funcName.trim() + ".txt";
+                            var content = "Test failed on " + getLocalTime() + ". Assert result: " + serviceTotal + ", expect number: " + expectNum;
+                            fh.appendStrToFile(path, content, workroot);
+                        }
+                        model.channelSearch.setSource(sourceType);
+                        model.channelSearch.Finish();
+                        done();
+                        model.channelSearch.onSearchingProgressChaged = null;
+                        model.channelSearch.onSearchStateChaged = null;
+                    }
+                }
+            }
+        };
+        model.channelSearch.onSearchingProgressChaged = function (value) {
+            var newValue = 0;
+            if (scanOrder == 1) {
+                newValue = Math.ceil(value / 4);
+            }
+            else if (scanOrder == 2) {
+                newValue = 25 + Math.ceil(value / 4);
+            }
+            else if (scanOrder == 3) {
+                newValue = 50 + Math.ceil(value / 4);
+            }
+            else {
+                newValue = 75 + Math.ceil(value / 4);
+            }
+            $("#progress").html(newValue);
+        }
+        model.channelSearch.Clear();
+        model.channelSearch.getSearchingProgress();
+        startAutoScan(sourceType);
+        curSource = sourceType;
+    });
+}
 function autoScanStart(sourceType, testName) {
     var path = "hisenseUI/" + testName.trim() + ".txt";
     QUnit.test(testName, function (assert) {
@@ -260,6 +350,8 @@ function autoScanStart(sourceType, testName) {
                     model.channelSearch.Stop();
             };
         }
+        model.channelSearch.Clear();
+        model.channelSearch.getSearchingProgress();
         startAutoScan(sourceType);
     });
 }
@@ -287,6 +379,8 @@ function autoScanProgress(sourceType, testName) {
             if (value == 100)
                 assert.ok(true, "check progress");
         }
+        model.channelSearch.Clear();
+        model.channelSearch.getSearchingProgress();
         startAutoScan(sourceType);
     });
 }
@@ -349,6 +443,8 @@ function autoScanServices(expectNum, sourceType, funcName) {
                 $("#total").html(value);
             }
         }
+        model.channelSearch.Clear();
+        model.channelSearch.getSearchingProgress();
         startAutoScan(sourceType);
     });
 }
@@ -373,8 +469,8 @@ function manualScanServices(expectNum, fre, sourceType, funcName) {
                             var path = "hisenseUI/" + funcName.trim() + ".txt";
                             var content = "Test failed on " + getLocalTime() + ". Service number DTV: " + serviceNumDtv + ", expect number: " + expectNum;
                             fh.appendStrToFile(path, content, workroot);
+                            modeljs.dbgprint("manualScanServices found: " + serviceNumDtv, 1);
                         }
-
                         model.channelSearch.onFoundDigitServicesChaged = null;
                     }
                     else if ((sourceType == 17) || (sourceType == 18)) {
@@ -435,6 +531,8 @@ function autoScanCompleteState(sourceType, funcName) {
                 done();
             }
         };
+        model.channelSearch.Clear();
+        model.channelSearch.getSearchingProgress();
         startAutoScan(sourceType);
     });
 }
@@ -495,6 +593,8 @@ function autoScanCancelState(sourceType, funcName) {
             if (value >= 10)
                 model.channelSearch.Stop();
         }
+        model.channelSearch.Clear();
+        model.channelSearch.getSearchingProgress();
         startAutoScan(sourceType);
     });
 }
@@ -572,6 +672,8 @@ function ScanFinish(sourceType, funcName) {
             done();
         }
 
+        model.channelSearch.Clear();
+        model.channelSearch.getSearchingProgress();
         startAutoScan(sourceType);
     });
 }
