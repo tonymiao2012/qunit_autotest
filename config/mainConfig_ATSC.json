@@ -307,6 +307,18 @@
       },
       {
         "casename": "2046_Finish"
+      },
+      {
+        "casename": "2047_autoScanT",
+        "input": [
+          "service count"
+        ]
+      },
+      {
+        "casename": "2048_autoScanC",
+        "input": [
+          "service count"
+        ]
       }
     ],
     "icon-class": "fa fa-signal fa-2x"

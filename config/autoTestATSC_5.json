@@ -1,41 +1,23 @@
 [
   {
-    "name": "2025_autoScanDigitServicesDtvC",
-    "param0": "39"
+    "name": "2048_autoScanC",
+    "param0": "74"
   },
-  {
-    "name": "2026_autoScanAnalogServicesAtvC",
-    "param0": "2"
-  },  
-  {
-    "name": "2023_autoScanDigitServicesDtvT",
-    "param0": "34"
-  },
-  {
-    "name": "2024_autoScanAnalogServicesAtvT",
-    "param0": "0"
-  },  
-  {
-    "name": "2005_setSourceDtvC"
-  },    
-  {
-    "name": "2046_Finish"
-  },   
   {
     "name": "4002_getServicelistC",
     "param0": "41",
     "param1": "0"
-  }, 
+  },
   {
     "name": "3002_playChannelC",
     "param0": "1"
-  },  
+  },
   {
     "name": "3002_playChannelC",
     "param0": "3"
-  },    
+  },
   {
     "name": "3002_playChannelC",
     "param0": "6"
-  } 
+  }
 ]
